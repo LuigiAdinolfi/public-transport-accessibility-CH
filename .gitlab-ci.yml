@@ -1,18 +1,20 @@
 # The Docker image that will be used to build your app
 image: node:lts
+
 # Functions that should be executed before the build script is run
 before_script:
   - npm install
+
 pages:
   cache:
     paths:
       - node_modules/
   script:
     # Build the project
-    - npm run dev
-    - mkdir .public
-    - cp -r * .public
-    - mv .public public
+    - npm run build
+    # Next.js builds the static files in the "out" directory by default
+    - mkdir public
+    - cp -r out/* public
   artifacts:
     paths:
       # The folder that contains the files to be exposed at the Page URL
