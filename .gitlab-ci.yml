@@ -9,11 +9,12 @@ pages:
   script:
     # Install dependencies
     - npm install
-    # Build the project
+    # Build the project (if necessary, for example for a static site with a framework like Next.js, Gatsby, etc.)
     - npm run build
-    # Copy files to the public directory for GitLab Pages
+    # Create the public directory
     - mkdir public
-    - cp -r * public
+    # Copy everything except the public directory itself
+    - find . -maxdepth 1 -mindepth 1 -not -name public -exec cp -r {} public/ \;
   artifacts:
     paths:
       # The folder that contains the files to be exposed at the Page URL
