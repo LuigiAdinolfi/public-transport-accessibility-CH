@@ -9,7 +9,7 @@ pages:
       - node_modules/
   script:
     # Build the project
-    - npm run build
+    - npm run dev
     - mkdir .public
     - cp -r * .public
     - mv .public public
