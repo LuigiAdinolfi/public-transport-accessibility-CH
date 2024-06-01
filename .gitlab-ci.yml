@@ -1,0 +1,24 @@
+# Use the official Node.js LTS Docker image
+image: node:lts
+
+# The name of the job
+pages:
+  cache:
+    paths:
+      - node_modules/
+  script:
+    # Install dependencies
+    - npm install
+    # Build the project
+    - npm run build
+    # Copy files to the public directory for GitLab Pages
+    - mkdir public
+    - cp -r * public
+  artifacts:
+    paths:
+      # The folder that contains the files to be exposed at the Page URL
+      - public
+  rules:
+    # This ensures that only pushes to the default branch will trigger
+    # a pages deploy
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
