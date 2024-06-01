@@ -3,13 +3,14 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import React from "react";
 import { ThemeProvider } from "@/components/theme-provider";
+import { siteConfig } from "@/config/site";
+import SiteHeader from "@/components/site-header";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Swiss Public Transport Accessibility",
-  description:
-    "Open data for public transport in Switzerland: Access for all and inclusive design for people with disabilities",
+  title: `${siteConfig.name}`,
+  description: `${siteConfig.description}`,
 };
 
 export default function RootLayout({
@@ -20,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <title>Swiss Public Transport Accessibility</title>
+        <title>{siteConfig.name}</title>
       </head>
       <body className={inter.className}>
         <ThemeProvider
@@ -29,6 +30,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <SiteHeader />
           {children}
         </ThemeProvider>
       </body>
