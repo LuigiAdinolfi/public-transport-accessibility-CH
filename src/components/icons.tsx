@@ -1,6 +1,9 @@
 import React from "react";
+
+type IconProps = React.HTMLAttributes<SVGElement>;
+
 export const Icons = {
-  lightLogo: () => (
+  lightLogo: (props: IconProps) => (
     <svg
       width="32"
       height="32"
@@ -45,7 +48,7 @@ export const Icons = {
       />
     </svg>
   ),
-  darkLogo: () => (
+  darkLogo: (props: IconProps) => (
     <svg
       width="32"
       height="32"
