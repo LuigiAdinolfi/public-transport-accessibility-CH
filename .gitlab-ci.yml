@@ -1,20 +1,18 @@
-# Use the official Node.js LTS Docker image
+# The Docker image that will be used to build your app
 image: node:lts
-
-# The name of the job
+# Functions that should be executed before the build script is run
+before_script:
+  - npm install
 pages:
   cache:
     paths:
       - node_modules/
   script:
-    # Install dependencies
-    - npm install
-    # Build the project (if necessary, for example for a static site with a framework like Next.js, Gatsby, etc.)
+    # Build the project
     - npm run build
-    # Create the public directory
-    - mkdir public
-    # Copy everything except the public directory itself
-    - find . -maxdepth 1 -mindepth 1 -not -name public -exec cp -r {} public/ \;
+    - mkdir .public
+    - cp -r * .public
+    - mv .public public
   artifacts:
     paths:
       # The folder that contains the files to be exposed at the Page URL
