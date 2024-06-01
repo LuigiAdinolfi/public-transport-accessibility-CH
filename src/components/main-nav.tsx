@@ -28,7 +28,7 @@ export function MainNav() {
           Plan a journey
         </Link>
         <Link
-          href="/community"
+          href={"/community"}
           className={cn(
             "transition-colors hover:text-foreground/100",
             "hover:bg-zinc-600 hover:text-zinc-50",
@@ -43,7 +43,7 @@ export function MainNav() {
           Community
         </Link>
         <Link
-          href="/settings"
+          href={"/settings"}
           className={cn(
             "transition-colors hover:text-foreground/100",
             "hover:bg-zinc-600 hover:text-zinc-50",
