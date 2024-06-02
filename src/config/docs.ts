@@ -7,15 +7,15 @@ interface DocsConfig {
 export const docsConfig: DocsConfig = {
   mainNav: [
     {
-      title: "Plan a Journey",
-      href: "/",
+      title: "Reise planen",
+      href: "/plan",
     },
     {
       title: "Community",
       href: "/community",
     },
     {
-      title: "Settings",
+      title: "Einstellungen",
       href: "/settings",
     },
   ],
