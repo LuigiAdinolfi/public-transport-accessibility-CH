@@ -2,7 +2,8 @@
 
 import * as React from "react";
 import { useTheme } from "next-themes";
-import { Icons } from "@/components/icons"; // Adjust the import path as needed
+import { LightLogo } from "@/assets/icons/light-logo";
+import { DarkLogo } from "@/assets/icons/dark-logo";
 
 interface LogoProps {
   className?: string;
@@ -11,5 +12,5 @@ interface LogoProps {
 export function Logo({ className }: LogoProps) {
   const { theme } = useTheme();
 
-  return <>{theme === "dark" ? <Icons.darkLogo /> : <Icons.lightLogo />}</>;
+  return <>{theme === "dark" ? <DarkLogo /> : <LightLogo />}</>;
 }

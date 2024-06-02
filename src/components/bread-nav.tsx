@@ -9,10 +9,10 @@ import {
 
 export function BreadcrumbHome() {
   return (
-    <Breadcrumb>
+    <Breadcrumb className="lg:w-[960px] w-full text-left px-2">
       <BreadcrumbList className="text-xl">
         <BreadcrumbItem>
-          <BreadcrumbPage>Reise planen</BreadcrumbPage>
+          <BreadcrumbPage className="font-bold">Reise planen</BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
@@ -21,14 +21,14 @@ export function BreadcrumbHome() {
 
 export function BreadcrumbChooseJourney() {
   return (
-    <Breadcrumb>
+    <Breadcrumb className="lg:w-[960px] w-full text-left px-2">
       <BreadcrumbList className="text-xl">
         <BreadcrumbItem>
           <BreadcrumbLink href="/">Reise planen</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbPage>Reise auswählen</BreadcrumbPage>
+          <BreadcrumbPage className="font-bold">Reise auswählen</BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
@@ -37,7 +37,7 @@ export function BreadcrumbChooseJourney() {
 
 export function BreadcrumbJourneyDetails() {
   return (
-    <Breadcrumb>
+    <Breadcrumb className="lg:w-[960px] w-full text-left px-2">
       <BreadcrumbList className="text-xl">
         <BreadcrumbItem>
           <BreadcrumbLink href="/">Reise planen</BreadcrumbLink>
@@ -50,7 +50,7 @@ export function BreadcrumbJourneyDetails() {
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbPage>Reise Details</BreadcrumbPage>
+          <BreadcrumbPage className="font-bold">Reise Details</BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
@@ -59,7 +59,7 @@ export function BreadcrumbJourneyDetails() {
 
 export function BreadcrumbStopPoint() {
   return (
-    <Breadcrumb>
+    <Breadcrumb className="lg:w-[960px] w-full text-left px-2">
       <BreadcrumbList className="text-xl">
         <BreadcrumbItem>
           <BreadcrumbLink href="/">Reise planen</BreadcrumbLink>
@@ -76,7 +76,7 @@ export function BreadcrumbStopPoint() {
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbPage>Haltestelle</BreadcrumbPage>
+          <BreadcrumbPage className="font-bold">Haltestelle</BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
