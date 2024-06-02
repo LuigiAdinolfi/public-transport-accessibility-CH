@@ -5,6 +5,7 @@ import React from "react";
 import { ThemeProvider } from "@/components/theme-provider";
 import { siteConfig } from "@/config/site";
 import SiteHeader from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,7 +32,8 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <SiteHeader />
-          {children}
+          <main className="flex-1">{children}</main>
+          <SiteFooter />
         </ThemeProvider>
       </body>
     </html>
