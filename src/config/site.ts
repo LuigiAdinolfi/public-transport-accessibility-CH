@@ -1,8 +1,8 @@
 export const siteConfig = {
-  name: "Swiss Public Transport Accessibility",
+  name: "Barrierefreiheit im öffentlichen Verkehr der Schweiz",
   logo: "@/public/accessibility_light.svg",
   description:
-    "Open data for public transport in Switzerland: Access for all and inclusive design for people with disabilities.",
+    "Offene Daten für den öffentlichen Verkehr in der Schweiz: Zugang für alle und inklusive Gestaltung für Menschen mit Behinderungen.",
 };
 
 export type SiteConfig = typeof siteConfig;

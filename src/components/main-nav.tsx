@@ -25,7 +25,7 @@ export function MainNav() {
             "px-4 py-2",
           )}
         >
-          Plan a journey
+          Reise planen
         </Link>
         <Link
           href={"/community"}
@@ -55,7 +55,7 @@ export function MainNav() {
             "px-4 py-2",
           )}
         >
-          Settings
+          Einstellungen
         </Link>
       </nav>
     </div>
