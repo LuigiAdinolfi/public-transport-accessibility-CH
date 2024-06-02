@@ -5,10 +5,7 @@ import * as React from "react";
 
 export function Company() {
   return (
-    <Link
-      href="/"
-      className="mr-6 flex items-center space-x-2 rounded-md p-2 px-4 py-2"
-    >
+    <Link href="/" className="mr-6 flex items-center space-x-2 rounded-md py-2">
       <Logo className="h-6 w-6" />
       <span className="hidden text-2xl font-bold sm:inline-block">
         {siteConfig.name}
