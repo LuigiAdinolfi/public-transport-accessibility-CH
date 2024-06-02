@@ -9,27 +9,27 @@ import { cn } from "@/lib/utils";
 
 export function MainNav() {
   const pathname = usePathname();
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
 
   const getClasses = (currentPath: string): string => {
     const isActive = pathname === currentPath;
 
-    if (theme === "light") {
+    if (resolvedTheme === "dark") {
       return cn(
-        "transition-colors",
+        "transition-colors text-white",
         isActive
-          ? "bg-zinc-950 text-zinc-50"
-          : "text-foreground/100 hover:bg-zinc-600 hover:text-zinc-50",
+          ? "bg-white text-zinc-950"
+          : "text-white hover:bg-zinc-600 hover:text-white",
         "text-lg",
         "rounded-md p-2",
         "px-4 py-2",
       );
     } else {
       return cn(
-        "transition-colors",
+        "transition-colors text-zinc-950",
         isActive
-          ? "bg-zinc-50 text-zinc-950"
-          : "text-foreground/100 hover:bg-zinc-600 hover:text-zinc-50",
+          ? "bg-zinc-950 text-white"
+          : "text-zinc-950 hover:bg-zinc-600 hover:text-zinc-50",
         "text-lg",
         "rounded-md p-2",
         "px-4 py-2",
@@ -40,7 +40,7 @@ export function MainNav() {
   return (
     <div className="mr-4 hidden md:flex">
       <nav className="flex items-center gap-4 text-sm lg:gap-6">
-        <Link href={"/plan"} className={getClasses("/plan")}>
+        <Link href={"/"} className={getClasses("/")}>
           Reise planen
         </Link>
         <Link href={"/community"} className={getClasses("/community")}>
