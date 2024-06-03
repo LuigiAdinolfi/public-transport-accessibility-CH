@@ -21,6 +21,15 @@ import {
   LightInactiveCircle,
   LightInactiveSmallCircle,
 } from "@/assets/icons/light-inactive-circle";
+import { useTheme } from "next-themes";
+import {
+  DarkActiveCircle,
+  DarkActiveSmallCircle,
+} from "@/assets/icons/dark-active-circle";
+import {
+  DarkInactiveCircle,
+  DarkInactiveSmallCircle,
+} from "@/assets/icons/dark-inactive-circle";
 
 export function CardPlanJourney() {
   const [activeJourneyTab, setActiveJourneyTab] = useState("new-journey");
@@ -28,6 +37,7 @@ export function CardPlanJourney() {
   const [origin, setOrigin] = useState("Basel");
   const [destination, setDestination] = useState("Brugg");
   const [datetime, setDatetime] = useState("");
+  const { resolvedTheme } = useTheme();
 
   useEffect(() => {
     const now = new Date();
@@ -52,23 +62,36 @@ export function CardPlanJourney() {
     >
       <TabsList className="grid lg:w-1/2 grid-cols-2 lg:h-12">
         <TabsTrigger className="lg:h-10 lg:text-base mx-1" value="new-journey">
-          {activeJourneyTab === "new-journey" ? (
+          {resolvedTheme === "dark" ? (
+            activeJourneyTab === "new-journey" ? (
+              <DarkActiveCircle />
+            ) : (
+              <DarkInactiveCircle />
+            )
+          ) : activeJourneyTab === "new-journey" ? (
             <LightActiveCircle />
           ) : (
             <LightInactiveCircle />
           )}
-          <div className="lg:pl-3">Neue Reise</div>
+
+          <div className="lg:pl-3 pl-1">Neue Reise</div>
         </TabsTrigger>
         <TabsTrigger
           className="lg:h-10 lg:text-base mx-1"
           value="recent-journeys"
         >
-          {activeJourneyTab === "recent-journeys" ? (
+          {resolvedTheme === "dark" ? (
+            activeJourneyTab === "recent-journeys" ? (
+              <DarkActiveCircle />
+            ) : (
+              <DarkInactiveCircle />
+            )
+          ) : activeJourneyTab === "recent-journeys" ? (
             <LightActiveCircle />
           ) : (
             <LightInactiveCircle />
           )}
-          <div className="lg:pl-3">Letzte Reisen</div>
+          <div className="lg:pl-3 pl-1">Letzte Reisen</div>
         </TabsTrigger>
       </TabsList>
       <TabsContent value="new-journey">
@@ -110,7 +133,7 @@ export function CardPlanJourney() {
             </div>
             <div className="space-y-1">
               <div className="flex justify-between">
-                <div className="space-y-1  w-4/12">
+                <div className="lg:space-y-1  lg:w-4/12 w-5/12">
                   <Label htmlFor="datetime">Wann</Label>
                   <Input
                     id="datetime"
@@ -122,32 +145,50 @@ export function CardPlanJourney() {
                     Gib Datum und Uhrzeit ein.
                   </CardDescription>
                 </div>
-                <div className="space-y-1  w-4/12 content-center lg:mt-[-4px] mt-[-24px]">
+                <div className="space-y-1  w-4/12 content-center lg:mt-[-4px] mt-[-4px]">
                   <Tabs
                     defaultValue={activeSearchTab}
                     onValueChange={(value) => setActiveSearchTab(value)}
                   >
                     <TabsList className="lg:w-64">
-                      <TabsTrigger className="lg:w-32" value="departure">
-                        {activeSearchTab === "departure" ? (
+                      <TabsTrigger
+                        className="lg:w-32 w-[4.6rem]"
+                        value="departure"
+                      >
+                        {resolvedTheme === "dark" ? (
+                          activeSearchTab === "departure" ? (
+                            <DarkActiveSmallCircle />
+                          ) : (
+                            <DarkInactiveSmallCircle />
+                          )
+                        ) : activeSearchTab === "departure" ? (
                           <LightActiveSmallCircle />
                         ) : (
                           <LightInactiveSmallCircle />
                         )}
-                        <div className="lg:pl-2">Abreise</div>
+                        <div className="lg:pl-2 pl-1">Abreise</div>
                       </TabsTrigger>
-                      <TabsTrigger className="lg:w-32" value="arrival">
-                        {activeSearchTab === "arrival" ? (
+                      <TabsTrigger
+                        className="lg:w-32 w-[4.6rem]"
+                        value="arrival"
+                      >
+                        {resolvedTheme === "dark" ? (
+                          activeSearchTab === "arrival" ? (
+                            <DarkActiveSmallCircle />
+                          ) : (
+                            <DarkInactiveSmallCircle />
+                          )
+                        ) : activeSearchTab === "arrival" ? (
                           <LightActiveSmallCircle />
                         ) : (
                           <LightInactiveSmallCircle />
                         )}
-                        <div className="lg:pl-2">Ankunft</div>
+                        <div className="lg:pl-2 pl-1">Ankunft</div>
                       </TabsTrigger>
                     </TabsList>
                   </Tabs>
                 </div>
-                <div className="content-center lg:mt-[-4px] mt-[-24px]">
+                <div className="content-center lg:mt-[-4px] mt-[-6px]">
                   <Button id="submit" type="submit" className="lg:w-40">
                     Suche
                   </Button>
