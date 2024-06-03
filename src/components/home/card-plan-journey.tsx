@@ -11,7 +11,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import * as React from "react";
-import ThemeArrowChange from "@/components/arrow-change-toggle";
 import { useEffect, useState } from "react";
 import {
   LightActiveCircle,
@@ -30,6 +29,8 @@ import {
   DarkInactiveCircle,
   DarkInactiveSmallCircle,
 } from "@/assets/icons/dark-inactive-circle";
+import { CardRecentJourneys } from "@/components/home/card-recent-journeys";
+import { ArrowRightLeft, MessageCircleQuestion } from "lucide-react";
 
 /**
  * Component representing the journey planning card.
@@ -69,40 +70,49 @@ export function CardPlanJourney() {
       className="lg:w-[960px] w-full"
       onValueChange={(value) => setActiveJourneyTab(value)}
     >
-      <TabsList className="grid lg:w-1/2 grid-cols-2 lg:h-12">
-        <TabsTrigger className="lg:h-10 lg:text-base mx-1" value="new-journey">
-          {resolvedTheme === "dark" ? (
-            activeJourneyTab === "new-journey" ? (
-              <DarkActiveCircle />
+      <div className="flex justify-between items-center">
+        <TabsList className="grid lg:w-1/2 grid-cols-2 lg:h-12">
+          <TabsTrigger
+            className="lg:h-10 lg:text-base mx-1"
+            value="new-journey"
+          >
+            {resolvedTheme === "dark" ? (
+              activeJourneyTab === "new-journey" ? (
+                <DarkActiveCircle />
+              ) : (
+                <DarkInactiveCircle />
+              )
+            ) : activeJourneyTab === "new-journey" ? (
+              <LightActiveCircle />
             ) : (
-              <DarkInactiveCircle />
-            )
-          ) : activeJourneyTab === "new-journey" ? (
-            <LightActiveCircle />
-          ) : (
-            <LightInactiveCircle />
-          )}
+              <LightInactiveCircle />
+            )}
 
-          <div className="lg:pl-2 pl-1">Neue Reise</div>
-        </TabsTrigger>
-        <TabsTrigger
-          className="lg:h-10 lg:text-base mx-1"
-          value="recent-journeys"
-        >
-          {resolvedTheme === "dark" ? (
-            activeJourneyTab === "recent-journeys" ? (
-              <DarkActiveCircle />
+            <div className="lg:pl-2 pl-1">Neue Reise</div>
+          </TabsTrigger>
+          <TabsTrigger
+            className="lg:h-10 lg:text-base mx-1"
+            value="recent-journeys"
+          >
+            {resolvedTheme === "dark" ? (
+              activeJourneyTab === "recent-journeys" ? (
+                <DarkActiveCircle />
+              ) : (
+                <DarkInactiveCircle />
+              )
+            ) : activeJourneyTab === "recent-journeys" ? (
+              <LightActiveCircle />
             ) : (
-              <DarkInactiveCircle />
-            )
-          ) : activeJourneyTab === "recent-journeys" ? (
-            <LightActiveCircle />
-          ) : (
-            <LightInactiveCircle />
-          )}
-          <div className="lg:pl-2 pl-1">Letzte Reisen</div>
-        </TabsTrigger>
-      </TabsList>
+              <LightInactiveCircle />
+            )}
+            <div className="lg:pl-2 pl-1">Letzte Reisen</div>
+          </TabsTrigger>
+        </TabsList>
+        <Button className="mr-4" variant="secondary">
+          <MessageCircleQuestion className="mr-2 h-4 w-4" />
+          Brauchst du Hilfe?
+        </Button>
+      </div>
       <TabsContent value="new-journey">
         <Card>
           <CardHeader className="pb-8">
@@ -124,7 +134,7 @@ export function CardPlanJourney() {
                 </div>
                 <div className="flex items-center justify-center w-2/12">
                   <Button variant="outline" size="icon" onClick={swapLocations}>
-                    <ThemeArrowChange />
+                    <ArrowRightLeft />
                   </Button>
                 </div>
                 <div className="space-y-1  w-5/12">
@@ -208,7 +218,7 @@ export function CardPlanJourney() {
         </Card>
       </TabsContent>
       <TabsContent value="recent-journeys">
-        <Card></Card>
+        <CardRecentJourneys />
       </TabsContent>
     </Tabs>
   );

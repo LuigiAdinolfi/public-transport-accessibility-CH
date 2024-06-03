@@ -1,5 +1,5 @@
-import { BreadcrumbHome } from "@/components/bread-nav";
-import { CardPlanJourney } from "@/components/card-plan-journey";
+import { BreadcrumbHome } from "@/components/shared/bread-nav";
+import { CardPlanJourney } from "@/components/home/card-plan-journey";
 
 export default function Homepage() {
   return (

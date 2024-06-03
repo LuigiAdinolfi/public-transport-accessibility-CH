@@ -1,4 +1,4 @@
-import { BreadcrumbJourneyDetails } from "@/components/bread-nav";
+import { BreadcrumbJourneyDetails } from "@/components/shared/bread-nav";
 
 export default function JourneyDetails() {
   return (

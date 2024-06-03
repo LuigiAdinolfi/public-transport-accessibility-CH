@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/mobile/new-york/ui/button";
 import { ScrollArea } from "@/mobile/new-york/ui/scroll-area";
 import { Sheet, SheetContent, SheetTrigger } from "@/mobile/new-york/ui/sheet";
-import { Logo } from "@/components/logo";
+import { Logo } from "@/components/shared/logo";
 
 /**
  * Component representing the mobile navigation menu.

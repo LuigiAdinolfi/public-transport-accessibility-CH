@@ -1,4 +1,4 @@
-import { BreadcrumbStopPoint } from "@/components/bread-nav";
+import { BreadcrumbStopPoint } from "@/components/shared/bread-nav";
 
 export default function StopPoint() {
   return (

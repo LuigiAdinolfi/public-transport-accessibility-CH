@@ -1,4 +1,4 @@
-import { BreadcrumbChooseJourney } from "@/components/bread-nav";
+import { BreadcrumbChooseJourney } from "@/components/shared/bread-nav";
 
 export default function ChooseJourney() {
   return (

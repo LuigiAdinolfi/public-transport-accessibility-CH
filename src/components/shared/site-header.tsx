@@ -1,8 +1,8 @@
-import { MainNav } from "@/components/main-nav";
-import { MobileNav } from "@/components/mobile-nav";
-import { ModeToggle } from "@/components/mode-toggle";
+import { MainNav } from "@/components/shared/main-nav";
+import { MobileNav } from "@/components/shared/mobile-nav";
+import { ModeToggle } from "@/components/shared/mode-toggle";
 import * as React from "react";
-import { Company } from "@/components/company";
+import { Company } from "@/components/shared/company";
 
 /**
  * Component representing the site header.
