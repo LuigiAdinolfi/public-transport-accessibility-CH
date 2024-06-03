@@ -13,7 +13,7 @@ export function Company() {
       href="/public"
       className="mr-6 flex items-center space-x-2 rounded-md py-2"
     >
-      <Logo className="h-6 w-6" />
+      <Logo />
       <span className="hidden text-2xl font-bold sm:inline-block">
         {siteConfig.name}
       </span>

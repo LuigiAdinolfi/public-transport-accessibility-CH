@@ -11,6 +11,7 @@ import { MessageCirclePlus } from "lucide-react";
 import { DarkIc36, LightIc36 } from "@/assets/icons/ic-36";
 import { useTheme } from "next-themes";
 import { Rating } from "@/components/home/rating";
+import { DarkTrainProfile } from "@/assets/icons/dark-train-profile";
 
 export function CardRecentJourneys() {
   const { resolvedTheme } = useTheme();
@@ -38,7 +39,11 @@ export function CardRecentJourneys() {
                     Zug
                   </div>
                   <div className="flex items-center text-base font-normal px-1">
-                    <LightTrainProfile className="h-6 w-6" />
+                    {resolvedTheme === "dark" ? (
+                      <DarkTrainProfile className="h-6 w-6" />
+                    ) : (
+                      <LightTrainProfile className="h-6 w-6" />
+                    )}
                   </div>
                   <div className="flex items-center text-base font-normal px-1">
                     {resolvedTheme === "dark" ? (
