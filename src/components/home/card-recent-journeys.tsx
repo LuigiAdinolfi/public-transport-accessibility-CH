@@ -10,7 +10,7 @@ import { LightTrainProfile } from "@/assets/icons/light-train-profile";
 import { MessageCirclePlus } from "lucide-react";
 import { DarkIc36, LightIc36 } from "@/assets/icons/ic-36";
 import { useTheme } from "next-themes";
-import { useState } from "react";
+import { Rating } from "@/components/home/rating";
 
 export function CardRecentJourneys() {
   const { resolvedTheme } = useTheme();
@@ -25,8 +25,6 @@ export function CardRecentJourneys() {
         {/*    Keine früheren Reisen vorhanden.*/}
         {/*  </CardDescription>*/}
         {/*</Card>*/}
-
-        {/*<Card className="flex justify-between items-center min-h-48">*/}
         <Button
           className="flex justify-between items-center min-h-44 w-full"
           variant="outline"
@@ -60,13 +58,17 @@ export function CardRecentJourneys() {
               </div>
             </div>
           </div>
-          <Card className="lg:h-36 lg:w-96">
-            <CardContent className="grid grid-rows-3 justify-center grid-flow-col w-full px-4">
-              <CardDescription className="flex justify-center w-full text-sm text-text/60 py-2">
-                Reiseerfahrung
-              </CardDescription>
-              <div className="flex justify-center"></div>
-              <Button variant="secondary">
+          <Card className="w-full lg:h-36 lg:w-96 py-4">
+            <CardContent className="px-4 flex flex-col items-center justify-center space-y-6">
+              <div className="flex flex-col items-center justify-center space-y-2">
+                <CardDescription className="w-full text-sm font-base text-text/60 text-center">
+                  Reiseerfahrung
+                </CardDescription>
+                <div className="flex justify-center">
+                  <Rating />
+                </div>
+              </div>
+              <Button variant="secondary" className="pb-4">
                 <MessageCirclePlus className="mr-2 h-4 w-4" />
                 Kommentar hinzufügen
               </Button>

@@ -8,7 +8,7 @@ interface LogoProps {
   className?: string;
 }
 
-export function Logo({ className }: LogoProps) {
+export function Logo() {
   const { theme } = useTheme();
 
   return <>{theme === "dark" ? <DarkLogo /> : <LightLogo />}</>;

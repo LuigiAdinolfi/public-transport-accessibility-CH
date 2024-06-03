@@ -2,7 +2,7 @@ import React from "react";
 
 type IconProps = React.HTMLAttributes<SVGElement>;
 
-export const DarkLogo: React.FC<IconProps> = (props) => (
+export const DarkLogo: React.FC<IconProps> = () => (
   <svg
     width="32"
     height="32"
@@ -48,7 +48,7 @@ export const DarkLogo: React.FC<IconProps> = (props) => (
   </svg>
 );
 
-export const LightLogo: React.FC<IconProps> = (props) => (
+export const LightLogo: React.FC<IconProps> = () => (
   <svg
     width="32"
     height="32"
