@@ -2,8 +2,7 @@
 
 import * as React from "react";
 import { useTheme } from "next-themes";
-import { LightLogo } from "@/assets/icons/light-logo";
-import { DarkLogo } from "@/assets/icons/dark-logo";
+import { DarkLogo, LightLogo } from "@/assets/icons/logo";
 
 interface LogoProps {
   className?: string;

@@ -12,25 +12,22 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import * as React from "react";
 import { useEffect, useState } from "react";
-import {
-  LightActiveCircle,
-  LightActiveSmallCircle,
-} from "@/assets/icons/light-active-circle";
-import {
-  LightInactiveCircle,
-  LightInactiveSmallCircle,
-} from "@/assets/icons/light-inactive-circle";
+
+import { CardRecentJourneys } from "@/components/home/card-recent-journeys";
+import { ArrowRightLeft, MessageCircleQuestion } from "lucide-react";
 import { useTheme } from "next-themes";
 import {
   DarkActiveCircle,
   DarkActiveSmallCircle,
-} from "@/assets/icons/dark-active-circle";
+  LightActiveCircle,
+  LightActiveSmallCircle,
+} from "@/assets/icons/active-circle";
 import {
   DarkInactiveCircle,
   DarkInactiveSmallCircle,
-} from "@/assets/icons/dark-inactive-circle";
-import { CardRecentJourneys } from "@/components/home/card-recent-journeys";
-import { ArrowRightLeft, MessageCircleQuestion } from "lucide-react";
+  LightInactiveCircle,
+  LightInactiveSmallCircle,
+} from "@/assets/icons/inactive-circle";
 
 /**
  * Component representing the journey planning card.
@@ -108,7 +105,7 @@ export function CardPlanJourney() {
             <div className="lg:pl-2 pl-1">Letzte Reisen</div>
           </TabsTrigger>
         </TabsList>
-        <Button className="mr-4" variant="secondary">
+        <Button className="mr-4 bg-indigo-900 dark:text-zinc-100">
           <MessageCircleQuestion className="mr-2 h-4 w-4" />
           Brauchst du Hilfe?
         </Button>

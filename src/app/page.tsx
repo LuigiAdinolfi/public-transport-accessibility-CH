@@ -1,5 +1,6 @@
 import { BreadcrumbHome } from "@/components/shared/bread-nav";
 import { CardPlanJourney } from "@/components/home/card-plan-journey";
+import "@smastrom/react-rating/style.css";
 
 export default function Homepage() {
   return (
