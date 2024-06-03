@@ -12,16 +12,24 @@ import { ScrollArea } from "@/mobile/new-york/ui/scroll-area";
 import { Sheet, SheetContent, SheetTrigger } from "@/mobile/new-york/ui/sheet";
 import { Logo } from "@/components/logo";
 
+/**
+ * Component representing the mobile navigation menu.
+ * @returns {JSX.Element} - MobileNav component.
+ */
 export function MobileNav() {
+  // State to manage the open/close state of the mobile menu
   const [open, setOpen] = React.useState(false);
 
+  // Render the mobile navigation menu
   return (
     <Sheet open={open} onOpenChange={setOpen}>
+      {/* Trigger button for opening the mobile menu */}
       <SheetTrigger asChild>
         <Button
           variant="ghost"
           className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
         >
+          {/* Icon for toggling the menu */}
           <svg
             strokeWidth="1.5"
             viewBox="0 0 24 24"
@@ -51,10 +59,13 @@ export function MobileNav() {
               strokeLinejoin="round"
             ></path>
           </svg>
+          {/* Screen reader text for accessibility */}
           <span className="sr-only">Toggle Menu</span>
         </Button>
       </SheetTrigger>
+      {/* Content of the mobile menu */}
       <SheetContent side="left" className="pr-0">
+        {/* Logo and site name */}
         <MobileLink
           href="/"
           className="flex items-center"
@@ -63,8 +74,10 @@ export function MobileNav() {
           <Logo className="h-6 w-6" />
           <span className="font-bold">{siteConfig.name}</span>
         </MobileLink>
+        {/* Scrollable area for menu items */}
         <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
           <div className="flex flex-col space-y-3">
+            {/* Render each menu item */}
             {docsConfig.mainNav?.map(
               (item) =>
                 item.href && (
@@ -89,12 +102,24 @@ export function MobileNav() {
   );
 }
 
+/**
+ * Props for the MobileLink component.
+ */
 interface MobileLinkProps extends LinkProps {
   onOpenChange?: (open: boolean) => void;
   children: React.ReactNode;
   className?: string;
 }
 
+/**
+ * Component representing a mobile link.
+ * @param href - The URL of the link.
+ * @param onOpenChange - Function to change the open state of the mobile menu.
+ * @param className - Additional CSS classes for the link.
+ * @param children - The content of the link.
+ * @param {MobileLinkProps} props - The props for the MobileLink component.
+ * @returns {JSX.Element} - MobileLink component.
+ */
 function MobileLink({
   href,
   onOpenChange,
@@ -102,11 +127,14 @@ function MobileLink({
   children,
   ...props
 }: MobileLinkProps) {
+  // Next.js router hook
   const router = useRouter();
+  // Render the link
   return (
     <Link
       href={href}
       onClick={() => {
+        // Navigate to the link and close the mobile menu
         router.push(href.toString());
         onOpenChange?.(false);
       }}

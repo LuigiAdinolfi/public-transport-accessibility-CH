@@ -31,14 +31,22 @@ import {
   DarkInactiveSmallCircle,
 } from "@/assets/icons/dark-inactive-circle";
 
+/**
+ * Component representing the journey planning card.
+ * @returns JSX.Element
+ */
 export function CardPlanJourney() {
+  // State variables
   const [activeJourneyTab, setActiveJourneyTab] = useState("new-journey");
   const [activeSearchTab, setActiveSearchTab] = useState("departure");
   const [origin, setOrigin] = useState("Basel");
   const [destination, setDestination] = useState("Brugg");
   const [datetime, setDatetime] = useState("");
+
+  // Theme hook
   const { resolvedTheme } = useTheme();
 
+  // Effect to set initial date and time
   useEffect(() => {
     const now = new Date();
     const offset = now.getTimezoneOffset();
@@ -47,6 +55,7 @@ export function CardPlanJourney() {
     setDatetime(formattedDate);
   }, []);
 
+  // Function to swap origin and destination
   const swapLocations = () => {
     setOrigin((prevOrigin) => {
       setDestination(prevOrigin);

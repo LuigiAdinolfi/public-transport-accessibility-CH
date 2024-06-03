@@ -1,3 +1,6 @@
+/**
+ * Configuration object for the site, including name, description, and relevant links.
+ */
 export const siteConfig = {
   name: "Barrierefreiheit im öffentlichen Verkehr der Schweiz",
   description:
@@ -10,4 +13,7 @@ export const siteConfig = {
   },
 };
 
+/**
+ * Type definition representing the structure of the site configuration.
+ */
 export type SiteConfig = typeof siteConfig;
