@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,27 +12,68 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import * as React from "react";
 import ThemeArrowChange from "@/components/arrow-change-toggle";
+import { useEffect, useState } from "react";
+import {
+  LightActiveCircle,
+  LightActiveSmallCircle,
+} from "@/assets/icons/light-active-circle";
+import {
+  LightInactiveCircle,
+  LightInactiveSmallCircle,
+} from "@/assets/icons/light-inactive-circle";
 
 export function CardPlanJourney() {
+  const [activeJourneyTab, setActiveJourneyTab] = useState("new-journey");
+  const [activeSearchTab, setActiveSearchTab] = useState("departure");
+  const [origin, setOrigin] = useState("Basel");
+  const [destination, setDestination] = useState("Brugg");
+  const [datetime, setDatetime] = useState("");
+
+  useEffect(() => {
+    const now = new Date();
+    const offset = now.getTimezoneOffset();
+    const localTime = new Date(now.getTime() - offset * 60000);
+    const formattedDate = localTime.toISOString().slice(0, 16);
+    setDatetime(formattedDate);
+  }, []);
+
+  const swapLocations = () => {
+    setOrigin((prevOrigin) => {
+      setDestination(prevOrigin);
+      return destination;
+    });
+  };
+
   return (
-    <Tabs defaultValue="new-journey" className="lg:w-[960px] w-full">
+    <Tabs
+      defaultValue={activeJourneyTab}
+      className="lg:w-[960px] w-full"
+      onValueChange={(value) => setActiveJourneyTab(value)}
+    >
       <TabsList className="grid lg:w-1/2 grid-cols-2 lg:h-12">
         <TabsTrigger className="lg:h-10 lg:text-base mx-1" value="new-journey">
-          {/*TODO: Add a new journey icon*/}
-          <div className="lg:pl-2">Neue Reise</div>
+          {activeJourneyTab === "new-journey" ? (
+            <LightActiveCircle />
+          ) : (
+            <LightInactiveCircle />
+          )}
+          <div className="lg:pl-3">Neue Reise</div>
         </TabsTrigger>
         <TabsTrigger
-          className="lg:h-8 lg:text-base mx-1"
+          className="lg:h-10 lg:text-base mx-1"
           value="recent-journeys"
         >
-          {/*TODO: Add a recent journeys icon*/}
-          <div className="lg:pl-2">Letzte Reisen</div>
+          {activeJourneyTab === "recent-journeys" ? (
+            <LightActiveCircle />
+          ) : (
+            <LightInactiveCircle />
+          )}
+          <div className="lg:pl-3">Letzte Reisen</div>
         </TabsTrigger>
       </TabsList>
       <TabsContent value="new-journey">
         <Card>
           <CardHeader className="pb-8">
-            {/*<CardTitle>Account</CardTitle>*/}
             <CardDescription>Gib deine Reisedaten ein.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-12 pb-12">
@@ -38,19 +81,27 @@ export function CardPlanJourney() {
               <div className="flex justify-between">
                 <div className="space-y-1  w-5/12">
                   <Label htmlFor="origin">Von</Label>
-                  <Input id="origin" defaultValue="Basel" />
+                  <Input
+                    id="origin"
+                    value={origin}
+                    onChange={(e) => setOrigin(e.target.value)}
+                  />
                   <CardDescription className="pt-2">
                     Gib den Abfahrtsort ein.
                   </CardDescription>
                 </div>
                 <div className="flex items-center justify-center w-2/12">
-                  <Button variant="outline" size="icon">
+                  <Button variant="outline" size="icon" onClick={swapLocations}>
                     <ThemeArrowChange />
                   </Button>
                 </div>
                 <div className="space-y-1  w-5/12">
                   <Label htmlFor="destination">Nach</Label>
-                  <Input id="destination" defaultValue="Brugg" />
+                  <Input
+                    id="destination"
+                    value={destination}
+                    onChange={(e) => setDestination(e.target.value)}
+                  />
                   <CardDescription className="pt-2">
                     Gib den Zielort ein.
                   </CardDescription>
@@ -61,19 +112,37 @@ export function CardPlanJourney() {
               <div className="flex justify-between">
                 <div className="space-y-1  w-4/12">
                   <Label htmlFor="datetime">Wann</Label>
-                  <Input id="datetime" type="datetime-local" />
+                  <Input
+                    id="datetime"
+                    type="datetime-local"
+                    value={datetime}
+                    onChange={(e) => setDatetime(e.target.value)}
+                  />
                   <CardDescription className="pt-2">
                     Gib Datum und Uhrzeit ein.
                   </CardDescription>
                 </div>
                 <div className="space-y-1  w-4/12 content-center lg:mt-[-4px] mt-[-24px]">
-                  <Tabs defaultValue="departure">
+                  <Tabs
+                    defaultValue={activeSearchTab}
+                    onValueChange={(value) => setActiveSearchTab(value)}
+                  >
                     <TabsList className="lg:w-64">
                       <TabsTrigger className="lg:w-32" value="departure">
-                        Abreise
+                        {activeSearchTab === "departure" ? (
+                          <LightActiveSmallCircle />
+                        ) : (
+                          <LightInactiveSmallCircle />
+                        )}
+                        <div className="lg:pl-2">Abreise</div>
                       </TabsTrigger>
                       <TabsTrigger className="lg:w-32" value="arrival">
-                        Ankunft
+                        {activeSearchTab === "arrival" ? (
+                          <LightActiveSmallCircle />
+                        ) : (
+                          <LightInactiveSmallCircle />
+                        )}
+                        <div className="lg:pl-2">Ankunft</div>
                       </TabsTrigger>
                     </TabsList>
                   </Tabs>
