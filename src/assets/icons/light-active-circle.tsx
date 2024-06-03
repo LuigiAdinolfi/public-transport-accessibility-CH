@@ -2,7 +2,7 @@ import React from "react";
 
 type IconProps = React.HTMLAttributes<SVGElement>;
 
-export const LightActiveCircle: React.FC<IconProps> = (props) => (
+export const LightActiveCircle: React.FC<IconProps> = () => (
   <svg
     width="12"
     height="12"
@@ -28,7 +28,7 @@ export const LightActiveCircle: React.FC<IconProps> = (props) => (
   </svg>
 );
 
-export const LightActiveSmallCircle: React.FC<IconProps> = (props) => (
+export const LightActiveSmallCircle: React.FC<IconProps> = () => (
   <svg
     width="10"
     height="10"
