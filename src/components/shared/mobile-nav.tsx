@@ -71,7 +71,7 @@ export function MobileNav() {
           className="flex items-center"
           onOpenChange={setOpen}
         >
-          <Logo className="h-6 w-6" />
+          <Logo />
           <span className="font-bold">{siteConfig.name}</span>
         </MobileLink>
         {/* Scrollable area for menu items */}
