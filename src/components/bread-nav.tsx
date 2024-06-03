@@ -10,7 +10,7 @@ import {
 export function BreadcrumbHome() {
   return (
     <Breadcrumb className="lg:w-[960px] w-full text-left px-2">
-      <BreadcrumbList className="text-xl">
+      <BreadcrumbList className="text-lg">
         <BreadcrumbItem>
           <BreadcrumbPage className="font-bold">Reise planen</BreadcrumbPage>
         </BreadcrumbItem>
@@ -22,7 +22,7 @@ export function BreadcrumbHome() {
 export function BreadcrumbChooseJourney() {
   return (
     <Breadcrumb className="lg:w-[960px] w-full text-left px-2">
-      <BreadcrumbList className="text-xl">
+      <BreadcrumbList className="text-lg">
         <BreadcrumbItem>
           <BreadcrumbLink href="/">Reise planen</BreadcrumbLink>
         </BreadcrumbItem>
@@ -38,7 +38,7 @@ export function BreadcrumbChooseJourney() {
 export function BreadcrumbJourneyDetails() {
   return (
     <Breadcrumb className="lg:w-[960px] w-full text-left px-2">
-      <BreadcrumbList className="text-xl">
+      <BreadcrumbList className="text-lg">
         <BreadcrumbItem>
           <BreadcrumbLink href="/">Reise planen</BreadcrumbLink>
         </BreadcrumbItem>
@@ -60,7 +60,7 @@ export function BreadcrumbJourneyDetails() {
 export function BreadcrumbStopPoint() {
   return (
     <Breadcrumb className="lg:w-[960px] w-full text-left px-2">
-      <BreadcrumbList className="text-xl">
+      <BreadcrumbList className="text-lg">
         <BreadcrumbItem>
           <BreadcrumbLink href="/">Reise planen</BreadcrumbLink>
         </BreadcrumbItem>

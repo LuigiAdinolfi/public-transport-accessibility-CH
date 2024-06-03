@@ -15,19 +15,21 @@ export function CardPlanJourney() {
   return (
     <Tabs defaultValue="new-journey" className="lg:w-[960px] w-full">
       <TabsList className="grid lg:w-1/2 grid-cols-2 lg:h-12">
-        <TabsTrigger className="lg:h-10 lg:text-lg mx-1" value="new-journey">
+        <TabsTrigger className="lg:h-10 lg:text-base mx-1" value="new-journey">
+          {/*TODO: Add a new journey icon*/}
           <div className="lg:pl-2">Neue Reise</div>
         </TabsTrigger>
         <TabsTrigger
-          className="lg:h-10 lg:text-lg mx-1"
+          className="lg:h-8 lg:text-base mx-1"
           value="recent-journeys"
         >
+          {/*TODO: Add a recent journeys icon*/}
           <div className="lg:pl-2">Letzte Reisen</div>
         </TabsTrigger>
       </TabsList>
       <TabsContent value="new-journey">
         <Card>
-          <CardHeader className="pb-12">
+          <CardHeader className="pb-8">
             {/*<CardTitle>Account</CardTitle>*/}
             <CardDescription>Gib deine Reisedaten ein.</CardDescription>
           </CardHeader>

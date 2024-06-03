@@ -32,7 +32,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <SiteHeader />
-          <main className="flex min-h-screen flex-col items-center justify-between lg:py-14 p-6 w-full">
+          <main className="flex min-h-screen flex-col items-center justify-between lg:py-12 p-6 w-full">
             {children}
           </main>
           <SiteFooter />
