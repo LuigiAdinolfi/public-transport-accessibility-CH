@@ -17,7 +17,7 @@ export function BreadcrumbHome() {
     <Breadcrumb className="lg:w-[960px] w-full text-left px-2">
       <BreadcrumbList className="text-lg">
         <BreadcrumbItem>
-          <BreadcrumbPage className="font-bold">Plan Journey</BreadcrumbPage>
+          <BreadcrumbPage className="font-bold">Reise planen</BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
@@ -33,11 +33,11 @@ export function BreadcrumbChooseJourney() {
     <Breadcrumb className="lg:w-[960px] w-full text-left px-2">
       <BreadcrumbList className="text-lg">
         <BreadcrumbItem>
-          <BreadcrumbLink href="/">Plan Journey</BreadcrumbLink>
+          <BreadcrumbLink href="/">Reise planen</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbPage className="font-bold">Choose Journey</BreadcrumbPage>
+          <BreadcrumbPage className="font-bold">Reise auswählen</BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
@@ -53,15 +53,17 @@ export function BreadcrumbJourneyDetails() {
     <Breadcrumb className="lg:w-[960px] w-full text-left px-2">
       <BreadcrumbList className="text-lg">
         <BreadcrumbItem>
-          <BreadcrumbLink href="/">Plan Journey</BreadcrumbLink>
+          <BreadcrumbLink href="/">Reise planen</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href="/choose-journey">Choose Journey</BreadcrumbLink>
+          <BreadcrumbLink href="/choose-journey">
+            Reise auswählen
+          </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbPage className="font-bold">Journey Details</BreadcrumbPage>
+          <BreadcrumbPage className="font-bold">Reise Details</BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
@@ -77,21 +79,21 @@ export function BreadcrumbStopPoint() {
     <Breadcrumb className="lg:w-[960px] w-full text-left px-2">
       <BreadcrumbList className="text-lg">
         <BreadcrumbItem>
-          <BreadcrumbLink href="/">Plan Journey</BreadcrumbLink>
+          <BreadcrumbLink href="/">Reise planen</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href="/choose-journey">Choose Journey</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/journey-details">
-            Journey Details
+          <BreadcrumbLink href="/choose-journey">
+            Reise auswählen
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbPage className="font-bold">Stop Point</BreadcrumbPage>
+          <BreadcrumbLink href="/journey-details">Reise Details</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbPage className="font-bold">Haltestelle</BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
