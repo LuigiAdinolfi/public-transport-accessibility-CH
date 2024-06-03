@@ -74,7 +74,7 @@ export function CardPlanJourney() {
             <LightInactiveCircle />
           )}
 
-          <div className="lg:pl-3 pl-1">Neue Reise</div>
+          <div className="lg:pl-2 pl-1">Neue Reise</div>
         </TabsTrigger>
         <TabsTrigger
           className="lg:h-10 lg:text-base mx-1"
@@ -91,7 +91,7 @@ export function CardPlanJourney() {
           ) : (
             <LightInactiveCircle />
           )}
-          <div className="lg:pl-3 pl-1">Letzte Reisen</div>
+          <div className="lg:pl-2 pl-1">Letzte Reisen</div>
         </TabsTrigger>
       </TabsList>
       <TabsContent value="new-journey">
