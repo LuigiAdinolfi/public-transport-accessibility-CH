@@ -73,7 +73,7 @@ export function CardRecentJourneys() {
                   <Rating />
                 </div>
               </div>
-              <Button variant="secondary" className="pb-4">
+              <Button variant="secondary">
                 <MessageCirclePlus className="mr-2 h-4 w-4" />
                 Kommentar hinzufügen
               </Button>
