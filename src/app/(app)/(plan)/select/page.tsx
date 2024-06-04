@@ -1,6 +1,6 @@
 import { BreadcrumbChooseJourney } from "@/components/shared/bread-nav";
 
-export default function ChooseJourney() {
+export default function SelectJourney() {
   return (
     <div>
       <BreadcrumbChooseJourney />

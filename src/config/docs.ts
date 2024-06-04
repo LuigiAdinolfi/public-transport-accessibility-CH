@@ -14,7 +14,7 @@ export const docsConfig: DocsConfig = {
   mainNav: [
     {
       title: "Reise planen", // Title of the navigation item
-      href: "/plan", // URL path of the navigation item
+      href: "/", // URL path of the navigation item
     },
     {
       title: "Community", // Title of the navigation item

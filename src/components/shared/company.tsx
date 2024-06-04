@@ -4,7 +4,7 @@ import Link from "next/link";
 import * as React from "react";
 
 /**
- * Component representing the company logo and name, linking to the plan page.
+ * Component representing the company logo and name, linking to the pages.
  * @returns JSX.Element
  */
 export function Company() {
