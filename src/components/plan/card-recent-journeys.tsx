@@ -7,11 +7,10 @@ import {
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { LightTrainProfile } from "@/assets/icons/light-train-profile";
-import { MessageCirclePlus } from "lucide-react";
 import { DarkIc36, LightIc36 } from "@/assets/icons/ic-36";
 import { useTheme } from "next-themes";
-import { Rating } from "@/components/home/rating";
 import { DarkTrainProfile } from "@/assets/icons/dark-train-profile";
+import { CardRating } from "@/components/plan/card-rating";
 
 export function CardRecentJourneys() {
   const { resolvedTheme } = useTheme();
@@ -53,34 +52,16 @@ export function CardRecentJourneys() {
                     )}
                   </div>
                 </div>
-
                 <div>Brugg AG</div>
               </div>
-
               <div className="flex justify-between w-full text-sm text-text/90">
                 <div>Di, 07.05.2024</div>
                 <div>46 min</div>
               </div>
             </div>
           </div>
-          <Card className="w-full lg:h-36 lg:w-96 py-4">
-            <CardContent className="px-4 flex flex-col items-center justify-center space-y-6">
-              <div className="flex flex-col items-center justify-center space-y-2">
-                <CardDescription className="w-full text-sm font-base text-text/60 text-center">
-                  Reiseerfahrung
-                </CardDescription>
-                <div className="flex justify-center">
-                  <Rating />
-                </div>
-              </div>
-              <Button variant="secondary">
-                <MessageCirclePlus className="mr-2 h-4 w-4" />
-                Kommentar hinzufügen
-              </Button>
-            </CardContent>
-          </Card>
+          <CardRating />
         </Button>
-        {/*</Card>*/}
       </CardContent>
     </Card>
   );

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Rating as ReactRating } from "@smastrom/react-rating";
 
-export function Rating() {
+export function RatingStars() {
   const [rating, setRating] = useState(0);
 
   return (
