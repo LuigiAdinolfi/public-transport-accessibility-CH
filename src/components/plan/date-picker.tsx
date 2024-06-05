@@ -44,7 +44,7 @@ export function DatePicker() {
   };
 
   const formatDate = (date: Date) => {
-    return format(date, "EEE, PPP HH:mm", { locale: de });
+    return format(date, "EEE, PPP - HH:mm", { locale: de });
   };
 
   return (
