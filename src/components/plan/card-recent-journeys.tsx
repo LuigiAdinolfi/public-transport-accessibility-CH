@@ -26,7 +26,7 @@ export function CardRecentJourneys() {
         {/*  </CardDescription>*/}
         {/*</Card>*/}
         <Button
-          className="flex justify-between items-center min-h-44 w-full"
+          className="lg:flex grid lg:justify-between align-middle items-center lg:min-h-44 min-h-64 w-full"
           variant="outline"
         >
           <div className="w-full h-full inline-flex justify-start items-center ">

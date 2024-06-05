@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { ArrowRightLeft } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -23,6 +23,7 @@ import {
   DarkInactiveSmallCircle,
   LightInactiveSmallCircle,
 } from "@/assets/icons/inactive-circle";
+import { DatePicker } from "@/components/plan/date-picker";
 
 /**
  * Component representing the journey planning card.
@@ -33,19 +34,9 @@ export function CardNewJourney() {
   const [activeSearchTab, setActiveSearchTab] = useState("departure");
   const [origin, setOrigin] = useState("Basel");
   const [destination, setDestination] = useState("Brugg");
-  const [datetime, setDatetime] = useState("");
 
   // Theme hook
   const { resolvedTheme } = useTheme();
-
-  // Effect to set initial date and time
-  useEffect(() => {
-    const now = new Date();
-    const offset = now.getTimezoneOffset();
-    const localTime = new Date(now.getTime() - offset * 60000);
-    const formattedDate = localTime.toISOString().slice(0, 16);
-    setDatetime(formattedDate);
-  }, []);
 
   // Function to swap origin and destination
   const swapLocations = () => {
@@ -94,19 +85,14 @@ export function CardNewJourney() {
         </div>
         <div className="space-y-1">
           <div className="flex justify-between">
-            <div className="lg:space-y-1  lg:w-4/12 w-5/12">
+            <div className="lg:space-y-1  lg:w-4/12 w-4/12">
               <Label htmlFor="datetime">Wann</Label>
-              <Input
-                id="datetime"
-                type="datetime-local"
-                value={datetime}
-                onChange={(e) => setDatetime(e.target.value)}
-              />
+              <DatePicker />
               <CardDescription className="pt-2">
                 Gib Datum und Uhrzeit ein.
               </CardDescription>
             </div>
-            <div className="space-y-1  w-4/12 content-center lg:mt-[-4px] mt-[-4px]">
+            <div className="space-y-1  lg:w-4/12 w-3/12 content-center lg:mt-[-4px] mt-[-24px]">
               <Tabs
                 defaultValue={activeSearchTab}
                 onValueChange={(value) => setActiveSearchTab(value)}
@@ -143,7 +129,7 @@ export function CardNewJourney() {
                 </TabsList>
               </Tabs>
             </div>
-            <div className="content-center lg:mt-[-4px] mt-[-6px]">
+            <div className="content-center lg:mt-[-4px] mt-[-24px]">
               <Button id="submit" type="submit" className="lg:w-40">
                 Suche
               </Button>
