@@ -57,6 +57,7 @@ export function DatePicker() {
             !date && "text-muted-foreground",
           )}
           aria-label="Datum und Uhrzeit wählen"
+          suppressHydrationWarning
         >
           {date ? formatDate(date) : formatDate(new Date())}
           <CalendarIcon className="h-4 w-4" />
