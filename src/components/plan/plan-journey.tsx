@@ -32,13 +32,13 @@ export function PlanJourney() {
   return (
     <Tabs
       defaultValue={activeJourneyTab}
-      className="lg:w-[960px] w-full"
+      className="w-full lg:w-[960px]"
       onValueChange={(value) => setActiveJourneyTab(value)}
     >
-      <div className="flex justify-between items-center">
-        <TabsList className="grid lg:w-1/2 grid-cols-2 lg:h-12">
+      <div className="flex items-center justify-between">
+        <TabsList className="grid grid-cols-2 lg:h-12 lg:w-1/2">
           <TabsTrigger
-            className="lg:h-10 lg:text-base mx-1"
+            className="mx-1 lg:h-10 lg:text-base"
             value="new-journey"
           >
             {resolvedTheme === "dark" ? (
@@ -53,10 +53,10 @@ export function PlanJourney() {
               <LightInactiveCircle />
             )}
 
-            <div className="lg:pl-2 pl-1">Neue Reise</div>
+            <div className="pl-1 lg:pl-2">Neue Reise</div>
           </TabsTrigger>
           <TabsTrigger
-            className="lg:h-10 lg:text-base mx-1"
+            className="mx-1 lg:h-10 lg:text-base"
             value="recent-journeys"
           >
             {resolvedTheme === "dark" ? (
@@ -70,7 +70,7 @@ export function PlanJourney() {
             ) : (
               <LightInactiveCircle />
             )}
-            <div className="lg:pl-2 pl-1">Letzte Reisen</div>
+            <div className="pl-1 lg:pl-2">Letzte Reisen</div>
           </TabsTrigger>
         </TabsList>
         <HelpButton />

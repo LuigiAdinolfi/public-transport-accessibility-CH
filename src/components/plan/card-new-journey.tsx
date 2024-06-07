@@ -54,7 +54,7 @@ export function CardNewJourney() {
       <CardContent className="space-y-12 pb-12">
         <div className="space-y-1">
           <div className="flex justify-between">
-            <div className="space-y-1  w-5/12">
+            <div className="w-5/12 space-y-1">
               <Label htmlFor="origin">Von</Label>
               <Input
                 id="origin"
@@ -65,12 +65,12 @@ export function CardNewJourney() {
                 Gib den Abfahrtsort ein.
               </CardDescription>
             </div>
-            <div className="flex items-center justify-center w-2/12">
+            <div className="flex w-2/12 items-center justify-center">
               <Button variant="outline" size="icon" onClick={swapLocations}>
                 <ArrowRightLeft />
               </Button>
             </div>
-            <div className="space-y-1  w-5/12">
+            <div className="w-5/12 space-y-1">
               <Label htmlFor="destination">Nach</Label>
               <Input
                 id="destination"
@@ -85,20 +85,20 @@ export function CardNewJourney() {
         </div>
         <div className="space-y-1">
           <div className="flex justify-between">
-            <div className="lg:space-y-1  lg:w-4/12 w-4/12">
+            <div className="w-4/12 lg:w-4/12 lg:space-y-1">
               <Label htmlFor="datetime">Wann</Label>
               <DatePicker />
               <CardDescription className="pt-2">
                 Gib Datum und Uhrzeit ein.
               </CardDescription>
             </div>
-            <div className="space-y-1  lg:w-4/12 w-3/12 content-center lg:mt-[-4px] mt-[-24px]">
+            <div className="mt-[-24px] w-3/12 content-center space-y-1 lg:mt-[-4px] lg:w-4/12">
               <Tabs
                 defaultValue={activeSearchTab}
                 onValueChange={(value) => setActiveSearchTab(value)}
               >
                 <TabsList className="lg:w-64">
-                  <TabsTrigger className="lg:w-32 w-[4.6rem]" value="departure">
+                  <TabsTrigger className="w-[4.6rem] lg:w-32" value="departure">
                     {resolvedTheme === "dark" ? (
                       activeSearchTab === "departure" ? (
                         <DarkActiveSmallCircle />
@@ -110,9 +110,9 @@ export function CardNewJourney() {
                     ) : (
                       <LightInactiveSmallCircle />
                     )}
-                    <div className="lg:pl-2 pl-1">Abreise</div>
+                    <div className="pl-1 lg:pl-2">Abreise</div>
                   </TabsTrigger>
-                  <TabsTrigger className="lg:w-32 w-[4.6rem]" value="arrival">
+                  <TabsTrigger className="w-[4.6rem] lg:w-32" value="arrival">
                     {resolvedTheme === "dark" ? (
                       activeSearchTab === "arrival" ? (
                         <DarkActiveSmallCircle />
@@ -124,12 +124,12 @@ export function CardNewJourney() {
                     ) : (
                       <LightInactiveSmallCircle />
                     )}
-                    <div className="lg:pl-2 pl-1">Ankunft</div>
+                    <div className="pl-1 lg:pl-2">Ankunft</div>
                   </TabsTrigger>
                 </TabsList>
               </Tabs>
             </div>
-            <div className="content-center lg:mt-[-4px] mt-[-24px]">
+            <div className="mt-[-24px] content-center lg:mt-[-4px]">
               <Button id="submit" type="submit" className="lg:w-40">
                 Suche
               </Button>

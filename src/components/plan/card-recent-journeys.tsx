@@ -26,25 +26,25 @@ export function CardRecentJourneys() {
         {/*  </CardDescription>*/}
         {/*</Card>*/}
         <Button
-          className="lg:flex grid lg:justify-between align-middle items-center lg:min-h-44 min-h-64 w-full"
+          className="grid min-h-64 w-full items-center align-middle lg:flex lg:min-h-44 lg:justify-between"
           variant="outline"
         >
-          <div className="w-full h-full inline-flex justify-start items-center ">
-            <div className="grid grid-rows-2 grid-flow-col gap-10 w-full px-4">
-              <div className="flex justify-between w-full text-2xl font-semibold text-text/90">
+          <div className="inline-flex h-full w-full items-center justify-start">
+            <div className="grid w-full grid-flow-col grid-rows-2 gap-10 px-4">
+              <div className="text-text/90 flex w-full justify-between text-2xl font-semibold">
                 <div>Basel SBB</div>
                 <div className="flex justify-center">
-                  <div className="flex items-center text-base font-semibold px-1">
+                  <div className="flex items-center px-1 text-base font-semibold">
                     Zug
                   </div>
-                  <div className="flex items-center text-base font-normal px-1">
+                  <div className="flex items-center px-1 text-base font-normal">
                     {resolvedTheme === "dark" ? (
                       <DarkTrainProfile className="h-6 w-6" />
                     ) : (
                       <LightTrainProfile className="h-6 w-6" />
                     )}
                   </div>
-                  <div className="flex items-center text-base font-normal px-1">
+                  <div className="flex items-center px-1 text-base font-normal">
                     {resolvedTheme === "dark" ? (
                       <DarkIc36 className="h-6 w-6" />
                     ) : (
@@ -54,7 +54,7 @@ export function CardRecentJourneys() {
                 </div>
                 <div>Brugg AG</div>
               </div>
-              <div className="flex justify-between w-full text-sm text-text/90">
+              <div className="text-text/90 flex w-full justify-between text-sm">
                 <div>Di, 07.05.2024</div>
                 <div>46 min</div>
               </div>

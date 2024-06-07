@@ -6,7 +6,7 @@ export default function StopPoint({ params }: { params: { id: string } }) {
       <div>
         <BreadcrumbStopPoint />
       </div>
-      <div className="flex min-h-screen flex-col items-center justify-between lg:p-12 py-6 w-full">
+      <div className="flex min-h-screen w-full flex-col items-center justify-between py-6 lg:p-12">
         Stop Point: {params.id}
       </div>
     </>

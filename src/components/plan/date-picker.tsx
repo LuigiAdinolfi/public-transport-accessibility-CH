@@ -53,7 +53,7 @@ export function DatePicker() {
         <Button
           variant={"outline"}
           className={cn(
-            "lg:w-[280px] w-[200px] justify-between text-left font-normal",
+            "w-[200px] justify-between text-left font-normal lg:w-[280px]",
             !date && "text-muted-foreground",
           )}
           aria-label="Datum und Uhrzeit wählen"
@@ -82,7 +82,7 @@ export function DatePicker() {
         <div className="p-4">
           <label
             htmlFor="time"
-            className="block text-sm font-medium text-gray-700 pl-4"
+            className="block pl-4 text-sm font-medium text-gray-700"
           >
             Zeit
           </label>
@@ -91,7 +91,7 @@ export function DatePicker() {
             id="time"
             value={time}
             onChange={handleTimeChange}
-            className="mt-1 block w-full pl-3 pr-12 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 block w-full rounded-md border border-gray-300 py-2 pl-3 pr-12 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
             aria-label="Select time"
           />
         </div>

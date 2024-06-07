@@ -41,7 +41,7 @@ export function ModeToggle() {
         <DropdownMenuItem onClick={() => setTheme("light")}>
           {/* Sun icon */}
           <Sun
-            className={`h-[0.8rem] w-[0.8rem] transition-all mr-2 ${theme === "light" ? "text-yellow-500" : "text-gray-500"}`}
+            className={`mr-2 h-[0.8rem] w-[0.8rem] transition-all ${theme === "light" ? "text-yellow-500" : "text-gray-500"}`}
           />
           {/* Label for light theme */}
           Light
@@ -50,7 +50,7 @@ export function ModeToggle() {
         <DropdownMenuItem onClick={() => setTheme("dark")}>
           {/* Moon icon */}
           <Moon
-            className={`h-[0.8rem] w-[0.8rem] transition-all mr-2 ${theme === "dark" ? "text-yellow-500" : "text-gray-500"}`}
+            className={`mr-2 h-[0.8rem] w-[0.8rem] transition-all ${theme === "dark" ? "text-yellow-500" : "text-gray-500"}`}
           />
           {/* Label for dark theme */}
           Dark
