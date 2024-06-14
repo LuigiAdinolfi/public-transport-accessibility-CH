@@ -17,7 +17,9 @@ export function CardRecentJourneys() {
   return (
     <Card>
       <CardHeader className="pb-8">
-        <CardDescription>Eine frühere Reise auswählen.</CardDescription>
+        <CardDescription className="text-zinc-600">
+          Eine frühere Reise auswählen.
+        </CardDescription>
       </CardHeader>
       <CardContent className="space-y-8 pb-12">
         {/*<Card className="flex justify-between items-center min-h-48">*/}

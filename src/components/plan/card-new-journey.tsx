@@ -49,7 +49,9 @@ export function CardNewJourney() {
   return (
     <Card>
       <CardHeader className="pb-8">
-        <CardDescription>Gib deine Reisedaten ein.</CardDescription>
+        <CardDescription className="text-zinc-600">
+          Gib deine Reisedaten ein.
+        </CardDescription>
       </CardHeader>
       <CardContent className="space-y-12 pb-12">
         <div className="space-y-1">
@@ -61,7 +63,7 @@ export function CardNewJourney() {
                 value={origin}
                 onChange={(e) => setOrigin(e.target.value)}
               />
-              <CardDescription className="pt-2">
+              <CardDescription className="pt-2 text-zinc-600">
                 Gib den Abfahrtsort ein.
               </CardDescription>
             </div>
@@ -77,7 +79,7 @@ export function CardNewJourney() {
                 value={destination}
                 onChange={(e) => setDestination(e.target.value)}
               />
-              <CardDescription className="pt-2">
+              <CardDescription className="pt-2 text-zinc-600">
                 Gib den Zielort ein.
               </CardDescription>
             </div>
@@ -88,7 +90,7 @@ export function CardNewJourney() {
             <div className="w-4/12 lg:w-4/12 lg:space-y-1">
               <Label htmlFor="datetime">Wann</Label>
               <DatePicker />
-              <CardDescription className="pt-2">
+              <CardDescription className="pt-2 text-zinc-600">
                 Gib Datum und Uhrzeit ein.
               </CardDescription>
             </div>
@@ -98,7 +100,10 @@ export function CardNewJourney() {
                 onValueChange={(value) => setActiveSearchTab(value)}
               >
                 <TabsList className="lg:w-64">
-                  <TabsTrigger className="w-[4.6rem] lg:w-32" value="departure">
+                  <TabsTrigger
+                    className="w-[4.6rem] text-zinc-700 active:text-zinc-950 lg:w-32"
+                    value="departure"
+                  >
                     {resolvedTheme === "dark" ? (
                       activeSearchTab === "departure" ? (
                         <DarkActiveSmallCircle />
@@ -112,7 +117,10 @@ export function CardNewJourney() {
                     )}
                     <div className="pl-1 lg:pl-2">Abreise</div>
                   </TabsTrigger>
-                  <TabsTrigger className="w-[4.6rem] lg:w-32" value="arrival">
+                  <TabsTrigger
+                    className="w-[4.6rem] text-zinc-700 active:text-zinc-950 lg:w-32"
+                    value="arrival"
+                  >
                     {resolvedTheme === "dark" ? (
                       activeSearchTab === "arrival" ? (
                         <DarkActiveSmallCircle />
