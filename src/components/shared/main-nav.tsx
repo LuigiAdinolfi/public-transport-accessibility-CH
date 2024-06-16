@@ -31,7 +31,7 @@ export function MainNav() {
       return cn(
         "transition-colors text-white",
         isActive
-          ? "bg-zinc-700 text-white"
+          ? "bg-zinc-700 text-white font-semibold"
           : "text-white hover:bg-zinc-800 hover:text-white",
         "text-lg",
         "rounded-md p-2",
@@ -41,7 +41,7 @@ export function MainNav() {
       return cn(
         "transition-colors text-zinc-950",
         isActive
-          ? "bg-zinc-300 text-zinc-950"
+          ? "bg-zinc-300 text-zinc-950 font-semibold"
           : "text-zinc-950 dark:text-white hover:bg-zinc-100 hover:text-zinc-950",
         "text-lg",
         "rounded-md p-2",

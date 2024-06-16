@@ -7,10 +7,10 @@ import {
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { LightTrainProfile } from "@/assets/icons/light-train-profile";
-import { DarkIc36, LightIc36 } from "@/assets/icons/ic-36";
 import { useTheme } from "next-themes";
 import { DarkTrainProfile } from "@/assets/icons/dark-train-profile";
-import { CardRating } from "@/components/plan/card-rating";
+import { DarkIr16, LightIr16 } from "@/assets/icons/ir-16";
+import { DarkIc6, LightIc6 } from "@/assets/icons/ic-6";
 
 export function CardRecentJourneys() {
   const { resolvedTheme } = useTheme();
@@ -28,15 +28,24 @@ export function CardRecentJourneys() {
         {/*  </CardDescription>*/}
         {/*</Card>*/}
         <Button
-          className="grid min-h-64 w-full items-center align-middle lg:flex lg:min-h-44 lg:justify-between"
+          className="grid min-h-64 w-full items-center align-middle lg:flex lg:min-h-32 lg:justify-between"
           variant="outline"
         >
           <div className="inline-flex h-full w-full items-center justify-start">
-            <div className="grid w-full grid-flow-col grid-rows-2 gap-10 px-4">
-              <div className="text-text/90 flex w-full justify-between text-2xl font-semibold">
-                <div>Basel SBB</div>
+            <div className="text-text/90 flex w-full items-center justify-between">
+              <div className="grid w-full grid-flow-col grid-rows-2 justify-start gap-6 px-4">
                 <div className="flex justify-center">
-                  <div className="flex items-center px-1 text-base font-semibold">
+                  <div className="flex items-center px-1 text-2xl font-semibold">
+                    Basel SBB
+                  </div>
+                </div>
+                <div className="flex justify-center">
+                  <div className="flex items-center px-1">Di, 07.05.2024</div>
+                </div>
+              </div>
+              <div className="grid w-full grid-flow-col grid-rows-2 justify-center gap-7 px-4">
+                <div className="flex justify-center">
+                  <div className="mr-2 flex items-center px-1 text-base font-semibold">
                     Zug
                   </div>
                   <div className="flex items-center px-1 text-base font-normal">
@@ -48,21 +57,45 @@ export function CardRecentJourneys() {
                   </div>
                   <div className="flex items-center px-1 text-base font-normal">
                     {resolvedTheme === "dark" ? (
-                      <DarkIc36 className="h-6 w-6" />
+                      <DarkIc6 className="h-6 w-6" />
                     ) : (
-                      <LightIc36 className="h-6 w-6" />
+                      <LightIc6 className="h-6 w-6" />
                     )}
                   </div>
                 </div>
-                <div>Brugg AG</div>
+                <div className="flex justify-center">
+                  <div className="mr-2 flex items-center px-1 text-base font-semibold">
+                    Zug
+                  </div>
+                  <div className="flex items-center px-1 text-base font-normal">
+                    {resolvedTheme === "dark" ? (
+                      <DarkTrainProfile className="h-8 w-8" />
+                    ) : (
+                      <LightTrainProfile className="h-8 w-8" />
+                    )}
+                  </div>
+                  <div className="flex items-center px-1 text-base font-normal">
+                    {resolvedTheme === "dark" ? (
+                      <DarkIr16 className="h-6 w-6" />
+                    ) : (
+                      <LightIr16 className="h-6 w-6" />
+                    )}
+                  </div>
+                </div>
               </div>
-              <div className="text-text/90 flex w-full justify-between text-sm">
-                <div>Di, 07.05.2024</div>
-                <div>46 min</div>
+              <div className="grid w-full grid-flow-col grid-rows-2 justify-end gap-6 px-4">
+                <div className="flex justify-center">
+                  <div className="flex items-center px-1 text-2xl font-semibold">
+                    Brugg AG
+                  </div>
+                </div>
+                <div className="flex justify-center">
+                  <div className="flex items-center px-1">46 min Reisezeit</div>
+                </div>
               </div>
             </div>
           </div>
-          <CardRating />
+          {/*<CardRating />*/}
         </Button>
       </CardContent>
     </Card>
