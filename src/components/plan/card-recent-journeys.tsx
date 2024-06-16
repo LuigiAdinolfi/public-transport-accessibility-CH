@@ -34,12 +34,12 @@ export function CardRecentJourneys() {
           <div className="inline-flex h-full w-full items-center justify-start">
             <div className="text-text/90 flex w-full items-center justify-between">
               <div className="grid w-full grid-flow-col grid-rows-2 justify-start gap-6 px-4">
-                <div className="flex justify-center">
+                <div className="flex justify-start">
                   <div className="flex items-center px-1 text-2xl font-semibold">
                     Basel SBB
                   </div>
                 </div>
-                <div className="flex justify-center">
+                <div className="flex justify-start">
                   <div className="flex items-center px-1">Di, 07.05.2024</div>
                 </div>
               </div>
@@ -84,12 +84,12 @@ export function CardRecentJourneys() {
                 </div>
               </div>
               <div className="grid w-full grid-flow-col grid-rows-2 justify-end gap-6 px-4">
-                <div className="flex justify-center">
+                <div className="flex justify-end">
                   <div className="flex items-center px-1 text-2xl font-semibold">
                     Brugg AG
                   </div>
                 </div>
-                <div className="flex justify-center">
+                <div className="flex justify-end">
                   <div className="flex items-center px-1">46 min Reisezeit</div>
                 </div>
               </div>
