@@ -38,7 +38,7 @@ export function PlanJourney() {
       <div className="flex items-center justify-between">
         <TabsList className="grid grid-cols-2 lg:h-12 lg:w-1/2">
           <TabsTrigger
-            className="mx-1 text-zinc-700 active:text-zinc-950 lg:h-10 lg:text-base"
+            className="mx-1 text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:h-10 lg:text-base"
             value="new-journey"
           >
             {resolvedTheme === "dark" ? (
@@ -56,7 +56,7 @@ export function PlanJourney() {
             <div className="pl-1 lg:pl-2">Neue Reise</div>
           </TabsTrigger>
           <TabsTrigger
-            className="mx-1 text-zinc-700 active:text-zinc-950 lg:h-10 lg:text-base"
+            className="mx-1 text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:h-10 lg:text-base"
             value="recent-journeys"
           >
             {resolvedTheme === "dark" ? (

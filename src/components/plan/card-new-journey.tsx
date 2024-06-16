@@ -101,7 +101,7 @@ export function CardNewJourney() {
               >
                 <TabsList className="lg:w-64">
                   <TabsTrigger
-                    className="w-[4.6rem] text-zinc-700 active:text-zinc-950 lg:w-32"
+                    className="w-[4.6rem] text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:w-32"
                     value="departure"
                   >
                     {resolvedTheme === "dark" ? (
@@ -118,7 +118,7 @@ export function CardNewJourney() {
                     <div className="pl-1 lg:pl-2">Abreise</div>
                   </TabsTrigger>
                   <TabsTrigger
-                    className="w-[4.6rem] text-zinc-700 active:text-zinc-950 lg:w-32"
+                    className="w-[4.6rem] text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:w-32"
                     value="arrival"
                   >
                     {resolvedTheme === "dark" ? (

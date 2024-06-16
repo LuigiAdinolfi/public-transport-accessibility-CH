@@ -9,7 +9,7 @@ export function SiteFooter() {
     <footer className="py-6 md:px-8 md:py-0">
       <div className="container flex flex-col items-center justify-between gap-4 md:h-24">
         {/* Text content */}
-        <p className="text-balance text-center text-sm leading-loose text-muted-foreground text-zinc-600 md:text-left">
+        <p className="text-balance text-center text-sm leading-loose text-muted-foreground text-zinc-600 dark:text-zinc-400 md:text-left">
           {/* Built by Luigi Adinolfi */}
           Built by{" "}
           <a
