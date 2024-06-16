@@ -2,6 +2,7 @@ import { HelpButton } from "@/components/shared/help-button";
 import * as React from "react";
 import { BackButton } from "@/components/shared/back-button";
 import Link from "next/link";
+import { CardSelectJourney } from "@/components/select/card-select-journey";
 
 export function SelectJourney() {
   return (
@@ -12,6 +13,7 @@ export function SelectJourney() {
         </Link>
         <HelpButton />
       </div>
+      <CardSelectJourney />
     </div>
   );
 }

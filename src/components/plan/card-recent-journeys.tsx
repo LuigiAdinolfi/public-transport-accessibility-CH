@@ -6,9 +6,9 @@ import {
 } from "@/components/ui/card";
 import * as React from "react";
 import { Button } from "@/components/ui/button";
-import { LightTrainProfile } from "@/assets/icons/light-train-profile";
+import { LightTrainProfile } from "@/assets/icons/train-profile";
 import { useTheme } from "next-themes";
-import { DarkTrainProfile } from "@/assets/icons/dark-train-profile";
+import { DarkTrainProfile } from "@/assets/icons/train-profile";
 import { DarkIr16, LightIr16 } from "@/assets/icons/ir-16";
 import { DarkIc6, LightIc6 } from "@/assets/icons/ic-6";
 
@@ -35,7 +35,7 @@ export function CardRecentJourneys() {
             <div className="text-text/90 flex w-full items-center justify-between">
               <div className="grid w-full grid-flow-col grid-rows-2 justify-start gap-6 px-4">
                 <div className="flex justify-start">
-                  <div className="flex items-center px-1 text-2xl font-semibold">
+                  <div className="flex items-center px-1 text-xl font-semibold">
                     Basel SBB
                   </div>
                 </div>
@@ -85,7 +85,7 @@ export function CardRecentJourneys() {
               </div>
               <div className="grid w-full grid-flow-col grid-rows-2 justify-end gap-6 px-4">
                 <div className="flex justify-end">
-                  <div className="flex items-center px-1 text-2xl font-semibold">
+                  <div className="flex items-center px-1 text-xl font-semibold">
                     Brugg AG
                   </div>
                 </div>
