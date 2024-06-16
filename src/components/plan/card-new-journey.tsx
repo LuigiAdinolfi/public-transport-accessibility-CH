@@ -24,6 +24,8 @@ import {
   LightInactiveSmallCircle,
 } from "@/assets/icons/inactive-circle";
 import { DatePicker } from "@/components/plan/date-picker";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 /**
  * Component representing the journey planning card.
@@ -37,6 +39,7 @@ export function CardNewJourney() {
 
   // Theme hook
   const { resolvedTheme } = useTheme();
+  const router = useRouter();
 
   // Function to swap origin and destination
   const swapLocations = () => {
@@ -138,9 +141,11 @@ export function CardNewJourney() {
               </Tabs>
             </div>
             <div className="mt-[-24px] content-center lg:mt-[-4px]">
-              <Button id="submit" type="submit" className="lg:w-40">
-                Suche
-              </Button>
+              <Link href={"/select"} passHref legacyBehavior>
+                <Button id="submit" type="submit" className="lg:w-40">
+                  Suche
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

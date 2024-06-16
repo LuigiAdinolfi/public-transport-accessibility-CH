@@ -1,6 +1,6 @@
 import { BreadcrumbStopPoint } from "@/components/shared/bread-nav";
 
-export default function StopPoint({ params }: { params: { id: string } }) {
+export default function StopPointPage({ params }: { params: { id: string } }) {
   return (
     <>
       <div>
