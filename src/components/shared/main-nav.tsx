@@ -35,7 +35,7 @@ export function MainNav() {
           : "text-white hover:bg-zinc-800 hover:text-white",
         "text-lg",
         "rounded-md p-2",
-        "px-4 py-2",
+        "px-8 py-2.5",
       );
     } else {
       return cn(
@@ -45,7 +45,7 @@ export function MainNav() {
           : "text-zinc-950 dark:text-white hover:bg-zinc-100 hover:text-zinc-950",
         "text-lg",
         "rounded-md p-2",
-        "px-4 py-2",
+        "px-8 py-2.5",
       );
     }
   };
