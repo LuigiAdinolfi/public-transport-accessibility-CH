@@ -52,8 +52,8 @@ export function MainNav() {
 
   // Render the main navigation menu
   return (
-    <div className="mr-4 hidden md:flex">
-      <nav className="flex items-center gap-4 text-sm lg:gap-6">
+    <div className="hidden md:flex">
+      <nav className="flex items-center gap-4 text-sm">
         {/* Navigation links */}
         <Link href={"/"} className={getClasses("/")}>
           Reise planen

@@ -14,7 +14,7 @@ export function Company() {
       className="mr-6 flex items-center space-x-2 rounded-md py-2"
     >
       <Logo />
-      <span className="hidden text-2xl font-bold sm:inline-block">
+      <span className="hidden text-xl font-bold sm:inline-block">
         {siteConfig.name}
       </span>
     </Link>

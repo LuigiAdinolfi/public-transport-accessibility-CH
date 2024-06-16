@@ -24,7 +24,6 @@ import {
   LightInactiveSmallCircle,
 } from "@/assets/icons/inactive-circle";
 import { DatePicker } from "@/components/plan/date-picker";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 /**
@@ -39,7 +38,6 @@ export function CardNewJourney() {
 
   // Theme hook
   const { resolvedTheme } = useTheme();
-  const router = useRouter();
 
   // Function to swap origin and destination
   const swapLocations = () => {
