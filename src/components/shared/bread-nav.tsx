@@ -28,11 +28,11 @@ export function BreadcrumbHome() {
  * Component representing a breadcrumb for the "Choose Journey" page.
  * @returns JSX.Element
  */
-export function BreadcrumbChooseJourney() {
+export function BreadcrumbSelectJourney() {
   return (
     <Breadcrumb className="w-full px-2 text-left lg:w-[960px]">
       <BreadcrumbList className="text-lg">
-        <BreadcrumbItem>
+        <BreadcrumbItem className="text-zinc-600">
           <BreadcrumbLink href="/">Reise planen</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
@@ -52,11 +52,11 @@ export function BreadcrumbJourneyDetails() {
   return (
     <Breadcrumb className="w-full px-2 text-left lg:w-[960px]">
       <BreadcrumbList className="text-lg">
-        <BreadcrumbItem>
+        <BreadcrumbItem className="text-zinc-600">
           <BreadcrumbLink href="/">Reise planen</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
-        <BreadcrumbItem>
+        <BreadcrumbItem className="text-zinc-600">
           <BreadcrumbLink href="/choose-journey">
             Reise auswählen
           </BreadcrumbLink>
@@ -78,18 +78,20 @@ export function BreadcrumbStopPoint() {
   return (
     <Breadcrumb className="w-full px-2 text-left lg:w-[960px]">
       <BreadcrumbList className="text-lg">
-        <BreadcrumbItem>
+        <BreadcrumbItem className="text-zinc-600">
           <BreadcrumbLink href="/">Reise planen</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
-        <BreadcrumbItem>
+        <BreadcrumbItem className="text-zinc-600">
           <BreadcrumbLink href="/choose-journey">
             Reise auswählen
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href="/journey-details">Reise Details</BreadcrumbLink>
+          <BreadcrumbLink className="text-zinc-600" href="/journey-details">
+            Reise Details
+          </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
