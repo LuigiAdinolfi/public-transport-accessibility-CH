@@ -1,5 +1,3 @@
-
-
 import { Rating, Star } from "@smastrom/react-rating";
 import { useTheme } from "next-themes";
 
