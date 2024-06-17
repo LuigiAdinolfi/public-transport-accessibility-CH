@@ -8,7 +8,6 @@ import { DarkTrainProfile, LightTrainProfile } from "@/assets/icons/train-profil
 import { CommunityRating } from "@/components/select/community-rating";
 import { useTheme } from "next-themes";
 import { DarkIc36, LightIc36 } from "@/assets/icons/ic-36";
-import { DarkIr16, LightIr16 } from "@/assets/icons/ir-16";
 
 export function DirectConnection() {
   const router = useRouter();
