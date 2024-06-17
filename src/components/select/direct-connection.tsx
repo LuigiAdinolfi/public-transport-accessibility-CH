@@ -2,12 +2,13 @@
 
 import * as React from "react";
 import { Button } from "@/components/ui/button";
-import { LightWheelchairReservation } from "@/assets/icons/wheelchair-reservation";
+import { DarkWheelchairReservation, LightWheelchairReservation } from "@/assets/icons/wheelchair-reservation";
 import { useRouter } from "next/navigation";
 import { DarkTrainProfile, LightTrainProfile } from "@/assets/icons/train-profile";
 import { CommunityRating } from "@/components/select/community-rating";
 import { useTheme } from "next-themes";
 import { DarkIc36, LightIc36 } from "@/assets/icons/ic-36";
+import { DarkIr16, LightIr16 } from "@/assets/icons/ir-16";
 
 export function DirectConnection() {
   const router = useRouter();
@@ -16,16 +17,20 @@ export function DirectConnection() {
     <Button className="flex h-full w-full justify-start" variant="outline"
             onClick={() => router.push("/select/details")}>
       <div className="grid w-full">
-        <div className="mb-2 flex w-full items-center justify-start px-3 py-4 text-zinc-950">
+        <div className="mb-2 flex w-full items-center justify-start px-3 py-4 text-zinc-950 dark:text-zinc-50">
           <div className="flex w-full justify-start">
             <div className="pr-2">Niedrigste Barrierefreiheit:</div>
-            <LightWheelchairReservation className="h-6 w-6" />
+            {resolvedTheme === "dark" ? (
+              <DarkWheelchairReservation className="h-6 w-6" />
+            ) : (
+              <LightWheelchairReservation className="h-6 w-6" />
+            )}
             <div className="pl-2">Mit Personalhilfe ein-/aussteigen</div>
           </div>
           <div className="justify-end">46 min Reisezeit</div>
         </div>
         <div className="flex flex-row mb-2">
-          <div className="flex w-full justify-start rounded-lg bg-zinc-50">
+          <div className="flex w-full justify-start rounded-lg bg-zinc-50 dark:bg-zinc-900">
             <div className="w-full py-2">
               <div className="flex w-full items-center justify-between px-3 pt-1 pb-3 font-normal">
                 <div className="flex justify-start">21:11</div>
@@ -60,7 +65,11 @@ export function DirectConnection() {
               </div>
               <div className="flex w-full justify-between px-3 py-3 font-medium">
                 <div className="flex basis-1/2 justify-start items-center">
-                  <LightWheelchairReservation className="h-6 w-6" />
+                  {resolvedTheme === "dark" ? (
+                    <DarkWheelchairReservation className="h-6 w-6" />
+                  ) : (
+                    <LightWheelchairReservation className="h-6 w-6" />
+                  )}
                   <div className="pl-2 flex flex-col">
                     <span>Mit Personalhilfe ein-/aussteigen</span>
                   </div>
@@ -69,7 +78,11 @@ export function DirectConnection() {
                   <div className="pr-2 flex flex-col text-right">
                     <span>Mit Personalhilfe ein-/aussteigen</span>
                   </div>
-                  <LightWheelchairReservation className="h-6 w-6" />
+                  {resolvedTheme === "dark" ? (
+                    <DarkWheelchairReservation className="h-6 w-6" />
+                  ) : (
+                    <LightWheelchairReservation className="h-6 w-6" />
+                  )}
                 </div>
               </div>
               <div className="flex w-full items-center justify-start px-3 pb-2 pt-4 font-normal">

@@ -32,7 +32,7 @@ export function BreadcrumbSelectJourney() {
   return (
     <Breadcrumb className="w-full px-2 text-left lg:w-[960px]">
       <BreadcrumbList className="text-lg">
-        <BreadcrumbItem className="text-zinc-600">
+        <BreadcrumbItem className="text-zinc-600 dark:text-zinc-400">
           <BreadcrumbLink href="/">Reise planen</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
@@ -52,11 +52,11 @@ export function BreadcrumbJourneyDetails() {
   return (
     <Breadcrumb className="w-full px-2 text-left lg:w-[960px]">
       <BreadcrumbList className="text-lg">
-        <BreadcrumbItem className="text-zinc-600">
+        <BreadcrumbItem className="text-zinc-600 dark:text-zinc-400">
           <BreadcrumbLink href="/">Reise planen</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
-        <BreadcrumbItem className="text-zinc-600">
+        <BreadcrumbItem className="text-zinc-600 dark:text-zinc-400">
           <BreadcrumbLink href="/choose-journey">
             Reise auswählen
           </BreadcrumbLink>
@@ -78,18 +78,18 @@ export function BreadcrumbStopPoint() {
   return (
     <Breadcrumb className="w-full px-2 text-left lg:w-[960px]">
       <BreadcrumbList className="text-lg">
-        <BreadcrumbItem className="text-zinc-600">
+        <BreadcrumbItem className="text-zinc-600 dark:text-zinc-400">
           <BreadcrumbLink href="/">Reise planen</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
-        <BreadcrumbItem className="text-zinc-600">
+        <BreadcrumbItem className="text-zinc-600 dark:text-zinc-400">
           <BreadcrumbLink href="/choose-journey">
             Reise auswählen
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink className="text-zinc-600" href="/journey-details">
+          <BreadcrumbLink className="text-zinc-600 dark:text-zinc-400" href="/journey-details">
             Reise Details
           </BreadcrumbLink>
         </BreadcrumbItem>

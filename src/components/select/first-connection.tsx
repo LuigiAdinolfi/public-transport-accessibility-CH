@@ -4,13 +4,13 @@ import * as React from "react";
 import { DarkTrainProfile, LightTrainProfile } from "@/assets/icons/train-profile";
 import { DarkIc6, LightIc6 } from "@/assets/icons/ic-6";
 import { useTheme } from "next-themes";
-import { LightWheelchairReservation } from "@/assets/icons/wheelchair-reservation";
+import { DarkWheelchairReservation, LightWheelchairReservation } from "@/assets/icons/wheelchair-reservation";
 import { CommunityRating } from "@/components/select/community-rating";
 
 export function FirstConnection() {
   const { resolvedTheme } = useTheme();
   return (
-    <div className="flex basis-1/2 justify-start rounded-lg bg-zinc-50">
+    <div className="flex basis-1/2 justify-start rounded-lg bg-zinc-50 dark:bg-zinc-900">
       <div className="w-full py-2">
         <div className="flex w-full items-center justify-between px-3 pt-1 pb-3 font-normal">
           <div className="flex justify-start">20:28</div>
@@ -45,7 +45,11 @@ export function FirstConnection() {
         </div>
         <div className="flex w-full justify-between px-3 py-3 font-medium">
           <div className="flex basis-1/2 justify-start items-center">
-            <LightWheelchairReservation className="h-6 w-6" />
+            {resolvedTheme === "dark" ? (
+              <DarkWheelchairReservation className="h-6 w-6" />
+            ) : (
+              <LightWheelchairReservation className="h-6 w-6" />
+            )}
             <div className="pl-2 flex flex-col">
               <span>Mit Personalhilfe</span>
               <span>ein-/aussteigen</span>
@@ -56,7 +60,11 @@ export function FirstConnection() {
               <span>Mit Personalhilfe</span>
               <span>ein-/aussteigen</span>
             </div>
-            <LightWheelchairReservation className="h-6 w-6" />
+            {resolvedTheme === "dark" ? (
+              <DarkWheelchairReservation className="h-6 w-6" />
+            ) : (
+              <LightWheelchairReservation className="h-6 w-6" />
+            )}
           </div>
         </div>
         <div className="flex w-full items-center justify-start px-3 pb-2 pt-4 font-normal">

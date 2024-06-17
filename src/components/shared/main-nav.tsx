@@ -31,21 +31,21 @@ export function MainNav() {
       return cn(
         "transition-colors text-white",
         isActive
-          ? "bg-zinc-700 text-white font-semibold"
+          ? "bg-zinc-700 dark: zinc-700 text-white dark:text-white font-semibold"
           : "text-white hover:bg-zinc-800 hover:text-white font-semibold",
         "text-lg",
         "rounded-md p-2",
-        "px-6 py-2.5",
+        "px-6 py-2.5"
       );
     } else {
       return cn(
         "transition-colors text-zinc-950",
         isActive
-          ? "bg-zinc-200 text-zinc-950 font-semibold"
-          : "text-zinc-950 dark:text-white hover:bg-zinc-100 hover:text-zinc-950 font-semibold",
+          ? "bg-zinc-200 text-zinc-950 font-semibold dark:bg-zinc-700 dark:text-white"
+          : "text-zinc-950 dark:text-white hover:bg-zinc-100 hover:text-zinc-950 font-semibold dark:hover:bg-zinc-800",
         "text-lg",
         "rounded-md p-2",
-        "px-6 py-2.5",
+        "px-6 py-2.5"
       );
     }
   };

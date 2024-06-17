@@ -4,14 +4,14 @@ import { DarkTrainProfile, LightTrainProfile } from "@/assets/icons/train-profil
 import * as React from "react";
 import { useTheme } from "next-themes";
 import { DarkIr16, LightIr16 } from "@/assets/icons/ir-16";
-import { LightWheelchairReservation } from "@/assets/icons/wheelchair-reservation";
-import { LightWheelchair } from "@/assets/icons/wheelchair";
+import { DarkWheelchairReservation, LightWheelchairReservation } from "@/assets/icons/wheelchair-reservation";
+import { DarkWheelchair, LightWheelchair } from "@/assets/icons/wheelchair";
 import { CommunityRating } from "@/components/select/community-rating";
 
 export function LastConnection() {
   const { resolvedTheme } = useTheme();
   return (
-    <div className="flex basis-1/2 justify-start rounded-lg bg-zinc-50">
+    <div className="flex basis-1/2 justify-start rounded-lg bg-zinc-50 dark:bg-zinc-900">
       <div className="w-full py-2">
         <div className="flex w-full items-center justify-between px-3 pt-1 pb-3 font-normal">
           <div className="flex justify-start">21:02</div>
@@ -46,7 +46,11 @@ export function LastConnection() {
         </div>
         <div className="flex w-full justify-between px-3 py-3 font-medium">
           <div className="flex basis-1/2 justify-start items-center">
-            <LightWheelchairReservation className="h-6 w-6" />
+            {resolvedTheme === "dark" ? (
+              <DarkWheelchairReservation className="h-6 w-6" />
+            ) : (
+              <LightWheelchairReservation className="h-6 w-6" />
+            )}
             <div className="pl-2 flex flex-col">
               <span>Mit Personalhilfe</span>
               <span>ein-/aussteigen</span>
@@ -57,7 +61,11 @@ export function LastConnection() {
               <span>Selber ein-/</span>
               <span>aussteigen</span>
             </div>
-            <LightWheelchair className="h-6 w-6" />
+            {resolvedTheme === "dark" ? (
+              <DarkWheelchair className="h-6 w-6" />
+            ) : (
+              <LightWheelchair className="h-6 w-6" />
+            )}
           </div>
         </div>
         <div className="flex w-full items-center justify-start px-3 pb-2 pt-4 font-normal">
