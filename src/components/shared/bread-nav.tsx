@@ -57,7 +57,7 @@ export function BreadcrumbJourneyDetails() {
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem className="text-zinc-600 dark:text-zinc-400">
-          <BreadcrumbLink href="/choose-journey">
+          <BreadcrumbLink href="/select">
             Reise auswählen
           </BreadcrumbLink>
         </BreadcrumbItem>
@@ -83,13 +83,13 @@ export function BreadcrumbStopPoint() {
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem className="text-zinc-600 dark:text-zinc-400">
-          <BreadcrumbLink href="/choose-journey">
+          <BreadcrumbLink href="/select">
             Reise auswählen
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink className="text-zinc-600 dark:text-zinc-400" href="/journey-details">
+          <BreadcrumbLink className="text-zinc-600 dark:text-zinc-400" href="/select/details">
             Reise Details
           </BreadcrumbLink>
         </BreadcrumbItem>
