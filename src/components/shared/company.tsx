@@ -10,7 +10,7 @@ import * as React from "react";
 export function Company() {
   return (
     <Link
-      href="/public"
+      href="/"
       className="mr-6 flex items-center space-x-2 rounded-md py-2"
     >
       <Logo />

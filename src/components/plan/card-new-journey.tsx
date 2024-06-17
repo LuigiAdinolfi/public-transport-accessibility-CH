@@ -5,7 +5,7 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardHeader,
+  CardHeader
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -17,14 +17,14 @@ import { ArrowRightLeft } from "lucide-react";
 import { useTheme } from "next-themes";
 import {
   DarkActiveSmallCircle,
-  LightActiveSmallCircle,
+  LightActiveSmallCircle
 } from "@/assets/icons/active-circle";
 import {
   DarkInactiveSmallCircle,
-  LightInactiveSmallCircle,
+  LightInactiveSmallCircle
 } from "@/assets/icons/inactive-circle";
 import { DatePicker } from "@/components/plan/date-picker";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 /**
  * Component representing the journey planning card.
@@ -38,6 +38,7 @@ export function CardNewJourney() {
 
   // Theme hook
   const { resolvedTheme } = useTheme();
+  const router = useRouter();
 
   // Function to swap origin and destination
   const swapLocations = () => {
@@ -139,11 +140,9 @@ export function CardNewJourney() {
               </Tabs>
             </div>
             <div className="mt-[-24px] content-center lg:mt-[-4px]">
-              <Link href={"/select"} passHref legacyBehavior>
-                <Button id="submit" type="submit" className="lg:w-40">
-                  Suche
-                </Button>
-              </Link>
+              <Button id="submit" type="submit" className="lg:w-40" onClick={() => router.push("/select")}>
+                Suche
+              </Button>
             </div>
           </div>
         </div>
