@@ -10,7 +10,7 @@ import { DirectConnection } from "@/components/select/direct-connection";
 
 export function CardSelectJourney() {
   return (
-    <Card className="mt-3 border-b-zinc-500">
+    <Card className="mt-3">
       <CardHeader>
         <CardDescription className="flex w-full justify-start">
           <div className="flex w-full justify-start text-zinc-600 dark:text-zinc-400">
