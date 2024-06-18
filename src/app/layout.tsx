@@ -27,12 +27,11 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="light"
           disableTransitionOnChange
         >
           <SiteHeader />
-          <main className="flex min-h-screen w-full flex-col items-center justify-between p-6 lg:py-12">
+          <main className="flex min-h-screen w-full flex-col items-center justify-between p-6 lg:py-10">
             {children}
           </main>
           <SiteFooter />

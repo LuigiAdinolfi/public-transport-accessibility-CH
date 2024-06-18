@@ -1,12 +1,13 @@
-import { BreadcrumbStopPoint } from "@/components/shared/bread-nav";
+import { MyBreadcrumb } from "@/components/shared/bread-nav";
 
 export default function StopPointPage({ params }: { params: { id: string } }) {
+  const currentPage = "/select/details/stop";
   return (
     <>
       <div>
-        <BreadcrumbStopPoint />
+        <MyBreadcrumb currentPage={currentPage} />
       </div>
-      <div className="flex min-h-screen w-full flex-col items-center justify-between py-6 lg:p-12">
+      <div className="flex min-h-screen w-full flex-col items-center justify-between py-6 lg:p-10">
         Stop Point: {params.id}
       </div>
     </>
