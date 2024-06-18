@@ -42,7 +42,7 @@ export function MyBreadcrumb({ currentPage }: MyBreadcrumbProps) {
                   }}
                                   onKeyDown={(e) => handleKeyDown(e, item.url)}
                                   tabIndex={0}
-                                  className="cursor-pointer focus:outline-none focus:ring-2 focus:rounded-sm focus:ring-black dark:focus:ring-white p-1">
+                                  className="cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:after:ring-0 focus-visible:rounded-sm focus-visible:ring-black dark:focus-visible:ring-white p-1">
                     {item.name}
                   </BreadcrumbLink>
                   :

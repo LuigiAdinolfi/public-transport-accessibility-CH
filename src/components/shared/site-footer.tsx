@@ -16,7 +16,7 @@ export function SiteFooter() {
             href={siteConfig.links.github_luigi}
             target="_blank"
             rel="noreferrer"
-            className="font-medium underline underline-offset-4 focus:outline-none focus:ring-2 focus:rounded-sm focus:ring-black dark:focus:ring-white px-1"
+            className="font-medium underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:after:ring-0 focus-visible:rounded-sm focus-visible:ring-black dark:focus-visible:ring-white px-1"
           >
             Luigi Adinolfi
           </a>
@@ -26,7 +26,7 @@ export function SiteFooter() {
             href={siteConfig.links.github_raveena}
             target="_blank"
             rel="noreferrer"
-            className="font-medium underline underline-offset-4 focus:outline-none focus:ring-2 focus:rounded-sm focus:ring-black dark:focus:ring-white px-1"
+            className="font-medium underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:after:ring-0 focus-visible:rounded-sm focus-visible:ring-black dark:focus-visible:ring-white px-1"
           >
             Raveena Ramany
           </a>
@@ -35,7 +35,7 @@ export function SiteFooter() {
             href={siteConfig.links.gitlab}
             target="_blank"
             rel="noreferrer"
-            className="font-medium underline underline-offset-4 focus:outline-none focus:ring-2 focus:rounded-sm focus:ring-black dark:focus:ring-white px-1"
+            className="font-medium underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:after:ring-0 focus-visible:rounded-sm focus-visible:ring-black dark:focus-visible:ring-white px-1"
           >
             GitLab
           </a>

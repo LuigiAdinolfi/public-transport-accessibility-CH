@@ -36,7 +36,7 @@ export function MainNav() {
         "text-lg",
         "rounded-md p-2",
         "px-6 py-2.5",
-        "focus:outline-none focus:ring-2 focus:rounded-sm focus:ring-white"
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:after:ring-0 focus-visible:rounded-sm focus-visible:ring-black dark:focus-visible:ring-white"
       );
     } else {
       return cn(
@@ -47,7 +47,7 @@ export function MainNav() {
         "text-lg",
         "rounded-md p-2",
         "px-6 py-2.5",
-        "focus:outline-none focus:ring-2 focus:rounded-sm focus:ring-black"
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:after:ring-0 focus-visible:rounded-sm focus-visible:ring-black dark:focus-visible:ring-white"
       );
     }
   };

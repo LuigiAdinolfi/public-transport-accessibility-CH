@@ -11,7 +11,7 @@ export function Company() {
   return (
     <Link
       href="/"
-      className="mr-6 flex items-center space-x-2 rounded-md py-2 focus:outline-none focus:ring-2 focus:rounded-sm focus:ring-black dark:focus:ring-white pr-1"
+      className="mr-6 flex items-center space-x-2 rounded-md py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:after:ring-0 focus-visible:rounded-sm focus-visible:ring-black dark:focus-visible:ring-white pr-1"
     >
       <Logo />
       <span className="hidden text-xl font-bold sm:inline-block">
