@@ -1,7 +1,6 @@
 import { HelpButton } from "@/components/shared/help-button";
 import * as React from "react";
 import { BackButton } from "@/components/shared/back-button";
-import Link from "next/link";
 
 export function StopPoint() {
   return (
