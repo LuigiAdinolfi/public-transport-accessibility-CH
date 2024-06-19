@@ -6,7 +6,7 @@ import { useTheme } from "next-themes";
 import { DarkIr16, LightIr16 } from "@/assets/icons/ir-16";
 import { DarkWheelchairReservation, LightWheelchairReservation } from "@/assets/icons/wheelchair-reservation";
 import { DarkWheelchair, LightWheelchair } from "@/assets/icons/wheelchair";
-import { CommunityRating } from "@/components/select/community-rating";
+import { CommunityRatingSelect } from "@/components/select/community-rating-select";
 
 export function LastConnection() {
   const { resolvedTheme } = useTheme();
@@ -70,7 +70,7 @@ export function LastConnection() {
         </div>
         <div className="flex w-full items-center justify-start px-3 pb-2 pt-4 font-normal">
           <div className="pr-3">Bewertung der Community:</div>
-          <CommunityRating value={4} />
+          <CommunityRatingSelect value={4} />
         </div>
       </div>
     </div>

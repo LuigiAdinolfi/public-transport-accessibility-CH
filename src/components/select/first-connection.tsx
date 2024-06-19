@@ -5,7 +5,7 @@ import { DarkTrainProfile, LightTrainProfile } from "@/assets/icons/train-profil
 import { DarkIc6, LightIc6 } from "@/assets/icons/ic-6";
 import { useTheme } from "next-themes";
 import { DarkWheelchairReservation, LightWheelchairReservation } from "@/assets/icons/wheelchair-reservation";
-import { CommunityRating } from "@/components/select/community-rating";
+import { CommunityRatingSelect } from "@/components/select/community-rating-select";
 
 export function FirstConnection() {
   const { resolvedTheme } = useTheme();
@@ -69,7 +69,7 @@ export function FirstConnection() {
         </div>
         <div className="flex w-full items-center justify-start px-3 pb-2 pt-4 font-normal">
           <div className="pr-3">Bewertung der Community:</div>
-          <CommunityRating value={3} />
+          <CommunityRatingSelect value={3} />
         </div>
       </div>
     </div>

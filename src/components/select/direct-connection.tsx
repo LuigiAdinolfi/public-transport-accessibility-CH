@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { DarkWheelchairReservation, LightWheelchairReservation } from "@/assets/icons/wheelchair-reservation";
 import { useRouter } from "next/navigation";
 import { DarkTrainProfile, LightTrainProfile } from "@/assets/icons/train-profile";
-import { CommunityRating } from "@/components/select/community-rating";
+import { CommunityRatingSelect } from "@/components/select/community-rating-select";
 import { useTheme } from "next-themes";
 import { DarkIc36, LightIc36 } from "@/assets/icons/ic-36";
 
@@ -86,7 +86,7 @@ export function DirectConnection() {
               </div>
               <div className="flex w-full items-center justify-start px-3 pb-2 pt-4 font-normal">
                 <div className="pr-3">Bewertung der Community:</div>
-                <CommunityRating value={3} />
+                <CommunityRatingSelect value={3} />
               </div>
             </div>
           </div>

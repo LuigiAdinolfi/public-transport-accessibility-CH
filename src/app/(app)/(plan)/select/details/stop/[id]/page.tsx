@@ -15,7 +15,7 @@ export default function StopPointPage({ params }: { params: { id: string } }) {
 }
 
 export async function generateStaticParams() {
-  const stopPoints = [{ id: "Basel" }, { id: "Brugg" }, { id: "Bern" }];
+  const stopPoints = [{ id: "Basel" }, { id: "Brugg" }, { id: "Bern" }, {id: "Olten"}];
 
   return stopPoints.map((stop: { id: string }) => ({
     id: stop.id,

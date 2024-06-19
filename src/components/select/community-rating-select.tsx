@@ -1,7 +1,7 @@
 import { Rating, Star } from "@smastrom/react-rating";
 import { useTheme } from "next-themes";
 
-export function CommunityRating({value}: {value: number}) {
+export function CommunityRatingSelect({value}: {value: number}) {
   const { resolvedTheme } = useTheme();
   const myStyles = {
     itemShapes: Star,
