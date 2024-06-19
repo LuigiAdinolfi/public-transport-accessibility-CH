@@ -7,8 +7,10 @@ import { Button } from "@/components/ui/button";
 import { ArrowUpRight, Map } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { CommunityRatingDetails } from "@/components/details/community-rating-details";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import Image from "next/image";
 
-export function CardFirstRoute() {
+export function CardFirstPath() {
   const { resolvedTheme } = useTheme();
   const router = useRouter();
 
@@ -53,15 +55,33 @@ export function CardFirstRoute() {
             <div className="pl-1 font-semibold">Sektor A / C</div>
           </div>
           <div className="flex flex-col p-2">
-            <div className="text-base font-normal">Zugang zum Bahnsteig ohne Hilfe</div>
+            <div className="text-base font-normal px-4">Zugang zum Bahnsteig ohne Hilfe</div>
           </div>
-          <div className="flex flex-col p-2">
-            <div className="font-normal">Zugkomposition</div>
-          </div>
-          <div className="flex flex-col p-2">
-            <div className="font-normal">Ein- und Aussteigen für Rollstuhlfahrer</div>
-          </div>
-          <div className="flex justify-center mt-4">
+          <Accordion type="single" collapsible className="p-2">
+            <AccordionItem value="item-1">
+              <AccordionTrigger>Zugkomposition</AccordionTrigger>
+              <AccordionContent>
+                <Image src="/train-composition.png" alt="Zugkomposition" width={320} height={100} />
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+          <Accordion type="single" collapsible className="p-2">
+            <AccordionItem value="item-1">
+              <AccordionTrigger>Ein- und Aussteigen für Rollstuhlfahrer</AccordionTrigger>
+              <AccordionContent className="px-2">
+                <div className=" py-3">
+                  Informationen zur Rampe
+                </div>
+                <div className=" py-3">
+                  Informationen zum Lift
+                </div>
+                <div className=" py-3">
+                  Informationen über Treppen
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+          <div className="flex justify-center mt-6">
             <Button
               variant="outline"
               onClick={() => router.push("/select/details/stop/Basel")}
@@ -84,15 +104,33 @@ export function CardFirstRoute() {
             <div className="pl-1 font-semibold"></div>
           </div>
           <div className="flex flex-col p-2">
-            <div className="font-normal">Zugang zum Bahnsteig ohne Hilfe</div>
+            <div className="font-normal px-4">Zugang zum Bahnsteig ohne Hilfe</div>
           </div>
-          <div className="flex flex-col p-2">
-            <div className="font-normal">Zugkomposition</div>
-          </div>
-          <div className="flex flex-col p-2">
-            <div className="font-normal">Ein- und Aussteigen für Rollstuhlfahrer</div>
-          </div>
-          <div className="flex justify-center mt-4">
+          <Accordion type="single" collapsible className="p-2">
+            <AccordionItem value="item-1">
+              <AccordionTrigger>Zugkomposition</AccordionTrigger>
+              <AccordionContent>
+                <Image src="/train-composition.png" alt="Zugkomposition" width={320} height={100} />
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+          <Accordion type="single" collapsible className="p-2">
+            <AccordionItem value="item-1">
+              <AccordionTrigger>Ein- und Aussteigen für Rollstuhlfahrer</AccordionTrigger>
+              <AccordionContent className="px-2">
+                <div className=" py-3">
+                  Informationen zur Rampe
+                </div>
+                <div className=" py-3">
+                  Informationen zum Lift
+                </div>
+                <div className=" py-3">
+                  Informationen über Treppen
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+          <div className="flex justify-center mt-6">
             <Button
               variant="outline"
               onClick={() => router.push("/select/details/stop/Olten")}
