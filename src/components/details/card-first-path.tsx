@@ -54,14 +54,14 @@ export function CardFirstPath() {
             <div className="pr-1 pl-3 font-semibold">Gleis 9</div>
             <div className="pl-1 font-semibold">Sektor A / C</div>
           </div>
-          <div className="flex flex-col p-2">
-            <div className="text-base font-normal px-4">Zugang zum Bahnsteig ohne Hilfe</div>
+          <div className="flex flex-row align-middle items-center pb-2 pt-1">
+            <div className="text-sm font-normal px-4">Zugang zum Bahnsteig ohne Hilfe</div>
           </div>
           <Accordion type="single" collapsible className="p-2">
             <AccordionItem value="item-1">
               <AccordionTrigger>Zugkomposition</AccordionTrigger>
               <AccordionContent>
-                <Image src="/train-composition.png" alt="Zugkomposition" width={320} height={100} />
+                <Image src="/train-composition.png" alt="Zugkomposition" width={320} height={100} className="px-2" />
               </AccordionContent>
             </AccordionItem>
           </Accordion>
@@ -103,14 +103,14 @@ export function CardFirstPath() {
             <div className="pr-1 pl-3 font-semibold">Gleis 12</div>
             <div className="pl-1 font-semibold"></div>
           </div>
-          <div className="flex flex-col p-2">
-            <div className="font-normal px-4">Zugang zum Bahnsteig ohne Hilfe</div>
+          <div className="flex flex-row align-middle items-center pb-2 pt-1">
+            <div className="text-sm font-normal px-4">Zugang zum Bahnsteig ohne Hilfe</div>
           </div>
           <Accordion type="single" collapsible className="p-2">
             <AccordionItem value="item-1">
               <AccordionTrigger>Zugkomposition</AccordionTrigger>
               <AccordionContent>
-                <Image src="/train-composition.png" alt="Zugkomposition" width={320} height={100} />
+                <Image src="/train-composition.png" alt="Zugkomposition" width={320} height={100} className="px-2" />
               </AccordionContent>
             </AccordionItem>
           </Accordion>
