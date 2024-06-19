@@ -12,8 +12,8 @@ pages:
   script:
     # Build the project
     - npm run build
-    # Next.js builds the static files in the "out" directory by default
-    - mkdir public
+    # Ensure the 'public' directory exists before copying
+    - '[ -d public ] || mkdir public'
     - cp -r out/* public
   artifacts:
     paths:
