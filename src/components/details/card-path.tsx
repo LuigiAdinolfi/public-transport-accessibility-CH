@@ -84,7 +84,7 @@ export function CardPath() {
           <div className="flex justify-center mt-6">
             <Button
               variant="outline"
-              onClick={() => router.push("/select/details/stop/Basel")}
+              onClick={() => router.push("/select/details/stop")}
               className="flex w-full items-center p-2"
             >
               <div>Info zur Haltestelle &nbsp;</div>
@@ -133,7 +133,7 @@ export function CardPath() {
           <div className="flex justify-center mt-6">
             <Button
               variant="outline"
-              onClick={() => router.push("/select/details/stop/Olten")}
+              onClick={() => router.push("/select/details/stop")}
               className="flex w-full items-center p-2"
             >
               <div>Info zur Haltestelle &nbsp;</div>
