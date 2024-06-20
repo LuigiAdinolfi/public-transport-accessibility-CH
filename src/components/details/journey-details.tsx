@@ -8,7 +8,7 @@ import { useState } from "react";
 import { useTheme } from "next-themes";
 import { DarkActiveCircle, LightActiveCircle } from "@/assets/icons/active-circle";
 import { DarkInactiveCircle, LightInactiveCircle } from "@/assets/icons/inactive-circle";
-import { CardFirstPath } from "@/components/details/card-first-path";
+import { CardPath } from "@/components/details/card-path";
 import { DummyMap } from "@/components/details/dummy-map";
 
 export function JourneyDetails() {
@@ -66,7 +66,7 @@ export function JourneyDetails() {
           </TabsList>
         </div>
         <TabsContent value="first-route" className="flex flex-col gap-8">
-          <CardFirstPath />
+          <CardPath />
           <DummyMap />
         </TabsContent>
         <TabsContent value="second-route">

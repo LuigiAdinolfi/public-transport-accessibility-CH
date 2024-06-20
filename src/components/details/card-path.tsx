@@ -10,7 +10,7 @@ import { CommunityRatingDetails } from "@/components/details/community-rating-de
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Image from "next/image";
 
-export function CardFirstPath() {
+export function CardPath() {
   const { resolvedTheme } = useTheme();
   const router = useRouter();
 
@@ -57,17 +57,17 @@ export function CardFirstPath() {
           <div className="flex flex-row align-middle items-center pb-2 pt-1">
             <div className="text-sm font-normal px-4">Zugang zum Bahnsteig ohne Hilfe</div>
           </div>
-          <Accordion type="single" collapsible className="p-2">
+          <Accordion type="single" collapsible className="px-2">
             <AccordionItem value="item-1">
-              <AccordionTrigger>Zugkomposition</AccordionTrigger>
+              <AccordionTrigger className="py-6">Zugkomposition</AccordionTrigger>
               <AccordionContent>
                 <Image src="/train-composition.png" alt="Zugkomposition" width={320} height={100} className="px-2" />
               </AccordionContent>
             </AccordionItem>
           </Accordion>
-          <Accordion type="single" collapsible className="p-2">
-            <AccordionItem value="item-1">
-              <AccordionTrigger>Ein- und Aussteigen für Rollstuhlfahrer</AccordionTrigger>
+          <Accordion type="single" collapsible className="px-2">
+            <AccordionItem value="item-2">
+              <AccordionTrigger className="py-6">Ein- und Aussteigen für Rollstuhlfahrer</AccordionTrigger>
               <AccordionContent className="px-2">
                 <div className=" py-3">
                   Informationen zur Rampe
@@ -106,17 +106,17 @@ export function CardFirstPath() {
           <div className="flex flex-row align-middle items-center pb-2 pt-1">
             <div className="text-sm font-normal px-4">Zugang zum Bahnsteig ohne Hilfe</div>
           </div>
-          <Accordion type="single" collapsible className="p-2">
+          <Accordion type="single" collapsible className="px-2">
             <AccordionItem value="item-1">
-              <AccordionTrigger>Zugkomposition</AccordionTrigger>
+              <AccordionTrigger className="py-6">Zugkomposition</AccordionTrigger>
               <AccordionContent>
                 <Image src="/train-composition.png" alt="Zugkomposition" width={320} height={100} className="px-2" />
               </AccordionContent>
             </AccordionItem>
           </Accordion>
-          <Accordion type="single" collapsible className="p-2">
+          <Accordion type="single" collapsible className="px-2">
             <AccordionItem value="item-1">
-              <AccordionTrigger>Ein- und Aussteigen für Rollstuhlfahrer</AccordionTrigger>
+              <AccordionTrigger className="py-6">Ein- und Aussteigen für Rollstuhlfahrer</AccordionTrigger>
               <AccordionContent className="px-2">
                 <div className=" py-3">
                   Informationen zur Rampe

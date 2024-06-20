@@ -1,6 +1,7 @@
 import { HelpButton } from "@/components/shared/help-button";
 import * as React from "react";
 import { BackButton } from "@/components/shared/back-button";
+import { CardStopPoint } from "@/components/stop/card-stop-point";
 
 export function StopPoint() {
   return (
@@ -9,6 +10,7 @@ export function StopPoint() {
         <BackButton />
         <HelpButton />
       </div>
+      <CardStopPoint />
     </div>
   );
 }
