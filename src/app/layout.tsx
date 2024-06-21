@@ -10,6 +10,15 @@ import { SiteFooter } from "@/components/shared/site-footer";
 const inter = Inter({ subsets: ["latin"] });
 
 /**
+ * Metadata for the application.
+ */
+export const metadata: Metadata = {
+  title: `${siteConfig.name}`,
+  description: `${siteConfig.description}`,
+};
+
+
+/**
  * Root layout component for the application.
  * Provides the base HTML structure with theme provider, header, main content, and footer.
  * @param {Object} props - Props for RootLayout component.
