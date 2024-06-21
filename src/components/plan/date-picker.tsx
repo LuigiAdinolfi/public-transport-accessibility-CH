@@ -67,7 +67,7 @@ export function DatePicker() {
         <Button
           variant={"outline"}
           className={cn(
-            "w-[200px] justify-between text-left font-normal lg:w-[280px]",
+            "w-full justify-between text-left font-normal lg:w-[280px]",
             !date && "text-muted-foreground"
           )}
           aria-label="Datum und Uhrzeit wählen"

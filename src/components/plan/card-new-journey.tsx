@@ -30,18 +30,13 @@ import { useRouter } from "next/navigation";
  * @returns {JSX.Element} JSX Element
  */
 export function CardNewJourney() {
-  // State variables
   const [activeSearchTab, setActiveSearchTab] = useState("departure");
   const [origin, setOrigin] = useState("Basel");
   const [destination, setDestination] = useState("Brugg");
 
-  // Theme hook
   const { resolvedTheme } = useTheme();
   const router = useRouter();
 
-  /**
-   * Function to swap origin and destination.
-   */
   const swapLocations = () => {
     setOrigin(destination);
     setDestination(origin);
@@ -54,10 +49,10 @@ export function CardNewJourney() {
           Gib deine Reisedaten ein.
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-12 pb-12">
+      <CardContent className="space-y-10 lg:space-y-12 pb-6 lg:pb-12">
         <div className="space-y-1">
-          <div className="flex justify-between">
-            <div className="w-5/12 space-y-1">
+          <div className="flex flex-col lg:flex-row justify-between items-center">
+            <div className="w-full lg:w-5/12 space-y-1">
               <Label htmlFor="origin">Von</Label>
               <Input
                 id="origin"
@@ -68,7 +63,7 @@ export function CardNewJourney() {
                 Gib den Abfahrtsort ein.
               </CardDescription>
             </div>
-            <div className="flex w-2/12 items-center justify-center">
+            <div className="flex w-full lg:w-2/12 items-center justify-center pt-4 lg:pt-0">
               <Button
                 variant="outline"
                 size="icon"
@@ -78,7 +73,7 @@ export function CardNewJourney() {
                 <ArrowRightLeft />
               </Button>
             </div>
-            <div className="w-5/12 space-y-1">
+            <div className="w-full lg:w-5/12 space-y-1">
               <Label htmlFor="destination">Nach</Label>
               <Input
                 id="destination"
@@ -92,22 +87,22 @@ export function CardNewJourney() {
           </div>
         </div>
         <div className="space-y-1">
-          <div className="flex justify-between">
-            <div className="w-4/12 lg:w-4/12 lg:space-y-1">
+          <div className="flex flex-col lg:flex-row justify-between items-center align-middle">
+            <div className="w-full lg:w-4/12 space-y-1">
               <Label htmlFor="datetime">Wann</Label>
               <DatePicker />
               <CardDescription className="pt-2 text-zinc-600">
                 Gib Datum und Uhrzeit ein.
               </CardDescription>
             </div>
-            <div className="mt-[-24px] w-3/12 content-center space-y-1 lg:mt-[-4px] lg:w-4/12">
+            <div className="flex justify-center mt-8 lg:mt-0 w-full lg:w-3/12 content-center space-y-1">
               <Tabs
                 defaultValue={activeSearchTab}
                 onValueChange={(value) => setActiveSearchTab(value)}
               >
-                <TabsList className="lg:w-64">
+                <TabsList className="content-center lg:w-64">
                   <TabsTrigger
-                    className="w-[4.6rem] text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:w-32"
+                    className="w-32 text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:w-32"
                     value="departure"
                   >
                     {resolvedTheme === "dark" ? (
@@ -124,7 +119,7 @@ export function CardNewJourney() {
                     <div className="pl-1 lg:pl-2">Abreise</div>
                   </TabsTrigger>
                   <TabsTrigger
-                    className="w-[4.6rem] text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:w-32"
+                    className="w-32 text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:w-32"
                     value="arrival"
                   >
                     {resolvedTheme === "dark" ? (
@@ -143,11 +138,11 @@ export function CardNewJourney() {
                 </TabsList>
               </Tabs>
             </div>
-            <div className="mt-[-24px] content-center lg:mt-[-4px]">
+            <div className="mt-16 lg:mt-0 w-full lg:w-auto flex justify-center items-center">
               <Button
                 id="submit"
                 type="submit"
-                className="lg:w-40"
+                className="w-full lg:w-40"
                 onClick={() => router.push("/select")}
               >
                 Suche

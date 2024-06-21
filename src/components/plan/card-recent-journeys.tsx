@@ -2,7 +2,7 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardHeader,
+  CardHeader
 } from "@/components/ui/card";
 import * as React from "react";
 import { Button } from "@/components/ui/button";
@@ -25,14 +25,14 @@ export function CardRecentJourneys() {
           Eine frühere Reise auswählen.
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-8 pb-12">
+      <CardContent className="space-y-8 lg:pb-12">
         {/*<Card className="flex justify-between items-center min-h-48">*/}
         {/*  <CardDescription className="flex justify-center w-full text-base">*/}
         {/*    Keine früheren Reisen vorhanden.*/}
         {/*  </CardDescription>*/}
         {/*</Card>*/}
         <Button
-          className="grid min-h-64 w-full items-center align-middle lg:flex lg:min-h-32 lg:justify-between"
+          className="grid min-h-32 w-full items-center align-middle md:flex lg:min-h-32 md:justify-between"
           variant="outline"
         >
           <div className="inline-flex h-full w-full items-center justify-start">
@@ -41,7 +41,7 @@ export function CardRecentJourneys() {
               {/* Left section */}
               <div className="grid w-full grid-flow-col grid-rows-2 justify-start gap-6 px-4">
                 <div className="flex justify-start">
-                  <div className="flex items-center px-1 text-xl font-semibold">
+                  <div className="flex items-center px-1 text-lg lg:text-xl font-semibold">
                     Basel SBB
                   </div>
                 </div>
@@ -51,19 +51,19 @@ export function CardRecentJourneys() {
               </div>
 
               {/* Middle section */}
-              <div className="grid w-full grid-flow-col grid-rows-2 justify-center gap-7 px-4">
+              <div className="hidden md:grid w-full grid-flow-col grid-rows-2 justify-center gap-7 px-4">
                 <div className="flex justify-center">
-                  <div className="mr-2 flex items-center px-1 text-base font-semibold">
+                  <div className="mr-2 hidden md:flex items-center px-1 text-sm lg:text-base lg:font-semibold">
                     Zug
                   </div>
-                  <div className="flex items-center px-1 text-base font-normal">
+                  <div className="hidden md:flex items-center px-1 text-base font-normal">
                     {resolvedTheme === "dark" ? (
                       <DarkTrainProfile className="h-6 w-6" />
                     ) : (
                       <LightTrainProfile className="h-6 w-6" />
                     )}
                   </div>
-                  <div className="flex items-center px-1 text-base font-normal">
+                  <div className="hidden md:flex items-center px-1 text-base font-normal">
                     {resolvedTheme === "dark" ? (
                       <DarkIc6 className="h-6 w-6" />
                     ) : (
@@ -72,17 +72,17 @@ export function CardRecentJourneys() {
                   </div>
                 </div>
                 <div className="flex justify-center">
-                  <div className="mr-2 flex items-center px-1 text-base font-semibold">
+                  <div className="mr-2 hidden md:flex items-center px-1 text-sm lg:text-base lg:font-semibold">
                     Zug
                   </div>
-                  <div className="flex items-center px-1 text-base font-normal">
+                  <div className="hidden md:flex items-center px-1 text-base font-normal">
                     {resolvedTheme === "dark" ? (
                       <DarkTrainProfile className="h-8 w-8" />
                     ) : (
                       <LightTrainProfile className="h-8 w-8" />
                     )}
                   </div>
-                  <div className="flex items-center px-1 text-base font-normal">
+                  <div className="hidden md:flex items-center px-1 text-base font-normal">
                     {resolvedTheme === "dark" ? (
                       <DarkIr16 className="h-6 w-6" />
                     ) : (
@@ -95,12 +95,12 @@ export function CardRecentJourneys() {
               {/* Right section */}
               <div className="grid w-full grid-flow-col grid-rows-2 justify-end gap-6 px-4">
                 <div className="flex justify-end">
-                  <div className="flex items-center px-1 text-xl font-semibold">
+                  <div className="flex items-center px-1 text-lg lg:text-xl font-semibold">
                     Brugg AG
                   </div>
                 </div>
                 <div className="flex justify-end">
-                  <div className="flex items-center px-1">46 min Reisezeit</div>
+                  <div className="flex items-center px-1 text-sm">46 min Reisezeit</div>
                 </div>
               </div>
             </div>

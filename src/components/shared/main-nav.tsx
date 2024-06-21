@@ -71,7 +71,7 @@ export function MainNav() {
 
   // Render the main navigation menu
   return (
-    <div className="hidden md:flex">
+    <div className="hidden lg:flex">
       <nav className="flex items-center gap-4 text-sm">
         {/* Navigation links */}
         <NavLink href="/" currentPath="/">

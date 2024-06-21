@@ -17,7 +17,6 @@ export const metadata: Metadata = {
   description: `${siteConfig.description}`,
 };
 
-
 /**
  * Root layout component for the application.
  * Provides the base HTML structure with theme provider, header, main content, and footer.
@@ -30,6 +29,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" suppressHydrationWarning>
     <head>
       <title>{siteConfig.name}</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </head>
     <body className={inter.className}>
     <ThemeProvider

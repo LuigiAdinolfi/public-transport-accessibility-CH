@@ -10,7 +10,6 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/mobile/new-york/ui/button";
 import { ScrollArea } from "@/mobile/new-york/ui/scroll-area";
 import { Sheet, SheetContent, SheetTrigger } from "@/mobile/new-york/ui/sheet";
-import { Logo } from "@/components/shared/logo";
 
 /**
  * Component representing the mobile navigation menu.
@@ -27,7 +26,7 @@ export function MobileNav() {
       <SheetTrigger asChild>
         <Button
           variant="ghost"
-          className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
+          className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 lg:hidden"
           onClick={() => setOpen(!open)}
         >
           {/* Icon for toggling the menu */}
@@ -69,14 +68,14 @@ export function MobileNav() {
         {/* Logo and site name */}
         <MobileLink
           href="/"
-          className="flex items-center"
+          className="flex items-center align-middle"
           onOpenChange={setOpen}
         >
-          <Logo />
-          <span className="font-bold">{siteConfig.name}</span>
+          {/*<Accessibility className="h-6 w-6"/>*/}
+          <span className="font-semibold text-base pl-1 pt-6">{siteConfig.name}</span>
         </MobileLink>
         {/* Scrollable area for menu items */}
-        <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
+        <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-4">
           <div className="flex flex-col space-y-3">
             {/* Render each menu item */}
             {docsConfig.mainNav?.map(
@@ -87,14 +86,14 @@ export function MobileNav() {
                     href={item.href}
                     onOpenChange={setOpen}
                     className={cn(
-                      "hover:bg-zinc-700 hover:text-zinc-50",
+                      "hover:bg-zinc-700 hover:text-zinc-50 bg-zinc-50",
                       "rounded-md p-2",
-                      "px-4 py-2",
+                      "px-4 py-2"
                     )}
                   >
                     {item.title}
                   </MobileLink>
-                ),
+                )
             )}
           </div>
         </ScrollArea>
@@ -143,11 +142,11 @@ function MobileLink({
   // Render the link
   return (
     <Link href={href} passHref
-        className={cn(className)}
-        onClick={handleClick}
-        {...props}
-      >
-        {children}
+          className={cn(className)}
+          onClick={handleClick}
+          {...props}
+    >
+      {children}
     </Link>
   );
 }
