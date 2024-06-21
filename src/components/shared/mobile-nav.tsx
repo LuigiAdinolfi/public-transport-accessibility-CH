@@ -28,6 +28,7 @@ export function MobileNav() {
         <Button
           variant="ghost"
           className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
+          onClick={() => setOpen(!open)}
         >
           {/* Icon for toggling the menu */}
           <svg
@@ -113,35 +114,40 @@ interface MobileLinkProps extends LinkProps {
 
 /**
  * Component representing a mobile link.
- * @param href - The URL of the link.
- * @param onOpenChange - Function to change the open state of the mobile menu.
- * @param className - Additional CSS classes for the link.
- * @param children - The content of the link.
+ * @param href
+ * @param onOpenChange
+ * @param className
+ * @param children
  * @param {MobileLinkProps} props - The props for the MobileLink component.
  * @returns {JSX.Element} - MobileLink component.
  */
 function MobileLink({
-  href,
-  onOpenChange,
-  className,
-  children,
-  ...props
-}: MobileLinkProps) {
+                      href,
+                      onOpenChange,
+                      className,
+                      children,
+                      ...props
+                    }: MobileLinkProps) {
   // Next.js router hook
   const router = useRouter();
+
+  /**
+   * Function to handle link click.
+   * Navigates to the link and closes the mobile menu.
+   */
+  const handleClick = () => {
+    router.push(href.toString());
+    onOpenChange?.(false);
+  };
+
   // Render the link
   return (
-    <Link
-      href={href}
-      onClick={() => {
-        // Navigate to the link and close the mobile menu
-        router.push(href.toString());
-        onOpenChange?.(false);
-      }}
-      className={cn(className)}
-      {...props}
-    >
-      {children}
+    <Link href={href} passHref
+        className={cn(className)}
+        onClick={handleClick}
+        {...props}
+      >
+        {children}
     </Link>
   );
 }

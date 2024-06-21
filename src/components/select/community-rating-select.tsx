@@ -1,13 +1,21 @@
 import { Rating, Star } from "@smastrom/react-rating";
 import { useTheme } from "next-themes";
 
-export function CommunityRatingSelect({value}: {value: number}) {
+/**
+ * Component to display community rating using stars.
+ * @param {Object} props - Component props.
+ * @param {number} props.value - Rating value (from 1 to 5).
+ * @returns {JSX.Element} CommunityRatingSelect component.
+ */
+export function CommunityRatingSelect({ value }: { value: number }) {
   const { resolvedTheme } = useTheme();
+
+  // Styles for the star rating component based on the theme
   const myStyles = {
     itemShapes: Star,
     itemSize: 16,
     itemStrokeWidth: 2,
-    activeFillColor: resolvedTheme === "light" ? "#18181B": "#FAFAFA",
+    activeFillColor: resolvedTheme === "light" ? "#18181B" : "#FAFAFA",
     activeStrokeColor: resolvedTheme === "light" ? "#18181B" : "#FAFAFA",
     inactiveFillColor: resolvedTheme === "light" ? "#FAFAFA" : "#18181B",
     inactiveStrokeColor: resolvedTheme === "light" ? "#A1A1AA" : "#A1A1AA",
@@ -19,6 +27,7 @@ export function CommunityRatingSelect({value}: {value: number}) {
       value={value}
       itemStyles={myStyles}
       readOnly={true}
+      aria-label={`Community rating: ${value} stars`}
     />
   );
 }

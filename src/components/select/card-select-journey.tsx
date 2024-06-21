@@ -1,10 +1,12 @@
-import {
-  Card
-} from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import * as React from "react";
 import { MultipleConnection } from "@/components/select/multiple-connection";
 import { DirectConnection } from "@/components/select/direct-connection";
 
+/**
+ * Component representing a card to select journey options.
+ * @returns {JSX.Element} JSX Element
+ */
 export function CardSelectJourney() {
   return (
     <Card className="mt-3">

@@ -9,12 +9,28 @@ import { DarkWheelchairReservation, LightWheelchairReservation } from "@/assets/
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 
+/**
+ * Component representing a button for selecting a journey with multiple connections.
+ * @returns {JSX.Element} JSX Element
+ */
 export function MultipleConnection() {
   const router = useRouter();
   const { resolvedTheme } = useTheme();
+
+  /**
+   * Handles click event to navigate to journey details.
+   */
+  const handleClick = () => {
+    router.push("/select/details");
+  };
+
   return (
-    <Button className="flex h-full w-full justify-start" variant="outline"
-            onClick={() => router.push("/select/details")}>
+    <Button
+      className="flex h-full w-full justify-start"
+      variant="outline"
+      onClick={handleClick}
+      aria-label="Select journey with multiple connections"
+    >
       <div className="grid w-full">
         <div className="mb-2 flex w-full items-center justify-start px-3 py-4 text-zinc-950 dark:text-zinc-50">
           <div className="flex w-full justify-start">

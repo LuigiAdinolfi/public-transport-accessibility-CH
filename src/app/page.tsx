@@ -2,6 +2,11 @@ import { MyBreadcrumb } from "@/components/shared/bread-nav";
 import { PlanJourney } from "@/components/plan/plan-journey";
 import "@smastrom/react-rating/style.css";
 
+/**
+ * Homepage component for the application.
+ * Renders the main content including breadcrumb and journey planning.
+ * @returns {JSX.Element} - Homepage component.
+ */
 export default function Homepage() {
   const currentPage = "/";
   return (

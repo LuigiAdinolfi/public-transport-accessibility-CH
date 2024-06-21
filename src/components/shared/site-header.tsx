@@ -14,9 +14,16 @@ export default function SiteHeader() {
       <div className="container flex h-20 max-w-screen-2xl items-center">
         <Company />
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
+          {/* Main navigation for larger screens */}
           <MainNav />
+
+          {/* Mobile navigation menu */}
           <MobileNav />
+
+          {/* Spacer */}
           <div className="w-full flex-1 md:w-auto md:flex-none"></div>
+
+          {/* Mode toggle for theme */}
           <nav className="flex items-center">
             <ModeToggle />
           </nav>

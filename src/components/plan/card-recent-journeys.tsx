@@ -6,14 +6,18 @@ import {
 } from "@/components/ui/card";
 import * as React from "react";
 import { Button } from "@/components/ui/button";
-import { LightTrainProfile } from "@/assets/icons/train-profile";
-import { useTheme } from "next-themes";
-import { DarkTrainProfile } from "@/assets/icons/train-profile";
+import { LightTrainProfile, DarkTrainProfile } from "@/assets/icons/train-profile";
 import { DarkIr16, LightIr16 } from "@/assets/icons/ir-16";
 import { DarkIc6, LightIc6 } from "@/assets/icons/ic-6";
+import { useTheme } from "next-themes";
 
+/**
+ * Component representing a card displaying recent journeys.
+ * @returns {JSX.Element} JSX Element
+ */
 export function CardRecentJourneys() {
   const { resolvedTheme } = useTheme();
+
   return (
     <Card>
       <CardHeader className="pb-8">
@@ -32,7 +36,9 @@ export function CardRecentJourneys() {
           variant="outline"
         >
           <div className="inline-flex h-full w-full items-center justify-start">
+            {/* Journey Details Grid */}
             <div className="text-text/90 flex w-full items-center justify-between">
+              {/* Left section */}
               <div className="grid w-full grid-flow-col grid-rows-2 justify-start gap-6 px-4">
                 <div className="flex justify-start">
                   <div className="flex items-center px-1 text-xl font-semibold">
@@ -43,6 +49,8 @@ export function CardRecentJourneys() {
                   <div className="flex items-center px-1">Di, 07.05.2024</div>
                 </div>
               </div>
+
+              {/* Middle section */}
               <div className="grid w-full grid-flow-col grid-rows-2 justify-center gap-7 px-4">
                 <div className="flex justify-center">
                   <div className="mr-2 flex items-center px-1 text-base font-semibold">
@@ -83,6 +91,8 @@ export function CardRecentJourneys() {
                   </div>
                 </div>
               </div>
+
+              {/* Right section */}
               <div className="grid w-full grid-flow-col grid-rows-2 justify-end gap-6 px-4">
                 <div className="flex justify-end">
                   <div className="flex items-center px-1 text-xl font-semibold">
@@ -95,7 +105,6 @@ export function CardRecentJourneys() {
               </div>
             </div>
           </div>
-          {/*<CardRating />*/}
         </Button>
       </CardContent>
     </Card>

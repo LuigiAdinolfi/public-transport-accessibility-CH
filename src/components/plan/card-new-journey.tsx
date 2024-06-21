@@ -12,7 +12,6 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import * as React from "react";
 import { useState } from "react";
-
 import { ArrowRightLeft } from "lucide-react";
 import { useTheme } from "next-themes";
 import {
@@ -28,7 +27,7 @@ import { useRouter } from "next/navigation";
 
 /**
  * Component representing the journey planning card.
- * @returns JSX.Element
+ * @returns {JSX.Element} JSX Element
  */
 export function CardNewJourney() {
   // State variables
@@ -40,12 +39,12 @@ export function CardNewJourney() {
   const { resolvedTheme } = useTheme();
   const router = useRouter();
 
-  // Function to swap origin and destination
+  /**
+   * Function to swap origin and destination.
+   */
   const swapLocations = () => {
-    setOrigin((prevOrigin) => {
-      setDestination(prevOrigin);
-      return destination;
-    });
+    setOrigin(destination);
+    setDestination(origin);
   };
 
   return (
@@ -70,7 +69,12 @@ export function CardNewJourney() {
               </CardDescription>
             </div>
             <div className="flex w-2/12 items-center justify-center">
-              <Button variant="outline" size="icon" onClick={swapLocations}>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={swapLocations}
+                aria-label="Ort wechseln"
+              >
                 <ArrowRightLeft />
               </Button>
             </div>
@@ -108,14 +112,14 @@ export function CardNewJourney() {
                   >
                     {resolvedTheme === "dark" ? (
                       activeSearchTab === "departure" ? (
-                        <DarkActiveSmallCircle />
+                        <DarkActiveSmallCircle aria-hidden="true" />
                       ) : (
-                        <DarkInactiveSmallCircle />
+                        <DarkInactiveSmallCircle aria-hidden="true" />
                       )
                     ) : activeSearchTab === "departure" ? (
-                      <LightActiveSmallCircle />
+                      <LightActiveSmallCircle aria-hidden="true" />
                     ) : (
-                      <LightInactiveSmallCircle />
+                      <LightInactiveSmallCircle aria-hidden="true" />
                     )}
                     <div className="pl-1 lg:pl-2">Abreise</div>
                   </TabsTrigger>
@@ -125,14 +129,14 @@ export function CardNewJourney() {
                   >
                     {resolvedTheme === "dark" ? (
                       activeSearchTab === "arrival" ? (
-                        <DarkActiveSmallCircle />
+                        <DarkActiveSmallCircle aria-hidden="true" />
                       ) : (
-                        <DarkInactiveSmallCircle />
+                        <DarkInactiveSmallCircle aria-hidden="true" />
                       )
                     ) : activeSearchTab === "arrival" ? (
-                      <LightActiveSmallCircle />
+                      <LightActiveSmallCircle aria-hidden="true" />
                     ) : (
-                      <LightInactiveSmallCircle />
+                      <LightInactiveSmallCircle aria-hidden="true" />
                     )}
                     <div className="pl-1 lg:pl-2">Ankunft</div>
                   </TabsTrigger>
@@ -140,7 +144,12 @@ export function CardNewJourney() {
               </Tabs>
             </div>
             <div className="mt-[-24px] content-center lg:mt-[-4px]">
-              <Button id="submit" type="submit" className="lg:w-40" onClick={() => router.push("/select")}>
+              <Button
+                id="submit"
+                type="submit"
+                className="lg:w-40"
+                onClick={() => router.push("/select")}
+              >
                 Suche
               </Button>
             </div>

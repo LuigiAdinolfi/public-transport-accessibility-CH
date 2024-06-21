@@ -18,11 +18,15 @@ import { useEffect } from "react";
 
 const timeZone = "Europe/Zurich";
 
+/**
+ * Component for selecting a date and time using a calendar and time picker.
+ * @returns {JSX.Element} JSX Element
+ */
 export function DatePicker() {
   const [date, setDate] = React.useState<Date>();
   const [time, setTime] = React.useState<string>("");
 
-  // Effect to set initial date and time
+  // Initialize date and time on component mount
   useEffect(() => {
     const now = new Date();
     const zonedTime = toZonedTime(now, timeZone);
@@ -31,6 +35,11 @@ export function DatePicker() {
     setTime(formattedTime);
   }, []);
 
+  /**
+   * Handles changes in the time input field.
+   * Updates the date state with the new time.
+   * @param {React.ChangeEvent<HTMLInputElement>} event - The change event object
+   */
   const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newTime = event.target.value;
     setTime(newTime);
@@ -43,6 +52,11 @@ export function DatePicker() {
     }
   };
 
+  /**
+   * Formats the provided date into a localized string with date and time.
+   * @param {Date} date - The date object to format
+   * @returns {string} Formatted date string
+   */
   const formatDate = (date: Date) => {
     return format(date, "EEE, PPP - HH:mm", { locale: de });
   };
@@ -54,7 +68,7 @@ export function DatePicker() {
           variant={"outline"}
           className={cn(
             "w-[200px] justify-between text-left font-normal lg:w-[280px]",
-            !date && "text-muted-foreground",
+            !date && "text-muted-foreground"
           )}
           aria-label="Datum und Uhrzeit wählen"
           suppressHydrationWarning

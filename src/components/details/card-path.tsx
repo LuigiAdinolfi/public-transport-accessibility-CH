@@ -1,3 +1,5 @@
+"use client";
+
 import { Card } from "@/components/ui/card";
 import * as React from "react";
 import { DarkTrainProfile, LightTrainProfile } from "@/assets/icons/train-profile";
@@ -10,12 +12,17 @@ import { CommunityRatingDetails } from "@/components/details/community-rating-de
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Image from "next/image";
 
+/**
+ * Component displaying journey details within a card format.
+ * @returns {JSX.Element} CardPath component.
+ */
 export function CardPath() {
   const { resolvedTheme } = useTheme();
   const router = useRouter();
 
   return (
     <Card>
+      {/* Content for the first section */}
       <div className="flex items-center justify-between p-6 px-8 pb-6">
         <div className="flex items-center space-x-1.5">
           <div className="text-base font-normal pr-1">Zug</div>
@@ -36,16 +43,17 @@ export function CardPath() {
           <div className="text-base font-normal">Richtung Brig</div>
         </div>
         <div className="flex-grow text-base font-semibold text-center">
-          7 Minuten zum umsteigen
+          7 Minuten zum Umsteigen
         </div>
-        <Button className="ml-4" variant="outline">
+        <Button className="ml-4" variant="outline" onClick={() => router.push("/select/details")}>
           Weg zum Umsteigen
           <Map className="ml-2 h-4 w-4" />
         </Button>
       </div>
+
+      {/* Content for the second section */}
       <div className="flex px-6 gap-6">
-        <div
-          className="flex flex-col w-1/2 p-4 bg-zinc-50 rounded-lg text-zinc-950 shadow-sm dark:bg-zinc-900 dark:text-zinc-50">
+        <div className="flex flex-col w-1/2 p-4 bg-zinc-50 rounded-lg text-zinc-950 shadow-sm dark:bg-zinc-900 dark:text-zinc-50">
           <div className="flex items-center p-2 mb-3">
             <div className="text-lg font-semibold">Basel SBB</div>
           </div>
@@ -69,39 +77,34 @@ export function CardPath() {
             <AccordionItem value="item-2">
               <AccordionTrigger className="py-6">Ein- und Aussteigen für Rollstuhlfahrer</AccordionTrigger>
               <AccordionContent className="px-2">
-                <div className=" py-3">
+                <div className="py-3">
                   Informationen zur Rampe
                 </div>
-                <div className=" py-3">
+                <div className="py-3">
                   Informationen zum Lift
                 </div>
-                <div className=" py-3">
+                <div className="py-3">
                   Informationen über Treppen
                 </div>
               </AccordionContent>
             </AccordionItem>
           </Accordion>
           <div className="flex justify-center mt-6">
-            <Button
-              variant="outline"
-              onClick={() => router.push("/select/details/stop")}
-              className="flex w-full items-center p-2"
-            >
+            <Button variant="outline" onClick={() => router.push("/select/details/stop")} className="flex w-full items-center p-2">
               <div>Info zur Haltestelle &nbsp;</div>
               <div>Basel SBB</div>
               <ArrowUpRight className="h-4 w-4 ml-1" />
             </Button>
           </div>
         </div>
-        <div
-          className="flex flex-col w-1/2 p-4 bg-zinc-50 rounded-lg text-zinc-950 shadow-sm dark:bg-zinc-900 dark:text-zinc-50">
+
+        <div className="flex flex-col w-1/2 p-4 bg-zinc-50 rounded-lg text-zinc-950 shadow-sm dark:bg-zinc-900 dark:text-zinc-50">
           <div className="flex items-center p-2 mb-3">
             <div className="text-lg font-semibold">Olten</div>
           </div>
           <div className="flex flex-row p-2">
             <div className="font-medium">Rollstuhlgerechte Waggons:</div>
             <div className="pr-1 pl-3 font-semibold">Gleis 12</div>
-            <div className="pl-1 font-semibold"></div>
           </div>
           <div className="flex flex-row align-middle items-center pb-2 pt-1">
             <div className="text-sm font-normal px-4">Zugang zum Bahnsteig ohne Hilfe</div>
@@ -118,24 +121,20 @@ export function CardPath() {
             <AccordionItem value="item-1">
               <AccordionTrigger className="py-6">Ein- und Aussteigen für Rollstuhlfahrer</AccordionTrigger>
               <AccordionContent className="px-2">
-                <div className=" py-3">
+                <div className="py-3">
                   Informationen zur Rampe
                 </div>
-                <div className=" py-3">
+                <div className="py-3">
                   Informationen zum Lift
                 </div>
-                <div className=" py-3">
+                <div className="py-3">
                   Informationen über Treppen
                 </div>
               </AccordionContent>
             </AccordionItem>
           </Accordion>
           <div className="flex justify-center mt-6">
-            <Button
-              variant="outline"
-              onClick={() => router.push("/select/details/stop")}
-              className="flex w-full items-center p-2"
-            >
+            <Button variant="outline" onClick={() => router.push("/select/details/stop")} className="flex w-full items-center p-2">
               <div>Info zur Haltestelle &nbsp;</div>
               <div>Olten</div>
               <ArrowUpRight className="h-4 w-4 ml-1" />
@@ -143,6 +142,8 @@ export function CardPath() {
           </div>
         </div>
       </div>
+
+      {/* Community Rating Section */}
       <div className="flex w-full items-center justify-center px-3 py-6 font-normal">
         <div className="pr-3">Bewertung der Community:</div>
         <CommunityRatingDetails value={3} />

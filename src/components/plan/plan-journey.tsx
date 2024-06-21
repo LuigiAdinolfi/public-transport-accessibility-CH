@@ -19,7 +19,7 @@ import { HelpButton } from "@/components/shared/help-button";
 
 /**
  * Component representing the journey planning card.
- * @returns JSX.Element
+ * @returns {JSX.Element} - PlanJourney component.
  */
 export function PlanJourney() {
   // State variables

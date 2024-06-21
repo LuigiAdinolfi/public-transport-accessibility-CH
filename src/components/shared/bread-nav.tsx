@@ -12,14 +12,17 @@ import {
 import { MyBreadcrumbList } from "@/components/shared/breadcrumb-list";
 import { useRouter } from "next/navigation";
 
-interface MyBreadcrumbProps {
-  currentPage: string;
-}
-
-export function MyBreadcrumb({ currentPage }: MyBreadcrumbProps) {
+/**
+ * Breadcrumb component displaying navigation links.
+ * @param {Object} props - Props for MyBreadcrumb component.
+ * @param {string} props.currentPage - The current page URL.
+ * @returns {JSX.Element} - MyBreadcrumb component.
+ */
+export function MyBreadcrumb({ currentPage }: { currentPage: string }) {
   const currentIndex = MyBreadcrumbList.findIndex(item => item.url === currentPage);
   const router = useRouter();
-  const handleKeyDown = (e: { key: string; preventDefault: () => void; }, url: string) => {
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLAnchorElement>, url: string) => {
     if (e.key === "Enter") {
       e.preventDefault();
       router.push(url);
@@ -36,13 +39,15 @@ export function MyBreadcrumb({ currentPage }: MyBreadcrumbProps) {
             <Fragment key={index}>
               <BreadcrumbItem className="text-zinc-600 dark:text-zinc-400">
                 {!isLastPath ?
-                  <BreadcrumbLink onClick={(e) => {
-                    e.preventDefault();
-                    router.push(item.url);
-                  }}
-                                  onKeyDown={(e) => handleKeyDown(e, item.url)}
-                                  tabIndex={0}
-                                  className="cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:after:ring-0 focus-visible:rounded-sm focus-visible:ring-black dark:focus-visible:ring-white p-1">
+                  <BreadcrumbLink
+                    onClick={(e) => {
+                      e.preventDefault();
+                      router.push(item.url);
+                    }}
+                    onKeyDown={(e) => handleKeyDown(e, item.url)}
+                    tabIndex={0}
+                    className="cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:after:ring-0 focus-visible:rounded-sm focus-visible:ring-black dark:focus-visible:ring-white p-1"
+                  >
                     {item.name}
                   </BreadcrumbLink>
                   :
@@ -59,5 +64,3 @@ export function MyBreadcrumb({ currentPage }: MyBreadcrumbProps) {
     </Breadcrumb>
   );
 }
-
-export default MyBreadcrumb;

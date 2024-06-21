@@ -22,7 +22,7 @@ export function MainNav() {
    * @param {string} currentPath - The current path to compare with the pathname.
    * @returns {string} - CSS classes for the navigation links.
    */
-  const getClasses = (currentPath: string): string => {
+  function getClasses(currentPath: string): string {
     // Check if the current path matches the pathname to determine if the link is active
     const isActive = pathname === currentPath;
 
@@ -31,7 +31,7 @@ export function MainNav() {
       return cn(
         "transition-colors text-white",
         isActive
-          ? "bg-zinc-700 dark: zinc-700 text-white dark:text-white font-semibold"
+          ? "bg-zinc-700 dark:zinc-700 text-white dark:text-white font-semibold"
           : "text-white hover:bg-zinc-800 hover:text-white font-semibold",
         "text-lg",
         "rounded-md p-2",
@@ -50,22 +50,39 @@ export function MainNav() {
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:after:ring-0 focus-visible:rounded-sm focus-visible:ring-black dark:focus-visible:ring-white"
       );
     }
-  };
+  }
+
+  /**
+   * Component representing a navigation link with active state styling.
+   * @param {Object} props - Component props.
+   * @param {string} props.href - The URL path for the link.
+   * @param {string} props.currentPath - The current path to compare with the link's URL.
+   * @returns {JSX.Element} - NavLink component.
+   */
+  function NavLink({ href, currentPath, children }: { href: string; currentPath: string; children: React.ReactNode }): JSX.Element {
+    const linkClasses = getClasses(currentPath);
+
+    return (
+      <Link href={href} className={linkClasses}>
+        {children}
+      </Link>
+    );
+  }
 
   // Render the main navigation menu
   return (
     <div className="hidden md:flex">
       <nav className="flex items-center gap-4 text-sm">
         {/* Navigation links */}
-        <Link href={"/"} className={getClasses("/")}>
+        <NavLink href="/" currentPath="/">
           Reise planen
-        </Link>
-        <Link href={"/community"} className={getClasses("/community")}>
+        </NavLink>
+        <NavLink href="/community" currentPath="/community">
           Community
-        </Link>
-        <Link href={"/settings"} className={getClasses("/settings")}>
+        </NavLink>
+        <NavLink href="/settings" currentPath="/settings">
           Einstellungen
-        </Link>
+        </NavLink>
       </nav>
     </div>
   );
