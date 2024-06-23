@@ -30,8 +30,8 @@ export function MyBreadcrumb({ currentPage }: { currentPage: string }) {
   };
 
   return (
-    <Breadcrumb className="w-full px-2 text-left lg:w-[960px]">
-      <BreadcrumbList className="text-base">
+    <Breadcrumb className="w-full text-left lg:w-[960px]">
+      <BreadcrumbList className="md:text-lg">
         {MyBreadcrumbList.slice(0, currentIndex + 1).map((item, index) => {
           const isLastPath = currentIndex === index;
 

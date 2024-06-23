@@ -8,7 +8,7 @@ import * as React from "react";
  */
 export function HelpButton() {
   return (
-    <Button variant="secondary" className="flex items-center">
+    <Button variant="secondary" className="flex items-center md:text-base">
       <MessageCircleQuestion className="h-4 w-4 mr-2" />
       <span>Brauchst du Hilfe?</span>
     </Button>

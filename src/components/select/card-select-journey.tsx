@@ -12,10 +12,10 @@ export function CardSelectJourney() {
     <Card className="mt-3">
       <div className="flex flex-col space-y-1.5 p-6">
         <div className="flex w-full justify-start text-sm text-zinc-500 dark:text-zinc-400">
-          <div className="flex w-full justify-start text-zinc-600 dark:text-zinc-400">
+          <div className="flex w-full md:text-base justify-start text-zinc-600 dark:text-zinc-400">
             Wählen Sie eine dieser Optionen aus.
           </div>
-          <div className="flex w-full justify-end font-normal text-zinc-950 dark:text-zinc-400">
+          <div className="flex w-full md:text-base justify-end font-normal text-zinc-950 dark:text-zinc-400">
             Fr. 10.05.2024
           </div>
         </div>

@@ -27,7 +27,7 @@ export function MultipleConnection() {
         <div
           className={`mb-1 flex w-full items-center justify-start ${isMobile ? "flex-col" : "px-3"} py-4 text-zinc-950 dark:text-zinc-50`}>
           <div className="flex w-full justify-start items-center">
-            <div className="pr-2">Niedrigste Barrierefreiheit:</div>
+            <div className="pr-2 md:text-base">Niedrigste Barrierefreiheit:</div>
             <div>
               {resolvedTheme === "dark" ? (
                 <DarkWheelchairReservation className="h-6 w-6" />
@@ -35,9 +35,9 @@ export function MultipleConnection() {
                 <LightWheelchairReservation className="h-6 w-6" />
               )}
             </div>
-            {!isMobile && <div className="pl-2">Mit Personalhilfe ein-/aussteigen</div>}
+            {!isMobile && <div className="pl-2 md:text-base">Mit Personalhilfe ein-/aussteigen</div>}
           </div>
-          <div className={`${isMobile ? "flex w-full justify-start pt-1" : "justify-end"}`}>1h Reisezeit</div>
+          <div className={`${isMobile ? "flex w-full justify-start pt-1" : "justify-end"} md:text-base`}>1h Reisezeit</div>
         </div>
 
         {/* Connection Details */}

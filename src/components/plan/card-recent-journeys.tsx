@@ -21,7 +21,7 @@ export function CardRecentJourneys() {
   return (
     <Card>
       <CardHeader className="pb-8">
-        <CardDescription className="text-zinc-600">
+        <CardDescription className="text-zinc-600 md:text-base">
           Eine frühere Reise auswählen.
         </CardDescription>
       </CardHeader>
@@ -46,7 +46,7 @@ export function CardRecentJourneys() {
                   </div>
                 </div>
                 <div className="flex justify-start">
-                  <div className="flex items-center px-1">Di, 07.05.2024</div>
+                  <div className="flex items-center px-1 md:text-base">Di, 07.05.2024</div>
                 </div>
               </div>
 
@@ -100,7 +100,7 @@ export function CardRecentJourneys() {
                   </div>
                 </div>
                 <div className="flex justify-end">
-                  <div className="flex items-center px-1 text-sm">46 min Reisezeit</div>
+                  <div className="flex items-center px-1 md:text-base">46 min Reisezeit</div>
                 </div>
               </div>
             </div>

@@ -27,7 +27,7 @@ export function LastConnection() {
         </div>
         {/* Departure and Arrival Stations */}
         <div className={`flex w-full items-center justify-between px-3 ${!isMobile ? "pt-2 pb-3" : ""}`}>
-          <div className="text-base items-center font-semibold">
+          <div className="md:text-lg text-base items-center font-semibold">
             Olten
           </div>
           <div className="flex justify-center items-center font-normal">
@@ -52,7 +52,7 @@ export function LastConnection() {
             </div>
             )}
           </div>
-          <div className="text-base items-center font-semibold">
+          <div className="md:text-lg text-base items-center font-semibold">
             Brugg AG
           </div>
         </div>

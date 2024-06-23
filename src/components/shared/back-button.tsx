@@ -15,6 +15,7 @@ export function BackButton() {
   return (
     <Button
       variant="outline"
+      className="md:text-base"
       type="button"
       onClick={() => router.back()}
       aria-label="Zurück"

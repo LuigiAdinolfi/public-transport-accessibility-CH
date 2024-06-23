@@ -45,7 +45,7 @@ export function CardNewJourney() {
   return (
     <Card>
       <CardHeader className="pb-8">
-        <CardDescription className="text-zinc-600">
+        <CardDescription className="text-zinc-600 md:text-base">
           Gib deine Reisedaten ein.
         </CardDescription>
       </CardHeader>
@@ -53,13 +53,14 @@ export function CardNewJourney() {
         <div className="space-y-1">
           <div className="flex flex-col lg:flex-row justify-between items-center">
             <div className="w-full lg:w-5/12 space-y-1">
-              <Label htmlFor="origin">Von</Label>
+              <Label className="md:text-base" htmlFor="origin">Von</Label>
               <Input
                 id="origin"
+                className="md:text-lg"
                 value={origin}
                 onChange={(e) => setOrigin(e.target.value)}
               />
-              <CardDescription className="pt-2 text-zinc-600">
+              <CardDescription className="pt-2 text-zinc-600 md:text-base">
                 Gib den Abfahrtsort ein.
               </CardDescription>
             </div>
@@ -74,13 +75,14 @@ export function CardNewJourney() {
               </Button>
             </div>
             <div className="w-full lg:w-5/12 space-y-1">
-              <Label htmlFor="destination">Nach</Label>
+              <Label className="md:text-base" htmlFor="destination">Nach</Label>
               <Input
                 id="destination"
+                className="md:text-lg"
                 value={destination}
                 onChange={(e) => setDestination(e.target.value)}
               />
-              <CardDescription className="pt-2 text-zinc-600">
+              <CardDescription className="pt-2 text-zinc-600 md:text-base">
                 Gib den Zielort ein.
               </CardDescription>
             </div>
@@ -89,9 +91,9 @@ export function CardNewJourney() {
         <div className="space-y-1">
           <div className="flex flex-col lg:flex-row justify-between items-center align-middle">
             <div className="w-full lg:w-4/12 space-y-1">
-              <Label htmlFor="datetime">Wann</Label>
+              <Label className="md:text-base" htmlFor="datetime">Wann</Label>
               <DatePicker />
-              <CardDescription className="pt-2 text-zinc-600">
+              <CardDescription className="pt-2 text-zinc-600 md:text-base">
                 Gib Datum und Uhrzeit ein.
               </CardDescription>
             </div>
@@ -116,7 +118,7 @@ export function CardNewJourney() {
                     ) : (
                       <LightInactiveSmallCircle aria-hidden="true" />
                     )}
-                    <div className="pl-1 lg:pl-2">Abreise</div>
+                    <div className="pl-1 lg:pl-2 md:text-base">Abreise</div>
                   </TabsTrigger>
                   <TabsTrigger
                     className="w-32 text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:w-32"
@@ -133,7 +135,7 @@ export function CardNewJourney() {
                     ) : (
                       <LightInactiveSmallCircle aria-hidden="true" />
                     )}
-                    <div className="pl-1 lg:pl-2">Ankunft</div>
+                    <div className="pl-1 lg:pl-2 md:text-base">Ankunft</div>
                   </TabsTrigger>
                 </TabsList>
               </Tabs>
@@ -142,7 +144,7 @@ export function CardNewJourney() {
               <Button
                 id="submit"
                 type="submit"
-                className="w-full lg:w-40"
+                className="w-full lg:w-40 md:text-base"
                 onClick={() => router.push("/select")}
               >
                 Suche

@@ -51,7 +51,7 @@ export function CardPath() {
         <div className="flex-grow text-base font-semibold text-center">
           7 Minuten zum Umsteigen
         </div>
-        <Button className="ml-4" variant="outline" onClick={() => router.push("/select/details")}>
+        <Button className="ml-4 md:text-base" variant="outline" onClick={() => router.push("/select/details")}>
           Weg zum Umsteigen
           <Map className="ml-2 h-4 w-4" />
         </Button>
@@ -65,9 +65,9 @@ export function CardPath() {
             <div className="text-lg font-semibold">Basel SBB</div>
           </div>
           <div className="flex flex-row p-2">
-            <div className={`font-medium ${!isMobile ? "" : "text-sm"}`}>Rollstuhlgerechte Waggons:</div>
-            <div className={`pr-1 pl-3 font-semibold ${!isMobile ? "" : "text-sm"}`}>Gleis 9</div>
-            <div className={`pl-1 font-semibold ${!isMobile ? "" : "text-sm"}`}>Sektor A / C</div>
+            <div className={`font-medium ${!isMobile ? "text-base" : "text-sm"}`}>Rollstuhlgerechte Waggons:</div>
+            <div className={`pr-1 pl-3 font-semibold ${!isMobile ? "text-base" : "text-sm"}`}>Gleis 9</div>
+            <div className={`pl-1 font-semibold ${!isMobile ? "text-base" : "text-sm"}`}>Sektor A / C</div>
           </div>
           <div className="flex flex-row align-middle items-center pb-2 pt-1">
             <div className="text-sm font-normal px-4">Zugang zum Bahnsteig ohne Hilfe</div>
@@ -97,7 +97,7 @@ export function CardPath() {
             </AccordionItem>
           </Accordion>
           <div className="flex justify-center mt-6">
-            <Button variant="outline" onClick={() => router.push("/select/details/stop")} className="flex w-full items-center p-2">
+            <Button variant="outline" onClick={() => router.push("/select/details/stop")} className="flex w-full items-center p-2 md:text-base">
               <div>Info zur Haltestelle &nbsp;</div>
               <div>Basel SBB</div>
               <ArrowUpRight className="h-4 w-4 ml-1" />
@@ -111,9 +111,9 @@ export function CardPath() {
             <div className="text-lg font-semibold">Olten</div>
           </div>
           <div className="flex flex-row p-2">
-            <div className={`font-medium ${!isMobile ? "" : "text-sm"}`}>Rollstuhlgerechte Waggons:</div>
-            <div className={`pr-1 pl-3 font-semibold ${!isMobile ? "" : "text-sm"}`}>Gleis 12</div>
-            <div className={`pl-1 font-semibold ${!isMobile ? "" : "text-sm"}`}></div>
+            <div className={`font-medium ${!isMobile ? "text-base" : "text-sm"}`}>Rollstuhlgerechte Waggons:</div>
+            <div className={`pr-1 pl-3 font-semibold ${!isMobile ? "text-base" : "text-sm"}`}>Gleis 12</div>
+            <div className={`pl-1 font-semibold ${!isMobile ? "text-base" : "text-sm"}`}></div>
           </div>
           <div className="flex flex-row align-middle items-center pb-2 pt-1">
           <div className="text-sm font-normal px-4">Zugang zum Bahnsteig ohne Hilfe</div>
@@ -143,7 +143,7 @@ export function CardPath() {
             </AccordionItem>
           </Accordion>
           <div className="flex justify-center mt-6">
-            <Button variant="outline" onClick={() => router.push("/select/details/stop")} className="flex w-full items-center p-2">
+            <Button variant="outline" onClick={() => router.push("/select/details/stop")} className="flex w-full items-center p-2 md:text-base">
               <div>Info zur Haltestelle &nbsp;</div>
               <div>Olten</div>
               <ArrowUpRight className="h-4 w-4 ml-1" />

@@ -47,7 +47,7 @@ export function JourneyDetails() {
               ) : (
                 <LightInactiveCircle />
               )}
-              <div className="pl-1 lg:pl-2">Basel SBB - Olten</div>
+              <div className="pl-1 lg:pl-2 md:text-base">Basel SBB - Olten</div>
             </TabsTrigger>
 
             {/* Second Route Tab */}
@@ -66,7 +66,7 @@ export function JourneyDetails() {
               ) : (
                 <LightInactiveCircle />
               )}
-              <div className="pl-1 lg:pl-2">Olten - Brugg AG</div>
+              <div className="pl-1 lg:pl-2 md:text-base">Olten - Brugg AG</div>
             </TabsTrigger>
           </TabsList>
         </div>

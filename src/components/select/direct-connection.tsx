@@ -25,7 +25,7 @@ export function DirectConnection() {
         {/* Accessibility and Travel Time */}
         <div className={`mb-1 flex w-full items-center justify-start ${isMobile ? "flex-col" : "px-3"} py-4 text-zinc-950 dark:text-zinc-50`}>
           <div className="flex w-full justify-start items-center">
-            <div className="pr-2">Niedrigste Barrierefreiheit:</div>
+            <div className="pr-2 md:text-base">Niedrigste Barrierefreiheit:</div>
             {/* Wheelchair Accessibility Icon */}
             {resolvedTheme === "dark" ? (
               <DarkWheelchairReservation className="h-6 w-6" aria-hidden="true" />
@@ -33,10 +33,10 @@ export function DirectConnection() {
               <LightWheelchairReservation className="h-6 w-6" aria-hidden="true" />
             )}
             {!isMobile && (
-              <div className="pl-2">Mit Personalhilfe ein-/aussteigen</div>
+              <div className="pl-2 md:text-base">Mit Personalhilfe ein-/aussteigen</div>
             )}
           </div>
-          <div className={`${isMobile ? "flex w-full justify-start pt-1" : "justify-end"}`}>46 min Reisezeit</div>
+          <div className={`${isMobile ? "flex w-full justify-start pt-1" : "justify-end md:text-base"}`}>46 min Reisezeit</div>
         </div>
         {/* Connection Details */}
         <div className="flex flex-row mb-2">
@@ -49,7 +49,7 @@ export function DirectConnection() {
               </div>
               {/* Departure and Arrival Stations */}
               <div className="flex w-full items-center justify-between px-3">
-                <div className="text-base items-center font-semibold">
+                <div className="md:text-lg text-base items-center font-semibold">
                   Basel SBB
                 </div>
                 <div className="flex justify-center items-center font-normal">
@@ -76,7 +76,7 @@ export function DirectConnection() {
                     </div>
                   )}
                 </div>
-                <div className="text-base items-center font-semibold">
+                <div className="md:text-lg text-base items-center font-semibold">
                   Brugg AG
                 </div>
               </div>

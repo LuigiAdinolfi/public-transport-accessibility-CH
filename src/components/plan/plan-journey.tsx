@@ -49,14 +49,14 @@ export function PlanJourney() {
               value="new-journey"
             >
               {renderCircle("new-journey", activeJourneyTab === "new-journey")}
-              <div className="pl-1 lg:pl-2">Neue Reise</div>
+              <div className="pl-1 lg:pl-2 md:text-base">Neue Reise</div>
             </TabsTrigger>
             <TabsTrigger
               className="mx-1 text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:h-10 lg:text-base"
               value="recent-journeys"
             >
               {renderCircle("recent-journeys", activeJourneyTab === "recent-journeys")}
-              <div className="pl-1 lg:pl-2">Letzte Reisen</div>
+              <div className="pl-1 lg:pl-2 md:text-base">Letzte Reisen</div>
             </TabsTrigger>
           </TabsList>
 
