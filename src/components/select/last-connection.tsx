@@ -7,6 +7,7 @@ import { useTheme } from "next-themes";
 import { DarkWheelchairReservation, LightWheelchairReservation } from "@/assets/icons/wheelchair-reservation";
 import { DarkWheelchair, LightWheelchair } from "@/assets/icons/wheelchair";
 import { CommunityRatingSelect } from "@/components/select/community-rating-select";
+import { useMediaQuery } from "react-responsive";
 
 /**
  * Component representing the last connection in a journey.
@@ -14,6 +15,7 @@ import { CommunityRatingSelect } from "@/components/select/community-rating-sele
  */
 export function LastConnection() {
   const { resolvedTheme } = useTheme();
+  const isMobile = useMediaQuery({ maxWidth: 767 });
 
   return (
     <div className="flex basis-1/2 justify-start rounded-lg bg-zinc-50 dark:bg-zinc-900">
@@ -24,14 +26,15 @@ export function LastConnection() {
           <div className="flex justify-end">21:28</div>
         </div>
         {/* Departure and Arrival Stations */}
-        <div className="flex w-full items-center justify-between px-3 pt-2 pb-3">
+        <div className={`flex w-full items-center justify-between px-3 ${!isMobile ? "pt-2 pb-3" : ""}`}>
           <div className="text-base items-center font-semibold">
             Olten
           </div>
           <div className="flex justify-center items-center font-normal">
-            <div className="flex items-center pr-2">
+            {!isMobile &&  <div className="flex items-center pr-2">
               Zug
             </div>
+            }
             <div>
               {resolvedTheme === "dark" ? (
                 <DarkTrainProfile className="h-6 w-6" />
@@ -39,6 +42,7 @@ export function LastConnection() {
                 <LightTrainProfile className="h-6 w-6" />
               )}
             </div>
+            {!isMobile && (
             <div>
               {resolvedTheme === "dark" ? (
                 <DarkIr16 className="h-6 w-6" />
@@ -46,29 +50,34 @@ export function LastConnection() {
                 <LightIr16 className="h-6 w-6" />
               )}
             </div>
+            )}
           </div>
           <div className="text-base items-center font-semibold">
             Brugg AG
           </div>
         </div>
         {/* Accessibility Information */}
-        <div className="flex w-full justify-between px-3 py-3 font-medium">
+        <div className={`flex w-full justify-between px-3 ${isMobile ? "py-2" : "py-3"} font-medium`}>
           <div className="flex basis-1/2 justify-start items-center">
             {resolvedTheme === "dark" ? (
               <DarkWheelchairReservation className="h-6 w-6" />
             ) : (
               <LightWheelchairReservation className="h-6 w-6" />
             )}
+            {!isMobile && (
             <div className="pl-2 flex flex-col">
               <span>Mit Personalhilfe</span>
               <span>ein-/aussteigen</span>
             </div>
+            )}
           </div>
           <div className="flex basis-1/2 justify-end items-center">
+            {!isMobile && (
             <div className="pr-2 flex flex-col text-right">
               <span>Selber ein-/</span>
               <span>aussteigen</span>
             </div>
+            )}
             {resolvedTheme === "dark" ? (
               <DarkWheelchair className="h-6 w-6" />
             ) : (
@@ -77,8 +86,8 @@ export function LastConnection() {
           </div>
         </div>
         {/* Community Rating */}
-        <div className="flex w-full items-center justify-start px-3 pb-2 pt-4 font-normal">
-          <div className="pr-3">Bewertung der Community:</div>
+        <div className={`flex w-full ${isMobile ? "justify-center" : "items-center justify-start pt-4"} px-3 pb-2 font-normal`}>
+          {!isMobile && <div className="pr-3">Bewertung der Community:</div>}
           <CommunityRatingSelect value={4} />
         </div>
       </div>
