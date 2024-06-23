@@ -10,28 +10,6 @@ import { Company } from "@/components/shared/company";
  */
 export default function SiteHeader() {
   return (
-    // <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-    //   <div className="container flex h-20 max-w-screen-2xl items-center">
-    //     <Company />
-    //     <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-    //       {/* Main navigation for larger screens */}
-    //       <MainNav />
-    //
-    //       {/* Mobile navigation menu */}
-    //       <MobileNav />
-    //
-    //       {/* Spacer */}
-    //       <div className="w-full flex-1 md:w-auto md:flex-none"></div>
-    //
-    //       {/* Mode toggle for theme */}
-    //       <nav className="flex items-center">
-    //         <ModeToggle />
-    //       </nav>
-    //     </div>
-    //   </div>
-    // </header>
-
-
     <header
       className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-20 max-w-screen-2xl items-center">
