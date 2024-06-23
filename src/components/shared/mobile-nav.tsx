@@ -86,7 +86,7 @@ export function MobileNav() {
                     href={item.href}
                     onOpenChange={setOpen}
                     className={cn(
-                      "hover:bg-zinc-700 hover:text-zinc-50 bg-zinc-50",
+                      "hover:bg-zinc-100 hover:text-zinc-950 dark:hover:text-zinc-50 bg-zinc-50 dark:bg-zinc-900 dark:hover:bg-zinc-800",
                       "rounded-md p-2",
                       "px-4 py-2"
                     )}
