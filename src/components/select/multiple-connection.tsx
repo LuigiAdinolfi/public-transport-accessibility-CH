@@ -3,7 +3,7 @@
 import * as React from "react";
 import { FirstConnection } from "@/components/select/first-connection";
 import { LastConnection } from "@/components/select/last-connection";
-import { ChevronRight, ChevronDown } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DarkWheelchairReservation, LightWheelchairReservation } from "@/assets/icons/wheelchair-reservation";
 import { useRouter } from "next/navigation";
