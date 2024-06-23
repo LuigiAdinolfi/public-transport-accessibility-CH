@@ -11,21 +11,27 @@ import { useRouter } from "next/navigation";
 import { CommunityRatingDetails } from "@/components/details/community-rating-details";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Image from "next/image";
+import { useMediaQuery } from "react-responsive";
 
 /**
  * Component displaying journey details within a card format.
- * @returns {JSX.Element} CardPath component.
+ * @returns {JSX.Element} ResponsiveCardPath component.
  */
 export function CardPath() {
   const { resolvedTheme } = useTheme();
   const router = useRouter();
+  const isMobile = useMediaQuery({ maxWidth: 767 });
 
   return (
     <Card>
       {/* Content for the first section */}
-      <div className="flex items-center justify-between p-6 px-8 pb-6">
+      <div className={`flex items-center justify-between ${!isMobile ? "p-6 px-8 pb-6" : "flex-col p-4 px-2 pb-6 gap-3"} `}>
         <div className="flex items-center space-x-1.5">
-          <div className="text-base font-normal pr-1">Zug</div>
+          {
+            !isMobile && (
+              <div className="text-base font-normal pr-1">Zug</div>
+            )
+          }
           <div className="text-base font-normal">
             {resolvedTheme === "dark" ? (
               <DarkTrainProfile className="h-6 w-6" />
@@ -52,22 +58,23 @@ export function CardPath() {
       </div>
 
       {/* Content for the second section */}
-      <div className="flex px-6 gap-6">
-        <div className="flex flex-col w-1/2 p-4 bg-zinc-50 rounded-lg text-zinc-950 shadow-sm dark:bg-zinc-900 dark:text-zinc-50">
-          <div className="flex items-center p-2 mb-3">
+      <div className={`flex px-6 gap-6 ${!isMobile ? "" : "flex-col"}`}>
+        {/* Basel SBB Section */}
+        <div className="flex flex-col w-full md:w-1/2 p-4 bg-zinc-50 rounded-lg text-zinc-950 shadow-sm dark:bg-zinc-900 dark:text-zinc-50">
+          <div className={`flex items-center ${!isMobile ? "p-2 mb-3" : "px-2 py-1 mb-2"}`}>
             <div className="text-lg font-semibold">Basel SBB</div>
           </div>
           <div className="flex flex-row p-2">
-            <div className="font-medium">Rollstuhlgerechte Waggons:</div>
-            <div className="pr-1 pl-3 font-semibold">Gleis 9</div>
-            <div className="pl-1 font-semibold">Sektor A / C</div>
+            <div className={`font-medium ${!isMobile ? "" : "text-sm"}`}>Rollstuhlgerechte Waggons:</div>
+            <div className={`pr-1 pl-3 font-semibold ${!isMobile ? "" : "text-sm"}`}>Gleis 9</div>
+            <div className={`pl-1 font-semibold ${!isMobile ? "" : "text-sm"}`}>Sektor A / C</div>
           </div>
           <div className="flex flex-row align-middle items-center pb-2 pt-1">
             <div className="text-sm font-normal px-4">Zugang zum Bahnsteig ohne Hilfe</div>
           </div>
           <Accordion type="single" collapsible className="px-2">
             <AccordionItem value="item-1">
-              <AccordionTrigger className="py-6">Zugkomposition</AccordionTrigger>
+              <AccordionTrigger className={`${!isMobile ? "py-6"  : "py-4 text-sm"}`}>Zugkomposition</AccordionTrigger>
               <AccordionContent>
                 <Image src="/train-composition.png" alt="Zugkomposition" width={320} height={100} className="px-2" />
               </AccordionContent>
@@ -75,7 +82,7 @@ export function CardPath() {
           </Accordion>
           <Accordion type="single" collapsible className="px-2">
             <AccordionItem value="item-2">
-              <AccordionTrigger className="py-6">Ein- und Aussteigen für Rollstuhlfahrer</AccordionTrigger>
+              <AccordionTrigger className={`${!isMobile ? "py-6" : "py-4 text-sm"}`}>Ein- und Aussteigen für Rollstuhlfahrer</AccordionTrigger>
               <AccordionContent className="px-2">
                 <div className="py-3">
                   Informationen zur Rampe
@@ -98,20 +105,22 @@ export function CardPath() {
           </div>
         </div>
 
-        <div className="flex flex-col w-1/2 p-4 bg-zinc-50 rounded-lg text-zinc-950 shadow-sm dark:bg-zinc-900 dark:text-zinc-50">
-          <div className="flex items-center p-2 mb-3">
+        {/* Olten Section */}
+        <div className="flex flex-col w-full md:w-1/2 p-4 bg-zinc-50 rounded-lg text-zinc-950 shadow-sm dark:bg-zinc-900 dark:text-zinc-50">
+          <div className={`flex items-center ${!isMobile ? "p-2 mb-3" : "px-2 py-1 mb-2"}`}>
             <div className="text-lg font-semibold">Olten</div>
           </div>
           <div className="flex flex-row p-2">
-            <div className="font-medium">Rollstuhlgerechte Waggons:</div>
-            <div className="pr-1 pl-3 font-semibold">Gleis 12</div>
+            <div className={`font-medium ${!isMobile ? "" : "text-sm"}`}>Rollstuhlgerechte Waggons:</div>
+            <div className={`pr-1 pl-3 font-semibold ${!isMobile ? "" : "text-sm"}`}>Gleis 12</div>
+            <div className={`pl-1 font-semibold ${!isMobile ? "" : "text-sm"}`}></div>
           </div>
           <div className="flex flex-row align-middle items-center pb-2 pt-1">
-            <div className="text-sm font-normal px-4">Zugang zum Bahnsteig ohne Hilfe</div>
+          <div className="text-sm font-normal px-4">Zugang zum Bahnsteig ohne Hilfe</div>
           </div>
           <Accordion type="single" collapsible className="px-2">
             <AccordionItem value="item-1">
-              <AccordionTrigger className="py-6">Zugkomposition</AccordionTrigger>
+              <AccordionTrigger className={`${!isMobile ? "py-6"  : "py-4 text-sm"}`}>Zugkomposition</AccordionTrigger>
               <AccordionContent>
                 <Image src="/train-composition.png" alt="Zugkomposition" width={320} height={100} className="px-2" />
               </AccordionContent>
@@ -119,7 +128,7 @@ export function CardPath() {
           </Accordion>
           <Accordion type="single" collapsible className="px-2">
             <AccordionItem value="item-1">
-              <AccordionTrigger className="py-6">Ein- und Aussteigen für Rollstuhlfahrer</AccordionTrigger>
+              <AccordionTrigger className={`${!isMobile ? "py-6"  : "py-4 text-sm"}`}>Ein- und Aussteigen für Rollstuhlfahrer</AccordionTrigger>
               <AccordionContent className="px-2">
                 <div className="py-3">
                   Informationen zur Rampe
@@ -145,7 +154,11 @@ export function CardPath() {
 
       {/* Community Rating Section */}
       <div className="flex w-full items-center justify-center px-3 py-6 font-normal">
-        <div className="pr-3">Bewertung der Community:</div>
+        {
+          !isMobile && (
+            <div className="pr-3">Bewertung der Community:</div>
+          )
+        }
         <CommunityRatingDetails value={3} />
       </div>
     </Card>
