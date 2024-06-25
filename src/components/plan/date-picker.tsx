@@ -1,36 +1,31 @@
-"use client";
-
 import * as React from "react";
-import { format } from "date-fns";
-import { de } from "date-fns/locale";
-import { toZonedTime } from "date-fns-tz";
+import { useState, useEffect } from "react";
+import { toZonedTime, format } from "date-fns-tz";
 import { Calendar as CalendarIcon } from "lucide-react";
-
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
-  PopoverTrigger,
+  PopoverTrigger
 } from "@/components/ui/popover";
-import { useEffect } from "react";
+import { de } from "date-fns/locale";
 
 const timeZone = "Europe/Zurich";
 
 /**
- * Component for selecting a date and time using a calendar and time picker.
- * @returns {JSX.Element} JSX Element
+ * DatePicker component allows selecting a date and time with timezone awareness.
+ * @returns {JSX.Element} The DatePicker component UI
  */
 export function DatePicker() {
-  const [date, setDate] = React.useState<Date>();
-  const [time, setTime] = React.useState<string>("");
+  const [date, setDate] = useState<Date>(new Date());
+  const [time, setTime] = useState<string>("");
 
-  // Initialize date and time on component mount
+  // Initialize with current date and time
   useEffect(() => {
     const now = new Date();
-    const zonedTime = toZonedTime(now, timeZone);
-    const formattedTime = format(zonedTime, "HH:mm");
+    const zonedTime = toZonedTime(now, timeZone); // Convert to specified time zone
+    const formattedTime = format(zonedTime, "HH:mm"); // Format time to HH:mm
     setDate(zonedTime);
     setTime(formattedTime);
   }, []);
@@ -54,11 +49,12 @@ export function DatePicker() {
 
   /**
    * Formats the provided date into a localized string with date and time.
-   * @param {Date} date - The date object to format
-   * @returns {string} Formatted date string
+   * @param {Date | null} date - The date object to format
+   * @returns {string} Formatted date string in "EEE dd. MMMM yyyy, HH:mm" format
    */
-  const formatDate = (date: Date) => {
-    return format(date, "EEE, PPP - HH:mm", { locale: de });
+  const formatDateForUI = (date: Date | null) => {
+    if (!date) return "";
+    return format(date, "EEE dd. MMMM yyyy, HH:mm", { locale: de });
   };
 
   return (
@@ -66,21 +62,18 @@ export function DatePicker() {
       <PopoverTrigger asChild>
         <Button
           variant={"outline"}
-          className={cn(
-            "md:text-lg w-full justify-between text-left font-normal lg:w-[320px]",
-            !date && "text-muted-foreground"
-          )}
-          aria-label="Datum und Uhrzeit wählen"
+          className="text-base w-full justify-between text-left font-normal lg:w-[320px]"
+          aria-label="Select Date and Time"
           suppressHydrationWarning
         >
-          {date ? formatDate(date) : formatDate(new Date())}
+          {date ? formatDateForUI(date) : ""}
           <CalendarIcon className="h-4 w-4" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
         <Calendar
           mode="single"
-          selected={date}
+          selected={date} // Pass non-null value
           onSelect={(newDate) => {
             if (newDate) {
               const [hours, minutes] = time.split(":");
@@ -98,7 +91,7 @@ export function DatePicker() {
             htmlFor="time"
             className="block pl-4 text-sm font-medium text-gray-700"
           >
-            Zeit
+            Time
           </label>
           <input
             type="time"
