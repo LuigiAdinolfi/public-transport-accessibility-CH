@@ -65,7 +65,7 @@ export function DatePicker({ onChange }: Props) {
       <PopoverTrigger asChild>
         <Button
           variant={"outline"}
-          className="text-base w-full justify-between text-left font-normal lg:w-[320px]"
+          className="text-base w-full justify-between text-left font-normal lg:w-[280px]"
           aria-label="Select Date and Time"
           suppressHydrationWarning
         >

@@ -112,7 +112,7 @@ export function CardNewJourney() {
                 Gib Datum und Uhrzeit ein.
               </CardDescription>
             </div>
-            <div className="flex justify-center mt-8 lg:mt-0 w-full lg:w-3/12 content-center space-y-1">
+            <div className="flex justify-center mt-8 lg:mt-0 w-full content-center space-y-1 lg:pb-2">
               <Tabs
                 defaultValue={activeSearchTab}
                 onValueChange={(value) => setActiveSearchTab(value as "Dep" | "Arr")}
@@ -159,7 +159,7 @@ export function CardNewJourney() {
               <Button
                 id="submit"
                 type="submit"
-                className="w-full lg:w-40 md:text-base"
+                className="w-full lg:w-44 md:text-base lg:mb-2"
                 onClick={() => handleFormSubmit(origin, destination, selectedDate, activeSearchTab)}
               >
                 Suche
