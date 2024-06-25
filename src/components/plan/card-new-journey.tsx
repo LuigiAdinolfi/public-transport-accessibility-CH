@@ -1,15 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import * as React from "react";
 import { useState } from "react";
 import { ArrowRightLeft } from "lucide-react";
@@ -24,22 +14,59 @@ import {
 } from "@/assets/icons/inactive-circle";
 import { DatePicker } from "@/components/plan/date-picker";
 import { useRouter } from "next/navigation";
+import JourneyPointInput from "@/components/plan/journey-point-input";
+import * as OJP from "ojp-sdk";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { fetchTripRequest } from "@/api/openJourneyPlanner/fetch-trip-request";
 
-/**
- * Component representing the journey planning card.
- * @returns {JSX.Element} JSX Element
- */
+
 export function CardNewJourney() {
-  const [activeSearchTab, setActiveSearchTab] = useState("departure");
-  const [origin, setOrigin] = useState("Basel");
-  const [destination, setDestination] = useState("Brugg");
-
+  const [activeSearchTab, setActiveSearchTab] = useState<"Dep" | "Arr">("Dep");
+  const [origin, setOrigin] = useState<OJP.Location | null>(null);
+  const [destination, setDestination] = useState<OJP.Location | null>(null);
+  const [selectedDate, setSelectedDate] = useState<string>("");
   const { resolvedTheme } = useTheme();
   const router = useRouter();
 
+  /**
+   * Handles the form submission by initiating a trip request with selected parameters.
+   * @param {OJP.Location | null} origin - The origin location selected.
+   * @param {OJP.Location | null} destination - The destination location selected.
+   * @param {string} selectedDate - The selected date and time formatted in ISO format.
+   * @param {"Dep" | "Arr"} activeSearchTab - The active search tab ('Dep' for departure, 'Arr' for arrival).
+   */
+  const handleFormSubmit = async (origin: OJP.Location | null, destination: OJP.Location | null, selectedDate: string, activeSearchTab: "Dep" | "Arr") => {
+    if (!origin || !destination || !selectedDate) {
+      console.error("Please select origin, destination, and date/time.");
+      return;
+    }
+
+    try {
+      const formattedDate = new Date(selectedDate);
+      const response = await fetchTripRequest(origin.stopPlace?.stopPlaceRef ?? "", destination.stopPlace?.stopPlaceRef ?? "", formattedDate, activeSearchTab);
+      console.log("Response from fetchTripRequest:", response); // <-- Console log for response
+      // Handle response as needed, e.g., navigate to result page
+      router.push("/select");
+    } catch (error) {
+      console.error("Error fetching trip request:", error);
+    }
+  };
+
   const swapLocations = () => {
+    const temp = origin;
     setOrigin(destination);
-    setDestination(origin);
+    setDestination(temp);
+  };
+
+  const handleOriginSelected = (location: OJP.Location | null) => {
+    setOrigin(location);
+  };
+
+  const handleDestinationSelected = (location: OJP.Location | null) => {
+    setDestination(location);
   };
 
   return (
@@ -52,19 +79,13 @@ export function CardNewJourney() {
       <CardContent className="space-y-10 lg:space-y-12 pb-6 lg:pb-12">
         <div className="space-y-1">
           <div className="flex flex-col lg:flex-row justify-between items-center">
-            <div className="w-full lg:w-5/12 space-y-1">
-              <Label className="md:text-base" htmlFor="origin">Von</Label>
-              <Input
-                id="origin"
-                className="md:text-lg"
-                value={origin}
-                onChange={(e) => setOrigin(e.target.value)}
-              />
-              <CardDescription className="pt-2 text-zinc-600 md:text-base">
-                Gib den Abfahrtsort ein.
-              </CardDescription>
-            </div>
-            <div className="flex w-full lg:w-2/12 items-center justify-center pt-4 lg:pt-0">
+            <JourneyPointInput
+              placeholder="Von"
+              onLocationSelected={handleOriginSelected}
+              value={origin?.locationName ?? ""}
+              description="Gib den Abfahrtsort ein."
+            />
+            <div className="flex w-full lg:w-2/12 items-center justify-center pt-4 lg:pb-6">
               <Button
                 variant="outline"
                 size="icon"
@@ -74,25 +95,19 @@ export function CardNewJourney() {
                 <ArrowRightLeft />
               </Button>
             </div>
-            <div className="w-full lg:w-5/12 space-y-1">
-              <Label className="md:text-base" htmlFor="destination">Nach</Label>
-              <Input
-                id="destination"
-                className="md:text-lg"
-                value={destination}
-                onChange={(e) => setDestination(e.target.value)}
-              />
-              <CardDescription className="pt-2 text-zinc-600 md:text-base">
-                Gib den Zielort ein.
-              </CardDescription>
-            </div>
+            <JourneyPointInput
+              placeholder="Nach"
+              onLocationSelected={handleDestinationSelected}
+              value={destination?.locationName ?? ""}
+              description="Gib den Zielort ein."
+            />
           </div>
         </div>
         <div className="space-y-1">
           <div className="flex flex-col lg:flex-row justify-between items-center align-middle">
             <div className="w-full lg:w-4/12 space-y-1">
-              <Label className="md:text-base" htmlFor="datetime">Wann</Label>
-              <DatePicker />
+              <Label className="text-base" htmlFor="datetime">Wann</Label>
+              <DatePicker onChange={(date) => setSelectedDate(date)} />
               <CardDescription className="pt-2 text-zinc-600 md:text-base">
                 Gib Datum und Uhrzeit ein.
               </CardDescription>
@@ -100,20 +115,20 @@ export function CardNewJourney() {
             <div className="flex justify-center mt-8 lg:mt-0 w-full lg:w-3/12 content-center space-y-1">
               <Tabs
                 defaultValue={activeSearchTab}
-                onValueChange={(value) => setActiveSearchTab(value)}
+                onValueChange={(value) => setActiveSearchTab(value as "Dep" | "Arr")}
               >
                 <TabsList className="content-center lg:w-64">
                   <TabsTrigger
                     className="w-32 text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:w-32"
-                    value="departure"
+                    value="Dep"
                   >
                     {resolvedTheme === "dark" ? (
-                      activeSearchTab === "departure" ? (
+                      activeSearchTab === "Dep" ? (
                         <DarkActiveSmallCircle aria-hidden="true" />
                       ) : (
                         <DarkInactiveSmallCircle aria-hidden="true" />
                       )
-                    ) : activeSearchTab === "departure" ? (
+                    ) : activeSearchTab === "Dep" ? (
                       <LightActiveSmallCircle aria-hidden="true" />
                     ) : (
                       <LightInactiveSmallCircle aria-hidden="true" />
@@ -122,15 +137,15 @@ export function CardNewJourney() {
                   </TabsTrigger>
                   <TabsTrigger
                     className="w-32 text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:w-32"
-                    value="arrival"
+                    value="Arr"
                   >
                     {resolvedTheme === "dark" ? (
-                      activeSearchTab === "arrival" ? (
+                      activeSearchTab === "Arr" ? (
                         <DarkActiveSmallCircle aria-hidden="true" />
                       ) : (
                         <DarkInactiveSmallCircle aria-hidden="true" />
                       )
-                    ) : activeSearchTab === "arrival" ? (
+                    ) : activeSearchTab === "Arr" ? (
                       <LightActiveSmallCircle aria-hidden="true" />
                     ) : (
                       <LightInactiveSmallCircle aria-hidden="true" />
@@ -145,7 +160,7 @@ export function CardNewJourney() {
                 id="submit"
                 type="submit"
                 className="w-full lg:w-40 md:text-base"
-                onClick={() => router.push("/select")}
+                onClick={() => handleFormSubmit(origin, destination, selectedDate, activeSearchTab)}
               >
                 Suche
               </Button>

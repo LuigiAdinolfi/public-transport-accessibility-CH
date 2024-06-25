@@ -10,14 +10,15 @@ import {
   PopoverTrigger
 } from "@/components/ui/popover";
 import { de } from "date-fns/locale";
+import { formatISO } from "date-fns";
 
 const timeZone = "Europe/Zurich";
 
-/**
- * DatePicker component allows selecting a date and time with timezone awareness.
- * @returns {JSX.Element} The DatePicker component UI
- */
-export function DatePicker() {
+interface Props {
+  onChange: (date: string) => void; // Callback function to handle date change
+}
+
+export function DatePicker({ onChange }: Props) {
   const [date, setDate] = useState<Date>(new Date());
   const [time, setTime] = useState<string>("");
 
@@ -28,6 +29,7 @@ export function DatePicker() {
     const formattedTime = format(zonedTime, "HH:mm"); // Format time to HH:mm
     setDate(zonedTime);
     setTime(formattedTime);
+    onChange(formatISO(zonedTime)); // Initial date selection
   }, []);
 
   /**
@@ -44,6 +46,7 @@ export function DatePicker() {
       newDate.setHours(parseInt(hours, 10));
       newDate.setMinutes(parseInt(minutes, 10));
       setDate(newDate);
+      onChange(formatISO(newDate)); // Update parent with new date
     }
   };
 
@@ -80,6 +83,7 @@ export function DatePicker() {
               newDate.setHours(parseInt(hours, 10));
               newDate.setMinutes(parseInt(minutes, 10));
               setDate(newDate);
+              onChange(formatISO(newDate)); // Update parent with new date
             }
           }}
           initialFocus
