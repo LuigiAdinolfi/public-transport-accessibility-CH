@@ -69,6 +69,11 @@ export function CardNewJourney() {
     setDestination(location);
   };
 
+  const handleDateChange = (date: string) => {
+    setSelectedDate(date);
+  };
+
+
   return (
     <Card>
       <CardHeader className="pb-8">
@@ -107,7 +112,7 @@ export function CardNewJourney() {
           <div className="flex flex-col lg:flex-row justify-between items-center align-middle">
             <div className="w-full lg:w-4/12 space-y-1">
               <Label className="text-base" htmlFor="datetime">Wann</Label>
-              <DatePicker onChange={(date) => setSelectedDate(date)} />
+              <DatePicker onDateChange={handleDateChange} />
               <CardDescription className="pt-2 text-zinc-600 md:text-base">
                 Gib Datum und Uhrzeit ein.
               </CardDescription>

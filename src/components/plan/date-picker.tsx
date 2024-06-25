@@ -17,10 +17,10 @@ import { formatISO } from "date-fns";
 const timeZone = "Europe/Zurich";
 
 interface Props {
-  onChange: (date: string) => void; // Callback function to handle date change
+  onDateChange: (date: string) => void; // Callback function to handle date change
 }
 
-export function DatePicker({ onChange }: Props) {
+export function DatePicker({ onDateChange }: Props) {
   const [date, setDate] = useState<Date>(new Date());
   const [time, setTime] = useState<string>("");
 
@@ -31,7 +31,7 @@ export function DatePicker({ onChange }: Props) {
     const formattedTime = format(zonedTime, "HH:mm"); // Format time to HH:mm
     setDate(zonedTime);
     setTime(formattedTime);
-    onChange(formatISO(zonedTime)); // Initial date selection
+    onDateChange(formatISO(zonedTime)); // Initial date selection
   }, []);
 
   /**
@@ -48,7 +48,7 @@ export function DatePicker({ onChange }: Props) {
       newDate.setHours(parseInt(hours, 10));
       newDate.setMinutes(parseInt(minutes, 10));
       setDate(newDate);
-      onChange(formatISO(newDate)); // Update parent with new date
+      onDateChange(formatISO(newDate)); // Update parent with new date
     }
   };
 
@@ -85,7 +85,7 @@ export function DatePicker({ onChange }: Props) {
               newDate.setHours(parseInt(hours, 10));
               newDate.setMinutes(parseInt(minutes, 10));
               setDate(newDate);
-              onChange(formatISO(newDate)); // Update parent with new date
+              onDateChange(formatISO(newDate)); // Update parent with new date
             }
           }}
           initialFocus
