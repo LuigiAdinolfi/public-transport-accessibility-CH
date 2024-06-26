@@ -7,17 +7,54 @@ import { useRouter } from "next/navigation";
 import { DarkTrainProfile, LightTrainProfile } from "@/assets/icons/train-profile";
 import { CommunityRatingSelect } from "@/components/select/community-rating-select";
 import { useTheme } from "next-themes";
-import { DarkIc36, LightIc36 } from "@/assets/icons/ic-36";
 import { useMediaQuery } from 'react-responsive';
+import * as OJP from "ojp-sdk";
+
+interface DirectConnectionProps {
+  details: OJP.TripLeg;
+  duration: string;
+}
+
+/**
+ * Type guard to check if the trip leg is a TripTimedLeg
+ * @param leg - The trip leg to check
+ * @returns {boolean} Whether the leg is a TripTimedLeg
+ */
+function isTripTimedLeg(leg: OJP.TripLeg): leg is OJP.TripTimedLeg {
+  return (leg as OJP.TripTimedLeg).fromStopPoint !== undefined;
+}
+
+/**
+ * Function to format date to HH:MM
+ * @param date - The date to format
+ * @returns {string} Formatted time string
+ */
+function formatTime(date: Date | null): string {
+  if (!date) return 'N/A';
+  return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
 
 /**
  * Component representing a direct connection in a journey.
  * @returns {JSX.Element} JSX Element
  */
-export function DirectConnection() {
+export function DirectConnection({ details, duration }: DirectConnectionProps) {
   const router = useRouter();
   const { resolvedTheme } = useTheme();
   const isMobile = useMediaQuery({ maxWidth: 767 });
+
+  const trainNumber = isTripTimedLeg(details)
+    ? details.service.serviceLineNumber ?? 'N/A'
+    : 'N/A';
+
+  const departureTime = isTripTimedLeg(details)
+    ? formatTime(details.fromStopPoint.departureData?.timetableTime ?? null)
+    : 'N/A';
+  const arrivalTime = isTripTimedLeg(details)
+    ? formatTime(details.toStopPoint.arrivalData?.timetableTime ?? null)
+    : 'N/A';
+  const fromLocationName = details.fromLocation.locationName;
+  const toLocationName = details.toLocation.locationName;
 
   return (
     <Button className="flex h-full w-full justify-start" variant="outline" onClick={() => router.push("/select/details")}>
@@ -36,7 +73,7 @@ export function DirectConnection() {
               <div className="pl-2 md:text-base">Mit Personalhilfe ein-/aussteigen</div>
             )}
           </div>
-          <div className={`${isMobile ? "flex w-full justify-start pt-1" : "justify-end md:text-base"}`}>46 min Reisezeit</div>
+          <div className={`${isMobile ? "flex w-full justify-start pt-1" : "justify-end md:text-base"}`}>{duration}</div>
         </div>
         {/* Connection Details */}
         <div className="flex flex-row mb-2">
@@ -44,17 +81,17 @@ export function DirectConnection() {
             <div className="w-full py-2">
               {/* Time and Station */}
               <div className="flex w-full items-center justify-between px-3 pt-1 pb-3 font-normal">
-                <div className="flex justify-start">21:11</div>
-                <div className="flex justify-end">21:57</div>
+                <div className="flex justify-start">{departureTime}</div>
+                <div className="flex justify-end">{arrivalTime}</div>
               </div>
               {/* Departure and Arrival Stations */}
               <div className="flex w-full items-center justify-between px-3">
                 <div className="md:text-lg text-base items-center font-semibold">
-                  Basel SBB
+                  {fromLocationName}
                 </div>
                 <div className="flex justify-center items-center font-normal">
                   {!isMobile && (
-                    <div className="flex items-center pr-2">
+                    <div className="flex items-center font-medium pr-2">
                       Zug
                     </div>
                   )}
@@ -67,17 +104,13 @@ export function DirectConnection() {
                     )}
                   </div>
                   {!isMobile && (
-                    <div>
-                      {resolvedTheme === "dark" ? (
-                        <DarkIc36 className="h-6 w-6" aria-hidden="true" />
-                      ) : (
-                        <LightIc36 className="h-6 w-6" aria-hidden="true" />
-                      )}
+                    <div className="font-medium pl-2">
+                      {trainNumber}
                     </div>
                   )}
                 </div>
                 <div className="md:text-lg text-base items-center font-semibold">
-                  Brugg AG
+                  {toLocationName}
                 </div>
               </div>
               {/* Accessibility Information */}

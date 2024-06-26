@@ -31,7 +31,8 @@ export function CardNewJourney() {
     selectedDate,
     setActiveSearchTab,
     setOrigin,
-    setDestination
+    setDestination,
+    setTripDetails
   } = useJourneyStore();
   const { resolvedTheme } = useTheme();
   const router = useRouter();
@@ -52,7 +53,9 @@ export function CardNewJourney() {
     try {
       const formattedDate = new Date(selectedDate);
       const response = await fetchTripRequest(origin.stopPlace?.stopPlaceRef ?? "", destination.stopPlace?.stopPlaceRef ?? "", formattedDate, activeSearchTab);
-      console.log("Response from fetchTripRequest:", response); // <-- Console log for response
+      // console.log("Response from fetchTripRequest:", response); // <-- Console log for response
+      setTripDetails(response.trips);
+      console.log("Trip details:", response.trips); // <-- Console log for trip details
       // Handle response as needed, e.g., navigate to result page
       router.push("/select");
     } catch (error) {
