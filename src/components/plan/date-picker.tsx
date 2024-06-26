@@ -13,16 +13,14 @@ import {
 } from "@/components/ui/popover";
 import { de } from "date-fns/locale";
 import { formatISO } from "date-fns";
+import { useJourneyStore } from "@/store/useJourneyStore";
 
 const timeZone = "Europe/Zurich";
 
-interface Props {
-  onDateChange: (date: string) => void; // Callback function to handle date change
-}
-
-export function DatePicker({ onDateChange }: Props) {
+export function DatePicker() {
   const [date, setDate] = useState<Date>(new Date());
   const [time, setTime] = useState<string>("");
+  const setSelectedDate = useJourneyStore(state => state.setSelectedDate);
 
   // Initialize with current date and time
   useEffect(() => {
@@ -31,8 +29,8 @@ export function DatePicker({ onDateChange }: Props) {
     const formattedTime = format(zonedTime, "HH:mm"); // Format time to HH:mm
     setDate(zonedTime);
     setTime(formattedTime);
-    onDateChange(formatISO(zonedTime)); // Initial date selection
-  }, []);
+    setSelectedDate(formatISO(zonedTime)); // Initial date selection
+  }, [setSelectedDate]);
 
   /**
    * Handles changes in the time input field.
@@ -48,7 +46,7 @@ export function DatePicker({ onDateChange }: Props) {
       newDate.setHours(parseInt(hours, 10));
       newDate.setMinutes(parseInt(minutes, 10));
       setDate(newDate);
-      onDateChange(formatISO(newDate)); // Update parent with new date
+      setSelectedDate(formatISO(newDate)); // Update parent with new date
     }
   };
 
@@ -85,7 +83,7 @@ export function DatePicker({ onDateChange }: Props) {
               newDate.setHours(parseInt(hours, 10));
               newDate.setMinutes(parseInt(minutes, 10));
               setDate(newDate);
-              onDateChange(formatISO(newDate)); // Update parent with new date
+              setSelectedDate(formatISO(newDate)); // Update parent with new date
             }
           }}
           initialFocus

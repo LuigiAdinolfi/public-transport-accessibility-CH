@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { useState } from "react";
 import { ArrowRightLeft } from "lucide-react";
 import { useTheme } from "next-themes";
 import {
@@ -21,13 +20,19 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { fetchTripRequest } from "@/api/openJourneyPlanner/fetch-trip-request";
-
+import { useJourneyStore } from "@/store/useJourneyStore";
 
 export function CardNewJourney() {
-  const [activeSearchTab, setActiveSearchTab] = useState<"Dep" | "Arr">("Dep");
-  const [origin, setOrigin] = useState<OJP.Location | null>(null);
-  const [destination, setDestination] = useState<OJP.Location | null>(null);
-  const [selectedDate, setSelectedDate] = useState<string>("");
+
+  const {
+    activeSearchTab,
+    origin,
+    destination,
+    selectedDate,
+    setActiveSearchTab,
+    setOrigin,
+    setDestination
+  } = useJourneyStore();
   const { resolvedTheme } = useTheme();
   const router = useRouter();
 
@@ -61,19 +66,6 @@ export function CardNewJourney() {
     setDestination(temp);
   };
 
-  const handleOriginSelected = (location: OJP.Location | null) => {
-    setOrigin(location);
-  };
-
-  const handleDestinationSelected = (location: OJP.Location | null) => {
-    setDestination(location);
-  };
-
-  const handleDateChange = (date: string) => {
-    setSelectedDate(date);
-  };
-
-
   return (
     <Card>
       <CardHeader className="pb-8">
@@ -86,7 +78,7 @@ export function CardNewJourney() {
           <div className="flex flex-col lg:flex-row justify-between items-center">
             <JourneyPointInput
               placeholder="Von"
-              onLocationSelected={handleOriginSelected}
+              onLocationSelected={setOrigin}
               value={origin?.locationName ?? ""}
               description="Gib den Abfahrtsort ein."
             />
@@ -102,7 +94,7 @@ export function CardNewJourney() {
             </div>
             <JourneyPointInput
               placeholder="Nach"
-              onLocationSelected={handleDestinationSelected}
+              onLocationSelected={setDestination}
               value={destination?.locationName ?? ""}
               description="Gib den Zielort ein."
             />
@@ -112,7 +104,7 @@ export function CardNewJourney() {
           <div className="flex flex-col lg:flex-row justify-between items-center align-middle">
             <div className="w-full lg:w-4/12 space-y-1">
               <Label className="text-base" htmlFor="datetime">Wann</Label>
-              <DatePicker onDateChange={handleDateChange} />
+              <DatePicker />
               <CardDescription className="pt-2 text-zinc-600 md:text-base">
                 Gib Datum und Uhrzeit ein.
               </CardDescription>
