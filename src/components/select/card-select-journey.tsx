@@ -5,7 +5,6 @@ import * as React from "react";
 import { MultipleConnection } from "@/components/select/multiple-connection";
 import { DirectConnection } from "@/components/select/direct-connection";
 import { useJourneyStore } from "@/store/useJourneyStore";
-import * as OJP from "ojp-sdk";
 import { format } from "date-fns";
 import { de } from "date-fns/locale";
 
@@ -14,22 +13,7 @@ import { de } from "date-fns/locale";
  * @returns {JSX.Element} JSX Element
  */
 export function CardSelectJourney() {
-  const { tripDetails, selectedDate } = useJourneyStore();
-
-  // Funzione per formattare la durata del viaggio
-  const formatDuration = (duration: OJP.Duration | undefined): string => {
-    if (!duration) return 'N/A';
-
-    const totalMinutes = duration.totalMinutes ?? 0;
-    const hours = duration.hours ?? Math.floor(totalMinutes / 60);
-    const minutes = duration.minutes ?? totalMinutes % 60;
-
-    if (hours > 0) {
-      return `${hours} h ${minutes} min Reisezeit`;
-    } else {
-      return `${minutes} min Reisezeit`;
-    }
-  };
+  const { tripDetails, selectedDate, formattedDuration } = useJourneyStore();
 
   return (
     <Card className="mt-3">
@@ -47,13 +31,12 @@ export function CardSelectJourney() {
         {tripDetails.map((trip, index) => {
           const legs = trip.legs;
           const totalDuration = trip.stats.duration;
-
           if (legs.length === 1) {
             return (
               <DirectConnection
                 key={index}
                 details={legs[0]}
-                duration={formatDuration(totalDuration)}
+                duration={formattedDuration(totalDuration)}
               />
             );
           } else {
@@ -62,9 +45,10 @@ export function CardSelectJourney() {
             return (
               <MultipleConnection
                 key={index}
+                allLegs={legs}
                 firstLeg={firstLeg}
                 lastLeg={lastLeg}
-                duration={formatDuration(totalDuration)}
+                duration={formattedDuration(totalDuration)}
               />
             );
           }

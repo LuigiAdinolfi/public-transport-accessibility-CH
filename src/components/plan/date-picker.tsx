@@ -55,7 +55,7 @@ export function DatePicker() {
    * @param {Date | null} date - The date object to format
    * @returns {string} Formatted date string in "EEE dd. MMMM yyyy, HH:mm" format
    */
-  const formatDateForUI = (date: Date | null) => {
+  const formatDateForUI = (date: Date | null): string => {
     if (!date) return "";
     return format(date, "EEE dd. MMMM yyyy, HH:mm", { locale: de });
   };

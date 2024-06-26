@@ -10,22 +10,29 @@ import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { useMediaQuery } from "react-responsive";
 import * as OJP from "ojp-sdk";
+import { useJourneyStore } from "@/store/useJourneyStore";
 
 
 /**
  * Component representing a journey with multiple connections.
  * @returns {JSX.Element} JSX Element
  */
-export function MultipleConnection({ firstLeg, lastLeg, duration }: { firstLeg: OJP.TripLeg, lastLeg: OJP.TripLeg, duration: string }) {
+export function MultipleConnection({ firstLeg, lastLeg, allLegs, duration }: { firstLeg: OJP.TripLeg, lastLeg: OJP.TripLeg, allLegs:  OJP.TripLeg[], duration: string }) {
   const router = useRouter();
   const { resolvedTheme } = useTheme();
   const isMobile = useMediaQuery({ maxWidth: 767 });
+  const { setAllLegs } = useJourneyStore();
+
+  const handleClick = () => {
+    setAllLegs(allLegs);
+    router.push("/select/details");
+  };
 
   return (
     <Button
       className="flex h-full w-full justify-start"
       variant="outline"
-      onClick={() => router.push("/select/details")}
+      onClick={handleClick}
       aria-label="Select journey with multiple connections"
     >
       <div className={`w-full ${!isMobile ? "grid" : ""}`}>
