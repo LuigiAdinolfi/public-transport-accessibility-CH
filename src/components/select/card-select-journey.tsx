@@ -46,7 +46,6 @@ export function CardSelectJourney() {
       <div className="space-y-6 p-6 pt-0">
         {tripDetails.map((trip, index) => {
           const legs = trip.legs;
-          const stats = trip.stats;
           const totalDuration = trip.stats.duration;
 
           if (legs.length === 1) {

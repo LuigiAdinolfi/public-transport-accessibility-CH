@@ -39,20 +39,6 @@ export function MultipleConnection({ firstLeg, lastLeg, duration }: { firstLeg: 
   const { resolvedTheme } = useTheme();
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
-  // Format departure and arrival times for first and last legs
-  const firstDepartureTime = isTripTimedLeg(firstLeg)
-    ? formatTime(firstLeg.fromStopPoint.departureData?.estimatedTime ?? null)
-    : 'N/A';
-  const firstArrivalTime = isTripTimedLeg(firstLeg)
-    ? formatTime(firstLeg.toStopPoint.arrivalData?.estimatedTime ?? null)
-    : 'N/A';
-  const lastDepartureTime = isTripTimedLeg(lastLeg)
-    ? formatTime(lastLeg.fromStopPoint.departureData?.estimatedTime ?? null)
-    : 'N/A';
-  const lastArrivalTime = isTripTimedLeg(lastLeg)
-    ? formatTime(lastLeg.toStopPoint.arrivalData?.estimatedTime ?? null)
-    : 'N/A';
-
   return (
     <Button
       className="flex h-full w-full justify-start"
