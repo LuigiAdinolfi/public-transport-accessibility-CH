@@ -11,24 +11,6 @@ import { useTheme } from "next-themes";
 import { useMediaQuery } from "react-responsive";
 import * as OJP from "ojp-sdk";
 
-/**
- * Type guard to check if the trip leg is a TripTimedLeg
- * @param leg - The trip leg to check
- * @returns {boolean} Whether the leg is a TripTimedLeg
- */
-function isTripTimedLeg(leg: OJP.TripLeg): leg is OJP.TripTimedLeg {
-  return (leg as OJP.TripTimedLeg).fromStopPoint !== undefined;
-}
-
-/**
- * Function to format date to HH:MM
- * @param date - The date to format
- * @returns {string} Formatted time string
- */
-function formatTime(date: Date | null): string {
-  if (!date) return 'N/A';
-  return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-}
 
 /**
  * Component representing a journey with multiple connections.
