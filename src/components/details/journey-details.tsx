@@ -17,6 +17,7 @@ export function JourneyDetails() {
   const { resolvedTheme } = useTheme();
   const { allLegs, indexTripSelected } = useJourneyStore();
   const legs = allLegs.filter((leg) => leg.legType === "TimedLeg") || [];
+  const transferLegs = allLegs.filter((leg) => leg.legType === "TransferLeg") || [];
 
   useEffect(() => {
     if (allLegs && allLegs.length > 0) {
@@ -68,12 +69,16 @@ export function JourneyDetails() {
           </TabsList>
         </div>
 
-        {legs.map((leg, index) => (
-          <TabsContent key={index} value={`leg-${index}`}>
-            <CardPath index={index} legs={legs} />
-            <DummyMap />
-          </TabsContent>
-        ))}
+        {legs.map((leg, index) => {
+            const legDuration = transferLegs[index]?.legDuration?.totalMinutes;
+            return (
+              <TabsContent key={index} value={`leg-${index}`}>
+                <CardPath index={index} legs={legs} legDuration={legDuration ?? 0} />
+                <DummyMap />
+              </TabsContent>
+            );
+          }
+        )}
       </Tabs>
     </div>
   );

@@ -18,13 +18,14 @@ import { isTripTimedLeg } from "@/utils/tripUtils";
  * Component displaying journey details within a card format.
  * @returns {JSX.Element} ResponsiveCardPath component.
  */
-export function CardPath({ index, legs }: { index: number, legs: OJP.TripLeg[] }) {
+export function CardPath({ index, legs, legDuration }: { index: number, legs: OJP.TripLeg[], legDuration: number }) {
   const { resolvedTheme } = useTheme();
   const router = useRouter();
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const selectedLeg = legs[index];
   const fromLocationName = selectedLeg.fromLocation.locationName;
   const toLocationName = selectedLeg.toLocation.locationName;
+  const timeToChange = legDuration.toString();
 
   const trainNumber = isTripTimedLeg(selectedLeg)
     ? selectedLeg.service.serviceLineNumber ?? "N/A"
@@ -43,7 +44,7 @@ export function CardPath({ index, legs }: { index: number, legs: OJP.TripLeg[] }
       {/* Content for the first section */}
       <div
         className={`flex items-center justify-between ${!isMobile ? "p-6 px-8 pb-6" : "flex-col p-4 px-2 pb-6 gap-3"} `}>
-        <div className="flex items-center space-x-1.5">
+        <div className="flex items-center space-x-1.5 md:h-10">
           {
             !isMobile && (
               <div className="text-base font-medium pr-1">{vehicleType}</div>
@@ -61,13 +62,17 @@ export function CardPath({ index, legs }: { index: number, legs: OJP.TripLeg[] }
           </div>
           <div className="text-base font-normal pl-2">Richtung {trainDestinationStopPlace}</div>
         </div>
-        <div className="flex-grow text-base font-semibold text-center">
-          7 Minuten zum Umsteigen
-        </div>
-        <Button className="ml-4 md:text-base" variant="outline" onClick={() => router.push("/select/details")}>
-          Weg zum Umsteigen
-          <Map className="ml-2 h-4 w-4" />
-        </Button>
+        {timeToChange !== "0" && (
+          <>
+            <div className="flex-grow text-base font-semibold text-center">
+              {timeToChange} Minuten zum Umsteigen
+            </div>
+            <Button className="ml-4 md:text-base" variant="outline" onClick={() => router.push("/select/details")}>
+              Weg zum Umsteigen
+              <Map className="ml-2 h-4 w-4" />
+            </Button>
+          </>
+        )}
       </div>
 
       {/* Content for the second section */}
