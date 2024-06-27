@@ -4,20 +4,31 @@ import { HelpButton } from "@/components/shared/help-button";
 import * as React from "react";
 import { BackButton } from "@/components/shared/back-button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { DarkActiveCircle, LightActiveCircle } from "@/assets/icons/active-circle";
 import { DarkInactiveCircle, LightInactiveCircle } from "@/assets/icons/inactive-circle";
 import { CardPath } from "@/components/details/card-path";
 import { DummyMap } from "@/components/details/dummy-map";
+import { useJourneyStore } from "@/store/useJourneyStore";
+import { useRouter } from "next/navigation";
 
-/**
- * Component displaying journey details with tabs for different routes.
- * @returns {JSX.Element} JourneyDetails component.
- */
 export function JourneyDetails() {
-  const [activeRouteTab, setActiveRouteTab] = useState("first-route");
+  const [activeLegTab, setActiveLegTab] = useState("leg-0");
   const { resolvedTheme } = useTheme();
+  const { tripDetails, indexTripSelected, setIndexTripSelected } = useJourneyStore();
+  const { allLegs } = useJourneyStore();
+  const router = useRouter();
+  // const selectedTrip = tripDetails[indexTripSelected];
+  const legs = allLegs.filter((leg) => leg.legType === "TimedLeg") || [];
+
+  useEffect(() => {
+    if (allLegs && allLegs.length > 0) {
+      setActiveLegTab(`leg-${indexTripSelected}`);
+    }
+  }, [indexTripSelected, allLegs]);
+
+  if (legs.length === 0) return null;
 
   return (
     <div className="w-full lg:w-[960px]">
@@ -26,60 +37,47 @@ export function JourneyDetails() {
         <HelpButton />
       </div>
       <Tabs
-        defaultValue={activeRouteTab}
-        onValueChange={(value) => setActiveRouteTab(value)}
+        defaultValue={activeLegTab}
+        onValueChange={(value) => setActiveLegTab(value)}
       >
         <div className="flex items-center justify-between pt-3">
-          <TabsList className="grid grid-cols-2 lg:h-12 lg:w-full">
-            {/* First Route Tab */}
-            <TabsTrigger
-              className="mx-1 text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:h-10 lg:text-base"
-              value="first-route"
-            >
-              {resolvedTheme === "dark" ? (
-                activeRouteTab === "first-route" ? (
-                  <DarkActiveCircle />
-                ) : (
-                  <DarkInactiveCircle />
-                )
-              ) : activeRouteTab === "first-route" ? (
-                <LightActiveCircle />
-              ) : (
-                <LightInactiveCircle />
-              )}
-              <div className="pl-1 lg:pl-2 md:text-base">Basel SBB - Olten</div>
-            </TabsTrigger>
-
-            {/* Second Route Tab */}
-            <TabsTrigger
-              className="mx-1 text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:h-10 lg:text-base"
-              value="second-route"
-            >
-              {resolvedTheme === "dark" ? (
-                activeRouteTab === "second-route" ? (
-                  <DarkActiveCircle />
-                ) : (
-                  <DarkInactiveCircle />
-                )
-              ) : activeRouteTab === "second-route" ? (
-                <LightActiveCircle />
-              ) : (
-                <LightInactiveCircle />
-              )}
-              <div className="pl-1 lg:pl-2 md:text-base">Olten - Brugg AG</div>
-            </TabsTrigger>
+          <TabsList className="grid lg:h-12 lg:w-full" style={{ gridTemplateColumns: `repeat(${legs.length}, 1fr)` }}>
+            {legs.map((leg, index) => {
+                const fromLocationName = leg.fromLocation.locationName;
+                const toLocationName = leg.toLocation.locationName;
+                return (
+                  <TabsTrigger
+                    key={index}
+                    className="mx-1 text-zinc-700 active:text-zinc-950 bg-zinc-100 dark:bg-zinc-800 dark:text-zinc-300 dark:active:text-white lg:h-10 lg:text-base"
+                    value={`leg-${index}`}
+                  >
+                    {resolvedTheme === "dark" ? (
+                      activeLegTab === `leg-${index}` ? (
+                        <DarkActiveCircle />
+                      ) : (
+                        <DarkInactiveCircle />
+                      )
+                    ) : activeLegTab === `leg-${index}` ? (
+                      <LightActiveCircle />
+                    ) : (
+                      <LightInactiveCircle />
+                    )}
+                    <div className="pl-1 lg:pl-2 md:text-base">
+                      {fromLocationName} - {toLocationName}
+                    </div>
+                  </TabsTrigger>
+                );
+              }
+            )}
           </TabsList>
         </div>
 
-        {/* Content for First Route Tab */}
-        <TabsContent value="first-route" className="flex flex-col gap-8">
-          <CardPath />
-          <DummyMap />
-        </TabsContent>
-
-        {/* <TabsContent value="second-route">
-          <CardSecondPath />
-        </TabsContent> */}
+        {legs.map((leg, index) => (
+          <TabsContent key={index} value={`leg-${index}`}>
+            <CardPath index={index} legs={legs} />
+            <DummyMap />
+          </TabsContent>
+        ))}
       </Tabs>
     </div>
   );
