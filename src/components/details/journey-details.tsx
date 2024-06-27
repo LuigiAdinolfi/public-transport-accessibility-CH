@@ -11,15 +11,11 @@ import { DarkInactiveCircle, LightInactiveCircle } from "@/assets/icons/inactive
 import { CardPath } from "@/components/details/card-path";
 import { DummyMap } from "@/components/details/dummy-map";
 import { useJourneyStore } from "@/store/useJourneyStore";
-import { useRouter } from "next/navigation";
 
 export function JourneyDetails() {
   const [activeLegTab, setActiveLegTab] = useState("leg-0");
   const { resolvedTheme } = useTheme();
-  const { tripDetails, indexTripSelected, setIndexTripSelected } = useJourneyStore();
-  const { allLegs } = useJourneyStore();
-  const router = useRouter();
-  // const selectedTrip = tripDetails[indexTripSelected];
+  const { allLegs, indexTripSelected } = useJourneyStore();
   const legs = allLegs.filter((leg) => leg.legType === "TimedLeg") || [];
 
   useEffect(() => {

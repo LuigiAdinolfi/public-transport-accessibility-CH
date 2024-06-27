@@ -3,7 +3,6 @@
 import { Card } from "@/components/ui/card";
 import * as React from "react";
 import { DarkTrainProfile, LightTrainProfile } from "@/assets/icons/train-profile";
-import { DarkIc6, LightIc6 } from "@/assets/icons/ic-6";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, Map } from "lucide-react";
