@@ -31,24 +31,21 @@ export function CardSelectJourney() {
         {tripDetails.map((trip, index) => {
           const legs = trip.legs;
           const totalDuration = trip.stats.duration;
+          const duration = formattedDuration(totalDuration);
           if (legs.length === 1) {
             return (
               <DirectConnection
                 key={index}
-                details={legs[0]}
-                duration={formattedDuration(totalDuration)}
+                allLegs={legs}
+                duration={duration}
               />
             );
           } else {
-            const firstLeg = legs[0];
-            const lastLeg = legs[legs.length - 1];
             return (
               <MultipleConnection
                 key={index}
                 allLegs={legs}
-                firstLeg={firstLeg}
-                lastLeg={lastLeg}
-                duration={formattedDuration(totalDuration)}
+                duration={duration}
               />
             );
           }

@@ -17,7 +17,7 @@ import { useJourneyStore } from "@/store/useJourneyStore";
  * Component representing a journey with multiple connections.
  * @returns {JSX.Element} JSX Element
  */
-export function MultipleConnection({ firstLeg, lastLeg, allLegs, duration }: { firstLeg: OJP.TripLeg, lastLeg: OJP.TripLeg, allLegs:  OJP.TripLeg[], duration: string }) {
+export function MultipleConnection({ allLegs, duration }: { allLegs:  OJP.TripLeg[], duration: string }) {
   const router = useRouter();
   const { resolvedTheme } = useTheme();
   const isMobile = useMediaQuery({ maxWidth: 767 });
@@ -56,13 +56,13 @@ export function MultipleConnection({ firstLeg, lastLeg, allLegs, duration }: { f
         {/* Connection Details */}
         <div className="flex flex-col sm:flex-row mb-2">
           <div className={`w-full ${isMobile ? "mb-1" : ""}`}>
-            <FirstConnection leg={firstLeg} />
+            <FirstConnection allLegs={allLegs} />
           </div>
           <div className="flex items-center justify-center px-2">
             {isMobile ? <ChevronDown /> : <ChevronRight />}
           </div>
           <div className={`w-full ${isMobile ? "mt-1" : ""}`}>
-            <LastConnection leg={lastLeg} />
+            <LastConnection allLegs={allLegs} />
           </div>
         </div>
       </div>

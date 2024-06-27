@@ -7,48 +7,29 @@ import { DarkWheelchairReservation, LightWheelchairReservation } from "@/assets/
 import { CommunityRatingSelect } from "@/components/select/community-rating-select";
 import { useMediaQuery } from 'react-responsive';
 import * as OJP from "ojp-sdk";
-
-interface FirstConnectionProps {
-  leg: OJP.TripLeg;
-}
-
-/**
- * Type guard to check if the trip leg is a TripTimedLeg
- * @param leg - The trip leg to check
- * @returns {boolean} Whether the leg is a TripTimedLeg
- */
-function isTripTimedLeg(leg: OJP.TripLeg): leg is OJP.TripTimedLeg {
-  return (leg as OJP.TripTimedLeg).fromStopPoint !== undefined;
-}
-
-/**
- * Function to format date to HH:MM
- * @param date - The date to format
- * @returns {string} Formatted time string
- */
-function formatTime(date: Date | null): string {
-  if (!date) return 'N/A';
-  return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-}
+import { formatTime, isTripTimedLeg } from "@/utils/tripUtils";
 
 /**
  * Component representing the first connection in a journey.
  * @returns {JSX.Element} JSX Element
  */
-export function FirstConnection({ leg }: FirstConnectionProps) {
+export function FirstConnection({ allLegs }: { allLegs:  OJP.TripLeg[]}) {
   const { resolvedTheme } = useTheme();
   const isMobile = useMediaQuery({ maxWidth: 767 });
+  const firstLeg = allLegs[0];
+  const fromLocationName = firstLeg.fromLocation.locationName;
+  const toLocationName = firstLeg.toLocation.locationName;
 
-  const trainNumber = isTripTimedLeg(leg)
-    ? leg.service.serviceLineNumber ?? 'N/A'
+  const trainNumber = isTripTimedLeg(firstLeg)
+    ? firstLeg.service.serviceLineNumber ?? 'N/A'
     : 'N/A';
 
   // Format departure and arrival times for first leg
-  const departureTime = isTripTimedLeg(leg)
-    ? formatTime(leg.fromStopPoint.departureData?.timetableTime ?? null)
+  const departureTime = isTripTimedLeg(firstLeg)
+    ? formatTime(firstLeg.fromStopPoint.departureData?.timetableTime ?? null)
     : 'N/A';
-  const arrivalTime = isTripTimedLeg(leg)
-    ? formatTime(leg.toStopPoint.arrivalData?.timetableTime ?? null)
+  const arrivalTime = isTripTimedLeg(firstLeg)
+    ? formatTime(firstLeg.toStopPoint.arrivalData?.timetableTime ?? null)
     : 'N/A';
 
   return (
@@ -62,7 +43,7 @@ export function FirstConnection({ leg }: FirstConnectionProps) {
         {/* Departure and Arrival Stations */}
         <div className={`flex w-full items-center justify-between px-3 ${!isMobile ? "pt-2 pb-3" : ""}`}>
           <div className="md:text-lg text-base items-center font-semibold">
-            {leg.fromLocation.locationName}
+            {fromLocationName}
           </div>
           <div className="flex justify-center items-center font-normal">
             {!isMobile &&  <div className="flex items-center font-medium pr-2">
@@ -83,7 +64,7 @@ export function FirstConnection({ leg }: FirstConnectionProps) {
             )}
           </div>
           <div className="md:text-lg text-base items-center font-semibold">
-          {leg.toLocation.locationName}
+          {toLocationName}
           </div>
         </div>
         {/* Accessibility Information */}
