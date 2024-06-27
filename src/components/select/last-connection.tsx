@@ -33,6 +33,10 @@ export function LastConnection({ allLegs }: { allLegs:  OJP.TripLeg[]}) {
     ? formatTime(lastLeg.toStopPoint.arrivalData?.timetableTime ?? null)
     : 'N/A';
 
+  const vehicleType = isTripTimedLeg(lastLeg)
+    ? lastLeg.service.ptMode.name ?? "N/A"
+    : "N/A";
+
   return (
     <div className="flex basis-1/2 justify-start rounded-lg bg-zinc-50 dark:bg-zinc-900">
       <div className="w-full py-2">
@@ -48,7 +52,7 @@ export function LastConnection({ allLegs }: { allLegs:  OJP.TripLeg[]}) {
           </div>
           <div className="flex justify-center items-center font-normal">
             {!isMobile &&  <div className="flex items-center font-medium pr-2">
-              Zug
+              {vehicleType}
             </div>
             }
             <div>

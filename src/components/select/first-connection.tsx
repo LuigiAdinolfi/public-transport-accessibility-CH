@@ -32,6 +32,10 @@ export function FirstConnection({ allLegs }: { allLegs:  OJP.TripLeg[]}) {
     ? formatTime(firstLeg.toStopPoint.arrivalData?.timetableTime ?? null)
     : 'N/A';
 
+  const vehicleType = isTripTimedLeg(firstLeg)
+    ? firstLeg.service.ptMode.name ?? "N/A"
+    : "N/A";
+
   return (
     <div className="flex basis-1/2 justify-start rounded-lg bg-zinc-50 dark:bg-zinc-900">
       <div className="w-full py-2">
@@ -47,7 +51,7 @@ export function FirstConnection({ allLegs }: { allLegs:  OJP.TripLeg[]}) {
           </div>
           <div className="flex justify-center items-center font-normal">
             {!isMobile &&  <div className="flex items-center font-medium pr-2">
-              Zug
+              {vehicleType}
             </div>
             }
             <div>

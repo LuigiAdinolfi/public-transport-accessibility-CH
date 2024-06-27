@@ -12,24 +12,42 @@ import { CommunityRatingDetails } from "@/components/details/community-rating-de
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Image from "next/image";
 import { useMediaQuery } from "react-responsive";
+import * as OJP from "ojp-sdk";
+import { isTripTimedLeg } from "@/utils/tripUtils";
 
 /**
  * Component displaying journey details within a card format.
  * @returns {JSX.Element} ResponsiveCardPath component.
  */
-export function CardPath() {
+export function CardPath({ index, legs }: { index: number, legs: OJP.TripLeg[] }) {
   const { resolvedTheme } = useTheme();
   const router = useRouter();
   const isMobile = useMediaQuery({ maxWidth: 767 });
+  const selectedLeg = legs[index];
+  const fromLocationName = selectedLeg.fromLocation.locationName;
+  const toLocationName = selectedLeg.toLocation.locationName;
+
+  const trainNumber = isTripTimedLeg(selectedLeg)
+    ? selectedLeg.service.serviceLineNumber ?? "N/A"
+    : "N/A";
+
+  const trainDestinationStopPlace = isTripTimedLeg(selectedLeg)
+    ? selectedLeg.service.destinationStopPlace?.stopPlaceName ?? "N/A"
+    : "N/A";
+
+  const vehicleType = isTripTimedLeg(selectedLeg)
+    ? selectedLeg.service.ptMode.name ?? "N/A"
+    : "N/A";
 
   return (
     <Card>
       {/* Content for the first section */}
-      <div className={`flex items-center justify-between ${!isMobile ? "p-6 px-8 pb-6" : "flex-col p-4 px-2 pb-6 gap-3"} `}>
+      <div
+        className={`flex items-center justify-between ${!isMobile ? "p-6 px-8 pb-6" : "flex-col p-4 px-2 pb-6 gap-3"} `}>
         <div className="flex items-center space-x-1.5">
           {
             !isMobile && (
-              <div className="text-base font-normal pr-1">Zug</div>
+              <div className="text-base font-medium pr-1">{vehicleType}</div>
             )
           }
           <div className="text-base font-normal">
@@ -39,14 +57,10 @@ export function CardPath() {
               <LightTrainProfile className="h-6 w-6" />
             )}
           </div>
-          <div className="text-base font-normal">
-            {resolvedTheme === "dark" ? (
-              <DarkIc6 className="h-6 w-6" />
-            ) : (
-              <LightIc6 className="h-6 w-6" />
-            )}
+          <div className="text-base font-medium pl-1">
+            {trainNumber}
           </div>
-          <div className="text-base font-normal">Richtung Brig</div>
+          <div className="text-base font-normal pl-2">Richtung {trainDestinationStopPlace}</div>
         </div>
         <div className="flex-grow text-base font-semibold text-center">
           7 Minuten zum Umsteigen
@@ -60,9 +74,10 @@ export function CardPath() {
       {/* Content for the second section */}
       <div className={`flex px-6 gap-6 ${!isMobile ? "" : "flex-col"}`}>
         {/* Basel SBB Section */}
-        <div className="flex flex-col w-full md:w-1/2 p-4 bg-zinc-50 rounded-lg text-zinc-950 shadow-sm dark:bg-zinc-900 dark:text-zinc-50">
+        <div
+          className="flex flex-col w-full md:w-1/2 p-4 bg-zinc-50 rounded-lg text-zinc-950 shadow-sm dark:bg-zinc-900 dark:text-zinc-50">
           <div className={`flex items-center ${!isMobile ? "p-2 mb-3" : "px-2 py-1 mb-2"}`}>
-            <div className="text-lg font-semibold">Basel SBB</div>
+            <div className="text-lg font-semibold">{fromLocationName}</div>
           </div>
           <div className="flex flex-row p-2">
             <div className={`font-medium ${!isMobile ? "text-base" : "text-sm"}`}>Rollstuhlgerechte Waggons:</div>
@@ -74,7 +89,7 @@ export function CardPath() {
           </div>
           <Accordion type="single" collapsible className="px-2">
             <AccordionItem value="item-1">
-              <AccordionTrigger className={`${!isMobile ? "py-6"  : "py-4 text-sm"}`}>Zugkomposition</AccordionTrigger>
+              <AccordionTrigger className={`${!isMobile ? "py-6" : "py-4 text-sm"}`}>Zugkomposition</AccordionTrigger>
               <AccordionContent>
                 <Image src="/train-composition.png" alt="Zugkomposition" width={320} height={100} className="px-2" />
               </AccordionContent>
@@ -82,7 +97,8 @@ export function CardPath() {
           </Accordion>
           <Accordion type="single" collapsible className="px-2">
             <AccordionItem value="item-2">
-              <AccordionTrigger className={`${!isMobile ? "py-6" : "py-4 text-sm"}`}>Ein- und Aussteigen für Rollstuhlfahrer</AccordionTrigger>
+              <AccordionTrigger className={`${!isMobile ? "py-6" : "py-4 text-sm"}`}>Ein- und Aussteigen für
+                Rollstuhlfahrer</AccordionTrigger>
               <AccordionContent className="px-2">
                 <div className="py-3">
                   Informationen zur Rampe
@@ -97,18 +113,20 @@ export function CardPath() {
             </AccordionItem>
           </Accordion>
           <div className="flex justify-center mt-6">
-            <Button variant="outline" onClick={() => router.push("/select/details/stop")} className="flex w-full items-center p-2 md:text-base">
+            <Button variant="outline" onClick={() => router.push("/select/details/stop")}
+                    className="flex w-full items-center p-2 md:text-base">
               <div>Info zur Haltestelle &nbsp;</div>
-              <div>Basel SBB</div>
+              <div>{fromLocationName}</div>
               <ArrowUpRight className="h-4 w-4 ml-1" />
             </Button>
           </div>
         </div>
 
         {/* Olten Section */}
-        <div className="flex flex-col w-full md:w-1/2 p-4 bg-zinc-50 rounded-lg text-zinc-950 shadow-sm dark:bg-zinc-900 dark:text-zinc-50">
+        <div
+          className="flex flex-col w-full md:w-1/2 p-4 bg-zinc-50 rounded-lg text-zinc-950 shadow-sm dark:bg-zinc-900 dark:text-zinc-50">
           <div className={`flex items-center ${!isMobile ? "p-2 mb-3" : "px-2 py-1 mb-2"}`}>
-            <div className="text-lg font-semibold">Olten</div>
+            <div className="text-lg font-semibold">{toLocationName}</div>
           </div>
           <div className="flex flex-row p-2">
             <div className={`font-medium ${!isMobile ? "text-base" : "text-sm"}`}>Rollstuhlgerechte Waggons:</div>
@@ -116,11 +134,11 @@ export function CardPath() {
             <div className={`pl-1 font-semibold ${!isMobile ? "text-base" : "text-sm"}`}></div>
           </div>
           <div className="flex flex-row align-middle items-center pb-2 pt-1">
-          <div className="text-sm font-normal px-4">Zugang zum Bahnsteig ohne Hilfe</div>
+            <div className="text-sm font-normal px-4">Zugang zum Bahnsteig ohne Hilfe</div>
           </div>
           <Accordion type="single" collapsible className="px-2">
             <AccordionItem value="item-1">
-              <AccordionTrigger className={`${!isMobile ? "py-6"  : "py-4 text-sm"}`}>Zugkomposition</AccordionTrigger>
+              <AccordionTrigger className={`${!isMobile ? "py-6" : "py-4 text-sm"}`}>Zugkomposition</AccordionTrigger>
               <AccordionContent>
                 <Image src="/train-composition.png" alt="Zugkomposition" width={320} height={100} className="px-2" />
               </AccordionContent>
@@ -128,7 +146,8 @@ export function CardPath() {
           </Accordion>
           <Accordion type="single" collapsible className="px-2">
             <AccordionItem value="item-1">
-              <AccordionTrigger className={`${!isMobile ? "py-6"  : "py-4 text-sm"}`}>Ein- und Aussteigen für Rollstuhlfahrer</AccordionTrigger>
+              <AccordionTrigger className={`${!isMobile ? "py-6" : "py-4 text-sm"}`}>Ein- und Aussteigen für
+                Rollstuhlfahrer</AccordionTrigger>
               <AccordionContent className="px-2">
                 <div className="py-3">
                   Informationen zur Rampe
@@ -143,9 +162,10 @@ export function CardPath() {
             </AccordionItem>
           </Accordion>
           <div className="flex justify-center mt-6">
-            <Button variant="outline" onClick={() => router.push("/select/details/stop")} className="flex w-full items-center p-2 md:text-base">
+            <Button variant="outline" onClick={() => router.push("/select/details/stop")}
+                    className="flex w-full items-center p-2 md:text-base">
               <div>Info zur Haltestelle &nbsp;</div>
-              <div>Olten</div>
+              <div>{toLocationName}</div>
               <ArrowUpRight className="h-4 w-4 ml-1" />
             </Button>
           </div>

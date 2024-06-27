@@ -10,6 +10,7 @@ import { useTheme } from "next-themes";
 import { useMediaQuery } from "react-responsive";
 import * as OJP from "ojp-sdk";
 import { formatTime, isTripTimedLeg } from "@/utils/tripUtils";
+import { useJourneyStore } from "@/store/useJourneyStore";
 
 /**
  * Component representing a direct connection in a journey.
@@ -20,6 +21,12 @@ export function DirectConnection({ allLegs, duration }: { allLegs:  OJP.TripLeg[
   const { resolvedTheme } = useTheme();
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const details = allLegs[0];
+  const { setAllLegs } = useJourneyStore();
+
+  const handleClick = () => {
+    setAllLegs(allLegs);
+    router.push("/select/details");
+  };
 
   const trainNumber = isTripTimedLeg(details)
     ? details.service.serviceLineNumber ?? "N/A"
@@ -34,9 +41,13 @@ export function DirectConnection({ allLegs, duration }: { allLegs:  OJP.TripLeg[
   const fromLocationName = details.fromLocation.locationName;
   const toLocationName = details.toLocation.locationName;
 
+  const vehicleType = isTripTimedLeg(details)
+    ? details.service.ptMode.name ?? "N/A"
+    : "N/A";
+
   return (
     <Button className="flex h-full w-full justify-start" variant="outline"
-            onClick={() => router.push("/select/details")}>
+            onClick={handleClick}>
       <div className={`w-full ${!isMobile ? "grid" : ""}`}>
         {/* Accessibility and Travel Time */}
         <div
@@ -73,7 +84,7 @@ export function DirectConnection({ allLegs, duration }: { allLegs:  OJP.TripLeg[
                 <div className="flex justify-center items-center font-normal">
                   {!isMobile && (
                     <div className="flex items-center font-medium pr-2">
-                      Zug
+                      {vehicleType}
                     </div>
                   )}
                   {/* Train Profile Icon */}
