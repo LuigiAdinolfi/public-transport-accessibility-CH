@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/accordion";
 import * as React from "react";
 import { useMediaQuery } from "react-responsive";
+import { useJourneyStore } from "@/store/useJourneyStore";
 
 /**
  * Component representing a card displaying details about a stop point.
@@ -20,13 +21,14 @@ import { useMediaQuery } from "react-responsive";
 export function CardStopPoint() {
   const { resolvedTheme } = useTheme();
   const isMobile = useMediaQuery({ maxWidth: 767 });
+  const { selectedStop } = useJourneyStore();
 
   return (
     <Card className="mt-3">
       {/* Header Section */}
       <div className={`flex flex-row items-center space-y-1.5 ${!isMobile ? "px-14 pt-8 pb-6" : "px-8 pt-4 pb-2"}`}>
         <h1 className="text-xl font-bold items-center text-zinc-900 dark:text-zinc-100">
-          Haltestelle
+          {selectedStop}
         </h1>
         <div className={`flex items-center pb-1.5 ${!isMobile ? "pl-16" : "pl-8"}`}>
           <div className="text-base font-normal pr-2">Zug</div>

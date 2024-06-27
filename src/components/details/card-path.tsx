@@ -13,6 +13,7 @@ import Image from "next/image";
 import { useMediaQuery } from "react-responsive";
 import * as OJP from "ojp-sdk";
 import { isTripTimedLeg } from "@/utils/tripUtils";
+import { useJourneyStore } from "@/store/useJourneyStore";
 
 /**
  * Component displaying journey details within a card format.
@@ -26,6 +27,14 @@ export function CardPath({ index, legs, legDuration }: { index: number, legs: OJ
   const fromLocationName = selectedLeg.fromLocation.locationName;
   const toLocationName = selectedLeg.toLocation.locationName;
   const timeToChange = legDuration.toString();
+  const { setSelectedStop } = useJourneyStore();
+
+  const handleClick = (stop: string | null) => {
+    if (!stop) return;
+    setSelectedStop(stop);
+    router.push("/select/details/stop");
+  };
+
 
   const trainNumber = isTripTimedLeg(selectedLeg)
     ? selectedLeg.service.serviceLineNumber ?? "N/A"
@@ -117,7 +126,7 @@ export function CardPath({ index, legs, legDuration }: { index: number, legs: OJ
             </AccordionItem>
           </Accordion>
           <div className="flex justify-center mt-6">
-            <Button variant="outline" onClick={() => router.push("/select/details/stop")}
+            <Button variant="outline" onClick={() => (handleClick(fromLocationName))}
                     className="flex w-full items-center p-2 md:text-base">
               <div>Info zur Haltestelle &nbsp;</div>
               <div>{fromLocationName}</div>
@@ -166,7 +175,7 @@ export function CardPath({ index, legs, legDuration }: { index: number, legs: OJ
             </AccordionItem>
           </Accordion>
           <div className="flex justify-center mt-6">
-            <Button variant="outline" onClick={() => router.push("/select/details/stop")}
+            <Button variant="outline" onClick={() => (handleClick(toLocationName))}
                     className="flex w-full items-center p-2 md:text-base">
               <div>Info zur Haltestelle &nbsp;</div>
               <div>{toLocationName}</div>

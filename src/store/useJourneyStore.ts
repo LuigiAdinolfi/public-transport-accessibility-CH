@@ -6,6 +6,7 @@ interface JourneyState {
   origin: OJP.Location | null;
   destination: OJP.Location | null;
   selectedDate: string;
+  selectedStop: string;
   tripDetails: OJP.Trip[];
   indexTripSelected: number;
   firstLeg: OJP.TripLeg | null;
@@ -15,6 +16,7 @@ interface JourneyState {
   setOrigin: (origin: OJP.Location | null) => void;
   setDestination: (destination: OJP.Location | null) => void;
   setSelectedDate: (date: string) => void;
+  setSelectedStop: (stop: string) => void;
   setTripDetails: (tripDetails: OJP.Trip[]) => void;
   addTripDetail: (tripDetail: OJP.Trip) => void;
   clearTripDetails: () => void;
@@ -30,6 +32,7 @@ export const useJourneyStore = create<JourneyState>((set) => ({
   origin: null,
   destination: null,
   selectedDate: "",
+  selectedStop: "",
   tripDetails: [],
   indexTripSelected: 0,
   firstLeg: null,
@@ -39,6 +42,7 @@ export const useJourneyStore = create<JourneyState>((set) => ({
   setOrigin: (origin) => set({ origin }),
   setDestination: (destination) => set({ destination }),
   setSelectedDate: (date) => set({ selectedDate: date }),
+  setSelectedStop: (stop) => set({ selectedStop: stop }),
   setTripDetails: (tripDetails) => set({ tripDetails }),
   addTripDetail: (tripDetail) =>
     set((state) => ({ tripDetails: [...state.tripDetails, tripDetail] })),
