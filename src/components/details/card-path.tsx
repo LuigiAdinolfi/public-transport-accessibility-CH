@@ -27,11 +27,12 @@ export function CardPath({ index, legs, legDuration }: { index: number, legs: OJ
   const fromLocationName = selectedLeg.fromLocation.locationName;
   const toLocationName = selectedLeg.toLocation.locationName;
   const timeToChange = legDuration.toString();
-  const { setSelectedStop } = useJourneyStore();
+  const { setSelectedStop, setSelectedTripLeg } = useJourneyStore();
 
   const handleClick = (stop: string | null) => {
     if (!stop) return;
     setSelectedStop(stop);
+    setSelectedTripLeg(selectedLeg);
     router.push("/select/details/stop");
   };
 

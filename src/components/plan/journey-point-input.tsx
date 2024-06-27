@@ -123,28 +123,14 @@ const JourneyPointInput: React.FC<Props> = ({ placeholder, onLocationSelected, d
         {menuOpen && options.length > 0 && (
           <div
             ref={menuRef}
-            style={{
-              position: "absolute",
-              top: "100%",
-              left: 0,
-              zIndex: 10,
-              width: "100%",
-              backgroundColor: "white",
-              border: "1px solid #ccc",
-              borderTop: "none",
-              borderRadius: "0 0 8px 8px"
-            }}
+            className="absolute top-full left-0 z-10 w-full bg-zinc-50 dark:bg-zinc-800 text-zinc-950 dark:text-zinc-50 border border-gray-300 border-t-0 rounded-b-md"
           >
             {options.map((option, index) => (
               <div
                 key={index}
                 onClick={() => handleOptionSelect(option)}
                 onMouseEnter={() => handleMouseEnter(index)}
-                style={{
-                  padding: "8px",
-                  cursor: "pointer",
-                  backgroundColor: highlightedIndex === index ? "#f0f0f0" : "transparent"
-                }}
+                className={`p-2 cursor-pointer ${highlightedIndex === index ? "bg-gray-200 dark:text-zinc-50 dark:bg-zinc-700" : ""}`}
               >
                 {option.locationName}
               </div>

@@ -7,6 +7,7 @@ interface JourneyState {
   destination: OJP.Location | null;
   selectedDate: string;
   selectedStop: string;
+  selectedTripLeg: OJP.TripLeg | null;
   tripDetails: OJP.Trip[];
   indexTripSelected: number;
   firstLeg: OJP.TripLeg | null;
@@ -17,6 +18,7 @@ interface JourneyState {
   setDestination: (destination: OJP.Location | null) => void;
   setSelectedDate: (date: string) => void;
   setSelectedStop: (stop: string) => void;
+  setSelectedTripLeg: (tripLeg: OJP.TripLeg | null) => void;
   setTripDetails: (tripDetails: OJP.Trip[]) => void;
   addTripDetail: (tripDetail: OJP.Trip) => void;
   clearTripDetails: () => void;
@@ -34,6 +36,7 @@ export const useJourneyStore = create<JourneyState>((set) => ({
   selectedDate: "",
   selectedStop: "",
   tripDetails: [],
+  selectedTripLeg: null,
   indexTripSelected: 0,
   firstLeg: null,
   lastLeg: null,
@@ -44,6 +47,7 @@ export const useJourneyStore = create<JourneyState>((set) => ({
   setSelectedDate: (date) => set({ selectedDate: date }),
   setSelectedStop: (stop) => set({ selectedStop: stop }),
   setTripDetails: (tripDetails) => set({ tripDetails }),
+  setSelectedTripLeg: (tripLeg) => set({ selectedTripLeg: tripLeg }),
   addTripDetail: (tripDetail) =>
     set((state) => ({ tripDetails: [...state.tripDetails, tripDetail] })),
   clearTripDetails: () => set({ tripDetails: [] }),
@@ -53,11 +57,9 @@ export const useJourneyStore = create<JourneyState>((set) => ({
   setAllLegs: (legs) => set({ allLegs: legs }),
   formattedDuration: (duration: OJP.Duration | undefined) => {
     if (!duration) return "N/A";
-
     const totalMinutes = duration.totalMinutes ?? 0;
     const hours = duration.hours ?? Math.floor(totalMinutes / 60);
     const minutes = duration.minutes ?? totalMinutes % 60;
-
     if (hours > 0) {
       return `${hours} h ${minutes} min Reisezeit`;
     } else {

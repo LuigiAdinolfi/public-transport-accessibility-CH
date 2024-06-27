@@ -13,6 +13,8 @@ import {
 import * as React from "react";
 import { useMediaQuery } from "react-responsive";
 import { useJourneyStore } from "@/store/useJourneyStore";
+import { isTripTimedLeg } from "@/utils/tripUtils";
+import { TripLeg } from "ojp-sdk";
 
 /**
  * Component representing a card displaying details about a stop point.
@@ -21,7 +23,14 @@ import { useJourneyStore } from "@/store/useJourneyStore";
 export function CardStopPoint() {
   const { resolvedTheme } = useTheme();
   const isMobile = useMediaQuery({ maxWidth: 767 });
-  const { selectedStop } = useJourneyStore();
+  const { selectedStop, selectedTripLeg } = useJourneyStore();
+  let vehicleType = "N/A";
+
+  if (selectedTripLeg instanceof TripLeg) {
+    vehicleType = isTripTimedLeg(selectedTripLeg)
+      ? selectedTripLeg.service.ptMode.name ?? "N/A"
+      : "N/A";
+  }
 
   return (
     <Card className="mt-3">
@@ -31,7 +40,7 @@ export function CardStopPoint() {
           {selectedStop}
         </h1>
         <div className={`flex items-center pb-1.5 ${!isMobile ? "pl-16" : "pl-8"}`}>
-          <div className="text-base font-normal pr-2">Zug</div>
+          <div className="text-base font-normal pr-2">{vehicleType}</div>
           <div className="text-base font-normal">
             {resolvedTheme === "dark" ? (
               <DarkTrainProfile className="h-6 w-6" />
