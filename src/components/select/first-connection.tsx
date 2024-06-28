@@ -20,7 +20,6 @@ export function FirstConnection({
 }: {
   allLegs: OJP.TripLeg[];
 }): React.ReactElement {
-  const { resolvedTheme } = useTheme();
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const firstLeg = allLegs[0];
   const fromLocationName = firstLeg.fromLocation.locationName;

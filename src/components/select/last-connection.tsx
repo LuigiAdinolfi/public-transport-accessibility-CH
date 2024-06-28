@@ -21,7 +21,6 @@ export function LastConnection({
 }: {
   allLegs: OJP.TripLeg[];
 }): React.ReactElement {
-  const { resolvedTheme } = useTheme();
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
   // Extract details for the last leg of the journey
