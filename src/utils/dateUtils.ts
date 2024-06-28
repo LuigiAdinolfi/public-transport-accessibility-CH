@@ -1,4 +1,3 @@
-import { formatISO } from "date-fns";
 import { format } from "date-fns-tz";
 import { de } from "date-fns/locale";
 import { useJourneyStore } from "@/store/useJourneyStore";
@@ -26,7 +25,7 @@ export const handleTimeChange = (
     newDate.setHours(parseInt(hours, 10));
     newDate.setMinutes(parseInt(minutes, 10));
     setDate(newDate);
-    setSelectedDate(formatISO(newDate)); // Update parent component with new date
+    setSelectedDate(newDate); // Update parent component with new date
   }
 };
 

@@ -45,6 +45,7 @@ export function CardNewJourney(): React.ReactElement {
   const router = useRouter();
   const inputOrigin = origin?.locationName ?? "";
   const inputDestination = destination?.locationName ?? "";
+  const date = selectedDate?.toISOString() ?? "";
 
   return (
     <Card>
@@ -154,7 +155,7 @@ export function CardNewJourney(): React.ReactElement {
                   handleFormSubmit(
                     origin,
                     destination,
-                    selectedDate,
+                    date,
                     activeSearchTab,
                     setTripDetails,
                     router.push,

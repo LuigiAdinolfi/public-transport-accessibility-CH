@@ -34,7 +34,7 @@ export function DatePicker(): React.ReactElement {
     const formattedTime = format(zonedTime, "HH:mm"); // Format time to HH:mm
     setDate(zonedTime);
     setTime(formattedTime);
-    setSelectedDate(formatISO(zonedTime)); // Initial date selection
+    setSelectedDate(zonedTime); // Update parent with initial date
   }, [setSelectedDate, setDate, setTime]);
 
   return (
@@ -60,7 +60,7 @@ export function DatePicker(): React.ReactElement {
               newDate.setHours(parseInt(hours, 10));
               newDate.setMinutes(parseInt(minutes, 10));
               setDate(newDate);
-              setSelectedDate(formatISO(newDate)); // Update parent with new date
+              setSelectedDate(newDate); // Update parent with new date
             }
           }}
           initialFocus

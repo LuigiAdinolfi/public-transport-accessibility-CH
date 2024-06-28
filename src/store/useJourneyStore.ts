@@ -10,7 +10,7 @@ interface JourneyState {
   activeSearchTab: "Dep" | "Arr"; // Active search tab: "Dep" (Departure) or "Arr" (Arrival)
   origin: OJP.Location | null; // Origin location
   destination: OJP.Location | null; // Destination location
-  selectedDate: string; // Selected date for journey
+  selectedDate: Date | null; // Selected date for journey
   selectedStop: string; // Selected stop point
   selectedTripLeg: OJP.TripLeg | null; // Selected trip leg
   tripDetails: OJP.Trip[]; // List of trip details
@@ -23,7 +23,7 @@ interface JourneyState {
   setActiveSearchTab: (tab: "Dep" | "Arr") => void; // Function to set active search tab
   setOrigin: (origin: OJP.Location | null) => void; // Function to set origin location
   setDestination: (destination: OJP.Location | null) => void; // Function to set destination location
-  setSelectedDate: (date: string) => void; // Function to set selected date
+  setSelectedDate: (date: Date | null) => void; // Function to set selected date
   setSelectedStop: (stop: string) => void; // Function to set selected stop point
   setSelectedTripLeg: (tripLeg: OJP.TripLeg | null) => void; // Function to set selected trip leg
   setTripDetails: (tripDetails: OJP.Trip[]) => void; // Function to set trip details
@@ -45,7 +45,7 @@ export const useJourneyStore = create<JourneyState>((set) => ({
   activeSearchTab: "Dep",
   origin: null,
   destination: null,
-  selectedDate: "",
+  selectedDate: null,
   selectedStop: "",
   tripDetails: [],
   selectedTripLeg: null,
