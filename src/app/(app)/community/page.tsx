@@ -1,3 +1,3 @@
 export default function Community() {
-  return <div></div>;
+  return <div>test</div>;
 }
