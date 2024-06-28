@@ -10,6 +10,7 @@ import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useJourneyStore } from "@/store/useJourneyStore";
+import { truncateTo20Chars } from "@/utils/tripUtils";
 
 interface LocationSectionProps {
   locationName: string;
@@ -31,6 +32,7 @@ export default function LocationSection({
 }: LocationSectionProps): React.ReactElement {
   const router = useRouter();
   const { setSelectedStop } = useJourneyStore();
+  const location = truncateTo20Chars(locationName);
 
   /**
    * Handles click on "Info zur Haltestelle" button.
@@ -47,7 +49,7 @@ export default function LocationSection({
   return (
     <div className="flex w-full flex-col rounded-lg bg-zinc-50 p-4 text-zinc-950 shadow-sm dark:bg-zinc-900 dark:text-zinc-50 md:w-1/2">
       <div className="mb-3 flex items-center p-2">
-        <div className="text-lg font-semibold">{locationName}</div>
+        <div className="text-lg font-semibold">{location}</div>
       </div>
       <div className="flex flex-row p-2">
         <div className="text-base font-medium">Rollstuhlgerechte Waggons:</div>
@@ -96,7 +98,7 @@ export default function LocationSection({
           className="flex w-full items-center p-2 md:text-base"
         >
           <div>Info zur Haltestelle &nbsp;</div>
-          <div>{locationName}</div>
+          <div>{location}</div>
           <ArrowUpRight className="ml-1 h-4 w-4" />
         </Button>
       </div>

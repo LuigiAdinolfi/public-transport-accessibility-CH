@@ -4,7 +4,13 @@ import * as React from "react";
 import { CommunityRatingSelect } from "@/components/select/community-rating-select";
 import { useMediaQuery } from "react-responsive";
 import * as OJP from "ojp-sdk";
-import { formatTime, isTripTimedLeg } from "@/utils/tripUtils";
+import {
+  getArrivalTime,
+  getDepartureTime,
+  getTrainNumber,
+  getVehicleType,
+  truncateTo12Chars,
+} from "@/utils/tripUtils";
 import { WheelchairReservationIcon } from "@/components/select/wheelchair-reservation-icon";
 import { WheelchairIcon } from "@/components/select/wheelchair-icon";
 import { TrainProfileIcon } from "@/components/select/train-profile-icon";
@@ -25,27 +31,13 @@ export function LastConnection({
   // Extract details for the last leg of the journey
   const lastLeg = allLegs[allLegs.length - 1];
   const fromLocationName = lastLeg.fromLocation.locationName;
-  const fromLocation =
-    fromLocationName && fromLocationName.length > 12
-      ? `${fromLocationName.substring(0, 12)}...`
-      : fromLocationName || "N/A";
+  const fromLocation = truncateTo12Chars(fromLocationName ?? "N/A");
   const toLocationName = lastLeg.toLocation.locationName;
-  const toLocation =
-    toLocationName && toLocationName.length > 12
-      ? `${toLocationName.substring(0, 12)}...`
-      : toLocationName || "N/A";
-  const trainNumber = isTripTimedLeg(lastLeg)
-    ? lastLeg.service.serviceLineNumber ?? "N/A"
-    : "N/A";
-  const departureTime = isTripTimedLeg(lastLeg)
-    ? formatTime(lastLeg.fromStopPoint.departureData?.timetableTime ?? null)
-    : "N/A";
-  const arrivalTime = isTripTimedLeg(lastLeg)
-    ? formatTime(lastLeg.toStopPoint.arrivalData?.timetableTime ?? null)
-    : "N/A";
-  const vehicleType = isTripTimedLeg(lastLeg)
-    ? lastLeg.service.ptMode.name ?? "N/A"
-    : "N/A";
+  const toLocation = truncateTo12Chars(toLocationName ?? "N/A");
+  const trainNumber = getTrainNumber(lastLeg);
+  const departureTime = getDepartureTime(lastLeg);
+  const arrivalTime = getArrivalTime(lastLeg);
+  const vehicleType = getVehicleType(lastLeg);
 
   return (
     <div className="flex basis-1/2 justify-start rounded-lg bg-zinc-50 dark:bg-zinc-900">

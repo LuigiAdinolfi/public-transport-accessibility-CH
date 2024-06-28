@@ -6,7 +6,14 @@ import { useRouter } from "next/navigation";
 import { CommunityRatingSelect } from "@/components/select/community-rating-select";
 import { useMediaQuery } from "react-responsive";
 import * as OJP from "ojp-sdk";
-import { formatTime, isTripTimedLeg } from "@/utils/tripUtils";
+import {
+  formatTime,
+  getArrivalTime,
+  getDepartureTime,
+  getTrainNumber,
+  getVehicleType,
+  isTripTimedLeg,
+} from "@/utils/tripUtils";
 import { useJourneyStore } from "@/store/useJourneyStore";
 import { WheelchairReservationIcon } from "@/components/select/wheelchair-reservation-icon";
 import { TrainProfileIcon } from "@/components/select/train-profile-icon";
@@ -39,20 +46,12 @@ export function DirectConnection({
   };
 
   // Extracted details for readability and maintainability
-  const trainNumber = isTripTimedLeg(details)
-    ? details.service.serviceLineNumber ?? "N/A"
-    : "N/A";
-  const departureTime = isTripTimedLeg(details)
-    ? formatTime(details.fromStopPoint.departureData?.timetableTime ?? null)
-    : "N/A";
-  const arrivalTime = isTripTimedLeg(details)
-    ? formatTime(details.toStopPoint.arrivalData?.timetableTime ?? null)
-    : "N/A";
+  const trainNumber = getTrainNumber(details);
+  const departureTime = getDepartureTime(details);
+  const arrivalTime = getArrivalTime(details);
   const fromLocationName = details.fromLocation.locationName;
   const toLocationName = details.toLocation.locationName;
-  const vehicleType = isTripTimedLeg(details)
-    ? details.service.ptMode.name ?? "N/A"
-    : "N/A";
+  const vehicleType = getVehicleType(details);
 
   return (
     <Button

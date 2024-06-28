@@ -6,6 +6,7 @@ import CardPath from "@/components/details/card-path";
 import { DummyMap } from "@/components/details/dummy-map";
 import { useJourneyStore } from "@/store/useJourneyStore";
 import { CircleIcons } from "@/components/details/circle-icons";
+import { truncateTo20Chars } from "@/utils/tripUtils";
 
 interface TabNavigationProps {
   legs: OJP.TripLeg[];
@@ -44,7 +45,9 @@ export default function TabNavigation({
         >
           {legs.map((leg, index) => {
             const fromLocationName = leg.fromLocation.locationName;
+            const fromLocation = truncateTo20Chars(fromLocationName ?? "N/A");
             const toLocationName = leg.toLocation.locationName;
+            const toLocation = truncateTo20Chars(toLocationName ?? "N/A");
             return (
               <TabsTrigger
                 key={index}
@@ -57,7 +60,7 @@ export default function TabNavigation({
                   darkTheme={resolvedTheme === "dark"}
                 />
                 <div className="pl-1 md:text-base lg:pl-2">
-                  {fromLocationName} - {toLocationName}
+                  {fromLocation} - {toLocation}
                 </div>
               </TabsTrigger>
             );

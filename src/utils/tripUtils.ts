@@ -19,3 +19,79 @@ export function formatTime(date: Date | null): string {
   if (!date) return "N/A";
   return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 }
+
+/**
+ * Truncates a string to 20 characters.
+ * Returns 'N/A' if the input string is null or undefined.
+ * @param {string} value - The string to truncate.
+ * @returns {string} - The truncated string or 'N/A' if value is null or undefined.
+ */
+export const truncateTo20Chars = (value: string): string => {
+  return value && value.length > 20
+    ? `${value.substring(0, 20)}`
+    : value || "N/A";
+};
+
+/**
+ * Truncates a string to 12 characters.
+ * Returns 'N/A' if the input string is null or undefined.
+ * @param {string} value - The string to truncate.
+ * @returns {string} - The truncated string or 'N/A' if value is null or undefined.
+ */
+export const truncateTo12Chars = (value: string): string => {
+  return value && value.length > 12
+    ? `${value.substring(0, 12)}`
+    : value || "N/A";
+};
+
+/**
+ * Returns the vehicle type of given TripLeg.
+ * @param {OJP.TripLeg | null} selectedTripLeg - The TripLeg object to get the vehicle type from.
+ * @returns {string} - The vehicle type of the selected trip leg or 'N/A' if the leg is null.
+ */
+export const getVehicleType = (selectedTripLeg: OJP.TripLeg | null): string => {
+  if (!selectedTripLeg) return "N/A";
+  return isTripTimedLeg(selectedTripLeg)
+    ? selectedTripLeg.service.ptMode.name ?? "N/A"
+    : "N/A";
+};
+
+/**
+ * Returns the arrival time of a given TripLeg.
+ * @param {OJP.TripLeg} leg - The TripLeg object to get the arrival time from.
+ * @returns {string} - The arrival time of the leg or 'N/A' if the leg is not a TripTimedLeg.
+ */
+export const getArrivalTime = (leg: OJP.TripLeg): string => {
+  if (!isTripTimedLeg(leg)) return "N/A";
+  return formatTime(leg.toStopPoint.arrivalData?.timetableTime ?? null);
+};
+
+/**
+ * Returns the departure time of a given TripLeg.
+ * @param {OJP.TripLeg} leg - The TripLeg object to get the departure time from.
+ * @returns {string} - The departure time of the leg or 'N/A' if the leg is not a TripTimedLeg.
+ */
+export const getDepartureTime = (leg: OJP.TripLeg): string => {
+  if (!isTripTimedLeg(leg)) return "N/A";
+  return formatTime(leg.fromStopPoint.departureData?.timetableTime ?? null);
+};
+
+/**
+ * Returns the train number of a given TripLeg.
+ * @param {OJP.TripLeg} leg - The TripLeg object to get the train number from.
+ * @returns {string} - The train number of the leg or 'N/A' if the leg is not a TripTimedLeg.
+ */
+export const getTrainNumber = (leg: OJP.TripLeg): string => {
+  if (!isTripTimedLeg(leg)) return "N/A";
+  return leg.service.serviceLineNumber ?? "N/A";
+};
+
+/**
+ * Returns the stop place name of a given TripLeg.
+ * @param {OJP.TripLeg} leg - The TripLeg object to get the stop place name from.
+ * @returns {string} - The stop place name of the leg or 'N/A' if the leg is not a TripTimedLeg.
+ */
+export const getStopPlaceName = (leg: OJP.TripLeg): string => {
+  if (!isTripTimedLeg(leg)) return "N/A";
+  return leg.service.destinationStopPlace?.stopPlaceName ?? "N/A";
+};

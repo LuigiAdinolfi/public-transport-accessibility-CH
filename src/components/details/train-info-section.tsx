@@ -8,7 +8,12 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Map } from "lucide-react";
 import * as OJP from "ojp-sdk";
-import { isTripTimedLeg } from "@/utils/tripUtils";
+import {
+  getStopPlaceName,
+  getTrainNumber,
+  getVehicleType,
+  isTripTimedLeg,
+} from "@/utils/tripUtils";
 
 interface TrainInfoSectionProps {
   leg: OJP.TripLeg;
@@ -30,15 +35,9 @@ export default function TrainInfoSection({
   const router = useRouter();
 
   // Determine train information based on leg type
-  const trainNumber = isTripTimedLeg(leg)
-    ? leg.service.serviceLineNumber ?? "N/A"
-    : "N/A";
-  const trainDestinationStopPlace = isTripTimedLeg(leg)
-    ? leg.service.destinationStopPlace?.stopPlaceName ?? "N/A"
-    : "N/A";
-  const vehicleType = isTripTimedLeg(leg)
-    ? leg.service.ptMode.name ?? "N/A"
-    : "N/A";
+  const trainNumber = getTrainNumber(leg);
+  const trainDestinationStopPlace = getStopPlaceName(leg);
+  const vehicleType = getVehicleType(leg);
 
   return (
     <div className="flex items-center justify-between p-6 px-8 pb-6">
