@@ -4,9 +4,9 @@ import * as React from "react";
 
 /**
  * Component for the Select page, displaying journey selection.
- * @returns {JSX.Element} - SelectPage component.
+ * @returns {React.ReactElement} The Select page component.
  */
-export default function SelectPage() {
+export default function SelectPage(): React.ReactElement {
   const currentPage = "/select";
 
   return (

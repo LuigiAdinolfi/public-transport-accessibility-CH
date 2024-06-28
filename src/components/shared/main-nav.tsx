@@ -9,9 +9,9 @@ import { cn } from "@/lib/utils";
 
 /**
  * Component representing the main navigation menu.
- * @returns {JSX.Element} - MainNav component.
+ * @returns {React.ReactElement} - The main navigation menu component.
  */
-export function MainNav() {
+export function MainNav(): React.ReactElement {
   // Get the current pathname using the usePathname hook from next/navigation
   const pathname = usePathname();
   // Get the resolved theme using the useTheme hook from next-themes
@@ -36,7 +36,7 @@ export function MainNav() {
         "text-lg",
         "rounded-md p-2",
         "px-6 py-2.5",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:after:ring-0 focus-visible:rounded-sm focus-visible:ring-black dark:focus-visible:ring-white"
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:after:ring-0 focus-visible:rounded-sm focus-visible:ring-black dark:focus-visible:ring-white",
       );
     } else {
       return cn(
@@ -47,7 +47,7 @@ export function MainNav() {
         "text-lg",
         "rounded-md p-2",
         "px-6 py-2.5",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:after:ring-0 focus-visible:rounded-sm focus-visible:ring-black dark:focus-visible:ring-white"
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:after:ring-0 focus-visible:rounded-sm focus-visible:ring-black dark:focus-visible:ring-white",
       );
     }
   }
@@ -57,9 +57,18 @@ export function MainNav() {
    * @param {Object} props - Component props.
    * @param {string} props.href - The URL path for the link.
    * @param {string} props.currentPath - The current path to compare with the link's URL.
-   * @returns {JSX.Element} - NavLink component.
+   * @param {React.ReactNode} props.children - The content to display within the link.
+   * @returns {React.ReactElement} - The rendered navigation link.
    */
-  function NavLink({ href, currentPath, children }: { href: string; currentPath: string; children: React.ReactNode }): JSX.Element {
+  function NavLink({
+    href,
+    currentPath,
+    children,
+  }: {
+    href: string;
+    currentPath: string;
+    children: React.ReactNode;
+  }): React.ReactElement {
     const linkClasses = getClasses(currentPath);
 
     return (

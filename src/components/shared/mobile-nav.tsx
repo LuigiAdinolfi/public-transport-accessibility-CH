@@ -13,9 +13,9 @@ import { Sheet, SheetContent, SheetTrigger } from "@/mobile/new-york/ui/sheet";
 
 /**
  * Component representing the mobile navigation menu.
- * @returns {JSX.Element} - MobileNav component.
+ * @returns {React.ReactElement} - The mobile navigation menu component.
  */
-export function MobileNav() {
+export function MobileNav(): React.ReactElement {
   // State to manage the open/close state of the mobile menu
   const [open, setOpen] = React.useState(false);
 
@@ -72,7 +72,9 @@ export function MobileNav() {
           onOpenChange={setOpen}
         >
           {/*<Accessibility className="h-6 w-6"/>*/}
-          <span className="font-semibold text-base pl-1 pt-6">{siteConfig.name}</span>
+          <span className="pl-1 pt-6 text-base font-semibold">
+            {siteConfig.name}
+          </span>
         </MobileLink>
         {/* Scrollable area for menu items */}
         <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-4">
@@ -86,14 +88,14 @@ export function MobileNav() {
                     href={item.href}
                     onOpenChange={setOpen}
                     className={cn(
-                      "hover:bg-zinc-100 hover:text-zinc-950 dark:hover:text-zinc-50 bg-zinc-50 dark:bg-zinc-900 dark:hover:bg-zinc-800",
+                      "bg-zinc-50 hover:bg-zinc-100 hover:text-zinc-950 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:hover:text-zinc-50",
                       "rounded-md p-2",
-                      "px-4 py-2"
+                      "px-4 py-2",
                     )}
                   >
                     {item.title}
                   </MobileLink>
-                )
+                ),
             )}
           </div>
         </ScrollArea>
@@ -113,20 +115,20 @@ interface MobileLinkProps extends LinkProps {
 
 /**
  * Component representing a mobile link.
- * @param href
- * @param onOpenChange
- * @param className
- * @param children
- * @param {MobileLinkProps} props - The props for the MobileLink component.
- * @returns {JSX.Element} - MobileLink component.
+ * @param href - The URL to navigate to.
+ * @param onOpenChange - Function to handle open/close state change.
+ * @param className - The class name for the link.
+ * @param children - The children of the link.
+ * @param props - The rest of the props.
+ * @returns {React.ReactElement} - The mobile link component.
  */
 function MobileLink({
-                      href,
-                      onOpenChange,
-                      className,
-                      children,
-                      ...props
-                    }: MobileLinkProps) {
+  href,
+  onOpenChange,
+  className,
+  children,
+  ...props
+}: MobileLinkProps): React.ReactElement {
   // Next.js router hook
   const router = useRouter();
 
@@ -141,10 +143,12 @@ function MobileLink({
 
   // Render the link
   return (
-    <Link href={href} passHref
-          className={cn(className)}
-          onClick={handleClick}
-          {...props}
+    <Link
+      href={href}
+      passHref
+      className={cn(className)}
+      onClick={handleClick}
+      {...props}
     >
       {children}
     </Link>

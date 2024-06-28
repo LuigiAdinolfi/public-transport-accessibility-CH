@@ -2,36 +2,46 @@
 
 import * as React from "react";
 import { Button } from "@/components/ui/button";
-import { DarkWheelchairReservation, LightWheelchairReservation } from "@/assets/icons/wheelchair-reservation";
 import { useRouter } from "next/navigation";
-import { DarkTrainProfile, LightTrainProfile } from "@/assets/icons/train-profile";
 import { CommunityRatingSelect } from "@/components/select/community-rating-select";
-import { useTheme } from "next-themes";
 import { useMediaQuery } from "react-responsive";
 import * as OJP from "ojp-sdk";
 import { formatTime, isTripTimedLeg } from "@/utils/tripUtils";
 import { useJourneyStore } from "@/store/useJourneyStore";
+import { WheelchairReservationIcon } from "@/components/select/wheelchair-reservation-icon";
+import { TrainProfileIcon } from "@/components/select/train-profile-icon";
 
 /**
  * Component representing a direct connection in a journey.
- * @returns {JSX.Element} JSX Element
+ * @param {Object} props - Component props.
+ * @param {OJP.TripLeg[]} props.allLegs - Array of trip legs representing the direct connection.
+ * @param {string} props.duration - Duration of the direct connection.
+ * @returns {React.ReactElement} - The rendered direct connection component.
  */
-export function DirectConnection({ allLegs, duration }: { allLegs:  OJP.TripLeg[], duration: string }) {
+export function DirectConnection({
+  allLegs,
+  duration,
+}: {
+  allLegs: OJP.TripLeg[];
+  duration: string;
+}): React.ReactElement {
   const router = useRouter();
-  const { resolvedTheme } = useTheme();
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const details = allLegs[0];
   const { setAllLegs } = useJourneyStore();
 
+  /**
+   * Handles click event when the user selects this direct connection.
+   */
   const handleClick = () => {
     setAllLegs(allLegs);
     router.push("/select/details");
   };
 
+  // Extracted details for readability and maintainability
   const trainNumber = isTripTimedLeg(details)
     ? details.service.serviceLineNumber ?? "N/A"
     : "N/A";
-
   const departureTime = isTripTimedLeg(details)
     ? formatTime(details.fromStopPoint.departureData?.timetableTime ?? null)
     : "N/A";
@@ -40,104 +50,101 @@ export function DirectConnection({ allLegs, duration }: { allLegs:  OJP.TripLeg[
     : "N/A";
   const fromLocationName = details.fromLocation.locationName;
   const toLocationName = details.toLocation.locationName;
-
   const vehicleType = isTripTimedLeg(details)
     ? details.service.ptMode.name ?? "N/A"
     : "N/A";
 
   return (
-    <Button className="flex h-full w-full justify-start" variant="outline"
-            onClick={handleClick}>
+    <Button
+      className="flex h-full w-full justify-start"
+      variant="outline"
+      onClick={handleClick}
+    >
       <div className={`w-full ${!isMobile ? "grid" : ""}`}>
         {/* Accessibility and Travel Time */}
         <div
-          className={`mb-1 flex w-full items-center justify-start ${isMobile ? "flex-col" : "px-3"} py-4 text-zinc-950 dark:text-zinc-50`}>
-          <div className="flex w-full justify-start items-center">
-            <div className="pr-2 md:text-base">Niedrigste Barrierefreiheit:</div>
+          className={`mb-1 flex w-full items-center justify-start ${isMobile ? "flex-col" : "px-3"} py-4 text-zinc-950 dark:text-zinc-50`}
+        >
+          <div className="flex w-full items-center justify-start">
+            <div className="pr-2 md:text-base">
+              Niedrigste Barrierefreiheit:
+            </div>
             {/* Wheelchair Accessibility Icon */}
-            {resolvedTheme === "dark" ? (
-              <DarkWheelchairReservation className="h-6 w-6" aria-hidden="true" />
-            ) : (
-              <LightWheelchairReservation className="h-6 w-6" aria-hidden="true" />
-            )}
+            <WheelchairReservationIcon />
             {!isMobile && (
-              <div className="pl-2 md:text-base">Mit Personalhilfe ein-/aussteigen</div>
+              <div className="pl-2 md:text-base">
+                Mit Personalhilfe ein-/aussteigen
+              </div>
             )}
           </div>
           <div
-            className={`${isMobile ? "flex w-full justify-start pt-1" : "justify-end md:text-base"}`}>{duration}</div>
+            className={`${isMobile ? "flex w-full justify-start pt-1" : "justify-end md:text-base"}`}
+          >
+            {duration}
+          </div>
         </div>
         {/* Connection Details */}
-        <div className="flex flex-row mb-2">
+        <div className="mb-2 flex flex-row">
           <div className="flex w-full justify-start rounded-lg bg-zinc-50 dark:bg-zinc-900">
             <div className="w-full py-2">
               {/* Time and Station */}
-              <div className="flex w-full items-center justify-between px-3 pt-1 pb-3 font-normal">
+              <div className="flex w-full items-center justify-between px-3 pb-3 pt-1 font-normal">
                 <div className="flex justify-start">{departureTime}</div>
                 <div className="flex justify-end">{arrivalTime}</div>
               </div>
               {/* Departure and Arrival Stations */}
               <div className="flex w-full items-center justify-between px-3">
-                <div className="md:text-lg text-base items-center font-semibold">
+                <div className="items-center text-base font-semibold md:text-lg">
                   {fromLocationName}
                 </div>
-                <div className="flex justify-center items-center font-normal">
+                <div className="flex items-center justify-center font-normal">
                   {!isMobile && (
-                    <div className="flex items-center font-medium pr-2">
+                    <div className="flex items-center pr-2 font-medium">
                       {vehicleType}
                     </div>
                   )}
                   {/* Train Profile Icon */}
                   <div>
-                    {resolvedTheme === "dark" ? (
-                      <DarkTrainProfile className="h-6 w-6" aria-hidden="true" />
-                    ) : (
-                      <LightTrainProfile className="h-6 w-6" aria-hidden="true" />
-                    )}
+                    <TrainProfileIcon />
                   </div>
                   {!isMobile && (
-                    <div className="font-medium pl-2">
-                      {trainNumber}
-                    </div>
+                    <div className="pl-2 font-medium">{trainNumber}</div>
                   )}
                 </div>
-                <div className="md:text-lg text-base items-center font-semibold">
+                <div className="items-center text-base font-semibold md:text-lg">
                   {toLocationName}
                 </div>
               </div>
               {/* Accessibility Information */}
-              <div className={`flex w-full justify-between px-3 ${isMobile ? "py-2" : "py-3"} font-medium`}>
-                <div className="flex basis-1/2 justify-start items-center">
+              <div
+                className={`flex w-full justify-between px-3 ${isMobile ? "py-2" : "py-3"} font-medium`}
+              >
+                <div className="flex basis-1/2 items-center justify-start">
                   {/* Wheelchair Accessibility Icon */}
-                  {resolvedTheme === "dark" ? (
-                    <DarkWheelchairReservation className="h-6 w-6" aria-hidden="true" />
-                  ) : (
-                    <LightWheelchairReservation className="h-6 w-6" aria-hidden="true" />
-                  )}
+                  <WheelchairReservationIcon />
                   {!isMobile && (
-                    <div className="pl-2 flex flex-col">
+                    <div className="flex flex-col pl-2">
                       <span>Mit Personalhilfe ein-/aussteigen</span>
                     </div>
                   )}
                 </div>
-                <div className="flex basis-1/2 justify-end items-center">
+                <div className="flex basis-1/2 items-center justify-end">
                   {!isMobile && (
-                    <div className="pr-2 flex flex-col text-right">
+                    <div className="flex flex-col pr-2 text-right">
                       <span>Mit Personalhilfe ein-/aussteigen</span>
                     </div>
                   )}
                   {/* Wheelchair Accessibility Icon */}
-                  {resolvedTheme === "dark" ? (
-                    <DarkWheelchairReservation className="h-6 w-6" aria-hidden="true" />
-                  ) : (
-                    <LightWheelchairReservation className="h-6 w-6" aria-hidden="true" />
-                  )}
+                  <WheelchairReservationIcon />
                 </div>
               </div>
               {/* Community Rating */}
               <div
-                className={`flex w-full ${isMobile ? "justify-center" : "items-center justify-start pt-4"} px-3 pb-2 font-normal`}>
-                {!isMobile && <div className="pr-3">Bewertung der Community:</div>}
+                className={`flex w-full ${isMobile ? "justify-center" : "items-center justify-start pt-4"} px-3 pb-2 font-normal`}
+              >
+                {!isMobile && (
+                  <div className="pr-3">Bewertung der Community:</div>
+                )}
                 <CommunityRatingSelect value={3} />
               </div>
             </div>

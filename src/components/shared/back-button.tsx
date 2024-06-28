@@ -7,9 +7,9 @@ import { useRouter } from "next/navigation";
 
 /**
  * Back button component that navigates back in the router history.
- * @returns {JSX.Element} BackButton component.
+ * @returns {React.ReactElement} The back button component.
  */
-export function BackButton() {
+export function BackButton(): React.ReactElement {
   const router = useRouter();
 
   return (
@@ -18,7 +18,7 @@ export function BackButton() {
       className="md:text-base"
       type="button"
       onClick={() => router.back()}
-      aria-label="Zurück"
+      aria-label="Back"
     >
       <ArrowLeft className="mr-2 h-4 w-4" aria-hidden="true" />
       Zurück

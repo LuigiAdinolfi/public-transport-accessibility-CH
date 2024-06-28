@@ -4,9 +4,9 @@ import * as React from "react";
 
 /**
  * Component for displaying journey details page.
- * @returns {JSX.Element} - JourneyDetailsPage component.
+ * @returns {React.ReactElement} The journey details page component.
  */
-export default function JourneyDetailsPage() {
+export default function JourneyDetailsPage(): React.ReactElement {
   const currentPage = "/select/details";
 
   return (

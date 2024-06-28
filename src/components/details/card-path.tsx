@@ -1,200 +1,55 @@
-"use client";
-
-import { Card } from "@/components/ui/card";
-import * as React from "react";
-import { DarkTrainProfile, LightTrainProfile } from "@/assets/icons/train-profile";
-import { useTheme } from "next-themes";
-import { Button } from "@/components/ui/button";
-import { ArrowUpRight, Map } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { CommunityRatingDetails } from "@/components/details/community-rating-details";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import Image from "next/image";
-import { useMediaQuery } from "react-responsive";
+import React from "react";
 import * as OJP from "ojp-sdk";
-import { isTripTimedLeg } from "@/utils/tripUtils";
+import { Card } from "@/components/ui/card";
+import TrainInfoSection from "@/components/details/train-info-section";
+import LocationSection from "@/components/details/location-section";
+import CommunityRatingSection from "@/components/details/community-rating-section";
 import { useJourneyStore } from "@/store/useJourneyStore";
 
+interface CardPathProps {
+  index: number;
+  legs: OJP.TripLeg[];
+  legDuration: number;
+}
+
 /**
- * Component displaying journey details within a card format.
- * @returns {JSX.Element} ResponsiveCardPath component.
+ * CardPath component displays details of a specific leg of a journey.
+ *
+ * @param {CardPathProps} props - The properties passed to the component.
+ * @returns {React.ReactElement} The CardPath component.
  */
-export function CardPath({ index, legs, legDuration }: { index: number, legs: OJP.TripLeg[], legDuration: number }) {
-  const { resolvedTheme } = useTheme();
-  const router = useRouter();
-  const isMobile = useMediaQuery({ maxWidth: 767 });
+export default function CardPath({
+  index,
+  legs,
+  legDuration,
+}: CardPathProps): React.ReactElement {
   const selectedLeg = legs[index];
-  const fromLocationName = selectedLeg.fromLocation.locationName;
-  const toLocationName = selectedLeg.toLocation.locationName;
-  const timeToChange = legDuration.toString();
-  const { setSelectedStop, setSelectedTripLeg } = useJourneyStore();
+  const fromLocationName = selectedLeg.fromLocation.locationName ?? "N/A";
+  const toLocationName = selectedLeg.toLocation.locationName ?? "N/A";
+  const platform = "Gleis 9"; // Example, customize as needed
 
-  const handleClick = (stop: string | null) => {
-    if (!stop) return;
-    setSelectedStop(stop);
+  const { setSelectedTripLeg } = useJourneyStore();
+
+  React.useEffect(() => {
     setSelectedTripLeg(selectedLeg);
-    router.push("/select/details/stop");
-  };
-
-
-  const trainNumber = isTripTimedLeg(selectedLeg)
-    ? selectedLeg.service.serviceLineNumber ?? "N/A"
-    : "N/A";
-
-  const trainDestinationStopPlace = isTripTimedLeg(selectedLeg)
-    ? selectedLeg.service.destinationStopPlace?.stopPlaceName ?? "N/A"
-    : "N/A";
-
-  const vehicleType = isTripTimedLeg(selectedLeg)
-    ? selectedLeg.service.ptMode.name ?? "N/A"
-    : "N/A";
+  }, [index, setSelectedTripLeg, selectedLeg]);
 
   return (
     <Card>
-      {/* Content for the first section */}
-      <div
-        className={`flex items-center justify-between ${!isMobile ? "p-6 px-8 pb-6" : "flex-col p-4 px-2 pb-6 gap-3"} `}>
-        <div className="flex items-center space-x-1.5 md:h-10">
-          {
-            !isMobile && (
-              <div className="text-base font-medium pr-1">{vehicleType}</div>
-            )
-          }
-          <div className="text-base font-normal">
-            {resolvedTheme === "dark" ? (
-              <DarkTrainProfile className="h-6 w-6" />
-            ) : (
-              <LightTrainProfile className="h-6 w-6" />
-            )}
-          </div>
-          <div className="text-base font-medium pl-1">
-            {trainNumber}
-          </div>
-          <div className="text-base font-normal pl-2">Richtung {trainDestinationStopPlace}</div>
-        </div>
-        {timeToChange !== "0" && (
-          <>
-            <div className="flex-grow text-base font-semibold text-center">
-              {timeToChange} Minuten zum Umsteigen
-            </div>
-            <Button className="ml-4 md:text-base" variant="outline" onClick={() => router.push("/select/details")}>
-              Weg zum Umsteigen
-              <Map className="ml-2 h-4 w-4" />
-            </Button>
-          </>
-        )}
+      <TrainInfoSection leg={selectedLeg} legDuration={legDuration} />
+      <div className="flex gap-6 px-6">
+        <LocationSection
+          locationName={fromLocationName}
+          platform={platform}
+          aria-label={`Departure from ${fromLocationName} at ${platform}`}
+        />
+        <LocationSection
+          locationName={toLocationName}
+          platform="Gleis 12"
+          aria-label={`Arrival at ${toLocationName} at Gleis 12`}
+        />
       </div>
-
-      {/* Content for the second section */}
-      <div className={`flex px-6 gap-6 ${!isMobile ? "" : "flex-col"}`}>
-        {/* Basel SBB Section */}
-        <div
-          className="flex flex-col w-full md:w-1/2 p-4 bg-zinc-50 rounded-lg text-zinc-950 shadow-sm dark:bg-zinc-900 dark:text-zinc-50">
-          <div className={`flex items-center ${!isMobile ? "p-2 mb-3" : "px-2 py-1 mb-2"}`}>
-            <div className="text-lg font-semibold">{fromLocationName}</div>
-          </div>
-          <div className="flex flex-row p-2">
-            <div className={`font-medium ${!isMobile ? "text-base" : "text-sm"}`}>Rollstuhlgerechte Waggons:</div>
-            <div className={`pr-1 pl-3 font-semibold ${!isMobile ? "text-base" : "text-sm"}`}>Gleis 9</div>
-            <div className={`pl-1 font-semibold ${!isMobile ? "text-base" : "text-sm"}`}>Sektor A / C</div>
-          </div>
-          <div className="flex flex-row align-middle items-center pb-2 pt-1">
-            <div className="text-sm font-normal px-4">Zugang zum Bahnsteig ohne Hilfe</div>
-          </div>
-          <Accordion type="single" collapsible className="px-2">
-            <AccordionItem value="item-1">
-              <AccordionTrigger className={`${!isMobile ? "py-6" : "py-4 text-sm"}`}>Zugkomposition</AccordionTrigger>
-              <AccordionContent>
-                <Image src="/train-composition.png" alt="Zugkomposition" width={320} height={100} className="px-2" />
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-          <Accordion type="single" collapsible className="px-2">
-            <AccordionItem value="item-2">
-              <AccordionTrigger className={`${!isMobile ? "py-6" : "py-4 text-sm"}`}>Ein- und Aussteigen für
-                Rollstuhlfahrer</AccordionTrigger>
-              <AccordionContent className="px-2">
-                <div className="py-3">
-                  Informationen zur Rampe
-                </div>
-                <div className="py-3">
-                  Informationen zum Lift
-                </div>
-                <div className="py-3">
-                  Informationen über Treppen
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-          <div className="flex justify-center mt-6">
-            <Button variant="outline" onClick={() => (handleClick(fromLocationName))}
-                    className="flex w-full items-center p-2 md:text-base">
-              <div>Info zur Haltestelle &nbsp;</div>
-              <div>{fromLocationName}</div>
-              <ArrowUpRight className="h-4 w-4 ml-1" />
-            </Button>
-          </div>
-        </div>
-
-        {/* Olten Section */}
-        <div
-          className="flex flex-col w-full md:w-1/2 p-4 bg-zinc-50 rounded-lg text-zinc-950 shadow-sm dark:bg-zinc-900 dark:text-zinc-50">
-          <div className={`flex items-center ${!isMobile ? "p-2 mb-3" : "px-2 py-1 mb-2"}`}>
-            <div className="text-lg font-semibold">{toLocationName}</div>
-          </div>
-          <div className="flex flex-row p-2">
-            <div className={`font-medium ${!isMobile ? "text-base" : "text-sm"}`}>Rollstuhlgerechte Waggons:</div>
-            <div className={`pr-1 pl-3 font-semibold ${!isMobile ? "text-base" : "text-sm"}`}>Gleis 12</div>
-            <div className={`pl-1 font-semibold ${!isMobile ? "text-base" : "text-sm"}`}></div>
-          </div>
-          <div className="flex flex-row align-middle items-center pb-2 pt-1">
-            <div className="text-sm font-normal px-4">Zugang zum Bahnsteig ohne Hilfe</div>
-          </div>
-          <Accordion type="single" collapsible className="px-2">
-            <AccordionItem value="item-1">
-              <AccordionTrigger className={`${!isMobile ? "py-6" : "py-4 text-sm"}`}>Zugkomposition</AccordionTrigger>
-              <AccordionContent>
-                <Image src="/train-composition.png" alt="Zugkomposition" width={320} height={100} className="px-2" />
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-          <Accordion type="single" collapsible className="px-2">
-            <AccordionItem value="item-1">
-              <AccordionTrigger className={`${!isMobile ? "py-6" : "py-4 text-sm"}`}>Ein- und Aussteigen für
-                Rollstuhlfahrer</AccordionTrigger>
-              <AccordionContent className="px-2">
-                <div className="py-3">
-                  Informationen zur Rampe
-                </div>
-                <div className="py-3">
-                  Informationen zum Lift
-                </div>
-                <div className="py-3">
-                  Informationen über Treppen
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-          <div className="flex justify-center mt-6">
-            <Button variant="outline" onClick={() => (handleClick(toLocationName))}
-                    className="flex w-full items-center p-2 md:text-base">
-              <div>Info zur Haltestelle &nbsp;</div>
-              <div>{toLocationName}</div>
-              <ArrowUpRight className="h-4 w-4 ml-1" />
-            </Button>
-          </div>
-        </div>
-      </div>
-
-      {/* Community Rating Section */}
-      <div className="flex w-full items-center justify-center px-3 py-6 font-normal">
-        {
-          !isMobile && (
-            <div className="pr-3">Bewertung der Community:</div>
-          )
-        }
-        <CommunityRatingDetails value={3} />
-      </div>
+      <CommunityRatingSection value={3} aria-label="Community rating section" />
     </Card>
   );
 }

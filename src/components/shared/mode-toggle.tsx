@@ -15,9 +15,9 @@ import {
 /**
  * Component representing a mode toggle button with dropdown menu.
  * Allows users to switch between light and dark themes.
- * @returns {JSX.Element} - ModeToggle component.
+ * @returns {React.ReactElement} - The mode toggle component.
  */
-export function ModeToggle() {
+export function ModeToggle(): React.ReactElement {
   // Get current theme and function to set theme
   const { theme, setTheme } = useTheme();
 
@@ -26,8 +26,14 @@ export function ModeToggle() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon">
-          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          <Sun
+            className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
+            aria-hidden="true"
+          />
+          <Moon
+            className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
+            aria-hidden="true"
+          />
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
@@ -35,12 +41,14 @@ export function ModeToggle() {
         <DropdownMenuItem onClick={() => setTheme("light")}>
           <Sun
             className={`mr-2 h-[0.8rem] w-[0.8rem] transition-all ${theme === "light" ? "text-yellow-500" : "text-gray-500"}`}
+            aria-hidden="true"
           />
           Light
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("dark")}>
           <Moon
             className={`mr-2 h-[0.8rem] w-[0.8rem] transition-all ${theme === "dark" ? "text-yellow-500" : "text-gray-500"}`}
+            aria-hidden="true"
           />
           Dark
         </DropdownMenuItem>

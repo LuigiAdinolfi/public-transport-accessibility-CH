@@ -1,13 +1,18 @@
 import { Rating, Star } from "@smastrom/react-rating";
 import { useTheme } from "next-themes";
+import React from "react";
 
 /**
  * Component to display community rating using stars.
  * @param {Object} props - Component props.
  * @param {number} props.value - Rating value (from 1 to 5).
- * @returns {JSX.Element} CommunityRatingSelect component.
+ * @returns {React.ReactElement} - The rendered component displaying the community rating.
  */
-export function CommunityRatingSelect({ value }: { value: number }) {
+export function CommunityRatingSelect({
+  value,
+}: {
+  value: number;
+}): React.ReactElement {
   const { resolvedTheme } = useTheme();
 
   // Styles for the star rating component based on the theme

@@ -1,20 +1,16 @@
-import { HelpButton } from "@/components/shared/help-button";
 import * as React from "react";
-import { BackButton } from "@/components/shared/back-button";
-import { CardStopPoint } from "@/components/stop/card-stop-point";
+import CardStopPoint from "@/components/stop/card-stop-point";
+import HeaderButtons from "@/components/shared/header-buttons";
 
 /**
- * Component representing the stop point details page.
- * @returns {JSX.Element} - StopPoint component.
+ * Component representing a stop point details page.
+ * @returns {React.ReactElement} - StopPoint component.
  */
-export function StopPoint() {
+export function StopPoint(): React.ReactElement {
   return (
     <div className="w-full lg:w-[960px]">
       {/* Header with BackButton and HelpButton */}
-      <div className="mt-1 flex items-center justify-between">
-        <BackButton />
-        <HelpButton />
-      </div>
+      <HeaderButtons />
 
       {/* Card displaying stop point details */}
       <CardStopPoint />

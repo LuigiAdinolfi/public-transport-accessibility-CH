@@ -2,20 +2,21 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardHeader
+  CardHeader,
 } from "@/components/ui/card";
 import * as React from "react";
 import { Button } from "@/components/ui/button";
-import { LightTrainProfile, DarkTrainProfile } from "@/assets/icons/train-profile";
-import { DarkIr16, LightIr16 } from "@/assets/icons/ir-16";
-import { DarkIc6, LightIc6 } from "@/assets/icons/ic-6";
+import {
+  LightTrainProfile,
+  DarkTrainProfile,
+} from "@/assets/icons/train-profile";
 import { useTheme } from "next-themes";
 
 /**
- * Component representing a card displaying recent journeys.
- * @returns {JSX.Element} JSX Element
+ * CardRecentJourneys component for selecting a recent journey.
+ * @returns {React.ReactElement} CardRecentJourneys component.
  */
-export function CardRecentJourneys() {
+export function CardRecentJourneys(): React.ReactElement {
   const { resolvedTheme } = useTheme();
 
   return (
@@ -32,7 +33,7 @@ export function CardRecentJourneys() {
         {/*  </CardDescription>*/}
         {/*</Card>*/}
         <Button
-          className="grid min-h-32 w-full items-center align-middle md:flex lg:min-h-32 md:justify-between"
+          className="grid min-h-32 w-full items-center align-middle md:flex md:justify-between lg:min-h-32"
           variant="outline"
         >
           <div className="inline-flex h-full w-full items-center justify-start">
@@ -41,53 +42,47 @@ export function CardRecentJourneys() {
               {/* Left section */}
               <div className="grid w-full grid-flow-col grid-rows-2 justify-start gap-6 px-4">
                 <div className="flex justify-start">
-                  <div className="flex items-center px-1 text-lg lg:text-xl font-semibold">
+                  <div className="flex items-center px-1 text-lg font-semibold lg:text-xl">
                     Basel SBB
                   </div>
                 </div>
                 <div className="flex justify-start">
-                  <div className="flex items-center px-1 md:text-base">Di, 07.05.2024</div>
+                  <div className="flex items-center px-1 md:text-base">
+                    Di, 07.05.2024
+                  </div>
                 </div>
               </div>
 
               {/* Middle section */}
-              <div className="hidden md:grid w-full grid-flow-col grid-rows-2 justify-center gap-7 px-4">
+              <div className="hidden w-full grid-flow-col grid-rows-2 justify-center gap-7 px-4 md:grid">
                 <div className="flex justify-center">
-                  <div className="mr-2 hidden md:flex items-center px-1 text-sm lg:text-base lg:font-semibold">
+                  <div className="mr-2 hidden items-center px-1 text-sm md:flex lg:text-base lg:font-semibold">
                     Zug
                   </div>
-                  <div className="hidden md:flex items-center px-1 text-base font-normal">
+                  <div className="hidden items-center px-1 text-base font-normal md:flex">
                     {resolvedTheme === "dark" ? (
                       <DarkTrainProfile className="h-6 w-6" />
                     ) : (
                       <LightTrainProfile className="h-6 w-6" />
                     )}
                   </div>
-                  <div className="hidden md:flex items-center px-1 text-base font-normal">
-                    {resolvedTheme === "dark" ? (
-                      <DarkIc6 className="h-6 w-6" />
-                    ) : (
-                      <LightIc6 className="h-6 w-6" />
-                    )}
+                  <div className="hidden items-center px-1 text-base font-normal md:flex">
+                    IC6
                   </div>
                 </div>
                 <div className="flex justify-center">
-                  <div className="mr-2 hidden md:flex items-center px-1 text-sm lg:text-base lg:font-semibold">
+                  <div className="mr-2 hidden items-center px-1 text-sm md:flex lg:text-base lg:font-semibold">
                     Zug
                   </div>
-                  <div className="hidden md:flex items-center px-1 text-base font-normal">
+                  <div className="hidden items-center px-1 text-base font-normal md:flex">
                     {resolvedTheme === "dark" ? (
                       <DarkTrainProfile className="h-8 w-8" />
                     ) : (
                       <LightTrainProfile className="h-8 w-8" />
                     )}
                   </div>
-                  <div className="hidden md:flex items-center px-1 text-base font-normal">
-                    {resolvedTheme === "dark" ? (
-                      <DarkIr16 className="h-6 w-6" />
-                    ) : (
-                      <LightIr16 className="h-6 w-6" />
-                    )}
+                  <div className="hidden items-center px-1 text-base font-normal md:flex">
+                    IR16
                   </div>
                 </div>
               </div>
@@ -95,12 +90,14 @@ export function CardRecentJourneys() {
               {/* Right section */}
               <div className="grid w-full grid-flow-col grid-rows-2 justify-end gap-6 px-4">
                 <div className="flex justify-end">
-                  <div className="flex items-center px-1 text-lg lg:text-xl font-semibold">
+                  <div className="flex items-center px-1 text-lg font-semibold lg:text-xl">
                     Brugg AG
                   </div>
                 </div>
                 <div className="flex justify-end">
-                  <div className="flex items-center px-1 md:text-base">46 min Reisezeit</div>
+                  <div className="flex items-center px-1 md:text-base">
+                    46 min Reisezeit
+                  </div>
                 </div>
               </div>
             </div>
