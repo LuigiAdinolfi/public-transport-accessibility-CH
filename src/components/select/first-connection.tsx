@@ -22,15 +22,15 @@ export function FirstConnection({
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const firstLeg = allLegs[0];
   const fromLocationName = firstLeg.fromLocation.locationName;
-  // const fromLocation =
-  //   fromLocationName && fromLocationName.length > 12
-  //     ? `${fromLocationName.substring(0, 12)}...`
-  //     : fromLocationName || "N/A";
+  const fromLocation =
+    fromLocationName && fromLocationName.length > 12
+      ? `${fromLocationName.substring(0, 12)}...`
+      : fromLocationName || "N/A";
   const toLocationName = firstLeg.toLocation.locationName;
-  // const toLocation =
-  //   toLocationName && toLocationName.length > 12
-  //     ? `${toLocationName.substring(0, 12)}...`
-  //     : toLocationName || "N/A";
+  const toLocation =
+    toLocationName && toLocationName.length > 12
+      ? `${toLocationName.substring(0, 12)}...`
+      : toLocationName || "N/A";
 
   const trainNumber = isTripTimedLeg(firstLeg)
     ? firstLeg.service.serviceLineNumber ?? "N/A"
@@ -61,7 +61,7 @@ export function FirstConnection({
           className={`flex w-full items-center justify-between px-3 ${!isMobile ? "pb-3 pt-2" : ""}`}
         >
           <div className="items-center text-base font-semibold md:text-lg">
-            {fromLocationName}
+            {fromLocation}
           </div>
           <div className="flex items-center justify-center font-normal">
             {!isMobile && (
@@ -75,7 +75,7 @@ export function FirstConnection({
             {!isMobile && <div className="pl-2 font-medium">{trainNumber}</div>}
           </div>
           <div className="items-center text-base font-semibold md:text-lg">
-            {toLocationName}
+            {toLocation}
           </div>
         </div>
         {/* Accessibility Information */}
