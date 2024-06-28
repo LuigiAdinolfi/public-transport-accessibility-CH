@@ -13,6 +13,19 @@ export interface MapLocations {
 }
 
 /**
+ * Helper function to format the location name by removing content within parentheses.
+ * @function formatLocationName
+ * @param {string} locationName - The name of the location.
+ * @returns {string} The formatted location name.
+ */
+const formatLocationName = (locationName: string | null): string => {
+  if (locationName === null) {
+    return "N/A";
+  }
+  return locationName.replace(/\s*\(.*?\)\s*/g, "");
+};
+
+/**
  * Asynchronously fetches journey points based on a search term.
  * @async
  * @function fetchJourneyPoints
@@ -43,6 +56,8 @@ export const fetchJourneyPoints = async (
     if (locationType === null) {
       return;
     }
+
+    location.locationName = formatLocationName(location.locationName);
 
     if (mapLookupLocations[locationType]) {
       mapLookupLocations[locationType].push(location);
