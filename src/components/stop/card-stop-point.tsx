@@ -7,11 +7,7 @@ import {
 import { useTheme } from "next-themes";
 import { useMediaQuery } from "react-responsive";
 import { useJourneyStore } from "@/store/useJourneyStore";
-import {
-  getVehicleType,
-  isTripTimedLeg,
-  truncateTo20Chars,
-} from "@/utils/tripUtils";
+import { getVehicleType, truncateTo20Chars } from "@/utils/tripUtils";
 import { TripLeg } from "ojp-sdk";
 import FeatureList from "@/components/stop/feature-list";
 import AccordionSections from "@/components/stop/accordion-sections";

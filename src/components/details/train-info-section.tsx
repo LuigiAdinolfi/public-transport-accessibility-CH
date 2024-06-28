@@ -12,7 +12,6 @@ import {
   getStopPlaceName,
   getTrainNumber,
   getVehicleType,
-  isTripTimedLeg,
 } from "@/utils/tripUtils";
 
 interface TrainInfoSectionProps {

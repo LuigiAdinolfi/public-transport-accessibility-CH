@@ -7,12 +7,10 @@ import { CommunityRatingSelect } from "@/components/select/community-rating-sele
 import { useMediaQuery } from "react-responsive";
 import * as OJP from "ojp-sdk";
 import {
-  formatTime,
   getArrivalTime,
   getDepartureTime,
   getTrainNumber,
   getVehicleType,
-  isTripTimedLeg,
 } from "@/utils/tripUtils";
 import { useJourneyStore } from "@/store/useJourneyStore";
 import { WheelchairReservationIcon } from "@/components/select/wheelchair-reservation-icon";
