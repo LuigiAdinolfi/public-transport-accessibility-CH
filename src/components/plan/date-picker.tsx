@@ -12,7 +12,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { de } from "date-fns/locale";
-import { formatISO } from "date-fns";
 import { useJourneyStore } from "@/store/useJourneyStore";
 import { formatDateForUI, handleTimeChange } from "@/utils/dateUtils";
 

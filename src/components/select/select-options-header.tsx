@@ -1,5 +1,5 @@
 import React from "react";
-import { formatDate, formatDateForUI } from "@/utils/dateUtils";
+import { formatDateForUI } from "@/utils/dateUtils";
 import { useJourneyStore } from "@/store/useJourneyStore";
 
 /**
