@@ -45,6 +45,28 @@ export const truncateTo12Chars = (value: string): string => {
 };
 
 /**
+ * @param {string | null | undefined} fromLocationName - The location name to handle.
+ * @param {number} transferLegsLength - The length of the transfer legs.
+ * @returns {string} - The formatted location name.
+ */
+export const handleLocation = (
+  fromLocationName: string | null | undefined,
+  transferLegsLength: number,
+): string => {
+  const defaultLocationName = fromLocationName ?? "N/A";
+
+  let fromLocation;
+  if (transferLegsLength > 3) {
+    fromLocation = truncateTo12Chars(defaultLocationName);
+  } else if (transferLegsLength === 2) {
+    fromLocation = truncateTo20Chars(defaultLocationName);
+  } else {
+    fromLocation = defaultLocationName;
+  }
+  return fromLocation;
+};
+
+/**
  * Returns the vehicle type of given TripLeg.
  * @param {OJP.TripLeg | null} selectedTripLeg - The TripLeg object to get the vehicle type from.
  * @returns {string} - The vehicle type of the selected trip leg or 'N/A' if the leg is null.

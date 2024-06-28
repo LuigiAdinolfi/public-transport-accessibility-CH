@@ -9,7 +9,7 @@ import HeaderButtons from "@/components/shared/header-buttons";
 export function SelectJourney(): React.ReactElement {
   return (
     <div
-      className="w-full lg:w-[960px]"
+      className="mx-auto w-full max-w-screen-lg px-0"
       role="region"
       aria-labelledby="select-journey-heading"
     >

@@ -67,6 +67,7 @@ export function CardNewJourney(): React.ReactElement {
             <div className="flex w-full items-center justify-center pt-4 lg:w-2/12 lg:pb-6">
               {/* Button to swap origin and destination */}
               <Button
+                className="w-16"
                 variant="outline"
                 size="icon"
                 onClick={() =>

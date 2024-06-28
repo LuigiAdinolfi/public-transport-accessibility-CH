@@ -28,7 +28,7 @@ export function JourneyDetails(): React.ReactElement {
   if (legs.length === 0) return <></>;
 
   return (
-    <div className="w-full lg:w-[960px]">
+    <div className="mx-auto w-full max-w-screen-lg px-0">
       <HeaderButtons />
       <TabNavigation
         legs={legs}

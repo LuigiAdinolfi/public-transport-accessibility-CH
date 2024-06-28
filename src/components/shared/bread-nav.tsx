@@ -44,7 +44,7 @@ export function MyBreadcrumb({
   };
 
   return (
-    <Breadcrumb className="w-full text-left lg:w-[960px]">
+    <Breadcrumb className="w-full text-left">
       <BreadcrumbList className="md:text-lg">
         {MyBreadcrumbList.slice(0, currentIndex + 1).map((item, index) => {
           const isLastPath = currentIndex === index;

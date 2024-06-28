@@ -46,7 +46,7 @@ export default function JourneyPointInput({
   }, [value, setInputValue]);
 
   return (
-    <div className="w-full space-y-1 lg:w-5/12">
+    <div className="w-full space-y-1 lg:w-96">
       <Label htmlFor={placeholder} className="md:text-base">
         {placeholder}
       </Label>

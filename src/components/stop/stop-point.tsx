@@ -8,7 +8,7 @@ import HeaderButtons from "@/components/shared/header-buttons";
  */
 export function StopPoint(): React.ReactElement {
   return (
-    <div className="w-full lg:w-[960px]">
+    <div className="mx-auto w-full max-w-screen-lg px-0">
       {/* Header with BackButton and HelpButton */}
       <HeaderButtons />
 

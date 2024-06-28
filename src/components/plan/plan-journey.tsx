@@ -43,7 +43,7 @@ export function PlanJourney(): React.ReactElement {
   return (
     <Tabs
       defaultValue={activeJourneyTab}
-      className="w-full lg:w-[960px]"
+      className="mx-auto w-full max-w-screen-lg px-0"
       onValueChange={(value) => setActiveJourneyTab(value as ActiveTab)} // Cast value to ActiveTab
     >
       <div className="flex flex-col">

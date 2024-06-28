@@ -12,7 +12,7 @@ export default function JourneyDetailsPage(): React.ReactElement {
   return (
     <>
       {/* Breadcrumb Navigation */}
-      <div>
+      <div className="w-full max-w-screen-lg px-0">
         <MyBreadcrumb currentPage={currentPage} />
       </div>
 
