@@ -51,7 +51,9 @@ export default function LocationSection({
       </div>
       <div className="flex flex-row p-2">
         <div className="text-base font-medium">Rollstuhlgerechte Waggons:</div>
-        <div className="pl-3 pr-1 text-base font-semibold">{platform}</div>
+        <div className="pl-3 pr-1 text-base font-semibold">
+          {platform}&nbsp;&nbsp;Sektor XY
+        </div>
       </div>
       <div className="flex flex-row items-center pb-2 pt-1 align-middle">
         <div className="px-4 text-sm font-normal">
