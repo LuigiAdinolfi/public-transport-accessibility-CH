@@ -25,7 +25,15 @@ export function LastConnection({
   // Extract details for the last leg of the journey
   const lastLeg = allLegs[allLegs.length - 1];
   const fromLocationName = lastLeg.fromLocation.locationName;
+  const fromLocation =
+    fromLocationName && fromLocationName.length > 12
+      ? `${fromLocationName.substring(0, 12)}...`
+      : fromLocationName || "N/A";
   const toLocationName = lastLeg.toLocation.locationName;
+  const toLocation =
+    toLocationName && toLocationName.length > 12
+      ? `${toLocationName.substring(0, 12)}...`
+      : toLocationName || "N/A";
   const trainNumber = isTripTimedLeg(lastLeg)
     ? lastLeg.service.serviceLineNumber ?? "N/A"
     : "N/A";
@@ -52,7 +60,7 @@ export function LastConnection({
           className={`flex w-full items-center justify-between px-3 ${!isMobile ? "pb-3 pt-2" : ""}`}
         >
           <div className="items-center text-base font-semibold md:text-lg">
-            {fromLocationName}
+            {fromLocation}
           </div>
           <div className="flex items-center justify-center font-normal">
             {!isMobile && (
@@ -65,8 +73,8 @@ export function LastConnection({
             </div>
             {!isMobile && <div className="pl-2 font-medium">{trainNumber}</div>}
           </div>
-          <div className="items-center text-base font-semibold md:text-lg">
-            {toLocationName}
+          <div className="items-center overflow-hidden overflow-ellipsis text-base font-semibold md:text-lg">
+            {toLocation}
           </div>
         </div>
         {/* Accessibility Information */}
