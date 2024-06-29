@@ -22,7 +22,10 @@ const formatLocationName = (locationName: string | null): string => {
   if (locationName === null) {
     return "N/A";
   }
-  return locationName.replace(/\s*\(.*?\)\s*/g, "");
+  return locationName
+    .replace(/\s*\(.*?\)\s*/g, "")
+    .replace(/\)\s*$/, "")
+    .trim();
 };
 
 /**
