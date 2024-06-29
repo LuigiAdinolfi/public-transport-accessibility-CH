@@ -1,8 +1,4 @@
 import React from "react";
-import {
-  DarkTrainProfile,
-  LightTrainProfile,
-} from "@/assets/icons/train-profile";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";

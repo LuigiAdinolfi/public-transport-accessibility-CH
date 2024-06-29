@@ -58,19 +58,19 @@ const vehicleTypeMap: { [key: string]: keyof typeof iconMap } = {
   Zug: "Train",
   Bus: "Bus",
   Tram: "Tram",
-  // Add more vehicle types here
+  Schiff: "Boat",
+  Kabinenbahn: "CableCar",
+  Auto: "Car",
+  Standseilbahn: "Funicular",
 };
 
 type Theme = "light" | "dark";
-type VehicleType = keyof typeof iconMap;
-
 export const getVehicleIcon = (
   vehicleType: string,
   theme: string | undefined,
 ) => {
   const mappedType = vehicleTypeMap[vehicleType];
   if (!mappedType) {
-    console.warn(`No icon found for vehicle type: ${vehicleType}`);
     return null;
   }
   const vehicleIcons = iconMap[mappedType];
