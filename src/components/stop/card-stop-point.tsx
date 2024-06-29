@@ -7,7 +7,7 @@ import {
 import { useTheme } from "next-themes";
 import { useMediaQuery } from "react-responsive";
 import { useJourneyStore } from "@/store/useJourneyStore";
-import { getVehicleType, truncateTo20Chars } from "@/utils/tripUtils";
+import { getVehicleType } from "@/utils/tripUtils";
 import { TripLeg } from "ojp-sdk";
 import FeatureList from "@/components/stop/feature-list";
 import AccordionSections from "@/components/stop/accordion-sections";
@@ -21,7 +21,6 @@ export default function CardStopPoint(): React.ReactElement {
   const { resolvedTheme } = useTheme();
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const { selectedStop, selectedTripLeg } = useJourneyStore();
-  const stopPoint = truncateTo20Chars(selectedStop);
 
   // Determine vehicle type based on selected trip leg
   let vehicleType = "N/A";
@@ -37,7 +36,7 @@ export default function CardStopPoint(): React.ReactElement {
       >
         {/* Stop name */}
         <h1 className="items-center text-xl font-bold text-zinc-900 dark:text-zinc-100">
-          {stopPoint}
+          {selectedStop}
         </h1>
         {/* Vehicle type and icon */}
         <div

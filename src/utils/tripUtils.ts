@@ -21,6 +21,18 @@ export function formatTime(date: Date | null): string {
 }
 
 /**
+ * Truncates a string to 40 characters.
+ * Returns 'N/A' if the input string is null or undefined.
+ * @param {string} value - The string to truncate.
+ * @returns {string} - The truncated string or 'N/A' if value is null or undefined.
+ */
+export const truncateTo40Chars = (value: string): string => {
+  return value && value.length > 40
+    ? `${value.substring(0, 40)}`
+    : value || "N/A";
+};
+
+/**
  * Truncates a string to 20 characters.
  * Returns 'N/A' if the input string is null or undefined.
  * @param {string} value - The string to truncate.
@@ -55,15 +67,13 @@ export const handleLocation = (
 ): string => {
   const defaultLocationName = fromLocationName ?? "N/A";
 
-  let fromLocation;
-  if (transferLegsLength > 3) {
-    fromLocation = truncateTo12Chars(defaultLocationName);
+  if (transferLegsLength > 2) {
+    return truncateTo12Chars(defaultLocationName);
   } else if (transferLegsLength === 2) {
-    fromLocation = truncateTo20Chars(defaultLocationName);
+    return truncateTo20Chars(defaultLocationName);
   } else {
-    fromLocation = defaultLocationName;
+    return defaultLocationName;
   }
-  return fromLocation;
 };
 
 /**
