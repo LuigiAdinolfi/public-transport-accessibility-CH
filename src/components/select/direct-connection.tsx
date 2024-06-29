@@ -12,7 +12,6 @@ import {
   getVehicleNumber,
   getVehicleType,
 } from "@/utils/tripUtils";
-import { useJourneyStore } from "@/store/useJourneyStore";
 import { WheelchairReservationIcon } from "@/components/select/wheelchair-reservation-icon";
 import { getVehicleIcon } from "@/utils/iconsUtils";
 import { useTheme } from "next-themes";
@@ -32,7 +31,7 @@ export function DirectConnection({
   allLegs: OJP.TripLeg[];
   duration: string;
 }): React.ReactElement {
-  const router = useRouter();
+  useRouter();
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const { resolvedTheme } = useTheme();
   const details = allLegs[0];
