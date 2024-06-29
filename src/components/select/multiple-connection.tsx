@@ -27,7 +27,7 @@ export function MultipleConnection({
 
   return (
     <Button
-      className="flex h-full w-full justify-start"
+      className="flex h-full w-full justify-start border-zinc-400"
       variant="outline"
       onClick={handleClick}
       aria-label="Select journey with multiple connections"

@@ -18,6 +18,12 @@ import { useTheme } from "next-themes";
  */
 export function CardRecentJourneys(): React.ReactElement {
   const { resolvedTheme } = useTheme();
+  const fromLocation = "Basel SBB";
+  const toLocation = "Brugg AG";
+  const journeyDate = "Di, 07.05.2024";
+  const journeyDuration = "46 min Reisezeit";
+  const vehicleType = "Zug";
+  const vehicleNumber = "IC6";
 
   return (
     <Card>
@@ -33,7 +39,7 @@ export function CardRecentJourneys(): React.ReactElement {
         {/*  </CardDescription>*/}
         {/*</Card>*/}
         <Button
-          className="grid min-h-32 w-full items-center align-middle md:flex md:justify-between lg:min-h-32"
+          className="grid min-h-32 w-full items-center border-zinc-400 align-middle md:flex md:justify-between lg:min-h-32"
           variant="outline"
         >
           <div className="inline-flex h-full w-full items-center justify-start">
@@ -43,12 +49,12 @@ export function CardRecentJourneys(): React.ReactElement {
               <div className="grid w-full grid-flow-col grid-rows-2 justify-start gap-6 px-4">
                 <div className="flex justify-start">
                   <div className="flex items-center px-1 text-lg font-semibold lg:text-xl">
-                    Basel SBB
+                    {fromLocation}
                   </div>
                 </div>
                 <div className="flex justify-start">
                   <div className="flex items-center px-1 md:text-base">
-                    Di, 07.05.2024
+                    {journeyDate}
                   </div>
                 </div>
               </div>
@@ -56,8 +62,8 @@ export function CardRecentJourneys(): React.ReactElement {
               {/* Middle section */}
               <div className="hidden w-full grid-flow-col grid-rows-2 justify-center gap-7 px-4 md:grid">
                 <div className="flex justify-center">
-                  <div className="mr-2 hidden items-center px-1 text-sm md:flex lg:text-base lg:font-semibold">
-                    Zug
+                  <div className="mr-2 hidden items-center px-1 text-sm md:flex lg:text-base lg:font-normal">
+                    {vehicleType}
                   </div>
                   <div className="hidden items-center px-1 text-base font-normal md:flex">
                     {resolvedTheme === "dark" ? (
@@ -67,12 +73,12 @@ export function CardRecentJourneys(): React.ReactElement {
                     )}
                   </div>
                   <div className="hidden items-center px-1 text-base font-normal md:flex">
-                    IC6
+                    {vehicleNumber}
                   </div>
                 </div>
                 <div className="flex justify-center">
-                  <div className="mr-2 hidden items-center px-1 text-sm md:flex lg:text-base lg:font-semibold">
-                    Zug
+                  <div className="mr-2 hidden items-center px-1 text-sm md:flex lg:text-base lg:font-normal">
+                    {vehicleType}
                   </div>
                   <div className="hidden items-center px-1 text-base font-normal md:flex">
                     {resolvedTheme === "dark" ? (
@@ -82,7 +88,7 @@ export function CardRecentJourneys(): React.ReactElement {
                     )}
                   </div>
                   <div className="hidden items-center px-1 text-base font-normal md:flex">
-                    IR16
+                    {vehicleNumber}
                   </div>
                 </div>
               </div>
@@ -91,12 +97,12 @@ export function CardRecentJourneys(): React.ReactElement {
               <div className="grid w-full grid-flow-col grid-rows-2 justify-end gap-6 px-4">
                 <div className="flex justify-end">
                   <div className="flex items-center px-1 text-lg font-semibold lg:text-xl">
-                    Brugg AG
+                    {toLocation}
                   </div>
                 </div>
                 <div className="flex justify-end">
                   <div className="flex items-center px-1 md:text-base">
-                    46 min Reisezeit
+                    {journeyDuration}
                   </div>
                 </div>
               </div>
