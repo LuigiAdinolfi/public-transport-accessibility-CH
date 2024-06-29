@@ -44,8 +44,9 @@ export const formatDateForUI = (date: Date | null): string => {
  * @param date - The date string to format (should be in ISO format).
  * @returns A formatted date string suitable for display.
  */
-export const formatDate = (date: string) => {
-  return format(new Date(date), "EEE dd.MM.yyyy", { locale: de });
+export const formatDate = (date: Date | null): string => {
+  if (!date) return "";
+  return format(new Date(date), "EEEE dd. MMMM yyyy", { locale: de });
 };
 
 /**

@@ -1,5 +1,5 @@
 import React from "react";
-import { formatDateForUI } from "@/utils/dateUtils";
+import { formatDate } from "@/utils/dateUtils";
 import { useJourneyStore } from "@/store/useJourneyStore";
 
 /**
@@ -15,7 +15,7 @@ export default function SelectOptionsHeader(): React.ReactElement {
         Wählen Sie eine dieser Optionen aus.
       </div>
       <div className="flex w-full justify-end font-normal text-zinc-950 dark:text-zinc-400 md:text-base">
-        {formatDateForUI(selectedDate)}
+        {formatDate(selectedDate)}
       </div>
     </div>
   );
