@@ -62,32 +62,32 @@ export function CardRecentJourneys(): React.ReactElement {
               {/* Middle section */}
               <div className="hidden w-full grid-flow-col grid-rows-2 justify-center gap-7 px-4 md:grid">
                 <div className="flex justify-center">
-                  <div className="mr-2 hidden items-center px-1 text-sm md:flex lg:text-base lg:font-normal">
+                  <div className="mr-2 hidden items-center px-1 text-sm md:flex lg:text-base lg:font-medium">
                     {vehicleType}
                   </div>
-                  <div className="hidden items-center px-1 text-base font-normal md:flex">
+                  <div className="text-lg:text-base hidden items-center px-1 md:flex lg:font-medium">
                     {resolvedTheme === "dark" ? (
                       <DarkTrainProfile className="h-6 w-6" />
                     ) : (
                       <LightTrainProfile className="h-6 w-6" />
                     )}
                   </div>
-                  <div className="hidden items-center px-1 text-base font-normal md:flex">
+                  <div className="hidden items-center px-1 md:flex lg:text-base lg:font-medium">
                     {vehicleNumber}
                   </div>
                 </div>
                 <div className="flex justify-center">
-                  <div className="mr-2 hidden items-center px-1 text-sm md:flex lg:text-base lg:font-normal">
+                  <div className="mr-2 hidden items-center px-1 text-sm md:flex lg:text-base lg:font-medium">
                     {vehicleType}
                   </div>
-                  <div className="hidden items-center px-1 text-base font-normal md:flex">
+                  <div className="tlg:text-base hidden items-center px-1 md:flex lg:font-medium">
                     {resolvedTheme === "dark" ? (
                       <DarkTrainProfile className="h-8 w-8" />
                     ) : (
                       <LightTrainProfile className="h-8 w-8" />
                     )}
                   </div>
-                  <div className="hidden items-center px-1 text-base font-normal md:flex">
+                  <div className="hidden items-center px-1 md:flex lg:text-base lg:font-medium">
                     {vehicleNumber}
                   </div>
                 </div>

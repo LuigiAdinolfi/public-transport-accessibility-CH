@@ -54,7 +54,7 @@ export function FirstConnection({
           <div className="items-center text-base font-semibold md:text-lg">
             {fromLocation}
           </div>
-          <div className="flex items-center justify-center font-normal">
+          <div className="flex items-center justify-center font-medium">
             {!isMobile && (
               <div className="flex items-center pr-2 font-medium">
                 {vehicleType}

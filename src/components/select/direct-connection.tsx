@@ -97,19 +97,15 @@ export function DirectConnection({
                 <div className="items-center text-base font-semibold md:text-lg">
                   {fromLocationName}
                 </div>
-                <div className="flex items-center justify-center font-normal">
+                <div className="flex items-center justify-center font-medium">
                   {!isMobile && (
-                    <div className="flex items-center pr-2 font-medium">
-                      {vehicleType}
-                    </div>
+                    <div className="flex items-center pr-2">{vehicleType}</div>
                   )}
                   {/* Vehicle Profile Icon */}
                   <div>
                     {VehicleIcon && <VehicleIcon className="h-6 w-6" />}
                   </div>
-                  {!isMobile && (
-                    <div className="pl-2 font-medium">{vehicleNumber}</div>
-                  )}
+                  {!isMobile && <div className="pl-2">{vehicleNumber}</div>}
                 </div>
                 <div className="items-center text-base font-semibold md:text-lg">
                   {toLocationName}
