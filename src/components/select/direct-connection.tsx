@@ -16,6 +16,7 @@ import { useJourneyStore } from "@/store/useJourneyStore";
 import { WheelchairReservationIcon } from "@/components/select/wheelchair-reservation-icon";
 import { getVehicleIcon } from "@/utils/iconsUtils";
 import { useTheme } from "next-themes";
+import { useHandleClick } from "@/utils/journeyUtils";
 
 /**
  * Component representing a direct connection in a journey.
@@ -35,15 +36,7 @@ export function DirectConnection({
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const { resolvedTheme } = useTheme();
   const details = allLegs[0];
-  const { setAllLegs } = useJourneyStore();
-
-  /**
-   * Handles click event when the user selects this direct connection.
-   */
-  const handleClick = () => {
-    setAllLegs(allLegs);
-    router.push("/select/details");
-  };
+  const handleClick = useHandleClick(allLegs);
 
   // Extracted details for readability and maintainability
   const vehicleNumber = getVehicleNumber(details);

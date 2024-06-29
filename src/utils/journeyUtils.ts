@@ -10,10 +10,6 @@ import * as OJP from "ojp-sdk";
 export const useHandleClick = (allLegs: OJP.TripLeg[]) => {
   const router = useRouter();
   const { setAllLegs } = useJourneyStore();
-
-  /**
-   * Handles the click event.
-   */
   return () => {
     setAllLegs(allLegs); // Set all trip legs in the journey store
     router.push("/select/details"); // Navigate to the details page
