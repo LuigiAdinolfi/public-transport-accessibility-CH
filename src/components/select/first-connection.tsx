@@ -7,12 +7,13 @@ import * as OJP from "ojp-sdk";
 import {
   getArrivalTime,
   getDepartureTime,
-  getTrainNumber,
+  getVehicleNumber,
   getVehicleType,
   truncateTo12Chars,
 } from "@/utils/tripUtils";
 import { WheelchairReservationIcon } from "@/components/select/wheelchair-reservation-icon";
-import { TrainProfileIcon } from "@/components/select/train-profile-icon";
+import { getVehicleIcon } from "@/utils/iconsUtils";
+import { useTheme } from "next-themes";
 
 /**
  * Component representing the first connection in a journey.
@@ -26,15 +27,17 @@ export function FirstConnection({
   allLegs: OJP.TripLeg[];
 }): React.ReactElement {
   const isMobile = useMediaQuery({ maxWidth: 767 });
+  const { resolvedTheme } = useTheme();
   const firstLeg = allLegs[0];
   const fromLocationName = firstLeg.fromLocation.locationName;
   const fromLocation = truncateTo12Chars(fromLocationName ?? "N/A");
   const toLocationName = firstLeg.toLocation.locationName;
   const toLocation = truncateTo12Chars(toLocationName ?? "N/A");
-  const trainNumber = getTrainNumber(firstLeg);
+  const trainNumber = getVehicleNumber(firstLeg);
   const departureTime = getDepartureTime(firstLeg);
   const arrivalTime = getArrivalTime(firstLeg);
   const vehicleType = getVehicleType(firstLeg);
+  const VehicleIcon = getVehicleIcon(vehicleType, resolvedTheme);
 
   return (
     <div className="flex basis-1/2 justify-start rounded-lg bg-zinc-50 dark:bg-zinc-900">
@@ -57,9 +60,7 @@ export function FirstConnection({
                 {vehicleType}
               </div>
             )}
-            <div>
-              <TrainProfileIcon />
-            </div>
+            <div>{VehicleIcon && <VehicleIcon className="h-6 w-6" />}</div>
             {!isMobile && <div className="pl-2 font-medium">{trainNumber}</div>}
           </div>
           <div className="items-center text-base font-semibold md:text-lg">

@@ -7,13 +7,14 @@ import * as OJP from "ojp-sdk";
 import {
   getArrivalTime,
   getDepartureTime,
-  getTrainNumber,
+  getVehicleNumber,
   getVehicleType,
   truncateTo12Chars,
 } from "@/utils/tripUtils";
 import { WheelchairReservationIcon } from "@/components/select/wheelchair-reservation-icon";
 import { WheelchairIcon } from "@/components/select/wheelchair-icon";
-import { TrainProfileIcon } from "@/components/select/train-profile-icon";
+import { getVehicleIcon } from "@/utils/iconsUtils";
+import { useTheme } from "next-themes";
 
 /**
  * Component representing the last connection in a journey.
@@ -27,17 +28,18 @@ export function LastConnection({
   allLegs: OJP.TripLeg[];
 }): React.ReactElement {
   const isMobile = useMediaQuery({ maxWidth: 767 });
-
+  const { resolvedTheme } = useTheme();
   // Extract details for the last leg of the journey
   const lastLeg = allLegs[allLegs.length - 1];
   const fromLocationName = lastLeg.fromLocation.locationName;
   const fromLocation = truncateTo12Chars(fromLocationName ?? "N/A");
   const toLocationName = lastLeg.toLocation.locationName;
   const toLocation = truncateTo12Chars(toLocationName ?? "N/A");
-  const trainNumber = getTrainNumber(lastLeg);
+  const trainNumber = getVehicleNumber(lastLeg);
   const departureTime = getDepartureTime(lastLeg);
   const arrivalTime = getArrivalTime(lastLeg);
   const vehicleType = getVehicleType(lastLeg);
+  const VehicleIcon = getVehicleIcon(vehicleType, resolvedTheme);
 
   return (
     <div className="flex basis-1/2 justify-start rounded-lg bg-zinc-50 dark:bg-zinc-900">
@@ -60,9 +62,7 @@ export function LastConnection({
                 {vehicleType}
               </div>
             )}
-            <div>
-              <TrainProfileIcon />
-            </div>
+            <div>{VehicleIcon && <VehicleIcon className="h-6 w-6" />}</div>
             {!isMobile && <div className="pl-2 font-medium">{trainNumber}</div>}
           </div>
           <div className="items-center overflow-hidden overflow-ellipsis text-base font-semibold md:text-lg">

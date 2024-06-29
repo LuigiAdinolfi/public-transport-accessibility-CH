@@ -10,50 +10,49 @@ import { Map } from "lucide-react";
 import * as OJP from "ojp-sdk";
 import {
   getStopPlaceName,
-  getTrainNumber,
+  getVehicleNumber,
   getVehicleType,
 } from "@/utils/tripUtils";
+import { getVehicleIcon } from "@/utils/iconsUtils";
 
-interface TrainInfoSectionProps {
+interface InfoSectionProps {
   leg: OJP.TripLeg;
   legDuration: number;
 }
 
 /**
- * TrainInfoSection component displays train information including vehicle type, train number,
+ * InfoSection component displays vehicle information including vehicle type, vehicle number,
  * destination stop place, and optionally, duration and navigation button.
  *
- * @param {TrainInfoSectionProps} props - Props for TrainInfoSection component.
- * @returns {React.ReactElement} TrainInfoSection component.
+ * @param {InfoSectionProps} props - Props for InfoSection component.
+ * @returns {React.ReactElement} InfoSection component.
  */
-export default function TrainInfoSection({
+export default function InfoSection({
   leg,
   legDuration,
-}: TrainInfoSectionProps): React.ReactElement {
+}: InfoSectionProps): React.ReactElement {
   const { resolvedTheme } = useTheme();
   const router = useRouter();
 
   // Determine train information based on leg type
-  const trainNumber = getTrainNumber(leg);
-  const trainDestinationStopPlace = getStopPlaceName(leg);
+  const vehicleNumber = getVehicleNumber(leg);
+  const vehicleDestinationStopPlace = getStopPlaceName(leg);
   const vehicleType = getVehicleType(leg);
+
+  const VehicleIcon = getVehicleIcon(vehicleType, resolvedTheme);
 
   return (
     <div className="flex items-center justify-between p-6 px-8 pb-6">
-      {/* Train information display */}
+      {/* Vehicle information display */}
       <div className="flex items-center space-x-1.5 md:h-10">
         <div className="pr-1 text-base font-medium">{vehicleType}</div>
-        {/* Train profile icon based on theme */}
+        {/* Vehicle profile icon based on theme */}
         <div className="text-base font-normal">
-          {resolvedTheme === "dark" ? (
-            <DarkTrainProfile className="h-6 w-6" />
-          ) : (
-            <LightTrainProfile className="h-6 w-6" />
-          )}
+          {VehicleIcon && <VehicleIcon className="h-6 w-6" />}
         </div>
-        <div className="pl-1 text-base font-medium">{trainNumber}</div>
+        <div className="pl-1 text-base font-medium">{vehicleNumber}</div>
         <div className="pl-2 text-base font-normal">
-          Richtung {trainDestinationStopPlace}
+          Richtung {vehicleDestinationStopPlace}
         </div>
       </div>
       {/* Optional display of transfer duration and navigation button */}

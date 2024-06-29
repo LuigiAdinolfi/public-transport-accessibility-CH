@@ -113,7 +113,7 @@ export const getDepartureTime = (leg: OJP.TripLeg): string => {
  * @param {OJP.TripLeg} leg - The TripLeg object to get the train number from.
  * @returns {string} - The train number of the leg or 'N/A' if the leg is not a TripTimedLeg.
  */
-export const getTrainNumber = (leg: OJP.TripLeg): string => {
+export const getVehicleNumber = (leg: OJP.TripLeg): string => {
   if (!isTripTimedLeg(leg)) return "N/A";
   return leg.service.serviceLineNumber ?? "N/A";
 };

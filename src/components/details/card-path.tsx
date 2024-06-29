@@ -1,7 +1,7 @@
 import React from "react";
 import * as OJP from "ojp-sdk";
 import { Card } from "@/components/ui/card";
-import TrainInfoSection from "@/components/details/train-info-section";
+import InfoSection from "@/components/details/info-section";
 import LocationSection from "@/components/details/location-section";
 import CommunityRatingSection from "@/components/details/community-rating-section";
 import { useJourneyStore } from "@/store/useJourneyStore";
@@ -36,7 +36,7 @@ export default function CardPath({
 
   return (
     <Card>
-      <TrainInfoSection leg={selectedLeg} legDuration={legDuration} />
+      <InfoSection leg={selectedLeg} legDuration={legDuration} />
       <div className="flex gap-6 px-6">
         <LocationSection
           locationName={fromLocationName}

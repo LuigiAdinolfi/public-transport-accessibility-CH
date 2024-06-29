@@ -9,12 +9,13 @@ import * as OJP from "ojp-sdk";
 import {
   getArrivalTime,
   getDepartureTime,
-  getTrainNumber,
+  getVehicleNumber,
   getVehicleType,
 } from "@/utils/tripUtils";
 import { useJourneyStore } from "@/store/useJourneyStore";
 import { WheelchairReservationIcon } from "@/components/select/wheelchair-reservation-icon";
-import { TrainProfileIcon } from "@/components/select/train-profile-icon";
+import { getVehicleIcon } from "@/utils/iconsUtils";
+import { useTheme } from "next-themes";
 
 /**
  * Component representing a direct connection in a journey.
@@ -32,6 +33,7 @@ export function DirectConnection({
 }): React.ReactElement {
   const router = useRouter();
   const isMobile = useMediaQuery({ maxWidth: 767 });
+  const { resolvedTheme } = useTheme();
   const details = allLegs[0];
   const { setAllLegs } = useJourneyStore();
 
@@ -44,12 +46,13 @@ export function DirectConnection({
   };
 
   // Extracted details for readability and maintainability
-  const trainNumber = getTrainNumber(details);
+  const vehicleNumber = getVehicleNumber(details);
   const departureTime = getDepartureTime(details);
   const arrivalTime = getArrivalTime(details);
   const fromLocationName = details.fromLocation.locationName;
   const toLocationName = details.toLocation.locationName;
   const vehicleType = getVehicleType(details);
+  const VehicleIcon = getVehicleIcon(vehicleType, resolvedTheme);
 
   return (
     <Button
@@ -100,12 +103,12 @@ export function DirectConnection({
                       {vehicleType}
                     </div>
                   )}
-                  {/* Train Profile Icon */}
+                  {/* Vehicle Profile Icon */}
                   <div>
-                    <TrainProfileIcon />
+                    {VehicleIcon && <VehicleIcon className="h-6 w-6" />}
                   </div>
                   {!isMobile && (
-                    <div className="pl-2 font-medium">{trainNumber}</div>
+                    <div className="pl-2 font-medium">{vehicleNumber}</div>
                   )}
                 </div>
                 <div className="items-center text-base font-semibold md:text-lg">

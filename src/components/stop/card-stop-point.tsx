@@ -1,9 +1,5 @@
 import React from "react";
 import { Card } from "@/components/ui/card";
-import {
-  DarkTrainProfile,
-  LightTrainProfile,
-} from "@/assets/icons/train-profile";
 import { useTheme } from "next-themes";
 import { useMediaQuery } from "react-responsive";
 import { useJourneyStore } from "@/store/useJourneyStore";
@@ -12,6 +8,7 @@ import { TripLeg } from "ojp-sdk";
 import FeatureList from "@/components/stop/feature-list";
 import AccordionSections from "@/components/stop/accordion-sections";
 import InfoSection from "@/components/stop/info-section";
+import { getVehicleIcon } from "@/utils/iconsUtils";
 
 /**
  * Component displaying detailed information about a stop point in a card format.
@@ -27,6 +24,7 @@ export default function CardStopPoint(): React.ReactElement {
   if (selectedTripLeg instanceof TripLeg) {
     vehicleType = getVehicleType(selectedTripLeg);
   }
+  const VehicleIcon = getVehicleIcon(vehicleType, resolvedTheme);
 
   return (
     <Card className="mt-3">
@@ -44,11 +42,7 @@ export default function CardStopPoint(): React.ReactElement {
         >
           <div className="pr-2 text-base font-normal">{vehicleType}</div>
           <div className="text-base font-normal">
-            {resolvedTheme === "dark" ? (
-              <DarkTrainProfile className="h-6 w-6" />
-            ) : (
-              <LightTrainProfile className="h-6 w-6" />
-            )}
+            {VehicleIcon && <VehicleIcon className="h-6 w-6" />}
           </div>
         </div>
       </div>
