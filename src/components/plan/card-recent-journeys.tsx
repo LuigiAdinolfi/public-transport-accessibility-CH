@@ -15,7 +15,8 @@ import { useRecentJourneysStore } from "@/store/useRecentJourneysStore";
 import { handleFormSubmit } from "@/utils/submitUtils";
 import { useJourneyStore } from "@/store/useJourneyStore";
 import { useRouter } from "next/navigation";
-import { formatDate } from "@/utils/dateUtils";
+import { formatDate, formatDateSmall } from "@/utils/dateUtils";
+import { useMediaQuery } from "react-responsive";
 
 /**
  * CardRecentJourneys component for selecting a recent journey.
@@ -23,6 +24,7 @@ import { formatDate } from "@/utils/dateUtils";
  */
 export function CardRecentJourneys(): React.ReactElement {
   const { resolvedTheme } = useTheme();
+  const isMobile = useMediaQuery({ maxWidth: 767 });
   const recentJourneys = useRecentJourneysStore((state) =>
     state.getRecentJourneys(),
   );
@@ -51,7 +53,8 @@ export function CardRecentJourneys(): React.ReactElement {
               journey.journeyDate instanceof Date
                 ? journey.journeyDate.toISOString()
                 : journey.journeyDate ?? "";
-            const formattedDate = formatDate(new Date(date));
+            const formattedDateBigScreen = formatDate(new Date(date));
+            const formattedDateSmallScreen = formatDateSmall(new Date(date));
             return (
               <Button
                 key={index}
@@ -72,13 +75,15 @@ export function CardRecentJourneys(): React.ReactElement {
                   <div className="text-text/90 flex w-full items-center justify-between">
                     <div className="grid w-full grid-flow-col grid-rows-2 justify-start gap-6 px-4">
                       <div className="flex justify-start">
-                        <div className="flex items-center px-1 text-lg font-semibold lg:text-xl">
+                        <div className="flex items-center px-1 text-base font-semibold lg:text-xl">
                           {origin}
                         </div>
                       </div>
                       <div className="flex justify-start">
                         <div className="flex items-center px-1 md:text-base">
-                          {formattedDate}
+                          {isMobile
+                            ? formattedDateSmallScreen
+                            : formattedDateBigScreen}
                         </div>
                       </div>
                     </div>
@@ -121,13 +126,17 @@ export function CardRecentJourneys(): React.ReactElement {
                     </div>
                     <div className="grid w-full grid-flow-col grid-rows-2 justify-end gap-6 px-4">
                       <div className="flex justify-end">
-                        <div className="flex items-center px-1 text-lg font-semibold lg:text-xl">
+                        <div className="flex items-center px-1 text-base font-semibold lg:text-xl">
                           {destination}
                         </div>
                       </div>
                       <div className="flex justify-end">
                         <div className="flex items-center px-1 md:text-base">
-                          {journey.journeyDuration}
+                          {isMobile ? (
+                            journey.journeyDuration.replace(/ Reisezeit/g, "")
+                          ) : (
+                            <>{journey.journeyDuration}</>
+                          )}
                         </div>
                       </div>
                     </div>
