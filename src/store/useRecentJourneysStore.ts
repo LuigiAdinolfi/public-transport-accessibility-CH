@@ -1,9 +1,10 @@
 import { create } from "zustand";
+import * as OJP from "ojp-sdk";
 
 interface RecentJourney {
-  fromLocation: string;
-  toLocation: string;
-  journeyDate: string;
+  fromLocation: OJP.Location | null;
+  toLocation: OJP.Location | null;
+  journeyDate: Date | null;
   journeyDuration: string;
   vehicleType: string;
   vehicleNumber: string;

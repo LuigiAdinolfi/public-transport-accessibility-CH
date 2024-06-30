@@ -18,10 +18,9 @@ export const useHandleClick = (allLegs: OJP.TripLeg[], duration: string) => {
     setAllLegs(allLegs); // Set all trip legs in the journey store
 
     // Extract necessary details for recent journey
-    const fromLocation = allLegs[0].fromLocation.locationName ?? "N/A";
-    const toLocation =
-      allLegs[allLegs.length - 1].toLocation.locationName ?? "N/A";
-    const journeyDate = new Date().toLocaleDateString(); // Set the current date for simplicity
+    const fromLocation = allLegs[0].fromLocation;
+    const toLocation = allLegs[allLegs.length - 1].toLocation;
+    const journeyDate = new Date();
     const vehicleType = getVehicleType(allLegs[0]);
     const vehicleNumber = getVehicleNumber(allLegs[0]);
     const legs = allLegs.filter((leg) => leg.legType === "TimedLeg") || [];
