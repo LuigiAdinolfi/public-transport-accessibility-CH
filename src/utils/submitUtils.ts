@@ -32,7 +32,6 @@ export async function handleFormSubmit(
       activeSearchTab,
     );
     setTripDetails(response.trips);
-    console.log("Trip details:", response.trips);
     push("/select");
   } catch (error) {
     console.error("Error fetching trip request:", error);

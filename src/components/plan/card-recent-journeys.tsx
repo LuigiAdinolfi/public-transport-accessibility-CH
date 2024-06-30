@@ -17,6 +17,7 @@ import { useJourneyStore } from "@/store/useJourneyStore";
 import { useRouter } from "next/navigation";
 import { formatDate, formatDateSmall } from "@/utils/dateUtils";
 import { useMediaQuery } from "react-responsive";
+import { getVehicleIcon } from "@/utils/iconsUtils";
 
 /**
  * CardRecentJourneys component for selecting a recent journey.
@@ -55,6 +56,10 @@ export function CardRecentJourneys(): React.ReactElement {
                 : journey.journeyDate ?? "";
             const formattedDateBigScreen = formatDate(new Date(date));
             const formattedDateSmallScreen = formatDateSmall(new Date(date));
+            const VehicleIcon = getVehicleIcon(
+              journey.vehicleType,
+              resolvedTheme,
+            );
             return (
               <Button
                 key={index}
@@ -89,34 +94,37 @@ export function CardRecentJourneys(): React.ReactElement {
                     </div>
                     <div className="hidden w-full grid-flow-col grid-rows-2 justify-center gap-7 px-4 md:grid">
                       {journey.isMultipleConnection ? (
-                        journey.connections.map((conn, connIndex) => (
-                          <div key={connIndex} className="flex justify-center">
-                            <div className="mr-2 items-center px-1 text-sm md:flex lg:text-base lg:font-medium">
-                              {conn.vehicleType}
+                        journey.connections.map((conn, connIndex) => {
+                          const ConnectionIcon = getVehicleIcon(
+                            conn.vehicleType,
+                            resolvedTheme,
+                          );
+                          return (
+                            <div
+                              key={connIndex}
+                              className="flex justify-center"
+                            >
+                              <div className="mr-2 items-center px-1 text-sm md:flex lg:text-base lg:font-medium">
+                                {conn.vehicleType}
+                              </div>
+                              <div className="text-lg:text-base items-center px-1 md:flex lg:font-medium">
+                                {ConnectionIcon && (
+                                  <ConnectionIcon className="h-6 w-6" />
+                                )}
+                              </div>
+                              <div className="items-center px-1 md:flex lg:text-base lg:font-medium">
+                                {conn.vehicleNumber}
+                              </div>
                             </div>
-                            <div className="text-lg:text-base items-center px-1 md:flex lg:font-medium">
-                              {resolvedTheme === "dark" ? (
-                                <DarkTrainProfile className="h-6 w-6" />
-                              ) : (
-                                <LightTrainProfile className="h-6 w-6" />
-                              )}
-                            </div>
-                            <div className="items-center px-1 md:flex lg:text-base lg:font-medium">
-                              {conn.vehicleNumber}
-                            </div>
-                          </div>
-                        ))
+                          );
+                        })
                       ) : (
                         <div className="flex justify-center">
                           <div className="mr-2 items-center px-1 text-sm md:flex lg:text-base lg:font-medium">
                             {journey.vehicleType}
                           </div>
                           <div className="text-lg:text-base items-center px-1 md:flex lg:font-medium">
-                            {resolvedTheme === "dark" ? (
-                              <DarkTrainProfile className="h-6 w-6" />
-                            ) : (
-                              <LightTrainProfile className="h-6 w-6" />
-                            )}
+                            {VehicleIcon && <VehicleIcon className="h-6 w-6" />}
                           </div>
                           <div className="items-center px-1 md:flex lg:text-base lg:font-medium">
                             {journey.vehicleNumber}
