@@ -47,7 +47,10 @@ export function CardRecentJourneys(): React.ReactElement {
           recentJourneys.map((journey, index) => {
             const origin = journey.fromLocation?.locationName ?? "";
             const destination = journey.toLocation?.locationName ?? "";
-            const date = journey.journeyDate?.toISOString() ?? "";
+            const date =
+              journey.journeyDate instanceof Date
+                ? journey.journeyDate.toISOString()
+                : journey.journeyDate ?? "";
             const formattedDate = formatDate(new Date(date));
             return (
               <Button
