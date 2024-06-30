@@ -30,7 +30,7 @@ export default function TabNavigation({
 
   // Filter TransferLegs from allLegs
   const transferLegs =
-    allLegs.filter((leg) => leg.legType === "TransferLeg") || [];
+    allLegs.filter((leg) => leg.legType === "TimedLeg") || [];
 
   return (
     <Tabs
