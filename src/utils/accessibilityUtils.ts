@@ -3,6 +3,10 @@ import { LightWheelchairInaccessible } from "@/assets/icons/wheelchair-inaccessi
 import { LightWheelchairPartially } from "@/assets/icons/wheelchair-partially";
 import { LightWheelchairReservation } from "@/assets/icons/wheelchair-reservation";
 import { LightWheelchairSubstituteTransport } from "@/assets/icons/wheelchair-substitute-transport";
+import {
+  DarkWheelchairUncertain,
+  LightWheelchairUncertain,
+} from "@/assets/icons/wheelchair-uncertain";
 
 const AccessibilityMap = {
   Wheelchair: {
@@ -30,6 +34,11 @@ const AccessibilityMap = {
     dark: LightWheelchairSubstituteTransport,
     text: "Mit Shuttle zur barrierefreien Haltestelle, vorher anmelden",
   },
+  WheelchairUncertain: {
+    light: LightWheelchairUncertain,
+    dark: DarkWheelchairUncertain,
+    text: "Keine Information vorhanden",
+  },
 };
 
 const accessibilityTypeMap: { [key: string]: keyof typeof AccessibilityMap } = {
@@ -38,6 +47,7 @@ const accessibilityTypeMap: { [key: string]: keyof typeof AccessibilityMap } = {
   PLATFORM_ACCESS_WITH_ASSISTANCE: "WheelchairPartially",
   PLATFORM_ACCESS_WITH_ASSISTANCE_WHEN_NOTIFIED: "WheelchairReservation",
   TO_BE_COMPLETED: "WheelchairSubstituteTransport",
+  null: "WheelchairUncertain",
 };
 
 type Theme = "light" | "dark";
