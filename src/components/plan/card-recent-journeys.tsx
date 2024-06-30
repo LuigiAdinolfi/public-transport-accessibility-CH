@@ -6,10 +6,6 @@ import {
 } from "@/components/ui/card";
 import * as React from "react";
 import { Button } from "@/components/ui/button";
-import {
-  LightTrainProfile,
-  DarkTrainProfile,
-} from "@/assets/icons/train-profile";
 import { useTheme } from "next-themes";
 import { useRecentJourneysStore } from "@/store/useRecentJourneysStore";
 import { handleFormSubmit } from "@/utils/submitUtils";
