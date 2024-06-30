@@ -35,7 +35,7 @@ export function DirectConnection({
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const { resolvedTheme } = useTheme();
   const details = allLegs[0];
-  const handleClick = useHandleClick(allLegs);
+  const handleClick = useHandleClick(allLegs, duration);
 
   // Extracted details for readability and maintainability
   const vehicleNumber = getVehicleNumber(details);

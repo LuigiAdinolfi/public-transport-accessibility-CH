@@ -22,7 +22,7 @@ export function MultipleConnection({
   allLegs: OJP.TripLeg[];
   duration: string;
 }): React.ReactElement {
-  const handleClick = useHandleClick(allLegs);
+  const handleClick = useHandleClick(allLegs, duration);
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
   return (

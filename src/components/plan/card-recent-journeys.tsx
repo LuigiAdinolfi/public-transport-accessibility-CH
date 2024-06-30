@@ -11,6 +11,7 @@ import {
   DarkTrainProfile,
 } from "@/assets/icons/train-profile";
 import { useTheme } from "next-themes";
+import { useRecentJourneysStore } from "@/store/useRecentJourneysStore";
 
 /**
  * CardRecentJourneys component for selecting a recent journey.
@@ -18,12 +19,9 @@ import { useTheme } from "next-themes";
  */
 export function CardRecentJourneys(): React.ReactElement {
   const { resolvedTheme } = useTheme();
-  const fromLocation = "Basel SBB";
-  const toLocation = "Brugg AG";
-  const journeyDate = "Di, 07.05.2024";
-  const journeyDuration = "46 min Reisezeit";
-  const vehicleType = "Zug";
-  const vehicleNumber = "IC6";
+  const recentJourneys = useRecentJourneysStore((state) =>
+    state.getRecentJourneys(),
+  );
 
   return (
     <Card>
@@ -32,83 +30,88 @@ export function CardRecentJourneys(): React.ReactElement {
           Eine frühere Reise auswählen.
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-8 lg:pb-12">
-        {/*<Card className="flex justify-between items-center min-h-48">*/}
-        {/*  <CardDescription className="flex justify-center w-full text-base">*/}
-        {/*    Keine früheren Reisen vorhanden.*/}
-        {/*  </CardDescription>*/}
-        {/*</Card>*/}
-        <Button
-          className="grid min-h-32 w-full items-center border-zinc-400 align-middle md:flex md:justify-between lg:min-h-32"
-          variant="outline"
-        >
-          <div className="inline-flex h-full w-full items-center justify-start">
-            {/* Journey Details Grid */}
-            <div className="text-text/90 flex w-full items-center justify-between">
-              {/* Left section */}
-              <div className="grid w-full grid-flow-col grid-rows-2 justify-start gap-6 px-4">
-                <div className="flex justify-start">
-                  <div className="flex items-center px-1 text-lg font-semibold lg:text-xl">
-                    {fromLocation}
+      <CardContent className="space-y-6 lg:pb-12">
+        {recentJourneys.length === 0 ? (
+          <Card className="flex min-h-48 items-center justify-center">
+            <CardDescription className="flex w-full justify-center text-base">
+              Keine früheren Reisen vorhanden.
+            </CardDescription>
+          </Card>
+        ) : (
+          recentJourneys.map((journey, index) => (
+            <Button
+              key={index}
+              className="grid min-h-32 w-full items-center border-zinc-400 align-middle md:flex md:justify-between lg:min-h-32"
+              variant="outline"
+            >
+              <div className="inline-flex h-full w-full items-center justify-start">
+                <div className="text-text/90 flex w-full items-center justify-between">
+                  <div className="grid w-full grid-flow-col grid-rows-2 justify-start gap-6 px-4">
+                    <div className="flex justify-start">
+                      <div className="flex items-center px-1 text-lg font-semibold lg:text-xl">
+                        {journey.fromLocation}
+                      </div>
+                    </div>
+                    <div className="flex justify-start">
+                      <div className="flex items-center px-1 md:text-base">
+                        {journey.journeyDate}
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div className="flex justify-start">
-                  <div className="flex items-center px-1 md:text-base">
-                    {journeyDate}
-                  </div>
-                </div>
-              </div>
-
-              {/* Middle section */}
-              <div className="hidden w-full grid-flow-col grid-rows-2 justify-center gap-7 px-4 md:grid">
-                <div className="flex justify-center">
-                  <div className="mr-2 hidden items-center px-1 text-sm md:flex lg:text-base lg:font-medium">
-                    {vehicleType}
-                  </div>
-                  <div className="text-lg:text-base hidden items-center px-1 md:flex lg:font-medium">
-                    {resolvedTheme === "dark" ? (
-                      <DarkTrainProfile className="h-6 w-6" />
+                  <div className="hidden w-full grid-flow-col grid-rows-2 justify-center gap-7 px-4 md:grid">
+                    {journey.isMultipleConnection ? (
+                      journey.connections.map((conn, connIndex) => (
+                        <div key={connIndex} className="flex justify-center">
+                          <div className="mr-2 items-center px-1 text-sm md:flex lg:text-base lg:font-medium">
+                            {conn.vehicleType}
+                          </div>
+                          <div className="text-lg:text-base items-center px-1 md:flex lg:font-medium">
+                            {resolvedTheme === "dark" ? (
+                              <DarkTrainProfile className="h-6 w-6" />
+                            ) : (
+                              <LightTrainProfile className="h-6 w-6" />
+                            )}
+                          </div>
+                          <div className="items-center px-1 md:flex lg:text-base lg:font-medium">
+                            {conn.vehicleNumber}
+                          </div>
+                        </div>
+                      ))
                     ) : (
-                      <LightTrainProfile className="h-6 w-6" />
+                      <div className="flex justify-center">
+                        <div className="mr-2 items-center px-1 text-sm md:flex lg:text-base lg:font-medium">
+                          {journey.vehicleType}
+                        </div>
+                        <div className="text-lg:text-base items-center px-1 md:flex lg:font-medium">
+                          {resolvedTheme === "dark" ? (
+                            <DarkTrainProfile className="h-6 w-6" />
+                          ) : (
+                            <LightTrainProfile className="h-6 w-6" />
+                          )}
+                        </div>
+                        <div className="items-center px-1 md:flex lg:text-base lg:font-medium">
+                          {journey.vehicleNumber}
+                        </div>
+                      </div>
                     )}
                   </div>
-                  <div className="hidden items-center px-1 md:flex lg:text-base lg:font-medium">
-                    {vehicleNumber}
-                  </div>
-                </div>
-                <div className="flex justify-center">
-                  <div className="mr-2 hidden items-center px-1 text-sm md:flex lg:text-base lg:font-medium">
-                    {vehicleType}
-                  </div>
-                  <div className="tlg:text-base hidden items-center px-1 md:flex lg:font-medium">
-                    {resolvedTheme === "dark" ? (
-                      <DarkTrainProfile className="h-8 w-8" />
-                    ) : (
-                      <LightTrainProfile className="h-8 w-8" />
-                    )}
-                  </div>
-                  <div className="hidden items-center px-1 md:flex lg:text-base lg:font-medium">
-                    {vehicleNumber}
+                  <div className="grid w-full grid-flow-col grid-rows-2 justify-end gap-6 px-4">
+                    <div className="flex justify-end">
+                      <div className="flex items-center px-1 text-lg font-semibold lg:text-xl">
+                        {journey.toLocation}
+                      </div>
+                    </div>
+                    <div className="flex justify-end">
+                      <div className="flex items-center px-1 md:text-base">
+                        {journey.journeyDuration}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-
-              {/* Right section */}
-              <div className="grid w-full grid-flow-col grid-rows-2 justify-end gap-6 px-4">
-                <div className="flex justify-end">
-                  <div className="flex items-center px-1 text-lg font-semibold lg:text-xl">
-                    {toLocation}
-                  </div>
-                </div>
-                <div className="flex justify-end">
-                  <div className="flex items-center px-1 md:text-base">
-                    {journeyDuration}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Button>
+            </Button>
+          ))
+        )}
       </CardContent>
     </Card>
   );
