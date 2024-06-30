@@ -11,6 +11,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useJourneyStore } from "@/store/useJourneyStore";
 import { truncateTo20Chars, truncateTo40Chars } from "@/utils/tripUtils";
+import { useMediaQuery } from "react-responsive";
 
 interface LocationSectionProps {
   locationName: string;
@@ -34,6 +35,7 @@ export default function LocationSection({
   const { setSelectedStop } = useJourneyStore();
   const locationTitle = truncateTo40Chars(locationName);
   const location = truncateTo20Chars(locationName);
+  const isMobile = useMediaQuery({ maxWidth: 767 });
 
   /**
    * Handles click on "Info zur Haltestelle" button.
@@ -49,13 +51,22 @@ export default function LocationSection({
 
   return (
     <div className="flex w-full flex-col rounded-lg bg-zinc-50 p-4 text-zinc-950 shadow-sm dark:bg-zinc-900 dark:text-zinc-50 md:w-1/2">
-      <div className="mb-3 flex items-center p-2">
+      <div
+        className={`flex items-center ${!isMobile ? "mb-3 p-2" : "mb-2 px-2 py-1"}`}
+      >
         <div className="text-lg font-semibold">{locationTitle}</div>
       </div>
       <div className="flex flex-row p-2">
-        <div className="text-base font-medium">Rollstuhlgerechte Waggons:</div>
-        <div className="pl-3 pr-1 text-base font-semibold">
-          {platform}&nbsp;&nbsp;Sektor XY
+        <div className={`font-medium ${!isMobile ? "" : "text-sm"}`}>
+          Rollstuhlgerechte Waggons:
+        </div>
+        <div
+          className={`pl-3 pr-1 font-semibold ${!isMobile ? "" : "text-sm"}`}
+        >
+          {platform}
+        </div>
+        <div className={`pl-1 font-semibold ${!isMobile ? "" : "text-sm"}`}>
+          Sektor XY
         </div>
       </div>
       <div className="flex flex-row items-center pb-2 pt-1 align-middle">
@@ -66,7 +77,11 @@ export default function LocationSection({
       {/* Accordion for Zugkomposition */}
       <Accordion type="single" collapsible className="px-2">
         <AccordionItem value="item-1">
-          <AccordionTrigger className="py-6">Zugkomposition</AccordionTrigger>
+          <AccordionTrigger
+            className={`${!isMobile ? "py-6" : "py-4 text-sm"}`}
+          >
+            Zugkomposition
+          </AccordionTrigger>
           <AccordionContent>
             <Image
               src="/train-composition.png"
@@ -81,7 +96,9 @@ export default function LocationSection({
       {/* Accordion for Ein- und Aussteigen für Rollstuhlfahrer */}
       <Accordion type="single" collapsible className="px-2">
         <AccordionItem value="item-2">
-          <AccordionTrigger className="py-6">
+          <AccordionTrigger
+            className={`${!isMobile ? "py-6" : "py-4 text-sm"}`}
+          >
             Ein- und Aussteigen für Rollstuhlfahrer
           </AccordionTrigger>
           <AccordionContent className="px-2">

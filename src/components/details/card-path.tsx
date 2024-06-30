@@ -5,6 +5,7 @@ import InfoSection from "@/components/details/info-section";
 import LocationSection from "@/components/details/location-section";
 import CommunityRatingSection from "@/components/details/community-rating-section";
 import { useJourneyStore } from "@/store/useJourneyStore";
+import { useMediaQuery } from "react-responsive";
 
 interface CardPathProps {
   index: number;
@@ -27,7 +28,7 @@ export default function CardPath({
   const fromLocationName = selectedLeg.fromLocation.locationName ?? "N/A";
   const toLocationName = selectedLeg.toLocation.locationName ?? "N/A";
   const platform = "Gleis 9"; // Example, customize as needed
-
+  const isMobile = useMediaQuery({ maxWidth: 767 });
   const { setSelectedTripLeg } = useJourneyStore();
 
   React.useEffect(() => {
@@ -37,7 +38,7 @@ export default function CardPath({
   return (
     <Card>
       <InfoSection leg={selectedLeg} legDuration={legDuration} />
-      <div className="flex gap-6 px-6">
+      <div className={`flex gap-6 px-6 ${!isMobile ? "" : "flex-col"}`}>
         <LocationSection
           locationName={fromLocationName}
           platform={platform}

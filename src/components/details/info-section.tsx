@@ -10,6 +10,7 @@ import {
   getVehicleType,
 } from "@/utils/tripUtils";
 import { getVehicleIcon } from "@/utils/iconsUtils";
+import { useMediaQuery } from "react-responsive";
 
 interface InfoSectionProps {
   leg: OJP.TripLeg;
@@ -34,14 +35,19 @@ export default function InfoSection({
   const vehicleNumber = getVehicleNumber(leg);
   const vehicleDestinationStopPlace = getStopPlaceName(leg);
   const vehicleType = getVehicleType(leg);
+  const isMobile = useMediaQuery({ maxWidth: 767 });
 
   const VehicleIcon = getVehicleIcon(vehicleType, resolvedTheme);
 
   return (
-    <div className="flex items-center justify-between p-6 px-8 pb-6">
+    <div
+      className={`flex items-center justify-between ${!isMobile ? "p-6 px-8 pb-6" : "flex-col gap-3 p-4 px-2 pb-6"} `}
+    >
       {/* Vehicle information display */}
       <div className="flex items-center space-x-1.5 md:h-10">
-        <div className="pr-1 text-base font-medium">{vehicleType}</div>
+        {!isMobile && (
+          <div className="pr-1 text-base font-medium">{vehicleType}</div>
+        )}
         {/* Vehicle profile icon based on theme */}
         <div className="text-base font-normal">
           {VehicleIcon && <VehicleIcon className="h-6 w-6" />}

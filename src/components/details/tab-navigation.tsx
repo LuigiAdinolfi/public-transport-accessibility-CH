@@ -40,7 +40,7 @@ export default function TabNavigation({
       <div className="flex items-center justify-between pt-3">
         {/* TabsList for displaying leg tabs */}
         <TabsList
-          className="grid lg:h-12 lg:w-full"
+          className="grid w-full grid-cols-2 lg:h-12"
           style={{ gridTemplateColumns: `repeat(${legs.length}, 1fr)` }}
         >
           {legs.map((leg, index) => {
