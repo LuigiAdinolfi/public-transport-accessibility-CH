@@ -30,18 +30,20 @@ export function CardRecentJourneys(): React.ReactElement {
 
   return (
     <Card>
-      <CardHeader className="pb-8">
-        <CardDescription className="text-zinc-600 md:text-base">
-          Eine frühere Reise auswählen.
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-6 lg:pb-12">
+      {recentJourneys.length !== 0 && (
+        <CardHeader className="pb-8">
+          <CardDescription className="text-zinc-600 md:text-base">
+            Eine frühere Reise auswählen.
+          </CardDescription>
+        </CardHeader>
+      )}
+      <CardContent className="space-y-6">
         {recentJourneys.length === 0 ? (
-          <Card className="flex min-h-48 items-center justify-center">
-            <CardDescription className="flex w-full justify-center text-base">
+          <div className="flex min-h-48 items-center justify-center">
+            <CardDescription className="flex w-full justify-center text-base font-medium text-zinc-700 dark:text-zinc-200">
               Keine früheren Reisen vorhanden.
             </CardDescription>
-          </Card>
+          </div>
         ) : (
           recentJourneys.map((journey, index) => {
             const origin = journey.fromLocation?.locationName ?? "";
