@@ -13,31 +13,37 @@ const AccessibilityMap = {
     light: LightWheelchair,
     dark: DarkWheelchair,
     text: "Selber ein-/aussteigen",
-  },
-  WheelchairInaccessible: {
-    light: LightWheelchairInaccessible,
-    dark: LightWheelchairInaccessible,
-    text: "Nicht rollstuhlgängig",
+    score: 5,
   },
   WheelchairPartially: {
     light: LightWheelchairPartially,
     dark: LightWheelchairPartially,
     text: "Mit Hilfe Fahrpersonal ein-/aussteigen",
+    score: 4,
   },
   WheelchairReservation: {
     light: LightWheelchairReservation,
     dark: LightWheelchairReservation,
     text: "Mit Personalhilfe ein-/aussteigen, vorher anmelden",
+    score: 3,
   },
   WheelchairSubstituteTransport: {
     light: LightWheelchairSubstituteTransport,
     dark: LightWheelchairSubstituteTransport,
     text: "Mit Shuttle zur barrierefreien Haltestelle, vorher anmelden",
+    score: 2,
   },
   WheelchairUncertain: {
     light: LightWheelchairUncertain,
     dark: DarkWheelchairUncertain,
     text: "Keine Information vorhanden",
+    score: 1,
+  },
+  WheelchairInaccessible: {
+    light: LightWheelchairInaccessible,
+    dark: LightWheelchairInaccessible,
+    text: "Nicht rollstuhlgängig",
+    score: 0,
   },
 };
 
@@ -64,6 +70,35 @@ export const getAccessIcon = (
     ? {
         icon: vehicleAccessIcons[theme as Theme],
         text: vehicleAccessIcons.text,
+        score: vehicleAccessIcons.score,
       }
     : null;
 };
+
+export const getBestIcon = (
+  icons: Array<{ icon: any; text: string; score: number }>,
+) => {
+  return icons.reduce((prev, current) =>
+    current.score > prev.score ? current : prev,
+  );
+};
+
+export const getWorstIcon = (
+  icons: Array<{ icon: any; text: string; score: number }>,
+) => {
+  return icons.reduce((prev, current) =>
+    current.score < prev.score ? current : prev,
+  );
+};
+
+// How to use the functions
+// const icons = allLegs.map(leg => getVehicleIcon(getVehicleType(leg), resolvedTheme)).filter(icon => icon !== null);
+// const bestIcon = getBestIcon(icons);
+// const worstIcon = getWorstIcon(icons);
+
+// {worstIcon.icon && <worstIcon.icon className="h-6 w-6" />}
+// {!isMobile && (
+//   <div className="pl-2 md:text-base">
+//     {worstIcon.text}
+//     </div>
+// )}
