@@ -29,8 +29,9 @@ export default function TabNavigation({
   const { allLegs } = useJourneyStore();
 
   // Filter TransferLegs from allLegs
+  const timedLegs = allLegs.filter((leg) => leg.legType === "TimedLeg") || [];
   const transferLegs =
-    allLegs.filter((leg) => leg.legType === "TimedLeg") || [];
+    allLegs.filter((leg) => leg.legType === "TransferLeg") || [];
 
   return (
     <Tabs
@@ -47,13 +48,13 @@ export default function TabNavigation({
             const fromLocationName = leg.fromLocation.locationName;
             let fromLocation = handleLocation(
               fromLocationName,
-              transferLegs?.length ?? 0,
+              timedLegs?.length ?? 0,
             );
 
             const toLocationName = leg.toLocation.locationName;
             let toLocation = handleLocation(
               toLocationName,
-              transferLegs?.length ?? 0,
+              timedLegs?.length ?? 0,
             );
             return (
               <TabsTrigger
