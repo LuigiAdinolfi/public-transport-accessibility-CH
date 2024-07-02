@@ -6,7 +6,7 @@ import CardPath from "@/components/details/card-path";
 import { DummyMap } from "@/components/details/dummy-map";
 import { useJourneyStore } from "@/store/useJourneyStore";
 import { CircleIcons } from "@/components/details/circle-icons";
-import { handleLocation } from "@/utils/tripUtils";
+import { handleLocation } from "@/utils/handleLocation";
 
 interface TabNavigationProps {
   legs: OJP.TripLeg[];

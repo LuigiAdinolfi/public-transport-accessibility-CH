@@ -4,7 +4,7 @@ import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { WheelchairReservationIcon } from "@/components/select/wheelchair-reservation-icon";
 import { ConnectionDetails } from "@/components/select/connection-details";
-import { useHandleClick } from "@/utils/journeyUtils";
+import { useHandleClick } from "@/utils/handleConnection";
 import * as OJP from "ojp-sdk";
 import { useMediaQuery } from "react-responsive";
 

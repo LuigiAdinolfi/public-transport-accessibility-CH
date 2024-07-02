@@ -10,7 +10,7 @@ import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useJourneyStore } from "@/store/useJourneyStore";
-import { truncateTo20Chars, truncateTo40Chars } from "@/utils/tripUtils";
+import { truncateTo20Chars, truncateTo40Chars } from "@/utils/handleLocation";
 import { useMediaQuery } from "react-responsive";
 
 interface LocationSectionProps {

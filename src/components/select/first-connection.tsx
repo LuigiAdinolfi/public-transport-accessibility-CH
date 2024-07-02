@@ -10,9 +10,9 @@ import {
   getVehicleNumber,
   getVehicleType,
   truncateTo12Chars,
-} from "@/utils/tripUtils";
+} from "@/utils/handleLocation";
 import { WheelchairReservationIcon } from "@/components/select/wheelchair-reservation-icon";
-import { getVehicleIcon } from "@/utils/iconsUtils";
+import { getVehicleIcon } from "@/utils/handleVehicleIcon";
 import { useTheme } from "next-themes";
 
 /**

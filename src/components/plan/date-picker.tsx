@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/popover";
 import { de } from "date-fns/locale";
 import { useJourneyStore } from "@/store/useJourneyStore";
-import { formatDateForUI, handleTimeChange } from "@/utils/dateUtils";
+import { formatDateForUI, handleTimeChange } from "@/utils/handleDate";
 
 const timeZone = "Europe/Zurich";
 

@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useJourneyStore } from "@/store/useJourneyStore";
-import { handleFormSubmit, swapLocations } from "@/utils/submitUtils";
+import { handleFormSubmit, swapLocations } from "@/utils/handleSearchSubmit";
 import { useRouter } from "next/navigation";
 
 type SearchTab = "Dep" | "Arr";

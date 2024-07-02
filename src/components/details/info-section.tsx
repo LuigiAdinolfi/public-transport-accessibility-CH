@@ -8,8 +8,8 @@ import {
   getStopPlaceName,
   getVehicleNumber,
   getVehicleType,
-} from "@/utils/tripUtils";
-import { getVehicleIcon } from "@/utils/iconsUtils";
+} from "@/utils/handleLocation";
+import { getVehicleIcon } from "@/utils/handleVehicleIcon";
 import { useMediaQuery } from "react-responsive";
 
 interface InfoSectionProps {

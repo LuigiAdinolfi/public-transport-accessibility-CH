@@ -11,11 +11,11 @@ import {
   getDepartureTime,
   getVehicleNumber,
   getVehicleType,
-} from "@/utils/tripUtils";
+} from "@/utils/handleLocation";
 import { WheelchairReservationIcon } from "@/components/select/wheelchair-reservation-icon";
-import { getVehicleIcon } from "@/utils/iconsUtils";
+import { getVehicleIcon } from "@/utils/handleVehicleIcon";
 import { useTheme } from "next-themes";
-import { useHandleClick } from "@/utils/journeyUtils";
+import { useHandleClick } from "@/utils/handleConnection";
 
 /**
  * Component representing a direct connection in a journey.
