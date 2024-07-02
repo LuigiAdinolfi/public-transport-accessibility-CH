@@ -13,13 +13,13 @@ export default function CommunityPage() {
   return (
     <>
       {/* Breadcrumb Navigation */}
-      <div>
+      <div className="mb-0"> {/* Remove margin between breadcrumb and main content */}
         <MyBreadcrumb currentPage={currentPage} />
       </div>
 
       {/* Main Content */}
-      <div className="flex min-h-screen w-full flex-col items-center justify-center py-6 lg:p-10">
-        <h1 className="mb-2.5">News und Forum</h1> {/* Adjusted margin-bottom to 10px */}
+      <div className="flex min-h-screen w-full flex-col items-center justify-center py-0 lg:p-0"> {/* Remove padding around main content */}
+      
         <CommunityCard />
       </div>
     </>

@@ -28,6 +28,8 @@ const MyBreadcrumbList: BreadcrumbItem[] = [
     name: 'Haltestelle',
     url: '/select/details/stop',
   },
+
+
 ];
 
 export { MyBreadcrumbList };
