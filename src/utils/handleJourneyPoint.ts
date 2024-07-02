@@ -109,7 +109,13 @@ export const useHandleKeyDown = (
         }
       }
     },
-    [menuOpen, options, highlightedIndex, handleOptionSelect],
+    [
+      menuOpen,
+      options,
+      highlightedIndex,
+      setHighlightedIndex,
+      handleOptionSelect,
+    ],
   );
 };
 
@@ -121,7 +127,10 @@ export const useHandleKeyDown = (
 export const useHandleMouseEnter = (
   setHighlightedIndex: (index: number) => void,
 ) => {
-  return useCallback((index: number) => {
-    setHighlightedIndex(index);
-  }, []);
+  return useCallback(
+    (index: number) => {
+      setHighlightedIndex(index);
+    },
+    [setHighlightedIndex],
+  );
 };
