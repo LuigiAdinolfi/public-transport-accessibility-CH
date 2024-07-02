@@ -2,10 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { JourneyPointProps } from "@/types/journeyPointProps";
-import { handleOJPOptionSelect } from "@/utils/handleOJPOptionSelect";
-import { useFetchOJPOptions } from "@/services/useFetchOJPOptions";
-import { useHandleKeyDown } from "@/utils/handleKeyboardInput";
-import { useHandleMouseEnter } from "@/utils/handleMouseInput";
+import {
+  useFetchOptions,
+  useHandleKeyDown,
+  useHandleMouseEnter,
+  useHandleOptionSelect,
+} from "@/utils/handleJourneyPoint";
 
 /**
  * Component for input field with location search and selection functionality.
@@ -21,8 +23,8 @@ export default function JourneyPointInput({
   value,
 }: JourneyPointProps): React.ReactElement {
   const { inputValue, setInputValue, selectedOption, handleOptionSelect } =
-    handleOJPOptionSelect(onLocationSelected);
-  const { options, menuOpen, setMenuOpen } = useFetchOJPOptions(
+    useHandleOptionSelect(onLocationSelected);
+  const { options, menuOpen, setMenuOpen } = useFetchOptions(
     inputValue,
     selectedOption,
   );

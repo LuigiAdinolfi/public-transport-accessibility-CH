@@ -1,8 +1,20 @@
 import { DarkWheelchair, LightWheelchair } from "@/assets/icons/wheelchair";
-import { LightWheelchairInaccessible } from "@/assets/icons/wheelchair-inaccessible";
-import { LightWheelchairPartially } from "@/assets/icons/wheelchair-partially";
-import { LightWheelchairReservation } from "@/assets/icons/wheelchair-reservation";
-import { LightWheelchairSubstituteTransport } from "@/assets/icons/wheelchair-substitute-transport";
+import {
+  DarkWheelchairInaccessible,
+  LightWheelchairInaccessible,
+} from "@/assets/icons/wheelchair-inaccessible";
+import {
+  DarkWheelchairPartially,
+  LightWheelchairPartially,
+} from "@/assets/icons/wheelchair-partially";
+import {
+  DarkWheelchairReservation,
+  LightWheelchairReservation,
+} from "@/assets/icons/wheelchair-reservation";
+import {
+  DarkWheelchairSubstituteTransport,
+  LightWheelchairSubstituteTransport,
+} from "@/assets/icons/wheelchair-substitute-transport";
 import {
   DarkWheelchairUncertain,
   LightWheelchairUncertain,
@@ -17,19 +29,19 @@ const AccessibilityMap = {
   },
   WheelchairPartially: {
     light: LightWheelchairPartially,
-    dark: LightWheelchairPartially,
+    dark: DarkWheelchairPartially,
     text: "Mit Hilfe Fahrpersonal ein-/aussteigen",
     score: 4,
   },
   WheelchairReservation: {
     light: LightWheelchairReservation,
-    dark: LightWheelchairReservation,
+    dark: DarkWheelchairReservation,
     text: "Mit Personalhilfe ein-/aussteigen, vorher anmelden",
     score: 3,
   },
   WheelchairSubstituteTransport: {
     light: LightWheelchairSubstituteTransport,
-    dark: LightWheelchairSubstituteTransport,
+    dark: DarkWheelchairSubstituteTransport,
     text: "Mit Shuttle zur barrierefreien Haltestelle, vorher anmelden",
     score: 2,
   },
@@ -41,7 +53,7 @@ const AccessibilityMap = {
   },
   WheelchairInaccessible: {
     light: LightWheelchairInaccessible,
-    dark: LightWheelchairInaccessible,
+    dark: DarkWheelchairInaccessible,
     text: "Nicht rollstuhlgängig",
     score: 0,
   },

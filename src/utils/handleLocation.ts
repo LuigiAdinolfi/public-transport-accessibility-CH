@@ -73,7 +73,7 @@ export const handleLocation = (
 /**
  * Returns the vehicle type of given TripLeg.
  * @param {OJP.TripLeg | null} selectedTripLeg - The TripLeg object to get the vehicle type from.
- * @returns {string} - The vehicle type of the selected trip leg or 'N/A' if the leg is null.
+ * @returns {string} - The vehicle type of the selected trip leg or N/A if the leg is null.
  */
 export const getVehicleType = (selectedTripLeg: OJP.TripLeg | null): string => {
   if (!selectedTripLeg) return "N/A";
@@ -85,7 +85,7 @@ export const getVehicleType = (selectedTripLeg: OJP.TripLeg | null): string => {
 /**
  * Returns the arrival time of a given TripLeg.
  * @param {OJP.TripLeg} leg - The TripLeg object to get the arrival time from.
- * @returns {string} - The arrival time of the leg or 'N/A' if the leg is not a TripTimedLeg.
+ * @returns {string} - The arrival time of the leg or N/A if the leg is not a TripTimedLeg.
  */
 export const getArrivalTime = (leg: OJP.TripLeg): string => {
   if (!isTripTimedLeg(leg)) return "N/A";
@@ -95,7 +95,7 @@ export const getArrivalTime = (leg: OJP.TripLeg): string => {
 /**
  * Returns the departure time of a given TripLeg.
  * @param {OJP.TripLeg} leg - The TripLeg object to get the departure time from.
- * @returns {string} - The departure time of the leg or 'N/A' if the leg is not a TripTimedLeg.
+ * @returns {string} - The departure time of the leg or N/A if the leg is not a TripTimedLeg.
  */
 export const getDepartureTime = (leg: OJP.TripLeg): string => {
   if (!isTripTimedLeg(leg)) return "N/A";
@@ -105,7 +105,7 @@ export const getDepartureTime = (leg: OJP.TripLeg): string => {
 /**
  * Returns the train number of a given TripLeg.
  * @param {OJP.TripLeg} leg - The TripLeg object to get the train number from.
- * @returns {string} - The train number of the leg or 'N/A' if the leg is not a TripTimedLeg.
+ * @returns {string} - The train number of the leg or N/A if the leg is not a TripTimedLeg.
  */
 export const getVehicleNumber = (leg: OJP.TripLeg): string => {
   if (!isTripTimedLeg(leg)) return "N/A";
@@ -115,7 +115,7 @@ export const getVehicleNumber = (leg: OJP.TripLeg): string => {
 /**
  * Returns the stop place name of a given TripLeg.
  * @param {OJP.TripLeg} leg - The TripLeg object to get the stop place name from.
- * @returns {string} - The stop place name of the leg or 'N/A' if the leg is not a TripTimedLeg.
+ * @returns {string} - The stop place name of the leg or N/A if the leg is not a TripTimedLeg.
  */
 export const getStopPlaceName = (leg: OJP.TripLeg): string => {
   if (!isTripTimedLeg(leg)) return "N/A";
