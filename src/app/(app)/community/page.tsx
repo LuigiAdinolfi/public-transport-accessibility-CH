@@ -19,6 +19,7 @@ export default function CommunityPage() {
 
       {/* Main Content */}
       <div className="flex min-h-screen w-full flex-col items-center justify-center py-6 lg:p-10">
+        <h1 className="mb-2.5">News und Forum</h1> {/* Adjusted margin-bottom to 10px */}
         <CommunityCard />
       </div>
     </>
