@@ -52,6 +52,7 @@ export function CardRecentJourneys(): React.ReactElement {
               journey.journeyDate instanceof Date
                 ? journey.journeyDate.toISOString()
                 : journey.journeyDate ?? "";
+            const now = new Date().toISOString();
             const formattedDateBigScreen = formatDate(new Date(date));
             const formattedDateSmallScreen = formatDateSmall(new Date(date));
             const VehicleIcon = getVehicleIcon(
@@ -67,7 +68,7 @@ export function CardRecentJourneys(): React.ReactElement {
                   handleFormSubmit(
                     journey.fromLocation,
                     journey.toLocation,
-                    date,
+                    now,
                     "Dep",
                     setTripDetails,
                     router.push,
