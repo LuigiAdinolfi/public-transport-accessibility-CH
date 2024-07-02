@@ -55,7 +55,7 @@ export function PlanJourney(): React.ReactElement {
         <div className="flex items-center justify-between">
           <TabsList className="grid w-full grid-cols-2 md:w-1/2 lg:h-12">
             <TabsTrigger
-              className="mx-1 text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:h-10 lg:text-base"
+              className="mx-1 items-center text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:h-10 lg:text-base"
               value="new-journey"
             >
               {renderCircle("new-journey", activeJourneyTab === "new-journey")}

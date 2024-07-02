@@ -109,7 +109,7 @@ export function CardNewJourney(): React.ReactElement {
                 <TabsList className="content-center lg:w-64">
                   {/* Departure Tab Trigger */}
                   <TabsTrigger
-                    className="w-32 text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:w-32"
+                    className="w-32 items-center text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:w-32"
                     value="Dep"
                   >
                     {resolvedTheme === "dark" ? (
