@@ -37,10 +37,7 @@ export function CommunityCard() {
       onValueChange={(value) => setActiveTab(value)}
     >
       <div className="flex flex-col">
-        {/* Mobile variant of HelpButton */}
-        <div className="flex md:hidden justify-end pb-6">
-          <HelpButton />
-        </div>
+ 
 
         <div className="flex items-center justify-between">
           <TabsList className="grid grid-cols-2 lg:h-12 md:w-1/2 w-full">
@@ -60,10 +57,7 @@ export function CommunityCard() {
             </TabsTrigger>
           </TabsList>
 
-          {/* Desktop variant of HelpButton */}
-          <div className="hidden md:flex">
-            <HelpButton />
-          </div>
+       
         </div>
 
         <TabsContent value="news">

@@ -5,9 +5,9 @@ import {
     CardHeader
   } from "@/components/ui/card";
   import * as React from "react";
-  import { Button } from "@/components/ui/button";
-  import { useTheme } from "next-themes";
-  
+  import { Button } from "@/components/ui/button"; 
+  import { Input } from "@/components/ui/input"; 
+import { useTheme } from "next-themes";
   /**
    * Component representing a card displaying forum posts.
    * @returns {JSX.Element} JSX Element
@@ -31,14 +31,12 @@ import {
   
     return (
       <Card>
-        <CardHeader className="pb-8 flex justify-between items-center">
-          <CardDescription className="text-zinc-600 md:text-base">
-            Forum Beiträge
-          </CardDescription>
-          <Button       
-          variant="outline"
-         className="md:text-base"
-        type="button">Neuer Beitrag</Button>
+        <CardHeader className="pb-8 flex flex-col space-y-4">
+          <div className="flex justify-between items-center">
+            <Input placeholder="Suche im Forum..." className="flex-grow mr-4" />
+            <Button variant="outline" className="self-start">Suche</Button>
+          </div>
+          <Button variant="outline" className="self-start">Neuer Beitrag</Button>
         </CardHeader>
         <CardContent className="space-y-8 lg:pb-12">
           {forumPosts.length > 0 ? (
