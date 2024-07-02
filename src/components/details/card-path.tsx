@@ -6,6 +6,11 @@ import LocationSection from "@/components/details/location-section";
 import CommunityRatingSection from "@/components/details/community-rating-section";
 import { useJourneyStore } from "@/store/useJourneyStore";
 import { useMediaQuery } from "react-responsive";
+import {
+  getPlatformNumberFromStopPoint,
+  getPlatformNumberToStopPoint,
+  isTripTimedLeg,
+} from "@/utils/handleLocation";
 
 interface CardPathProps {
   index: number;
@@ -27,7 +32,8 @@ export default function CardPath({
   const selectedLeg = legs[index];
   const fromLocationName = selectedLeg.fromLocation.locationName ?? "N/A";
   const toLocationName = selectedLeg.toLocation.locationName ?? "N/A";
-  const platform = "Gleis 9"; // Example, customize as needed
+  const platformFromLocation = getPlatformNumberFromStopPoint(selectedLeg);
+  const platformToLocation = getPlatformNumberToStopPoint(selectedLeg);
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const { setSelectedTripLeg } = useJourneyStore();
 
@@ -41,13 +47,13 @@ export default function CardPath({
       <div className={`flex gap-6 px-6 ${!isMobile ? "" : "flex-col"}`}>
         <LocationSection
           locationName={fromLocationName}
-          platform={platform}
-          aria-label={`Departure from ${fromLocationName} at ${platform}`}
+          platform={platformFromLocation}
+          aria-label={`Departure from ${fromLocationName} at ${platformFromLocation}`}
         />
         <LocationSection
           locationName={toLocationName}
-          platform="Gleis 12"
-          aria-label={`Arrival at ${toLocationName} at Gleis 12`}
+          platform={platformToLocation}
+          aria-label={`Arrival at ${toLocationName} at ${platformToLocation}`}
         />
       </div>
       <CommunityRatingSection value={3} aria-label="Community rating section" />

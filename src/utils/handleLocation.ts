@@ -83,6 +83,34 @@ export const getVehicleType = (selectedTripLeg: OJP.TripLeg | null): string => {
 };
 
 /**
+ * Returns the platform number of a given TripLeg.
+ * @param {OJP.TripLeg | null} selectedTripLeg - The TripLeg object to get the platform number from.
+ * @returns {string} - The platform number of the selected trip leg or N/A if the leg is null.
+ */
+export const getPlatformNumberFromStopPoint = (
+  selectedTripLeg: OJP.TripLeg | null,
+): string => {
+  if (!selectedTripLeg) return "N/A";
+  return isTripTimedLeg(selectedTripLeg)
+    ? selectedTripLeg.fromStopPoint.plannedPlatform ?? "N/A"
+    : "N/A";
+};
+
+/**
+ * Returns the platform number of a given TripLeg.
+ * @param {OJP.TripLeg | null} selectedTripLeg - The TripLeg object to get the platform number from.
+ * @returns {string} - The platform number of the selected trip leg or N/A if the leg is null.
+ */
+export const getPlatformNumberToStopPoint = (
+  selectedTripLeg: OJP.TripLeg | null,
+): string => {
+  if (!selectedTripLeg) return "N/A";
+  return isTripTimedLeg(selectedTripLeg)
+    ? selectedTripLeg.toStopPoint.plannedPlatform ?? "N/A"
+    : "N/A";
+};
+
+/**
  * Returns the arrival time of a given TripLeg.
  * @param {OJP.TripLeg} leg - The TripLeg object to get the arrival time from.
  * @returns {string} - The arrival time of the leg or N/A if the leg is not a TripTimedLeg.

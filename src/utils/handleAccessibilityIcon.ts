@@ -64,7 +64,9 @@ const accessibilityTypeMap: { [key: string]: keyof typeof AccessibilityMap } = {
   PLATFORM_NOT_WHEELCHAIR_ACCESSIBLE: "WheelchairInaccessible",
   PLATFORM_ACCESS_WITH_ASSISTANCE: "WheelchairPartially",
   PLATFORM_ACCESS_WITH_ASSISTANCE_WHEN_NOTIFIED: "WheelchairReservation",
-  TO_BE_COMPLETED: "WheelchairSubstituteTransport",
+  ALTERNATIVE_TRANSPORT: "WheelchairSubstituteTransport",
+  TO_BE_COMPLETED: "WheelchairUncertain",
+  NO_DATA: "WheelchairUncertain",
   null: "WheelchairUncertain",
 };
 

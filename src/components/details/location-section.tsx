@@ -63,10 +63,10 @@ export default function LocationSection({
         <div
           className={`pl-3 pr-1 font-semibold ${!isMobile ? "" : "text-sm"}`}
         >
-          {platform}
+          {`Gleis ${platform}`}
         </div>
         <div className={`pl-1 font-semibold ${!isMobile ? "" : "text-sm"}`}>
-          Sektor XY
+          Sektor B
         </div>
       </div>
       <div className="flex flex-row items-center pb-2 pt-1 align-middle">
