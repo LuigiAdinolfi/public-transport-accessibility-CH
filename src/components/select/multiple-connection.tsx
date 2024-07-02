@@ -37,11 +37,9 @@ export function MultipleConnection({
         <div
           className={`mb-1 flex w-full items-center justify-start ${isMobile ? "flex-col" : "px-3"} py-4 text-zinc-950 dark:text-zinc-50`}
         >
-          <div className="flex w-full items-center justify-start text-left">
-            <div
-              className={`font-normal md:text-base ${isMobile ? "whitespace-pre-wrap pr-2" : "pr-4"}`}
-            >
-              Niedrigste Barrierefreiheit bei dieser Verbindung:
+          <div className="flex w-full items-center justify-start">
+            <div className="pr-2 md:text-base">
+              Niedrigste Barrierefreiheit:
             </div>
             <div aria-label="Wheelchair reservation">
               <WheelchairReservationIcon />
@@ -52,15 +50,15 @@ export function MultipleConnection({
               </div>
             )}
           </div>
-          {/*<div*/}
-          {/*  className={`${isMobile ? "flex w-full justify-start pt-1" : "justify-end"} md:text-base`}*/}
-          {/*>*/}
-          {/*  {duration}*/}
-          {/*</div>*/}
+          <div
+            className={`${isMobile ? "flex w-full justify-start pt-1" : "justify-end"} md:text-base`}
+          >
+            {duration}
+          </div>
         </div>
 
         {/* Connection Details */}
-        <ConnectionDetails allLegs={allLegs} duration={duration} />
+        <ConnectionDetails allLegs={allLegs} />
       </div>
     </Button>
   );

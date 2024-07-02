@@ -12,7 +12,6 @@ import { useRouter } from "next/navigation";
 import { useJourneyStore } from "@/store/useJourneyStore";
 import { truncateTo20Chars, truncateTo40Chars } from "@/utils/handleLocation";
 import { useMediaQuery } from "react-responsive";
-import { WheelchairReservationIcon } from "@/components/select/wheelchair-reservation-icon";
 
 interface LocationSectionProps {
   locationName: string;
@@ -68,16 +67,6 @@ export default function LocationSection({
         </div>
         <div className={`pl-1 font-semibold ${!isMobile ? "" : "text-sm"}`}>
           Sektor B
-        </div>
-      </div>
-      <div className="flex flex-row items-center pb-2 pt-2 align-middle">
-        <div className="flex items-center px-4 text-sm font-normal">
-          <WheelchairReservationIcon />
-          {!isMobile && (
-            <div className="flex flex-col pl-2">
-              <span>Mit Personalhilfe ein-/aussteigen</span>
-            </div>
-          )}
         </div>
       </div>
       <div className="flex flex-row items-center pb-2 pt-1 align-middle">

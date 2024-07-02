@@ -12,10 +12,10 @@ import {
   getVehicleNumber,
   getVehicleType,
 } from "@/utils/handleLocation";
-import { WheelchairReservationIcon } from "@/components/select/wheelchair-reservation-icon";
 import { getVehicleIcon } from "@/utils/handleVehicleIcon";
 import { useTheme } from "next-themes";
 import { useHandleClick } from "@/utils/handleConnection";
+import { getAccessIcon, getWorstIcon } from "@/utils/handleAccessibilityIcon";
 
 /**
  * Component representing a direct connection in a journey.
@@ -46,6 +46,27 @@ export function DirectConnection({
   const vehicleType = getVehicleType(details);
   const VehicleIcon = getVehicleIcon(vehicleType, resolvedTheme);
 
+  const accessIconFromLocationProps = getAccessIcon(
+    "PLATFORM_ACCESS_WITH_ASSISTANCE_WHEN_NOTIFIED",
+    resolvedTheme,
+  );
+  const AccessIconFromLocation = accessIconFromLocationProps?.icon;
+  const accessTextFromLocation = accessIconFromLocationProps?.text;
+
+  const accessIconToLocationProps = getAccessIcon(
+    "PLATFORM_ACCESS_WITHOUT_ASSISTANCE",
+    resolvedTheme,
+  );
+  const AccessIconToLocation = accessIconToLocationProps?.icon;
+  const accessTextToLocation = accessIconToLocationProps?.text;
+
+  const worstIconProps = getWorstIcon(
+    accessIconFromLocationProps,
+    accessIconToLocationProps,
+  );
+  const WorstIcon = worstIconProps?.icon;
+  const worstText = worstIconProps?.text;
+
   return (
     <Button
       className="flex h-full w-full justify-start border-zinc-400"
@@ -57,26 +78,19 @@ export function DirectConnection({
         <div
           className={`mb-1 flex w-full items-center justify-start ${isMobile ? "flex-col" : "px-3"} py-4 text-zinc-950 dark:text-zinc-50`}
         >
-          <div className="flex w-full items-center justify-start text-left">
-            <div
-              className={`font-normal md:text-base ${isMobile ? "whitespace-pre-wrap pr-2" : "pr-4"}`}
-            >
-              Niedrigste Barrierefreiheit bei dieser Verbindung:
+          <div className="flex w-full items-center justify-start">
+            <div className="pr-2 md:text-base">
+              Niedrigste Barrierefreiheit:
             </div>
-            <div aria-label="Wheelchair reservation">
-              <WheelchairReservationIcon />
-            </div>
-            {!isMobile && (
-              <div className="pl-2 md:text-base">
-                Mit Personalhilfe ein-/aussteigen, vorher anmelden
-              </div>
-            )}
+            {/* Wheelchair Accessibility Icon */}
+            {WorstIcon && <WorstIcon className="h-6 w-6" />}
+            {!isMobile && <div className="pl-2 md:text-base">{worstText}</div>}
           </div>
-          {/*<div*/}
-          {/*  className={`${isMobile ? "flex w-full justify-start pt-1" : "justify-end md:text-base"}`}*/}
-          {/*>*/}
-          {/*  {duration}*/}
-          {/*</div>*/}
+          <div
+            className={`${isMobile ? "flex w-full justify-start pt-1" : "justify-end md:text-base"}`}
+          >
+            {duration}
+          </div>
         </div>
         {/* Connection Details */}
         <div className="mb-2 flex flex-row">
@@ -88,7 +102,7 @@ export function DirectConnection({
                 <div className="flex justify-end">{arrivalTime}</div>
               </div>
               {/* Departure and Arrival Stations */}
-              <div className="flex w-full items-center justify-between px-3 pb-2">
+              <div className="flex w-full items-center justify-between px-3">
                 <div className="items-center text-base font-semibold md:text-lg">
                   {fromLocationName}
                 </div>
@@ -110,46 +124,37 @@ export function DirectConnection({
               <div
                 className={`flex w-full justify-between px-3 ${isMobile ? "py-2" : "py-3"} font-medium`}
               >
-                <div className="flex basis-1/2 items-center justify-start">
+                <div className="flex basis-1/2 items-center justify-start pt-2">
                   {/* Wheelchair Accessibility Icon */}
-                  <WheelchairReservationIcon />
+                  {AccessIconFromLocation && (
+                    <AccessIconFromLocation className="h-6 w-6" />
+                  )}
                   {!isMobile && (
                     <div className="flex flex-col pl-2">
-                      <span>
-                        Mit Personalhilfe ein-/aussteigen, vorher anmelden
-                      </span>
+                      <span>{accessTextFromLocation}</span>
                     </div>
                   )}
                 </div>
-                <div className="flex basis-1/2 items-center justify-end">
+                <div className="flex basis-1/2 items-center justify-end pt-2">
                   {!isMobile && (
                     <div className="flex flex-col pr-2 text-right">
-                      <span>
-                        Mit Personalhilfe ein-/aussteigen, vorher anmelden
-                      </span>
+                      <span>{accessTextToLocation}</span>
                     </div>
                   )}
                   {/* Wheelchair Accessibility Icon */}
-                  <WheelchairReservationIcon />
+                  {AccessIconToLocation && (
+                    <AccessIconToLocation className="h-6 w-6" />
+                  )}
                 </div>
               </div>
+              {/* Community Rating */}
               <div
-                className={`flex w-full items-center justify-between px-3 ${isMobile ? "pt-1" : ""}`}
+                className={`flex w-full ${isMobile ? "justify-center" : "items-center justify-start pt-4"} px-3 pb-2 font-normal`}
               >
-                {/* Community Rating */}
-                <div
-                  className={`flex w-full ${isMobile ? "" : "items-center pb-2 pt-4"} justify-start font-normal`}
-                >
-                  {!isMobile && (
-                    <div className="pr-3">Bewertung der Community:</div>
-                  )}
-                  <CommunityRatingSelect value={3} />
-                </div>
-                <div
-                  className={`${isMobile ? "flex w-full justify-start" : "justify-end"}`}
-                >
-                  {duration}
-                </div>
+                {!isMobile && (
+                  <div className="pr-3">Bewertung der Community:</div>
+                )}
+                <CommunityRatingSelect value={3} />
               </div>
             </div>
           </div>

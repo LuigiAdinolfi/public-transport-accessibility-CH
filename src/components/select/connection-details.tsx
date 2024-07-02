@@ -13,23 +13,21 @@ import { useMediaQuery } from "react-responsive";
  */
 export const ConnectionDetails = ({
   allLegs,
-  duration,
 }: {
   allLegs: OJP.TripLeg[];
-  duration: string;
 }): React.ReactElement => {
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
   return (
     <div className="mb-2 flex flex-col sm:flex-row">
       <div className={`w-full ${isMobile ? "mb-1" : ""}`}>
-        <FirstConnection allLegs={allLegs} duration={duration} />
+        <FirstConnection allLegs={allLegs} />
       </div>
       <div className="flex items-center justify-center px-2">
         {isMobile ? <ChevronDown /> : <ChevronRight />}
       </div>
       <div className={`w-full ${isMobile ? "mt-1" : ""}`}>
-        <LastConnection allLegs={allLegs} duration={duration} />
+        <LastConnection allLegs={allLegs} />
       </div>
     </div>
   );

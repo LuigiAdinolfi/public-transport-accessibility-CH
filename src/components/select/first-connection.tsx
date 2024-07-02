@@ -11,9 +11,9 @@ import {
   getVehicleType,
   truncateTo12Chars,
 } from "@/utils/handleLocation";
-import { WheelchairReservationIcon } from "@/components/select/wheelchair-reservation-icon";
 import { getVehicleIcon } from "@/utils/handleVehicleIcon";
 import { useTheme } from "next-themes";
+import { getAccessIcon } from "@/utils/handleAccessibilityIcon";
 
 /**
  * Component representing the first connection in a journey.
@@ -23,10 +23,8 @@ import { useTheme } from "next-themes";
  */
 export function FirstConnection({
   allLegs,
-  duration,
 }: {
   allLegs: OJP.TripLeg[];
-  duration: string;
 }): React.ReactElement {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const { resolvedTheme } = useTheme();
@@ -41,17 +39,31 @@ export function FirstConnection({
   const vehicleType = getVehicleType(firstLeg);
   const VehicleIcon = getVehicleIcon(vehicleType, resolvedTheme);
 
+  const accessIconFromLocationProps = getAccessIcon(
+    "PLATFORM_ACCESS_WITH_ASSISTANCE_WHEN_NOTIFIED",
+    resolvedTheme,
+  );
+  const AccessIconFromLocation = accessIconFromLocationProps?.icon;
+  const accessTextFromLocation = accessIconFromLocationProps?.text;
+
+  const accessIconToLocationProps = getAccessIcon(
+    "PLATFORM_ACCESS_WITH_ASSISTANCE",
+    resolvedTheme,
+  );
+  const AccessIconToLocation = accessIconToLocationProps?.icon;
+  const accessTextToLocation = accessIconToLocationProps?.text;
+
   return (
     <div className="flex basis-1/2 justify-start rounded-lg bg-zinc-50 dark:bg-zinc-900">
       <div className="w-full py-2">
         {/* Time and Station */}
-        <div className="flex w-full items-center justify-between px-3 pb-3 pt-1 font-normal">
+        <div className="flex w-full items-center justify-between px-3 pb-2 pt-1 font-normal">
           <div className="flex justify-start">{departureTime}</div>
           <div className="flex justify-end">{arrivalTime}</div>
         </div>
         {/* Departure and Arrival Stations */}
         <div
-          className={`flex w-full items-center justify-between px-3 ${!isMobile ? "pb-3 pt-2" : ""}`}
+          className={`flex w-full items-center justify-between px-3 ${!isMobile ? "pt-2" : ""}`}
         >
           <div className="items-center text-base font-semibold md:text-lg">
             {fromLocation}
@@ -71,48 +83,43 @@ export function FirstConnection({
         </div>
         {/* Accessibility Information */}
         <div
-          className={`flex w-full justify-between px-3 ${isMobile ? "py-2" : "py-3"} font-medium`}
+          className={`flex w-full justify-between px-3 ${isMobile ? "py-2" : "min-h-24"} font-medium`}
         >
-          <div className="mr-4 flex flex-1 items-center justify-start">
+          <div className="flex flex-1 items-center justify-start">
             <div className="min-w-[24px] flex-shrink-0">
-              <WheelchairReservationIcon />
+              {AccessIconFromLocation && (
+                <AccessIconFromLocation className="h-6 w-6" />
+              )}
             </div>
             {!isMobile && (
               <div className="flex flex-col pl-2">
                 <span className="whitespace-pre-wrap text-left">
-                  Mit Personalhilfe ein-/aussteigen, vorher anmelden
+                  {accessTextFromLocation}
                 </span>
               </div>
             )}
           </div>
-          <div className="ml-4 flex flex-1 items-center justify-end">
+          <div className="flex flex-1 items-center justify-end">
             {!isMobile && (
               <div className="flex flex-col pr-2 text-right">
                 <span className="whitespace-pre-wrap text-right">
-                  Mit Personalhilfe ein-/aussteigen, vorher anmelden
+                  {accessTextToLocation}
                 </span>
               </div>
             )}
             <div className="min-w-[24px] flex-shrink-0">
-              <WheelchairReservationIcon />
+              {AccessIconToLocation && (
+                <AccessIconToLocation className="h-6 w-6" />
+              )}
             </div>
           </div>
         </div>
+        {/* Community Rating */}
         <div
-          className={`flex w-full items-center justify-between px-3 ${isMobile ? "pt-1" : ""}`}
+          className={`flex w-full ${isMobile ? "justify-center" : "items-center justify-start"} px-3 pb-2 font-normal`}
         >
-          {/* Community Rating */}
-          <div
-            className={`flex w-full ${isMobile ? "" : "items-center pb-2 pt-4"} justify-start font-normal`}
-          >
-            {!isMobile && <div className="pr-3">Bewertung der Community:</div>}
-            <CommunityRatingSelect value={3} />
-          </div>
-          <div
-            className={`${isMobile ? "flex w-full justify-start" : "justify-end"}`}
-          >
-            {duration}
-          </div>
+          {!isMobile && <div className="pr-3">Bewertung der Community:</div>}
+          <CommunityRatingSelect value={3} />
         </div>
       </div>
     </div>

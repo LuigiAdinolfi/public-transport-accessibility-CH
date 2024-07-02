@@ -21,34 +21,34 @@ import {
 } from "@/assets/icons/wheelchair-uncertain";
 
 const AccessibilityMap = {
+  WheelchairUncertain: {
+    light: LightWheelchairUncertain,
+    dark: DarkWheelchairUncertain,
+    text: "Keine Information vorhanden",
+    score: 5,
+  },
   Wheelchair: {
     light: LightWheelchair,
     dark: DarkWheelchair,
     text: "Selber ein-/aussteigen",
-    score: 5,
+    score: 4,
   },
   WheelchairPartially: {
     light: LightWheelchairPartially,
     dark: DarkWheelchairPartially,
     text: "Mit Hilfe Fahrpersonal ein-/aussteigen",
-    score: 4,
+    score: 3,
   },
   WheelchairReservation: {
     light: LightWheelchairReservation,
     dark: DarkWheelchairReservation,
     text: "Mit Personalhilfe ein-/aussteigen, vorher anmelden",
-    score: 3,
+    score: 2,
   },
   WheelchairSubstituteTransport: {
     light: LightWheelchairSubstituteTransport,
     dark: DarkWheelchairSubstituteTransport,
     text: "Mit Shuttle zur barrierefreien Haltestelle, vorher anmelden",
-    score: 2,
-  },
-  WheelchairUncertain: {
-    light: LightWheelchairUncertain,
-    dark: DarkWheelchairUncertain,
-    text: "Keine Information vorhanden",
     score: 1,
   },
   WheelchairInaccessible: {
@@ -89,20 +89,20 @@ export const getAccessIcon = (
     : null;
 };
 
-export const getBestIcon = (
-  icons: Array<{ icon: any; text: string; score: number }>,
-) => {
-  return icons.reduce((prev, current) =>
-    current.score > prev.score ? current : prev,
-  );
-};
-
 export const getWorstIcon = (
-  icons: Array<{ icon: any; text: string; score: number }>,
+  accessIconFromLocationProps: {
+    icon: any;
+    text: string;
+    score: number;
+  } | null,
+  accessIconToLocationProps: { icon: any; text: string; score: number } | null,
 ) => {
-  return icons.reduce((prev, current) =>
-    current.score < prev.score ? current : prev,
-  );
+  if (!accessIconFromLocationProps || !accessIconToLocationProps) {
+    return null;
+  }
+  return accessIconFromLocationProps.score < accessIconToLocationProps.score
+    ? accessIconFromLocationProps
+    : accessIconToLocationProps;
 };
 
 // How to use the functions
