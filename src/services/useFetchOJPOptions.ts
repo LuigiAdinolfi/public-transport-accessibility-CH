@@ -11,7 +11,7 @@ import {
  * @param {OJP.Location | null} selectedOption - The currently selected location option.
  * @returns an object containing the fetched options, menu open state, and setter function.
  */
-export const fetchOJPOptions = (
+export const useFetchOJPOptions = (
   inputValue: string,
   selectedOption: OJP.Location | null,
 ) => {

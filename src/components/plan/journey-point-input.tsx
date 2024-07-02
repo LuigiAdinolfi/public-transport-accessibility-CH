@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { JourneyPointProps } from "@/types/journeyPointProps";
 import { handleOJPOptionSelect } from "@/utils/handleOJPOptionSelect";
-import { fetchOJPOptions } from "@/services/fetchOJPOptions";
+import { useFetchOJPOptions } from "@/services/useFetchOJPOptions";
 import { useHandleKeyDown } from "@/utils/handleKeyboardInput";
 import { useHandleMouseEnter } from "@/utils/handleMouseInput";
 
@@ -22,7 +22,7 @@ export default function JourneyPointInput({
 }: JourneyPointProps): React.ReactElement {
   const { inputValue, setInputValue, selectedOption, handleOptionSelect } =
     handleOJPOptionSelect(onLocationSelected);
-  const { options, menuOpen, setMenuOpen } = fetchOJPOptions(
+  const { options, menuOpen, setMenuOpen } = useFetchOJPOptions(
     inputValue,
     selectedOption,
   );
