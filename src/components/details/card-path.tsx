@@ -9,7 +9,6 @@ import { useMediaQuery } from "react-responsive";
 import {
   getPlatformNumberFromStopPoint,
   getPlatformNumberToStopPoint,
-  isTripTimedLeg,
 } from "@/utils/handleLocation";
 
 interface CardPathProps {
