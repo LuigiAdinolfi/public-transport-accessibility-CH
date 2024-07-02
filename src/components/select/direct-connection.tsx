@@ -57,23 +57,26 @@ export function DirectConnection({
         <div
           className={`mb-1 flex w-full items-center justify-start ${isMobile ? "flex-col" : "px-3"} py-4 text-zinc-950 dark:text-zinc-50`}
         >
-          <div className="flex w-full items-center justify-start">
-            <div className="pr-2 md:text-base">
-              Niedrigste Barrierefreiheit:
+          <div className="flex w-full items-center justify-start text-left">
+            <div
+              className={`font-normal md:text-base ${isMobile ? "whitespace-pre-wrap pr-2" : "pr-4"}`}
+            >
+              Niedrigste Barrierefreiheit bei dieser Verbindung:
             </div>
-            {/* Wheelchair Accessibility Icon */}
-            <WheelchairReservationIcon />
+            <div aria-label="Wheelchair reservation">
+              <WheelchairReservationIcon />
+            </div>
             {!isMobile && (
               <div className="pl-2 md:text-base">
-                Mit Personalhilfe ein-/aussteigen
+                Mit Personalhilfe ein-/aussteigen, vorher anmelden
               </div>
             )}
           </div>
-          <div
-            className={`${isMobile ? "flex w-full justify-start pt-1" : "justify-end md:text-base"}`}
-          >
-            {duration}
-          </div>
+          {/*<div*/}
+          {/*  className={`${isMobile ? "flex w-full justify-start pt-1" : "justify-end md:text-base"}`}*/}
+          {/*>*/}
+          {/*  {duration}*/}
+          {/*</div>*/}
         </div>
         {/* Connection Details */}
         <div className="mb-2 flex flex-row">
@@ -85,7 +88,7 @@ export function DirectConnection({
                 <div className="flex justify-end">{arrivalTime}</div>
               </div>
               {/* Departure and Arrival Stations */}
-              <div className="flex w-full items-center justify-between px-3">
+              <div className="flex w-full items-center justify-between px-3 pb-2">
                 <div className="items-center text-base font-semibold md:text-lg">
                   {fromLocationName}
                 </div>
@@ -112,28 +115,41 @@ export function DirectConnection({
                   <WheelchairReservationIcon />
                   {!isMobile && (
                     <div className="flex flex-col pl-2">
-                      <span>Mit Personalhilfe ein-/aussteigen</span>
+                      <span>
+                        Mit Personalhilfe ein-/aussteigen, vorher anmelden
+                      </span>
                     </div>
                   )}
                 </div>
                 <div className="flex basis-1/2 items-center justify-end">
                   {!isMobile && (
                     <div className="flex flex-col pr-2 text-right">
-                      <span>Mit Personalhilfe ein-/aussteigen</span>
+                      <span>
+                        Mit Personalhilfe ein-/aussteigen, vorher anmelden
+                      </span>
                     </div>
                   )}
                   {/* Wheelchair Accessibility Icon */}
                   <WheelchairReservationIcon />
                 </div>
               </div>
-              {/* Community Rating */}
               <div
-                className={`flex w-full ${isMobile ? "justify-center" : "items-center justify-start pt-4"} px-3 pb-2 font-normal`}
+                className={`flex w-full items-center justify-between px-3 ${isMobile ? "pt-1" : ""}`}
               >
-                {!isMobile && (
-                  <div className="pr-3">Bewertung der Community:</div>
-                )}
-                <CommunityRatingSelect value={3} />
+                {/* Community Rating */}
+                <div
+                  className={`flex w-full ${isMobile ? "" : "items-center pb-2 pt-4"} justify-start font-normal`}
+                >
+                  {!isMobile && (
+                    <div className="pr-3">Bewertung der Community:</div>
+                  )}
+                  <CommunityRatingSelect value={3} />
+                </div>
+                <div
+                  className={`${isMobile ? "flex w-full justify-start" : "justify-end"}`}
+                >
+                  {duration}
+                </div>
               </div>
             </div>
           </div>
