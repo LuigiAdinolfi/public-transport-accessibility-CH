@@ -80,7 +80,7 @@ export function MainNav(): React.ReactElement {
 
   // Render the main navigation menu
   return (
-    <div className="hidden lg:flex">
+    <div className="hidden md:flex">
       <nav className="flex items-center gap-4 text-sm">
         {/* Navigation links */}
         <NavLink href="/" currentPath="/">
