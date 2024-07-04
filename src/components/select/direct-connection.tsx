@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 import { CommunityRatingSelect } from "@/components/select/community-rating-select";
 import { useMediaQuery } from "react-responsive";
 import * as OJP from "ojp-sdk";
@@ -16,6 +15,10 @@ import { getVehicleIcon } from "@/utils/handleVehicleIcon";
 import { useTheme } from "next-themes";
 import { useHandleClick } from "@/utils/handleConnection";
 import { getAccessIcon, getWorstIcon } from "@/utils/handleAccessibilityIcon";
+import {
+  useFromStopPointVehicleAccessType,
+  useToStopPointVehicleAccessType,
+} from "@/hooks/useVehicleAccessType";
 
 /**
  * Component representing a direct connection in a journey.
@@ -31,11 +34,13 @@ export function DirectConnection({
   allLegs: OJP.TripLeg[];
   duration: string;
 }): React.ReactElement {
-  useRouter();
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const { resolvedTheme } = useTheme();
   const details = allLegs[0];
   const handleClick = useHandleClick(allLegs, duration);
+  const fromLocationVehicleAccessType =
+    useFromStopPointVehicleAccessType(details);
+  const toLocationVehicleAccessType = useToStopPointVehicleAccessType(details);
 
   // Extracted details for readability and maintainability
   const vehicleNumber = getVehicleNumber(details);
@@ -47,14 +52,14 @@ export function DirectConnection({
   const VehicleIcon = getVehicleIcon(vehicleType, resolvedTheme);
 
   const accessIconFromLocationProps = getAccessIcon(
-    "PLATFORM_ACCESS_WITH_ASSISTANCE_WHEN_NOTIFIED",
+    fromLocationVehicleAccessType,
     resolvedTheme,
   );
   const AccessIconFromLocation = accessIconFromLocationProps?.icon;
   const accessTextFromLocation = accessIconFromLocationProps?.text;
 
   const accessIconToLocationProps = getAccessIcon(
-    "PLATFORM_ACCESS_WITHOUT_ASSISTANCE",
+    toLocationVehicleAccessType,
     resolvedTheme,
   );
   const AccessIconToLocation = accessIconToLocationProps?.icon;

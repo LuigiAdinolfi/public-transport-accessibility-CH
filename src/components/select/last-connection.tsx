@@ -14,6 +14,10 @@ import {
 import { getVehicleIcon } from "@/utils/handleVehicleIcon";
 import { useTheme } from "next-themes";
 import { getAccessIcon } from "@/utils/handleAccessibilityIcon";
+import {
+  useFromStopPointVehicleAccessType,
+  useToStopPointVehicleAccessType,
+} from "@/hooks/useVehicleAccessType";
 
 /**
  * Component representing the last connection in a journey.
@@ -29,25 +33,29 @@ export function LastConnection({
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const { resolvedTheme } = useTheme();
   const lastLeg = allLegs[allLegs.length - 1];
+  const fromLocationVehicleAccessType =
+    useFromStopPointVehicleAccessType(lastLeg);
+  const toLocationVehicleAccessType = useToStopPointVehicleAccessType(lastLeg);
+
   const fromLocationName = lastLeg.fromLocation.locationName;
   const fromLocation = truncateTo12Chars(fromLocationName ?? "N/A");
   const toLocationName = lastLeg.toLocation.locationName;
   const toLocation = truncateTo12Chars(toLocationName ?? "N/A");
-  const trainNumber = getVehicleNumber(lastLeg);
+  const vehicleNumber = getVehicleNumber(lastLeg);
   const departureTime = getDepartureTime(lastLeg);
   const arrivalTime = getArrivalTime(lastLeg);
   const vehicleType = getVehicleType(lastLeg);
   const VehicleIcon = getVehicleIcon(vehicleType, resolvedTheme);
 
   const accessIconFromLocationProps = getAccessIcon(
-    "PLATFORM_ACCESS_WITH_ASSISTANCE",
+    fromLocationVehicleAccessType,
     resolvedTheme,
   );
   const AccessIconFromLocation = accessIconFromLocationProps?.icon;
   const accessTextFromLocation = accessIconFromLocationProps?.text;
 
   const accessIconToLocationProps = getAccessIcon(
-    "PLATFORM_ACCESS_WITHOUT_ASSISTANCE",
+    toLocationVehicleAccessType,
     resolvedTheme,
   );
   const AccessIconToLocation = accessIconToLocationProps?.icon;
@@ -75,7 +83,9 @@ export function LastConnection({
               </div>
             )}
             <div>{VehicleIcon && <VehicleIcon className="h-6 w-6" />}</div>
-            {!isMobile && <div className="pl-2 font-medium">{trainNumber}</div>}
+            {!isMobile && (
+              <div className="pl-2 font-medium">{vehicleNumber}</div>
+            )}
           </div>
           <div className="items-center overflow-hidden overflow-ellipsis text-base font-semibold md:text-lg">
             {toLocation}

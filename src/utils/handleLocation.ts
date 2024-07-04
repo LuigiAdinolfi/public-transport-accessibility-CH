@@ -1,5 +1,7 @@
 import * as OJP from "ojp-sdk";
 import { formatTime } from "@/utils/handleDate";
+import fetchFromExplorerAPI from "@/api/explorer/fetchFromExplorerAPI";
+import { BehigRecord } from "@/types/BehigRecord";
 
 /**
  * Checks if a given TripLeg is of type TripTimedLeg.
@@ -51,6 +53,7 @@ export const truncateTo12Chars = (value: string): string => {
 };
 
 /**
+ * Handles the location name based on the number of transfer legs.
  * @param {string | null | undefined} fromLocationName - The location name to handle.
  * @param {number} transferLegsLength - The length of the transfer legs.
  * @returns {string} - The formatted location name.
@@ -95,6 +98,86 @@ export const getPlatformNumberFromStopPoint = (
     ? selectedTripLeg.fromStopPoint.plannedPlatform ?? "N/A"
     : "N/A";
 };
+
+/**
+ * Fetches the BehigRecord for the origin stop point of a given TripLeg.
+ * @param {OJP.TripLeg} selectedTripLeg - The TripLeg object to get the BehigRecord from.
+ * @returns {Promise<BehigRecord>} - The BehigRecord of the origin stop point.
+ */
+export async function getFromStopPointBehigRecord(
+  selectedTripLeg: OJP.TripLeg,
+): Promise<BehigRecord> {
+  if (!selectedTripLeg) return {} as BehigRecord;
+
+  const stopPlaceRef = isTripTimedLeg(selectedTripLeg)
+    ? selectedTripLeg.fromStopPoint.location.stopPlace?.stopPlaceRef ?? "N/A"
+    : "N/A";
+
+  const stopPlaceName = isTripTimedLeg(selectedTripLeg)
+    ? selectedTripLeg.fromStopPoint.location.stopPlace?.stopPlaceName ?? "N/A"
+    : "N/A";
+
+  const sloid = stopPlaceRef.startsWith("ch:1:") ? stopPlaceRef : stopPlaceName;
+
+  const behigRecordResponse = await fetchFromExplorerAPI(sloid);
+  console.log("BehigRecordResponse: ", behigRecordResponse);
+
+  return behigRecordResponse.results
+    ? behigRecordResponse.results[0]
+    : ({} as BehigRecord);
+}
+
+/**
+ * Fetches the BehigRecord for the destination stop point of a given TripLeg.
+ * @param {OJP.TripLeg} selectedTripLeg - The TripLeg object to get the BehigRecord from.
+ * @returns {Promise<BehigRecord>} - The BehigRecord of the destination stop point.
+ */
+export async function getToStopPointBehigRecord(
+  selectedTripLeg: OJP.TripLeg,
+): Promise<BehigRecord> {
+  if (!selectedTripLeg) return {} as BehigRecord;
+
+  const stopPlaceRef = isTripTimedLeg(selectedTripLeg)
+    ? selectedTripLeg.toStopPoint.location.stopPlace?.stopPlaceRef ?? "N/A"
+    : "N/A";
+
+  const stopPlaceName = isTripTimedLeg(selectedTripLeg)
+    ? selectedTripLeg.toStopPoint.location.stopPlace?.stopPlaceName ?? "N/A"
+    : "N/A";
+
+  const sloid = stopPlaceRef.startsWith("ch:1:") ? stopPlaceRef : stopPlaceName;
+
+  const behigRecordResponse = await fetchFromExplorerAPI(sloid);
+  console.log("BehigRecordResponse: ", behigRecordResponse);
+
+  return behigRecordResponse.results
+    ? behigRecordResponse.results[0]
+    : ({} as BehigRecord);
+}
+
+/**
+ * Fetches the vehicle access information for the origin stop point of a given TripLeg.
+ * @param {OJP.TripLeg} selectedTripLeg - The TripLeg object to get the vehicle access information from.
+ * @returns {Promise<string>} - The vehicle access information of the origin stop point.
+ */
+export async function getFromStopPointVehicleAccess(
+  selectedTripLeg: OJP.TripLeg,
+): Promise<string> {
+  const behigRecord = await getFromStopPointBehigRecord(selectedTripLeg);
+  return behigRecord.vehicleaccess ?? "NO_DATA"; // Default to 'NO_DATA' if null
+}
+
+/**
+ * Fetches the vehicle access information for the destination stop point of a given TripLeg.
+ * @param {OJP.TripLeg} selectedTripLeg - The TripLeg object to get the vehicle access information from.
+ * @returns {Promise<string>} - The vehicle access information of the destination stop point.
+ */
+export async function getToStopPointVehicleAccess(
+  selectedTripLeg: OJP.TripLeg,
+): Promise<string> {
+  const behigRecord = await getToStopPointBehigRecord(selectedTripLeg);
+  return behigRecord.vehicleaccess ?? "NO_DATA"; // Default to 'NO_DATA' if null
+}
 
 /**
  * Returns the platform number of a given TripLeg.

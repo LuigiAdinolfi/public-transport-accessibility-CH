@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import * as OJP from "ojp-sdk";
+import { Platform } from "@/types/Platform";
 
 /**
  * Interface defining the state structure for journey-related data.
@@ -9,7 +10,13 @@ interface JourneyState {
   time: string; // Time for journey
   activeSearchTab: "Dep" | "Arr"; // Active search tab: "Dep" (Departure) or "Arr" (Arrival)
   origin: OJP.Location | null; // Origin location
+  originPlatform: Platform; // Origin platform
+  originPlatformSloid: string; // Origin platform SLOID
+  originVehicleAccessType: string; // Origin vehicle access type
   destination: OJP.Location | null; // Destination location
+  destinationPlatform: Platform; // Destination platform
+  destinationPlatformSloid: string; // Destination platform SLOID
+  destinationVehicleAccessType: string; // Destination vehicle access type
   selectedDate: Date | null; // Selected date for journey
   selectedStop: string; // Selected stop point
   selectedTripLeg: OJP.TripLeg | null; // Selected trip leg
@@ -22,7 +29,13 @@ interface JourneyState {
   setTime: (time: string) => void; // Function to set journey time
   setActiveSearchTab: (tab: "Dep" | "Arr") => void; // Function to set active search tab
   setOrigin: (origin: OJP.Location | null) => void; // Function to set origin location
+  setOriginPlatform: (platform: Platform) => void; // Function to set origin platform (Platform type)
+  setOriginPlatformSloid: (sloid: string) => void; // Function to set origin platform SLOID
+  setOriginVehicleAccessType: (accessType: string) => void; // Function to set origin vehicle access type
   setDestination: (destination: OJP.Location | null) => void; // Function to set destination location
+  setDestinationPlatform: (platform: Platform) => void; // Function to set destination platform (Platform type)
+  setDestinationPlatformSloid: (sloid: string) => void; // Function to set destination platform SLOID
+  setDestinationVehicleAccessType: (accessType: string) => void; // Function to set destination vehicle access type
   setSelectedDate: (date: Date | null) => void; // Function to set selected date
   setSelectedStop: (stop: string) => void; // Function to set selected stop point
   setSelectedTripLeg: (tripLeg: OJP.TripLeg | null) => void; // Function to set selected trip leg
@@ -44,7 +57,13 @@ export const useJourneyStore = create<JourneyState>((set) => ({
   time: "",
   activeSearchTab: "Dep",
   origin: null,
+  originPlatform: {} as Platform,
+  originPlatformSloid: "",
+  originVehicleAccessType: "NO_DATA",
   destination: null,
+  destinationPlatform: {} as Platform,
+  destinationPlatformSloid: "",
+  destinationVehicleAccessType: "NO_DATA",
   selectedDate: null,
   selectedStop: "",
   tripDetails: [],
@@ -59,7 +78,16 @@ export const useJourneyStore = create<JourneyState>((set) => ({
   setTime: (time) => set({ time }),
   setActiveSearchTab: (tab) => set({ activeSearchTab: tab }),
   setOrigin: (origin) => set({ origin }),
+  setOriginPlatform: (platform) => set({ originPlatform: platform }),
+  setOriginPlatformSloid: (sloid) => set({ originPlatformSloid: sloid }),
+  setOriginVehicleAccessType: (accessType) =>
+    set({ originVehicleAccessType: accessType }),
   setDestination: (destination) => set({ destination }),
+  setDestinationPlatform: (platform) => set({ destinationPlatform: platform }),
+  setDestinationPlatformSloid: (sloid) =>
+    set({ destinationPlatformSloid: sloid }),
+  setDestinationVehicleAccessType: (accessType) =>
+    set({ destinationVehicleAccessType: accessType }),
   setSelectedDate: (date) => set({ selectedDate: date }),
   setSelectedStop: (stop) => set({ selectedStop: stop }),
   setSelectedTripLeg: (tripLeg) => set({ selectedTripLeg: tripLeg }),

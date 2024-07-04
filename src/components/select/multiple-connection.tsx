@@ -2,11 +2,21 @@
 
 import * as React from "react";
 import { Button } from "@/components/ui/button";
-import { WheelchairReservationIcon } from "@/components/select/wheelchair-reservation-icon";
-import { ConnectionDetails } from "@/components/select/connection-details";
 import { useHandleClick } from "@/utils/handleConnection";
 import * as OJP from "ojp-sdk";
 import { useMediaQuery } from "react-responsive";
+import { useTheme } from "next-themes";
+import { FirstConnection } from "@/components/select/first-connection";
+import { ChevronDown, ChevronRight } from "lucide-react";
+import { LastConnection } from "@/components/select/last-connection";
+import {
+  useFromStopPointVehicleAccessType,
+  useToStopPointVehicleAccessType,
+} from "@/hooks/useVehicleAccessType";
+import {
+  getAccessIcon,
+  getWorstIconMultipleConnections,
+} from "@/utils/handleAccessibilityIcon";
 
 /**
  * Component representing a journey with multiple connections.
@@ -24,6 +34,49 @@ export function MultipleConnection({
 }): React.ReactElement {
   const handleClick = useHandleClick(allLegs, duration);
   const isMobile = useMediaQuery({ maxWidth: 767 });
+  const { resolvedTheme } = useTheme();
+  const firstLeg = allLegs[0];
+  const lastLeg = allLegs[allLegs.length - 1];
+
+  const fromLocationVehicleAccessFirstLeg =
+    useFromStopPointVehicleAccessType(firstLeg);
+  const toLocationVehicleAccessFirstLeg =
+    useToStopPointVehicleAccessType(firstLeg);
+
+  const fromLocationVehicleAccessLastLeg =
+    useFromStopPointVehicleAccessType(lastLeg);
+  const toLocationVehicleAccessLastLeg =
+    useToStopPointVehicleAccessType(lastLeg);
+
+  const accessIconFromLocationFirstLeg = getAccessIcon(
+    fromLocationVehicleAccessFirstLeg,
+    resolvedTheme,
+  );
+
+  const accessIconToLocationFirstLeg = getAccessIcon(
+    toLocationVehicleAccessFirstLeg,
+    resolvedTheme,
+  );
+
+  const accessIconFromLocationLastLeg = getAccessIcon(
+    fromLocationVehicleAccessLastLeg,
+    resolvedTheme,
+  );
+
+  const accessIconToLocationLastLeg = getAccessIcon(
+    toLocationVehicleAccessLastLeg,
+    resolvedTheme,
+  );
+
+  const worstIconProps = getWorstIconMultipleConnections(
+    accessIconFromLocationFirstLeg,
+    accessIconToLocationFirstLeg,
+    accessIconFromLocationLastLeg,
+    accessIconToLocationLastLeg,
+  );
+
+  const WorstIcon = worstIconProps?.icon;
+  const worstText = worstIconProps?.text;
 
   return (
     <Button
@@ -41,14 +94,8 @@ export function MultipleConnection({
             <div className="pr-2 md:text-base">
               Niedrigste Barrierefreiheit:
             </div>
-            <div aria-label="Wheelchair reservation">
-              <WheelchairReservationIcon />
-            </div>
-            {!isMobile && (
-              <div className="pl-2 md:text-base">
-                Mit Personalhilfe ein-/aussteigen, vorher anmelden
-              </div>
-            )}
+            {WorstIcon && <WorstIcon className="h-6 w-6" />}
+            {!isMobile && <div className="pl-2 md:text-base">{worstText}</div>}
           </div>
           <div
             className={`${isMobile ? "flex w-full justify-start pt-1" : "justify-end"} md:text-base`}
@@ -58,7 +105,17 @@ export function MultipleConnection({
         </div>
 
         {/* Connection Details */}
-        <ConnectionDetails allLegs={allLegs} />
+        <div className="mb-2 flex flex-col sm:flex-row">
+          <div className={`w-full ${isMobile ? "mb-1" : ""}`}>
+            <FirstConnection allLegs={allLegs} />
+          </div>
+          <div className="flex items-center justify-center px-2">
+            {isMobile ? <ChevronDown /> : <ChevronRight />}
+          </div>
+          <div className={`w-full ${isMobile ? "mt-1" : ""}`}>
+            <LastConnection allLegs={allLegs} />
+          </div>
+        </div>
       </div>
     </Button>
   );

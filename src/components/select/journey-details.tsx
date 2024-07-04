@@ -14,22 +14,17 @@ export default function JourneyDetails(): React.ReactElement {
   return (
     <div className="space-y-6 p-6 pt-0">
       {tripDetails.map((trip, index) => {
-        const legs = trip.legs;
-        const totalDuration = trip.stats.duration;
+        const {
+          legs,
+          stats: { duration: totalDuration },
+        } = trip;
         const duration = formatDuration(totalDuration);
-        if (legs.length === 1) {
-          return (
-            <DirectConnection key={index} allLegs={legs} duration={duration} />
-          );
-        } else {
-          return (
-            <MultipleConnection
-              key={index}
-              allLegs={legs}
-              duration={duration}
-            />
-          );
-        }
+
+        return legs.length === 1 ? (
+          <DirectConnection key={index} allLegs={legs} duration={duration} />
+        ) : (
+          <MultipleConnection key={index} allLegs={legs} duration={duration} />
+        );
       })}
     </div>
   );

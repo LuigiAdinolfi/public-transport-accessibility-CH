@@ -24,19 +24,19 @@ const AccessibilityMap = {
   WheelchairUncertain: {
     light: LightWheelchairUncertain,
     dark: DarkWheelchairUncertain,
-    text: "Keine Information vorhanden",
+    text: "Keine Information\nvorhanden",
     score: 5,
   },
   Wheelchair: {
     light: LightWheelchair,
     dark: DarkWheelchair,
-    text: "Selber ein-/aussteigen",
+    text: "Selber\nein-/aussteigen",
     score: 4,
   },
   WheelchairPartially: {
     light: LightWheelchairPartially,
     dark: DarkWheelchairPartially,
-    text: "Mit Hilfe Fahrpersonal ein-/aussteigen",
+    text: "Mit Hilfe Fahrpersonal\nein-/aussteigen",
     score: 3,
   },
   WheelchairReservation: {
@@ -71,6 +71,7 @@ const accessibilityTypeMap: { [key: string]: keyof typeof AccessibilityMap } = {
 };
 
 type Theme = "light" | "dark";
+
 export const getAccessIcon = (
   vehicleAccess: string,
   theme: string | undefined,
@@ -105,14 +106,43 @@ export const getWorstIcon = (
     : accessIconToLocationProps;
 };
 
-// How to use the functions
-// const icons = allLegs.map(leg => getVehicleIcon(getVehicleType(leg), resolvedTheme)).filter(icon => icon !== null);
-// const bestIcon = getBestIcon(icons);
-// const worstIcon = getWorstIcon(icons);
+export const getWorstIconMultipleConnections = (
+  accessIconFromLocationFirstLeg: {
+    icon: any;
+    text: string;
+    score: number;
+  } | null,
+  accessIconToLocationFirstLeg: {
+    icon: any;
+    text: string;
+    score: number;
+  } | null,
+  accessIconFromLocationLastLeg: {
+    icon: any;
+    text: string;
+    score: number;
+  } | null,
+  accessIconToLocationLastLeg: {
+    icon: any;
+    text: string;
+    score: number;
+  } | null,
+) => {
+  const firstLegScore = accessIconFromLocationFirstLeg?.score ?? 0;
+  const lastLegScore = accessIconFromLocationLastLeg?.score ?? 0;
 
-// {worstIcon.icon && <worstIcon.icon className="h-6 w-6" />}
-// {!isMobile && (
-//   <div className="pl-2 md:text-base">
-//     {worstIcon.text}
-//     </div>
-// )}
+  const firstLegWorst =
+    firstLegScore < (accessIconToLocationFirstLeg?.score ?? 0)
+      ? accessIconFromLocationFirstLeg
+      : accessIconToLocationFirstLeg;
+
+  const lastLegWorst =
+    lastLegScore < (accessIconToLocationLastLeg?.score ?? 0)
+      ? accessIconFromLocationLastLeg
+      : accessIconToLocationLastLeg;
+
+  const firstLegWorstScore = firstLegWorst?.score ?? 0;
+  const lastLegWorstScore = lastLegWorst?.score ?? 0;
+
+  return firstLegWorstScore < lastLegWorstScore ? firstLegWorst : lastLegWorst;
+};
