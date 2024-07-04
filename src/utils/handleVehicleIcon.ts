@@ -18,6 +18,7 @@ import {
   LightRackRailwayProfile,
 } from "@/assets/icons/rack-railway-profile";
 import { DarkTramProfile, LightTramProfile } from "@/assets/icons/tram-profile";
+import { DarkWalkProfile, LightWalkProfile } from "@/assets/icons/walk-profile";
 
 const iconMap = {
   Train: {
@@ -52,6 +53,10 @@ const iconMap = {
     light: LightTramProfile,
     dark: DarkTramProfile,
   },
+  Wheelchair: {
+    light: LightWalkProfile,
+    dark: DarkWalkProfile,
+  },
 };
 
 const vehicleTypeMap: { [key: string]: keyof typeof iconMap } = {
@@ -62,6 +67,7 @@ const vehicleTypeMap: { [key: string]: keyof typeof iconMap } = {
   Kabinenbahn: "CableCar",
   Auto: "Car",
   Standseilbahn: "Funicular",
+  Rollstuhl: "Wheelchair",
 };
 
 type Theme = "light" | "dark";

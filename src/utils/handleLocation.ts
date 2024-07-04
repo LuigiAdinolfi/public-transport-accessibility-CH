@@ -80,6 +80,9 @@ export const handleLocation = (
  */
 export const getVehicleType = (selectedTripLeg: OJP.TripLeg | null): string => {
   if (!selectedTripLeg) return "N/A";
+  if (selectedTripLeg.legType === "TransferLeg") {
+    return "Rollstuhl";
+  }
   return isTripTimedLeg(selectedTripLeg)
     ? selectedTripLeg.service.ptMode.name ?? "N/A"
     : "N/A";
@@ -219,8 +222,11 @@ export const getDepartureTime = (leg: OJP.TripLeg): string => {
  * @returns {string} - The train number of the leg or N/A if the leg is not a TripTimedLeg.
  */
 export const getVehicleNumber = (leg: OJP.TripLeg): string => {
-  if (!isTripTimedLeg(leg)) return "N/A";
-  return leg.service.serviceLineNumber ?? "N/A";
+  if (leg.legType === "TransferLeg") {
+    return "";
+  }
+  if (!isTripTimedLeg(leg)) return "";
+  return leg.service.serviceLineNumber ?? "";
 };
 
 /**
