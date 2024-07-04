@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useJourneyStore } from "@/store/useJourneyStore";
 import * as OJP from "ojp-sdk";
 import {
   getFromStopPointVehicleAccess,
