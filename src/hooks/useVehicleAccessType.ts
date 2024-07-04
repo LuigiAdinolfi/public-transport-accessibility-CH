@@ -9,7 +9,6 @@ import {
 export function useFromStopPointVehicleAccessType(
   selectedTripLeg: OJP.TripLeg,
 ) {
-  const { setOriginVehicleAccessType } = useJourneyStore();
   const [vehicleAccessType, setVehicleAccessType] = useState<string>("");
 
   useEffect(() => {
@@ -29,7 +28,6 @@ export function useFromStopPointVehicleAccessType(
 }
 
 export function useToStopPointVehicleAccessType(selectedTripLeg: OJP.TripLeg) {
-  const { setDestinationVehicleAccessType } = useJourneyStore();
   const [vehicleAccessType, setVehicleAccessType] = useState<string>("");
 
   useEffect(() => {
