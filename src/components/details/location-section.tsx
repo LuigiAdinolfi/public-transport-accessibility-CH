@@ -12,7 +12,6 @@ import { useRouter } from "next/navigation";
 import { useJourneyStore } from "@/store/useJourneyStore";
 import { truncateTo20Chars, truncateTo40Chars } from "@/utils/handleLocation";
 import { useMediaQuery } from "react-responsive";
-import { WheelchairReservationIcon } from "@/components/select/wheelchair-reservation-icon";
 
 interface LocationSectionProps {
   locationName: string;
