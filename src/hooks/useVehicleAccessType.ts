@@ -17,14 +17,13 @@ export function useFromStopPointVehicleAccessType(
       const accessType = await getFromStopPointVehicleAccess(selectedTripLeg);
       if (vehicleAccessType !== accessType) {
         setVehicleAccessType(accessType);
-        setOriginVehicleAccessType(accessType);
       }
     }
 
     if (selectedTripLeg) {
       fetchVehicleAccessType().then((r) => r);
     }
-  }, [selectedTripLeg, setOriginVehicleAccessType]);
+  }, [selectedTripLeg]);
 
   return vehicleAccessType;
 }
@@ -38,14 +37,13 @@ export function useToStopPointVehicleAccessType(selectedTripLeg: OJP.TripLeg) {
       const accessType = await getToStopPointVehicleAccess(selectedTripLeg);
       if (vehicleAccessType !== accessType) {
         setVehicleAccessType(accessType);
-        setDestinationVehicleAccessType(accessType);
       }
     }
 
     if (selectedTripLeg) {
       fetchVehicleAccessType().then((r) => r);
     }
-  }, [selectedTripLeg, setDestinationVehicleAccessType]);
+  }, [selectedTripLeg]);
 
   return vehicleAccessType;
 }
