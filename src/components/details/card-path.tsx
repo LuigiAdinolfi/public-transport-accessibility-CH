@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import * as OJP from "ojp-sdk";
 import { Card } from "@/components/ui/card";
 import InfoSection from "@/components/details/info-section";
@@ -10,6 +10,12 @@ import {
   getPlatformNumberFromStopPoint,
   getPlatformNumberToStopPoint,
 } from "@/utils/handleLocation";
+import {
+  useFromStopPointVehicleAccessType,
+  useToStopPointVehicleAccessType,
+} from "@/hooks/useVehicleAccessType";
+import { getAccessIcon } from "@/utils/handleAccessibilityIcon";
+import { useTheme } from "next-themes";
 
 interface CardPathProps {
   index: number;
@@ -28,6 +34,7 @@ export default function CardPath({
   legs,
   legDuration,
 }: CardPathProps): React.ReactElement {
+  const { resolvedTheme } = useTheme();
   const selectedLeg = legs[index];
   const fromLocationName = selectedLeg.fromLocation.locationName ?? "N/A";
   const toLocationName = selectedLeg.toLocation.locationName ?? "N/A";
@@ -36,7 +43,22 @@ export default function CardPath({
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const { setSelectedTripLeg } = useJourneyStore();
 
-  React.useEffect(() => {
+  const fromLocationVehicleAccessType =
+    useFromStopPointVehicleAccessType(selectedLeg);
+  const toLocationVehicleAccessType =
+    useToStopPointVehicleAccessType(selectedLeg);
+
+  const accessIconFromLocationProps = getAccessIcon(
+    fromLocationVehicleAccessType,
+    resolvedTheme,
+  );
+
+  const accessIconToLocationProps = getAccessIcon(
+    toLocationVehicleAccessType,
+    resolvedTheme,
+  );
+
+  useEffect(() => {
     setSelectedTripLeg(selectedLeg);
   }, [index, setSelectedTripLeg, selectedLeg]);
 
@@ -47,11 +69,13 @@ export default function CardPath({
         <LocationSection
           locationName={fromLocationName}
           platform={platformFromLocation}
+          accessIconLocationProps={accessIconFromLocationProps}
           aria-label={`Departure from ${fromLocationName} at ${platformFromLocation}`}
         />
         <LocationSection
           locationName={toLocationName}
           platform={platformToLocation}
+          accessIconLocationProps={accessIconToLocationProps}
           aria-label={`Arrival at ${toLocationName} at ${platformToLocation}`}
         />
       </div>

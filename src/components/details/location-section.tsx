@@ -17,6 +17,11 @@ import { WheelchairReservationIcon } from "@/components/select/wheelchair-reserv
 interface LocationSectionProps {
   locationName: string;
   platform: string;
+  accessIconLocationProps: {
+    icon: any;
+    text: string;
+    score: number;
+  } | null;
 }
 
 /**
@@ -31,12 +36,15 @@ interface LocationSectionProps {
 export default function LocationSection({
   locationName,
   platform,
+  accessIconLocationProps,
 }: LocationSectionProps): React.ReactElement {
   const router = useRouter();
   const { setSelectedStop } = useJourneyStore();
   const locationTitle = truncateTo40Chars(locationName);
   const location = truncateTo20Chars(locationName);
   const isMobile = useMediaQuery({ maxWidth: 767 });
+  const AccessIconLocation = accessIconLocationProps?.icon;
+  const accessTextLocation = accessIconLocationProps?.text;
 
   /**
    * Handles click on "Info zur Haltestelle" button.
@@ -74,10 +82,10 @@ export default function LocationSection({
         <div className="px-4 text-sm font-normal">
           <div className="flex basis-1/2 items-center justify-start">
             {/* Wheelchair Accessibility Icon */}
-            <WheelchairReservationIcon />
+            {AccessIconLocation && <AccessIconLocation className="h-6 w-6" />}
             {!isMobile && (
               <div className="flex flex-col pl-2">
-                <span>Mit Personalhilfe ein-/aussteigen</span>
+                <span>{accessTextLocation}</span>
               </div>
             )}
           </div>
