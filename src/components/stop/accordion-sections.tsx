@@ -6,6 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useMediaQuery } from "react-responsive";
+import { useBehigRecordStore } from "@/store/useBehigRecordStore";
 
 /**
  * Component displaying accordion sections based on media query for responsiveness.
@@ -14,6 +15,8 @@ import { useMediaQuery } from "react-responsive";
 export default function AccordionSections(): React.ReactElement {
   // Determine if the screen width is considered mobile
   const isMobile = useMediaQuery({ maxWidth: 767 });
+  const { behigRecord } = useBehigRecordStore();
+  const assistancecondition = behigRecord.assistancecondition;
 
   return (
     <div
@@ -26,8 +29,10 @@ export default function AccordionSections(): React.ReactElement {
             Bedingung für die Unterstützung
           </AccordionTrigger>
           <AccordionContent className="px-2">
-            <div className={`py-3 ${isMobile ? "text-sm" : ""}`}>
-              Bedingung für die Unterstützung
+            <div
+              className={`py-3 ${isMobile ? "text-sm" : ""} leading-relaxed`}
+            >
+              {assistancecondition || "N/A"}
             </div>
           </AccordionContent>
         </AccordionItem>
@@ -40,7 +45,9 @@ export default function AccordionSections(): React.ReactElement {
             Parkplatz-Informationen
           </AccordionTrigger>
           <AccordionContent className="px-2">
-            <div className={`py-3 ${isMobile ? "text-sm" : ""}`}>
+            <div
+              className={`py-3 ${isMobile ? "text-sm" : ""} leading-relaxed`}
+            >
               Parkplatz-Informationen
             </div>
           </AccordionContent>

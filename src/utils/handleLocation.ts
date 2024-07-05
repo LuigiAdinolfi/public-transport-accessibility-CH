@@ -2,6 +2,7 @@ import * as OJP from "ojp-sdk";
 import { formatTime } from "@/utils/handleDate";
 import fetchFromExplorerAPI from "@/api/explorer/fetchFromExplorerAPI";
 import { BehigRecord } from "@/types/BehigRecord";
+import { useBehigRecordStore } from "@/store/useBehigRecordStore";
 
 /**
  * Checks if a given TripLeg is of type TripTimedLeg.
@@ -110,6 +111,7 @@ export const getPlatformNumberFromStopPoint = (
 export async function getFromStopPointBehigRecord(
   selectedTripLeg: OJP.TripLeg,
 ): Promise<BehigRecord> {
+  const { setBehigRecord } = useBehigRecordStore.getState();
   if (!selectedTripLeg) return {} as BehigRecord;
 
   const stopPlaceRef = isTripTimedLeg(selectedTripLeg)
@@ -123,7 +125,7 @@ export async function getFromStopPointBehigRecord(
   const sloid = stopPlaceRef.startsWith("ch:1:") ? stopPlaceRef : stopPlaceName;
 
   const behigRecordResponse = await fetchFromExplorerAPI(sloid);
-  console.log("BehigRecordResponse: ", behigRecordResponse);
+  setBehigRecord(behigRecordResponse.results[0]);
 
   return behigRecordResponse.results
     ? behigRecordResponse.results[0]

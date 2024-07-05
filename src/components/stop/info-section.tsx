@@ -1,5 +1,6 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
+import { useBehigRecordStore } from "@/store/useBehigRecordStore";
 
 /**
  * Component displaying information about ticket machine assistance.
@@ -7,6 +8,8 @@ import { useMediaQuery } from "react-responsive";
  */
 export default function InfoSection(): React.ReactElement {
   const isMobile = useMediaQuery({ maxWidth: 767 });
+  const { behigRecord } = useBehigRecordStore();
+  const infoticketmachine = behigRecord.infoticketmachine;
 
   return (
     <div
@@ -17,12 +20,10 @@ export default function InfoSection(): React.ReactElement {
         Info Ticketautomat:
       </div>
       {/* Text description */}
-      <div className={`font-normal ${isMobile ? "text-sm" : "pl-3 pr-1"}`}>
-        Hilfestellung für Sehbehinderte unter Telefon
-      </div>
-      {/* Phone number */}
-      <div className={`font-medium ${isMobile ? "text-sm" : "pl-1"}`}>
-        0800 11 44 77
+      <div
+        className={`font-normal ${isMobile ? "text-sm" : "pl-3 pr-1"} leading-relaxed`}
+      >
+        {infoticketmachine || "N/A"}
       </div>
     </div>
   );

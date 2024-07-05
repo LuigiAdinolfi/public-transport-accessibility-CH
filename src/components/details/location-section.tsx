@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { useJourneyStore } from "@/store/useJourneyStore";
 import { truncateTo20Chars, truncateTo40Chars } from "@/utils/handleLocation";
 import { useMediaQuery } from "react-responsive";
+import { useBehigRecordStore } from "@/store/useBehigRecordStore";
 
 interface LocationSectionProps {
   locationName: string;
@@ -44,6 +45,11 @@ export default function LocationSection({
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const AccessIconLocation = accessIconLocationProps?.icon;
   const accessTextLocation = accessIconLocationProps?.text;
+
+  const { behigRecord } = useBehigRecordStore();
+  const haltekanteAccess = behigRecord.haltekante_access_gerechnet;
+  const accessInfo = behigRecord.adviceaccessinfo;
+  const additionalinformation = behigRecord.additionalinformation;
 
   /**
    * Handles click on "Info zur Haltestelle" button.
@@ -91,8 +97,10 @@ export default function LocationSection({
         </div>
       </div>
       <div className="flex flex-row items-center pb-2 pt-1 align-middle">
-        <div className="px-4 text-sm font-normal">
-          Zugang zum Bahnsteig ohne Hilfe
+        <div className="hei px-4 py-2 text-sm font-normal leading-relaxed">
+          {/*Zugang zum Bahnsteig ohne Hilfe*/}
+          Haltekante Zugang: &nbsp;
+          {haltekanteAccess}
         </div>
       </div>
       {/* Accordion for Zugkomposition */}
@@ -120,12 +128,27 @@ export default function LocationSection({
           <AccordionTrigger
             className={`${!isMobile ? "py-6" : "py-4 text-sm"}`}
           >
-            Ein- und Aussteigen für Rollstuhlfahrer
+            {/*Ein- und Aussteigen für Rollstuhlfahrer*/}
+            Zugänglichkeitsinformationen
           </AccordionTrigger>
           <AccordionContent className="px-2">
-            <div className="py-3">Informationen zur Rampe</div>
-            <div className="py-3">Informationen zum Lift</div>
-            <div className="py-3">Informationen über Treppen</div>
+            <div className="py-3 leading-relaxed">
+              Informationen zur Rampe: &nbsp;N/A
+            </div>
+            <div className="py-3 leading-relaxed">
+              Informationen zum Lift: &nbsp;N/A
+            </div>
+            <div className="py-3 leading-relaxed">
+              Informationen über Treppen: &nbsp;N/A
+            </div>
+            {additionalinformation && (
+              <div className="py-3 leading-relaxed">
+                {additionalinformation}
+              </div>
+            )}
+            {accessInfo && (
+              <div className="py-3 leading-relaxed">{accessInfo}</div>
+            )}
           </AccordionContent>
         </AccordionItem>
       </Accordion>
