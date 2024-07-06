@@ -5,14 +5,9 @@ import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CardRecentJourneys } from "@/components/plan/card-recent-journeys";
 import { useTheme } from "next-themes";
-import {
-  DarkActiveCircle,
-  LightActiveCircle,
-  DarkInactiveCircle,
-  LightInactiveCircle,
-} from "@/assets/icons/active-circle";
 import { CardNewJourney } from "@/components/plan/card-new-journey";
 import { HelpButton } from "@/components/shared/help-button";
+import { CircleIcons } from "@/components/details/circle-icons";
 
 type ActiveTab = "new-journey" | "recent-journeys";
 
@@ -27,18 +22,6 @@ export function PlanJourney(): React.ReactElement {
 
   // Theme hook
   const { resolvedTheme } = useTheme();
-
-  // Function to render the active/inactive circle based on the theme and active tab
-  const renderCircle = (
-    _tab: ActiveTab,
-    isActive: boolean,
-  ): React.ReactElement => {
-    if (resolvedTheme === "dark") {
-      return isActive ? <DarkActiveCircle /> : <DarkInactiveCircle />;
-    } else {
-      return isActive ? <LightActiveCircle /> : <LightInactiveCircle />;
-    }
-  };
 
   return (
     <Tabs
@@ -58,17 +41,20 @@ export function PlanJourney(): React.ReactElement {
               className="mx-1 items-center text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:h-10 lg:text-base"
               value="new-journey"
             >
-              {renderCircle("new-journey", activeJourneyTab === "new-journey")}
+              <CircleIcons
+                active={activeJourneyTab === "new-journey"}
+                darkTheme={resolvedTheme === "dark"}
+              />
               <div className="pl-1 md:text-base lg:pl-2">Neue Reise</div>
             </TabsTrigger>
             <TabsTrigger
               className="mx-1 text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:h-10 lg:text-base"
               value="recent-journeys"
             >
-              {renderCircle(
-                "recent-journeys",
-                activeJourneyTab === "recent-journeys",
-              )}
+              <CircleIcons
+                active={activeJourneyTab === "recent-journeys"}
+                darkTheme={resolvedTheme === "dark"}
+              />
               <div className="pl-1 md:text-base lg:pl-2">Letzte Reisen</div>
             </TabsTrigger>
           </TabsList>

@@ -3,12 +3,6 @@
 import * as React from "react";
 import { ArrowRightLeft } from "lucide-react";
 import { useTheme } from "next-themes";
-import {
-  DarkActiveSmallCircle,
-  LightActiveSmallCircle,
-  DarkInactiveSmallCircle,
-  LightInactiveSmallCircle,
-} from "@/assets/icons/active-circle";
 import { DatePicker } from "@/components/plan/date-picker";
 import JourneyPointInput from "@/components/plan/journey-point-input";
 import { Label } from "@/components/ui/label";
@@ -23,6 +17,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useJourneyStore } from "@/store/useJourneyStore";
 import { handleFormSubmit, swapLocations } from "@/utils/handleSearchSubmit";
 import { useRouter } from "next/navigation";
+import { CircleIcons } from "@/components/details/circle-icons";
 
 type SearchTab = "Dep" | "Arr";
 
@@ -112,17 +107,11 @@ export function CardNewJourney(): React.ReactElement {
                     className="w-32 items-center text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:w-32"
                     value="Dep"
                   >
-                    {resolvedTheme === "dark" ? (
-                      activeSearchTab === "Dep" ? (
-                        <DarkActiveSmallCircle aria-hidden="true" />
-                      ) : (
-                        <DarkInactiveSmallCircle aria-hidden="true" />
-                      )
-                    ) : activeSearchTab === "Dep" ? (
-                      <LightActiveSmallCircle aria-hidden="true" />
-                    ) : (
-                      <LightInactiveSmallCircle aria-hidden="true" />
-                    )}
+                    <CircleIcons
+                      active={activeSearchTab === "Dep"}
+                      darkTheme={resolvedTheme === "dark"}
+                      size="small"
+                    />
                     <div className="pl-1 md:text-base lg:pl-2">Abreise</div>
                   </TabsTrigger>
                   {/* Arrival Tab Trigger */}
@@ -130,17 +119,11 @@ export function CardNewJourney(): React.ReactElement {
                     className="w-32 text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:w-32"
                     value="Arr"
                   >
-                    {resolvedTheme === "dark" ? (
-                      activeSearchTab === "Arr" ? (
-                        <DarkActiveSmallCircle aria-hidden="true" />
-                      ) : (
-                        <DarkInactiveSmallCircle aria-hidden="true" />
-                      )
-                    ) : activeSearchTab === "Arr" ? (
-                      <LightActiveSmallCircle aria-hidden="true" />
-                    ) : (
-                      <LightInactiveSmallCircle aria-hidden="true" />
-                    )}
+                    <CircleIcons
+                      active={activeSearchTab === "Arr"}
+                      darkTheme={resolvedTheme === "dark"}
+                      size="small"
+                    />
                     <div className="pl-1 md:text-base lg:pl-2">Ankunft</div>
                   </TabsTrigger>
                 </TabsList>
