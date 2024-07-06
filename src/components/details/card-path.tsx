@@ -7,15 +7,15 @@ import CommunityRatingSection from "@/components/details/community-rating-sectio
 import { useJourneyStore } from "@/store/useJourneyStore";
 import { useMediaQuery } from "react-responsive";
 import {
-  getPlatformNumberFromStopPoint,
-  getPlatformNumberToStopPoint,
-} from "@/utils/handleLocation";
-import {
   useFromStopPointVehicleAccessType,
   useToStopPointVehicleAccessType,
 } from "@/hooks/useVehicleAccessType";
 import { getAccessIcon } from "@/utils/handleAccessibilityIcon";
 import { useTheme } from "next-themes";
+import {
+  getPlatformNumberFromDestination,
+  getPlatformNumberFromOrigin,
+} from "@/utils/getPlatformNumber";
 
 interface CardPathProps {
   index: number;
@@ -38,8 +38,8 @@ export default function CardPath({
   const selectedLeg = legs[index];
   const fromLocationName = selectedLeg.fromLocation.locationName ?? "N/A";
   const toLocationName = selectedLeg.toLocation.locationName ?? "N/A";
-  const platformFromLocation = getPlatformNumberFromStopPoint(selectedLeg);
-  const platformToLocation = getPlatformNumberToStopPoint(selectedLeg);
+  const platformFromLocation = getPlatformNumberFromOrigin(selectedLeg);
+  const platformToLocation = getPlatformNumberFromDestination(selectedLeg);
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const { setSelectedTripLeg } = useJourneyStore();
 

@@ -3,12 +3,12 @@ import { Card } from "@/components/ui/card";
 import { useTheme } from "next-themes";
 import { useMediaQuery } from "react-responsive";
 import { useJourneyStore } from "@/store/useJourneyStore";
-import { getVehicleType } from "@/utils/handleLocation";
 import { TripLeg } from "ojp-sdk";
 import FeatureList from "@/components/stop/feature-list";
 import AccordionSections from "@/components/stop/accordion-sections";
 import InfoSection from "@/components/stop/info-section";
 import { getVehicleIcon } from "@/utils/handleVehicleIcon";
+import { getVehicleType } from "@/utils/getVehicleType";
 
 /**
  * Component displaying detailed information about a stop point in a card format.

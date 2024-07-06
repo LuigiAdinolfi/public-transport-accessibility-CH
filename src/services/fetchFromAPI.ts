@@ -1,4 +1,4 @@
-import getValidAccessToken from "@/utils/tokenManager";
+import getValidAccessToken from "@/lib/tokenManager";
 
 /**
  * Fetches data from the specified API endpoint using an access token for authorization.

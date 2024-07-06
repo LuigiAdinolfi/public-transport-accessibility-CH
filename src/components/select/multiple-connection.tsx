@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Button } from "@/components/ui/button";
-import { useHandleClick } from "@/utils/handleConnection";
+import { useHandleClick } from "@/hooks/useHandleClick";
 import * as OJP from "ojp-sdk";
 import { useMediaQuery } from "react-responsive";
 import { useTheme } from "next-themes";

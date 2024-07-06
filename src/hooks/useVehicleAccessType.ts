@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import * as OJP from "ojp-sdk";
 import {
-  getFromStopPointVehicleAccess,
-  getToStopPointVehicleAccess,
+  getStopPointVehicleAccessFromOrigin,
+  getStopPointVehicleAccessFromDestination,
 } from "@/utils/handleLocation";
 
 export function useFromStopPointVehicleAccessType(
@@ -12,7 +12,8 @@ export function useFromStopPointVehicleAccessType(
 
   useEffect(() => {
     async function fetchVehicleAccessType() {
-      const accessType = await getFromStopPointVehicleAccess(selectedTripLeg);
+      const accessType =
+        await getStopPointVehicleAccessFromOrigin(selectedTripLeg);
       if (vehicleAccessType !== accessType) {
         setVehicleAccessType(accessType);
       }
@@ -31,7 +32,8 @@ export function useToStopPointVehicleAccessType(selectedTripLeg: OJP.TripLeg) {
 
   useEffect(() => {
     async function fetchVehicleAccessType() {
-      const accessType = await getToStopPointVehicleAccess(selectedTripLeg);
+      const accessType =
+        await getStopPointVehicleAccessFromDestination(selectedTripLeg);
       if (vehicleAccessType !== accessType) {
         setVehicleAccessType(accessType);
       }

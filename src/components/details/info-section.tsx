@@ -4,13 +4,11 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Map } from "lucide-react";
 import * as OJP from "ojp-sdk";
-import {
-  getStopPlaceName,
-  getVehicleNumber,
-  getVehicleType,
-} from "@/utils/handleLocation";
 import { getVehicleIcon } from "@/utils/handleVehicleIcon";
 import { useMediaQuery } from "react-responsive";
+import { getVehicleNumber } from "@/utils/getVehicleNumber";
+import { getStopPlaceName } from "@/utils/getStopPlaceName";
+import { getVehicleType } from "@/utils/getVehicleType";
 
 interface InfoSectionProps {
   leg: OJP.TripLeg;

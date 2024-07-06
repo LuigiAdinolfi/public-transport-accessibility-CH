@@ -8,12 +8,13 @@ import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
 import { useRecentJourneysStore } from "@/store/useRecentJourneysStore";
-import { handleFormSubmit } from "@/utils/handleSearchSubmit";
+import { handleFormSubmit } from "@/utils/handleFormSubmit";
 import { useJourneyStore } from "@/store/useJourneyStore";
 import { useRouter } from "next/navigation";
-import { formatDate, formatDateSmall } from "@/utils/handleDate";
 import { useMediaQuery } from "react-responsive";
 import { getVehicleIcon } from "@/utils/handleVehicleIcon";
+import { formatDateSmall } from "@/utils/formatDateSmall";
+import { formatDate } from "@/utils/formatDate";
 
 /**
  * CardRecentJourneys component for selecting a recent journey.

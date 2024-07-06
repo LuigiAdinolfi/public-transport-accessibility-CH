@@ -1,4 +1,4 @@
-import getAccessToken from "@/utils/tokenManager";
+import getAccessToken from "@/lib/tokenManager";
 
 /**
  * Fetches data from the specified API endpoint using an access token and SLOID,

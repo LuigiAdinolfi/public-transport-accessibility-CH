@@ -4,13 +4,6 @@ import * as React from "react";
 import { CommunityRatingSelect } from "@/components/select/community-rating-select";
 import { useMediaQuery } from "react-responsive";
 import * as OJP from "ojp-sdk";
-import {
-  getArrivalTime,
-  getDepartureTime,
-  getVehicleNumber,
-  getVehicleType,
-  truncateTo12Chars,
-} from "@/utils/handleLocation";
 import { getVehicleIcon } from "@/utils/handleVehicleIcon";
 import { useTheme } from "next-themes";
 import { getAccessIcon } from "@/utils/handleAccessibilityIcon";
@@ -18,6 +11,11 @@ import {
   useFromStopPointVehicleAccessType,
   useToStopPointVehicleAccessType,
 } from "@/hooks/useVehicleAccessType";
+import { truncateTo12Chars } from "@/utils/truncateTo12Chars";
+import { getVehicleNumber } from "@/utils/getVehicleNumber";
+import { getDepartureTime } from "@/utils/getDepartureTime";
+import { getArrivalTime } from "@/utils/getArrivalTime";
+import { getVehicleType } from "@/utils/getVehicleType";
 
 /**
  * Component representing the last connection in a journey.

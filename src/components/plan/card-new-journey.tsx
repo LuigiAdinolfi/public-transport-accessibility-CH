@@ -15,9 +15,10 @@ import {
 } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useJourneyStore } from "@/store/useJourneyStore";
-import { handleFormSubmit, swapLocations } from "@/utils/handleSearchSubmit";
+import { handleFormSubmit } from "@/utils/handleFormSubmit";
 import { useRouter } from "next/navigation";
 import { CircleIcons } from "@/components/details/circle-icons";
+import { swapLocations } from "@/utils/swapLocations";
 
 type SearchTab = "Dep" | "Arr";
 

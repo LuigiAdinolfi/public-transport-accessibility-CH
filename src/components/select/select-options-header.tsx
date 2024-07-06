@@ -1,6 +1,6 @@
 import React from "react";
-import { formatDate } from "@/utils/handleDate";
 import { useJourneyStore } from "@/store/useJourneyStore";
+import { formatDate } from "@/utils/formatDate";
 
 /**
  * Component for displaying the header with journey options and the selected date.

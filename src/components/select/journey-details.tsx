@@ -2,7 +2,7 @@ import React from "react";
 import { MultipleConnection } from "@/components/select/multiple-connection";
 import { DirectConnection } from "@/components/select/direct-connection";
 import { useJourneyStore } from "@/store/useJourneyStore";
-import { formatDuration } from "@/utils/handleDate";
+import { formatDuration } from "@/utils/formatDuration";
 
 /**
  * Component rendering journey details including multiple or direct connections.

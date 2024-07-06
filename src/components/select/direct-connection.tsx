@@ -5,20 +5,18 @@ import { Button } from "@/components/ui/button";
 import { CommunityRatingSelect } from "@/components/select/community-rating-select";
 import { useMediaQuery } from "react-responsive";
 import * as OJP from "ojp-sdk";
-import {
-  getArrivalTime,
-  getDepartureTime,
-  getVehicleNumber,
-  getVehicleType,
-} from "@/utils/handleLocation";
 import { getVehicleIcon } from "@/utils/handleVehicleIcon";
 import { useTheme } from "next-themes";
-import { useHandleClick } from "@/utils/handleConnection";
+import { useHandleClick } from "@/hooks/useHandleClick";
 import { getAccessIcon, getWorstIcon } from "@/utils/handleAccessibilityIcon";
 import {
   useFromStopPointVehicleAccessType,
   useToStopPointVehicleAccessType,
 } from "@/hooks/useVehicleAccessType";
+import { getVehicleNumber } from "@/utils/getVehicleNumber";
+import { getDepartureTime } from "@/utils/getDepartureTime";
+import { getArrivalTime } from "@/utils/getArrivalTime";
+import { getVehicleType } from "@/utils/getVehicleType";
 
 /**
  * Component representing a direct connection in a journey.

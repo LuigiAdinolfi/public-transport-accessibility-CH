@@ -1,13 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { JourneyPointProps } from "@/types/journeyPointProps";
-import {
-  useFetchOptions,
-  useHandleKeyDown,
-  useHandleMouseEnter,
-  useHandleOptionSelect,
-} from "@/utils/handleJourneyPoint";
+import { JourneyPointProps } from "@/utils/journeyPointProps";
+import { useHandleOptionSelect } from "@/hooks/useHandleOptionSelect";
+import { useFetchOptions } from "@/hooks/useFetchOptions";
+import { useHandleKeyDown } from "@/hooks/useHandleKeyDown";
+import { useHandleMouseEnter } from "@/hooks/useHandleMouseEnter";
 
 /**
  * Component for input field with location search and selection functionality.

@@ -10,9 +10,10 @@ import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useJourneyStore } from "@/store/useJourneyStore";
-import { truncateTo20Chars, truncateTo40Chars } from "@/utils/handleLocation";
 import { useMediaQuery } from "react-responsive";
 import { useBehigRecordStore } from "@/store/useBehigRecordStore";
+import { truncateTo40Chars } from "@/utils/truncateTo40Chars";
+import { truncateTo20Chars } from "@/utils/truncateTo20Chars";
 
 interface LocationSectionProps {
   locationName: string;
