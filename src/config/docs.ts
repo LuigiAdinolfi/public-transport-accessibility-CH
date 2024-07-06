@@ -1,10 +1,20 @@
-import { MainNavItem } from "@/types/nav";
-
 /**
  * Interface for defining the configuration of documentation navigation items.
  */
 interface DocsConfig {
-  mainNav: MainNavItem[]; // Array of main navigation items
+  mainNav: NavItem[]; // Array of main navigation items
+}
+
+interface NavItem {
+  /**
+   * The title or display text of the navigation item.
+   */
+  title: string;
+
+  /**
+   * The URL path the navigation item links to, if applicable.
+   */
+  href?: string;
 }
 
 /**
