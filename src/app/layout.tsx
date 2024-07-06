@@ -6,8 +6,10 @@ import { ThemeProvider } from "@/components/shared/theme-provider";
 import { siteConfig } from "@/config/site";
 import SiteHeader from "@/components/shared/site-header";
 import { SiteFooter } from "@/components/shared/site-footer";
+import dotenv from "dotenv";
 
 const inter = Inter({ subsets: ["latin"] });
+dotenv.config();
 
 /**
  * Metadata for the application.
