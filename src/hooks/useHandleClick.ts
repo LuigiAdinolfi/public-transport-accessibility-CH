@@ -2,7 +2,8 @@ import { useRouter } from "next/navigation";
 import { useJourneyStore } from "@/store/useJourneyStore";
 import * as OJP from "ojp-sdk";
 import { useRecentJourneysStore } from "@/store/useRecentJourneysStore";
-import { getVehicleNumber, getVehicleType } from "@/utils/handleLocation";
+import { getVehicleType } from "@/utils/getVehicleType";
+import { getVehicleNumber } from "@/utils/getVehicleNumber";
 
 /**
  * Custom hook to handle click events for selecting trip details and navigating to the details page.
