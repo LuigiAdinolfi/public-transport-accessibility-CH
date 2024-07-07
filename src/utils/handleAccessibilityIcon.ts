@@ -21,34 +21,40 @@ import {
 } from "@/assets/icons/wheelchair-uncertain";
 
 const AccessibilityMap = {
-  WheelchairUncertain: {
-    light: LightWheelchairUncertain,
-    dark: DarkWheelchairUncertain,
-    text: "Keine Information\nvorhanden",
-    score: 5,
+  WALK: {
+    light: LightWheelchair,
+    dark: DarkWheelchair,
+    text: "Selber fahren",
+    score: 6,
   },
   Wheelchair: {
     light: LightWheelchair,
     dark: DarkWheelchair,
     text: "Selber\nein-/aussteigen",
-    score: 4,
+    score: 5,
   },
   WheelchairPartially: {
     light: LightWheelchairPartially,
     dark: DarkWheelchairPartially,
     text: "Mit Hilfe Fahrpersonal\nein-/aussteigen",
-    score: 3,
+    score: 4,
   },
   WheelchairReservation: {
     light: LightWheelchairReservation,
     dark: DarkWheelchairReservation,
     text: "Mit Personalhilfe ein-/aussteigen, vorher anmelden",
-    score: 2,
+    score: 3,
   },
   WheelchairSubstituteTransport: {
     light: LightWheelchairSubstituteTransport,
     dark: DarkWheelchairSubstituteTransport,
     text: "Mit Shuttle zur barrierefreien Haltestelle, vorher anmelden",
+    score: 2,
+  },
+  WheelchairUncertain: {
+    light: LightWheelchairUncertain,
+    dark: DarkWheelchairUncertain,
+    text: "Keine Information\nvorhanden",
     score: 1,
   },
   WheelchairInaccessible: {
@@ -68,6 +74,15 @@ const accessibilityTypeMap: { [key: string]: keyof typeof AccessibilityMap } = {
   TO_BE_COMPLETED: "WheelchairUncertain",
   NO_DATA: "WheelchairUncertain",
   null: "WheelchairUncertain",
+  WHEELCHAIR_RESERVATION: "WheelchairReservation",
+  WALK: "WALK",
+};
+
+const fullDescriptionMap: { [key: string]: string } = {
+  "Stufenloser Zugang, Ein-/Ausstieg durch Personalhilfestellung, Voranmeldung nötig.":
+    "WHEELCHAIR_RESERVATION",
+  "Haltekante nicht autonom benutzbar": "PLATFORM_NOT_WHEELCHAIR_ACCESSIBLE",
+  "Haltekante autonom benutzbar": "PLATFORM_ACCESS_WITHOUT_ASSISTANCE",
 };
 
 type Theme = "light" | "dark";
@@ -76,7 +91,8 @@ export const getAccessIcon = (
   vehicleAccess: string,
   theme: string | undefined,
 ) => {
-  const mappedType = accessibilityTypeMap[vehicleAccess];
+  const mappedType =
+    accessibilityTypeMap[fullDescriptionMap[vehicleAccess] || vehicleAccess];
   if (!mappedType) {
     return null;
   }

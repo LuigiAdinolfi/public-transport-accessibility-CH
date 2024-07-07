@@ -8,7 +8,10 @@ import { isTripTimedLeg } from "@/utils/isTripTimedLeg";
  */
 export const getVehicleType = (selectedTripLeg: OJP.TripLeg | null): string => {
   if (!selectedTripLeg) return "N/A";
-  if (selectedTripLeg.legType === "TransferLeg") {
+  if (
+    selectedTripLeg.legType === "TransferLeg" ||
+    selectedTripLeg.legType === "ContinousLeg"
+  ) {
     return "Rollstuhl";
   }
   return isTripTimedLeg(selectedTripLeg)

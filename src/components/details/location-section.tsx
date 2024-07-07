@@ -48,7 +48,12 @@ export default function LocationSection({
   const accessTextLocation = accessIconLocationProps?.text;
 
   const { behigRecord } = useBehigRecordStore();
-  const haltekanteAccess = behigRecord.haltekante_access_gerechnet;
+  let haltekanteAccess;
+  if (behigRecord.bpvh_verkehrsmittel_text_de === "TRAIN") {
+    haltekanteAccess = behigRecord.level_access_wheelchair_calculated;
+  } else {
+    haltekanteAccess = behigRecord.haltekante_access_gerechnet;
+  }
   const accessInfo = behigRecord.adviceaccessinfo;
   const additionalinformation = behigRecord.additionalinformation;
 
