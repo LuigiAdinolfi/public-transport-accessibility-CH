@@ -79,7 +79,7 @@ const accessibilityTypeMap: { [key: string]: keyof typeof AccessibilityMap } = {
 };
 
 const fullDescriptionMap: { [key: string]: string } = {
-  "Stufenloser Zugang, Ein-/Ausstieg durch Personalhilfestellung, Voranmeldung nötig.":
+  "Stufenloser Zugang, Ein-/Ausstieg durch Personalhilfestellung, Voranmeldung n\u00F6tig.":
     "WHEELCHAIR_RESERVATION",
   "Haltekante nicht autonom benutzbar": "PLATFORM_NOT_WHEELCHAIR_ACCESSIBLE",
   "Haltekante autonom benutzbar": "PLATFORM_ACCESS_WITHOUT_ASSISTANCE",
