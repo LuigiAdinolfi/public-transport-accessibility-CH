@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import * as OJP from "ojp-sdk";
 import {
-  getStopPointVehicleAccessFromOrigin,
   getStopPointVehicleAccessFromDestination,
-} from "@/utils/handleLocation";
+  getStopPointVehicleAccessFromOrigin,
+} from "@/utils/getStopPointVehicleAccess";
 
 export function useFromStopPointVehicleAccessType(
   selectedTripLeg: OJP.TripLeg,
