@@ -44,8 +44,10 @@ export function DirectConnection({
 
   useEffect(() => {
     async function fetchPlatform() {
-      await getPlatformFromOrigin(details);
-      await getPlatformFromDestination(details);
+      await Promise.all([
+        getPlatformFromOrigin(details),
+        getPlatformFromDestination(details),
+      ]);
     }
     fetchPlatform().then((r) => r);
   }, [details]);
