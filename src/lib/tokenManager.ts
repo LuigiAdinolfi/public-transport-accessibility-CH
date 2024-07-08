@@ -1,3 +1,5 @@
+"use server";
+
 import qs from "qs";
 
 let accessToken: string | null = null;

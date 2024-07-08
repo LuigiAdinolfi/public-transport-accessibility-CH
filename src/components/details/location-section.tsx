@@ -14,10 +14,16 @@ import { useMediaQuery } from "react-responsive";
 import { useBehigRecordStore } from "@/store/useBehigRecordStore";
 import { truncateTo40Chars } from "@/utils/truncateTo40Chars";
 import { truncateTo20Chars } from "@/utils/truncateTo20Chars";
+import { Platform } from "@/types/Platform";
+import getTactileSystem from "@/utils/getTactileSystem";
+import getBoardingDevice from "@/utils/getBoardingDevice";
+import getDynamicVisual from "@/utils/getDynamicVisual";
+import getDynamicAudio from "@/utils/getDynamicAudio";
 
 interface LocationSectionProps {
   locationName: string;
-  platform: string;
+  platform: Platform | null;
+  platformNr: string;
   accessIconLocationProps: {
     icon: any;
     text: string;
@@ -31,16 +37,19 @@ interface LocationSectionProps {
  *
  * @param {Object} props - Props for LocationSection component.
  * @param {string} props.locationName - Name of the location.
- * @param {string} props.platform - Platform information.
+ * @param {Platform} props.platform - Platform information.
+ * @param {string} props.platformNr - Platform information.
  * @returns {React.ReactElement} LocationSection component.
  */
 export default function LocationSection({
   locationName,
   platform,
+  platformNr,
   accessIconLocationProps,
 }: LocationSectionProps): React.ReactElement {
   const router = useRouter();
   const { setSelectedStop } = useJourneyStore();
+
   const locationTitle = truncateTo40Chars(locationName);
   const location = truncateTo20Chars(locationName);
   const isMobile = useMediaQuery({ maxWidth: 767 });
@@ -54,8 +63,12 @@ export default function LocationSection({
   } else {
     haltekanteAccess = behigRecord.haltekante_access_gerechnet;
   }
-  const accessInfo = behigRecord.adviceaccessinfo;
-  const additionalinformation = behigRecord.additionalinformation;
+  const accessInfo = platform?.adviceAccessInfo;
+  const additionalinformation = platform?.additionalInformation;
+  const tactileSystem = getTactileSystem(platform);
+  const boardingDevice = getBoardingDevice(platform);
+  const dynamicVisual = getDynamicVisual(platform);
+  const dynamicAudio = getDynamicAudio(platform);
 
   /**
    * Handles click on "Info zur Haltestelle" button.
@@ -83,7 +96,7 @@ export default function LocationSection({
         <div
           className={`pl-3 pr-1 font-semibold ${!isMobile ? "" : "text-sm"}`}
         >
-          {`Gleis ${platform}`}
+          {`Gleis ${platformNr}`}
         </div>
         <div className={`pl-1 font-semibold ${!isMobile ? "" : "text-sm"}`}>
           Sektor B
@@ -138,22 +151,39 @@ export default function LocationSection({
             Zugänglichkeitsinformationen
           </AccordionTrigger>
           <AccordionContent className="px-2">
-            <div className="py-3 leading-relaxed">
-              Informationen zur Rampe: &nbsp;N/A
-            </div>
-            <div className="py-3 leading-relaxed">
-              Informationen zum Lift: &nbsp;N/A
-            </div>
-            <div className="py-3 leading-relaxed">
-              Informationen über Treppen: &nbsp;N/A
-            </div>
+            {boardingDevice && (
+              <div className="py-2 leading-relaxed">
+                <span className="font-semibold">
+                  Hilfsmittel für Rollstuhl:&nbsp;
+                </span>
+                <span>{boardingDevice}</span>
+              </div>
+            )}
+            {tactileSystem && (
+              <div className="py-2 leading-relaxed">{tactileSystem}</div>
+            )}
             {additionalinformation && (
-              <div className="py-3 leading-relaxed">
+              <div className="py-2 leading-relaxed">
                 {additionalinformation}
               </div>
             )}
             {accessInfo && (
-              <div className="py-3 leading-relaxed">{accessInfo}</div>
+              <div className="py-2 leading-relaxed">
+                <div className="font-semibold">
+                  Hinweise zum Zugang zum Verkehrsmittel:
+                </div>
+                <div>{accessInfo}</div>
+              </div>
+            )}
+            {dynamicVisual && (
+              <div className="py-2 leading-relaxed">
+                <div>{dynamicVisual}</div>
+              </div>
+            )}
+            {dynamicAudio && (
+              <div className="py-2 leading-relaxed">
+                <div>{dynamicAudio}</div>
+              </div>
             )}
           </AccordionContent>
         </AccordionItem>

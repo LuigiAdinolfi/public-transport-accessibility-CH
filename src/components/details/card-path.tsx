@@ -16,6 +16,7 @@ import {
   getPlatformNumberFromDestination,
   getPlatformNumberFromOrigin,
 } from "@/utils/getPlatformNumber";
+import { usePlatformStore } from "@/store/usePlatformStore";
 
 interface CardPathProps {
   index: number;
@@ -38,10 +39,11 @@ export default function CardPath({
   const selectedLeg = legs[index];
   const fromLocationName = selectedLeg.fromLocation.locationName ?? "N/A";
   const toLocationName = selectedLeg.toLocation.locationName ?? "N/A";
-  const platformFromLocation = getPlatformNumberFromOrigin(selectedLeg);
-  const platformToLocation = getPlatformNumberFromDestination(selectedLeg);
+  const platformNrFromLocation = getPlatformNumberFromOrigin(selectedLeg);
+  const platformNrToLocation = getPlatformNumberFromDestination(selectedLeg);
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const { setSelectedTripLeg } = useJourneyStore();
+  const { platformOrigin, platformDestination } = usePlatformStore();
 
   const fromLocationVehicleAccessType =
     useFromStopPointVehicleAccessType(selectedLeg);
@@ -68,15 +70,17 @@ export default function CardPath({
       <div className={`flex gap-6 px-6 ${!isMobile ? "" : "flex-col"}`}>
         <LocationSection
           locationName={fromLocationName}
-          platform={platformFromLocation}
+          platform={platformOrigin}
+          platformNr={platformNrFromLocation}
           accessIconLocationProps={accessIconFromLocationProps}
-          aria-label={`Departure from ${fromLocationName} at ${platformFromLocation}`}
+          aria-label={`Departure from ${fromLocationName} at ${platformNrFromLocation}`}
         />
         <LocationSection
           locationName={toLocationName}
-          platform={platformToLocation}
+          platform={platformDestination}
+          platformNr={platformNrToLocation}
           accessIconLocationProps={accessIconToLocationProps}
-          aria-label={`Arrival at ${toLocationName} at ${platformToLocation}`}
+          aria-label={`Arrival at ${toLocationName} at ${platformNrToLocation}`}
         />
       </div>
       <CommunityRatingSection value={3} aria-label="Community rating section" />

@@ -17,6 +17,12 @@ import { getVehicleNumber } from "@/utils/getVehicleNumber";
 import { getDepartureTime } from "@/utils/getDepartureTime";
 import { getArrivalTime } from "@/utils/getArrivalTime";
 import { getVehicleType } from "@/utils/getVehicleType";
+import { Platform } from "@/types/Platform";
+import { useEffect, useState } from "react";
+import {
+  getPlatformFromDestination,
+  getPlatformFromOrigin,
+} from "@/utils/getPlatform";
 
 /**
  * Component representing a direct connection in a journey.
@@ -36,6 +42,19 @@ export function DirectConnection({
   const { resolvedTheme } = useTheme();
   const details = allLegs[0];
   const handleClick = useHandleClick(allLegs, duration);
+  // const [platformOrigin, setPlatformOrigin] = useState<Platform>();
+  // const [platformDestination, setPlatformDestination] = useState<Platform>();
+
+  useEffect(() => {
+    async function fetchPlatform() {
+      const resultOrigin = await getPlatformFromOrigin(details);
+      const resultDestination = await getPlatformFromDestination(details);
+      // setPlatformOrigin(resultOrigin);
+      // setPlatformDestination(resultDestination);
+    }
+    fetchPlatform().then((r) => r);
+  }, [details]);
+
   const fromLocationVehicleAccessType =
     useFromStopPointVehicleAccessType(details);
   const toLocationVehicleAccessType = useToStopPointVehicleAccessType(details);
