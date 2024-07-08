@@ -17,8 +17,7 @@ import { getVehicleNumber } from "@/utils/getVehicleNumber";
 import { getDepartureTime } from "@/utils/getDepartureTime";
 import { getArrivalTime } from "@/utils/getArrivalTime";
 import { getVehicleType } from "@/utils/getVehicleType";
-import { Platform } from "@/types/Platform";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   getPlatformFromDestination,
   getPlatformFromOrigin,
@@ -42,15 +41,11 @@ export function DirectConnection({
   const { resolvedTheme } = useTheme();
   const details = allLegs[0];
   const handleClick = useHandleClick(allLegs, duration);
-  // const [platformOrigin, setPlatformOrigin] = useState<Platform>();
-  // const [platformDestination, setPlatformDestination] = useState<Platform>();
 
   useEffect(() => {
     async function fetchPlatform() {
-      const resultOrigin = await getPlatformFromOrigin(details);
-      const resultDestination = await getPlatformFromDestination(details);
-      // setPlatformOrigin(resultOrigin);
-      // setPlatformDestination(resultDestination);
+      await getPlatformFromOrigin(details);
+      await getPlatformFromDestination(details);
     }
     fetchPlatform().then((r) => r);
   }, [details]);
