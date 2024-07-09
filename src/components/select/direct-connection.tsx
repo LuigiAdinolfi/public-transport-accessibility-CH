@@ -19,9 +19,9 @@ import { getArrivalTime } from "@/utils/getArrivalTime";
 import { getVehicleType } from "@/utils/getVehicleType";
 import { useEffect } from "react";
 import {
-  getPlatformFromDestination,
-  getPlatformFromOrigin,
-} from "@/utils/getPlatform";
+  getCachedPlatformFromDestination,
+  getCachedPlatformFromOrigin,
+} from "@/cache/getCachedPlatform";
 
 /**
  * Component representing a direct connection in a journey.
@@ -45,8 +45,8 @@ export function DirectConnection({
   useEffect(() => {
     async function fetchPlatform() {
       await Promise.all([
-        getPlatformFromOrigin(details),
-        getPlatformFromDestination(details),
+        getCachedPlatformFromOrigin(details),
+        getCachedPlatformFromDestination(details),
       ]);
     }
     fetchPlatform().then((r) => r);

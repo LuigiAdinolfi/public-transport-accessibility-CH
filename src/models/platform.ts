@@ -62,7 +62,7 @@ let Platform: mongoose.Model<IPlatform>;
 export function getPlatformModel(): mongoose.Model<IPlatform> {
   if (!Platform) {
     Platform =
-      mongoose.models.Platform ||
+      mongoose.models?.Platform ||
       mongoose.model<IPlatform>("Platform", PlatformSchema);
   }
   return Platform;
