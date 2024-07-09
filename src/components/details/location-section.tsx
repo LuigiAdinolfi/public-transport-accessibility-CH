@@ -135,8 +135,8 @@ export default function LocationSection({
               src="/train-composition.png"
               alt="Zugkomposition"
               width={320}
-              height={100}
-              className="px-2"
+              height={200}
+              className="flex h-full w-full px-2"
             />
           </AccordionContent>
         </AccordionItem>
