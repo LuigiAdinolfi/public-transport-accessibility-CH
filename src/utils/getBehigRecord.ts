@@ -27,6 +27,7 @@ export async function getBehigRecordFromOrigin(
 
   const behigRecordResponse = await fetchFromExplorerAPI(sloid);
   setBehigRecord(behigRecordResponse.results[0]);
+  console.log("BehigRecordResponse: ", behigRecordResponse);
 
   return behigRecordResponse.results
     ? behigRecordResponse.results[0]
@@ -41,6 +42,7 @@ export async function getBehigRecordFromOrigin(
 export async function getBehigRecordFromDestination(
   selectedTripLeg: OJP.TripLeg,
 ): Promise<BehigRecord> {
+  const { setBehigRecord } = useBehigRecordStore.getState();
   if (!selectedTripLeg) return {} as BehigRecord;
 
   const stopPlaceRef = isTripTimedLeg(selectedTripLeg)
@@ -54,6 +56,7 @@ export async function getBehigRecordFromDestination(
   const sloid = stopPlaceRef.startsWith("ch:1:") ? stopPlaceRef : stopPlaceName;
 
   const behigRecordResponse = await fetchFromExplorerAPI(sloid);
+  setBehigRecord(behigRecordResponse.results[0]);
   console.log("BehigRecordResponse: ", behigRecordResponse);
 
   return behigRecordResponse.results

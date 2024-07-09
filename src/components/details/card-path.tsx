@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import * as OJP from "ojp-sdk";
 import { Card } from "@/components/ui/card";
 import InfoSection from "@/components/details/info-section";
@@ -17,6 +17,11 @@ import {
   getPlatformNumberFromOrigin,
 } from "@/utils/getPlatformNumber";
 import { usePlatformStore } from "@/store/usePlatformStore";
+import {
+  getCachedPlatformFromDestination,
+  getCachedPlatformFromOrigin,
+} from "@/cache/getCachedPlatform";
+import { Platform } from "@/types/Platform";
 
 interface CardPathProps {
   index: number;
@@ -42,8 +47,15 @@ export default function CardPath({
   const platformNrFromLocation = getPlatformNumberFromOrigin(selectedLeg);
   const platformNrToLocation = getPlatformNumberFromDestination(selectedLeg);
   const isMobile = useMediaQuery({ maxWidth: 767 });
+
   const { setSelectedTripLeg } = useJourneyStore();
-  const { platformOrigin, platformDestination } = usePlatformStore();
+  const { setPlatformOrigin, setPlatformDestination } = usePlatformStore();
+
+  const [platformOrigin, setLocalPlatformOrigin] = useState<Platform | null>(
+    null,
+  );
+  const [platformDestination, setLocalPlatformDestination] =
+    useState<Platform | null>(null);
 
   const fromLocationVehicleAccessType =
     useFromStopPointVehicleAccessType(selectedLeg);
@@ -62,7 +74,25 @@ export default function CardPath({
 
   useEffect(() => {
     setSelectedTripLeg(selectedLeg);
-  }, [index, setSelectedTripLeg, selectedLeg]);
+
+    async function fetchPlatform() {
+      const originPlatform = await getCachedPlatformFromOrigin(selectedLeg);
+      const destinationPlatform =
+        await getCachedPlatformFromDestination(selectedLeg);
+      setLocalPlatformOrigin(originPlatform);
+      setLocalPlatformDestination(destinationPlatform);
+      setPlatformOrigin(originPlatform);
+      setPlatformDestination(destinationPlatform);
+    }
+
+    fetchPlatform().then((r) => r);
+  }, [
+    index,
+    setSelectedTripLeg,
+    selectedLeg,
+    setPlatformOrigin,
+    setPlatformDestination,
+  ]);
 
   return (
     <Card>
