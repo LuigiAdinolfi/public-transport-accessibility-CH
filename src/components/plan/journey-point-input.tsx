@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { JourneyPointProps } from "@/utils/journeyPointProps";
+import { JourneyPointProps } from "@/helpers/journeyPointProps";
 import { useHandleOptionSelect } from "@/hooks/useHandleOptionSelect";
 import { useFetchOptions } from "@/hooks/useFetchOptions";
 import { useHandleKeyDown } from "@/hooks/useHandleKeyDown";

@@ -3,7 +3,7 @@ import * as OJP from "ojp-sdk";
 import {
   fetchJourneyPoints,
   MapLocations,
-} from "@/api/openJourneyPlanner/fetch-journey-points";
+} from "@/services/openJourneyPlanner/fetch-journey-points";
 
 /**
  * Custom hook to fetch location options based on user input.

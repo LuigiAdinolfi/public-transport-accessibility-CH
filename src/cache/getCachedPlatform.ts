@@ -1,7 +1,7 @@
 import { usePlatformStore } from "@/store/usePlatformStore";
 import { isTripTimedLeg } from "@/utils/isTripTimedLeg";
 import { fetchPlatformClient } from "@/cache/fetchPlatformClient";
-import fetchFromExplorerAPI from "@/api/explorer/fetchFromExplorerAPI";
+import fetchFromExplorerAPI from "@/services/explorer/fetchFromExplorerAPI";
 
 /**
  * Retrieves and caches platform information for the origin stop of a trip leg.

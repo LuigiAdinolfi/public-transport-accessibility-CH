@@ -1,7 +1,7 @@
 import * as OJP from "ojp-sdk";
 import { usePlatformStore } from "@/store/usePlatformStore";
 import { isTripTimedLeg } from "@/utils/isTripTimedLeg";
-import fetchPlatformsBySloid from "@/api/atlas/prm-directory/fetchPlatformsBySloid";
+import fetchPlatformsBySloid from "@/services/atlas/prm-directory/fetchPlatformsBySloid";
 
 export async function getPlatformFromOrigin(selectedTripLeg: OJP.TripLeg) {
   const { setPlatformOrigin } = usePlatformStore.getState();

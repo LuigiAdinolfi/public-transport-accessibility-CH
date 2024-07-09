@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { fetchPlatform } from "@/cache/fetchPlatform";
+import { fetchPlatformFromLocalAPI } from "@/cache/fetchPlatformFromLocalAPI";
 
 export async function POST(request: NextRequest) {
   try {
@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid sloid" }, { status: 400 });
     }
 
-    const platform = await fetchPlatform(sloid);
+    const platform = await fetchPlatformFromLocalAPI(sloid);
     if (platform) {
       return NextResponse.json(platform);
     } else {

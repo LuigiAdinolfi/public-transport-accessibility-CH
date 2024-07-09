@@ -1,8 +1,8 @@
 "use server";
 
 import { Document } from "mongoose";
-import connectDB from "@/lib/connectDB";
-import fetchFromAPIBySloid from "@/services/fetchFromAPIBySloid";
+import connectDB from "@/db/connectDB";
+import fetchFromAPIBySloid from "@/lib/fetchFromAPIBySloid";
 import getPlatformModel from "@/models/platform";
 
 /**

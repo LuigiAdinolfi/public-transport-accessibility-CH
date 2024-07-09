@@ -1,5 +1,5 @@
 import * as OJP from "ojp-sdk";
-import { fetchTripRequest } from "@/api/openJourneyPlanner/fetch-trip-request";
+import { fetchTripRequest } from "@/services/openJourneyPlanner/fetch-trip-request";
 
 /**
  * Handles form submission for fetching trip details.

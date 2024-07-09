@@ -2,7 +2,7 @@ import * as OJP from "ojp-sdk";
 import {
   getBehigRecordFromDestination,
   getBehigRecordFromOrigin,
-} from "@/utils/getBehigRecord";
+} from "@/lib/fetchBehigRecord";
 
 /**
  * Fetches the vehicle access information for the origin stop point of a given TripLeg.

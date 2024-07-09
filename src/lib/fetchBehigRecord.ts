@@ -1,7 +1,7 @@
 import * as OJP from "ojp-sdk";
 import { BehigRecord } from "@/types/BehigRecord";
 import { useBehigRecordStore } from "@/store/useBehigRecordStore";
-import fetchFromExplorerAPI from "@/api/explorer/fetchFromExplorerAPI";
+import fetchFromExplorerAPI from "@/services/explorer/fetchFromExplorerAPI";
 import { isTripTimedLeg } from "@/utils/isTripTimedLeg";
 
 /**
