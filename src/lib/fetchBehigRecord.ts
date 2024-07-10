@@ -23,6 +23,10 @@ export async function getBehigRecordFromOrigin(
     ? selectedTripLeg.fromStopPoint.location.stopPlace?.stopPlaceName ?? "N/A"
     : "N/A";
 
+  if (/^[0-9]/.test(stopPlaceName)) {
+    return {} as BehigRecord;
+  }
+
   const sloid = stopPlaceRef.startsWith("ch:1:") ? stopPlaceRef : stopPlaceName;
 
   const behigRecordResponse = await fetchFromExplorerAPI(sloid);
@@ -52,6 +56,10 @@ export async function getBehigRecordFromDestination(
   const stopPlaceName = isTripTimedLeg(selectedTripLeg)
     ? selectedTripLeg.toStopPoint.location.stopPlace?.stopPlaceName ?? "N/A"
     : "N/A";
+
+  if (/^[0-9]/.test(stopPlaceName)) {
+    return {} as BehigRecord;
+  }
 
   const sloid = stopPlaceRef.startsWith("ch:1:") ? stopPlaceRef : stopPlaceName;
 

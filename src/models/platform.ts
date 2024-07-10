@@ -59,7 +59,7 @@ PlatformSchema.index({ id: 1 }, { unique: true });
 let Platform: mongoose.Model<IPlatform>;
 
 // Export the model function to ensure it's called after the connection is established
-export function getPlatformModel(): mongoose.Model<IPlatform> {
+export function PlatformToStore(): mongoose.Model<IPlatform> {
   if (!Platform) {
     Platform =
       mongoose.models?.Platform ||
@@ -68,4 +68,4 @@ export function getPlatformModel(): mongoose.Model<IPlatform> {
   return Platform;
 }
 
-export default getPlatformModel;
+export default PlatformToStore;

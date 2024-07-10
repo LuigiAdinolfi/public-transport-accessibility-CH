@@ -21,23 +21,29 @@ import {
 } from "@/assets/icons/wheelchair-uncertain";
 
 const AccessibilityMap = {
+  WheelchairUncertain: {
+    light: LightWheelchairUncertain,
+    dark: DarkWheelchairUncertain,
+    text: "Keine Information\nvorhanden",
+    score: 6,
+  },
   WALK: {
     light: LightWheelchair,
     dark: DarkWheelchair,
     text: "Selber fahren",
-    score: 6,
+    score: 5,
   },
   Wheelchair: {
     light: LightWheelchair,
     dark: DarkWheelchair,
     text: "Selber\nein-/aussteigen",
-    score: 5,
+    score: 4,
   },
   WheelchairPartially: {
     light: LightWheelchairPartially,
     dark: DarkWheelchairPartially,
     text: "Mit Hilfe Fahrpersonal\nein-/aussteigen",
-    score: 4,
+    score: 3,
   },
   WheelchairReservation: {
     light: LightWheelchairReservation,
@@ -49,12 +55,6 @@ const AccessibilityMap = {
     light: LightWheelchairSubstituteTransport,
     dark: DarkWheelchairSubstituteTransport,
     text: "Mit Shuttle zur barrierefreien Haltestelle, vorher anmelden",
-    score: 2,
-  },
-  WheelchairUncertain: {
-    light: LightWheelchairUncertain,
-    dark: DarkWheelchairUncertain,
-    text: "Keine Information\nvorhanden",
     score: 1,
   },
   WheelchairInaccessible: {

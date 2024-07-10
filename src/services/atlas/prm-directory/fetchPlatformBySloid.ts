@@ -10,7 +10,7 @@ import PlatformToStore from "@/models/platform";
  * @param {string} sloid - The SLOID to append to the endpoint.
  * @returns {Promise<any | null>} The response data or null if the request failed.
  */
-export default async function fetchPlatformsBySloid(
+export default async function fetchPlatformBySloid(
   sloid: string,
 ): Promise<any | null> {
   try {

@@ -1,9 +1,9 @@
 import * as OJP from "ojp-sdk";
 import { usePlatformStore } from "@/store/usePlatformStore";
 import { isTripTimedLeg } from "@/utils/isTripTimedLeg";
-import fetchPlatformsBySloid from "@/services/atlas/prm-directory/fetchPlatformsBySloid";
+import fetchPlatformBySloid from "@/services/atlas/prm-directory/fetchPlatformBySloid";
 
-export async function getPlatformFromOrigin(selectedTripLeg: OJP.TripLeg) {
+export async function fetchPlatformFromOrigin(selectedTripLeg: OJP.TripLeg) {
   const { setPlatformOrigin } = usePlatformStore.getState();
   if (!selectedTripLeg) return {};
 
@@ -12,14 +12,16 @@ export async function getPlatformFromOrigin(selectedTripLeg: OJP.TripLeg) {
     : "";
 
   if (sloid.startsWith("ch:1:")) {
-    const platformResponse = await fetchPlatformsBySloid(sloid);
+    const platformResponse = await fetchPlatformBySloid(sloid);
     setPlatformOrigin(platformResponse);
     return platformResponse;
   }
   return {};
 }
 
-export async function getPlatformFromDestination(selectedTripLeg: OJP.TripLeg) {
+export async function fetchPlatformFromDestination(
+  selectedTripLeg: OJP.TripLeg,
+) {
   const { setPlatformDestination } = usePlatformStore.getState();
   if (!selectedTripLeg) return {};
 
@@ -28,7 +30,7 @@ export async function getPlatformFromDestination(selectedTripLeg: OJP.TripLeg) {
     : "";
 
   if (sloid.startsWith("ch:1:")) {
-    const platformResponse = await fetchPlatformsBySloid(sloid);
+    const platformResponse = await fetchPlatformBySloid(sloid);
     setPlatformDestination(platformResponse);
     return platformResponse;
   }

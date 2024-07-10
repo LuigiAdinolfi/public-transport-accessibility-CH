@@ -2,9 +2,9 @@
 
 import redis from "@/cache/redisClient";
 import connectDB from "@/db/connectDB";
-import getPlatformModel from "@/models/platform";
-import fetchPlatformsBySloid from "@/services/atlas/prm-directory/fetchPlatformsBySloid";
+import fetchPlatformBySloid from "@/services/atlas/prm-directory/fetchPlatformBySloid";
 import { storePlatformBySloidToDB } from "@/db/storePlatformBySloidToDB";
+import PlatformToStore from "@/models/platform";
 
 /**
  * Fetches platform data by SLOID (Service Location IDentifier) from Redis cache,
@@ -25,7 +25,7 @@ export async function fetchPlatformFromLocalAPI(sloid: string): Promise<any> {
   await connectDB();
 
   // Check the database next
-  const PlatformModel = getPlatformModel();
+  const PlatformModel = PlatformToStore();
   const platformFromDB = await PlatformModel.findOne({ sloid });
   if (platformFromDB) {
     console.log(`Redis: Cached platform data for sloid ${sloid}`);
@@ -40,7 +40,7 @@ export async function fetchPlatformFromLocalAPI(sloid: string): Promise<any> {
   }
 
   // Fetch from API as a last resort
-  const platformFromAPI = await fetchPlatformsBySloid(sloid);
+  const platformFromAPI = await fetchPlatformBySloid(sloid);
   if (platformFromAPI) {
     console.log(`Redis: Retrieved platform data from API for sloid ${sloid}`);
     // Store the platform data in the database

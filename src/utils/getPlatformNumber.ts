@@ -7,7 +7,7 @@ import { isTripTimedLeg } from "@/utils/isTripTimedLeg";
  * @returns {string} - The platform number of the selected trip leg or N/A if the leg is null.
  */
 export const getPlatformNumberFromOrigin = (
-  selectedTripLeg: OJP.TripLeg | null,
+  selectedTripLeg: OJP.TripLeg,
 ): string => {
   if (!selectedTripLeg) return "N/A";
   return isTripTimedLeg(selectedTripLeg)
@@ -21,7 +21,7 @@ export const getPlatformNumberFromOrigin = (
  * @returns {string} - The platform number of the selected trip leg or N/A if the leg is null.
  */
 export const getPlatformNumberFromDestination = (
-  selectedTripLeg: OJP.TripLeg | null,
+  selectedTripLeg: OJP.TripLeg,
 ): string => {
   if (!selectedTripLeg) return "N/A";
   return isTripTimedLeg(selectedTripLeg)

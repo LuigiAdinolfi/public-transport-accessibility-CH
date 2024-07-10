@@ -58,6 +58,14 @@ export default function LocationSection({
 
   const { behigRecord } = useBehigRecordStore();
   let haltekanteAccess;
+  if (!behigRecord)
+    return (
+      <>
+        <div className="flex w-full justify-center py-12">
+          No available data for this connection
+        </div>
+      </>
+    );
   if (behigRecord.bpvh_verkehrsmittel_text_de === "TRAIN") {
     haltekanteAccess = behigRecord.level_access_wheelchair_calculated;
   } else {
