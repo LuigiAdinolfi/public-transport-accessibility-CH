@@ -2,7 +2,7 @@
 
 import fetchFromAPI from "@/lib/fetchFromAPI";
 import connectDB from "@/db/connectDB";
-import StopPointToStoreForDemo from "@/models/stopPoint";
+import StopPointToStoreForDemo from "@/models/stopPointForDemo";
 
 /**
  * Fetches data from the specified API endpoint and saves selected fields to MongoDB using upsert.

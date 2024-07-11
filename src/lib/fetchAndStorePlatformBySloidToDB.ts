@@ -4,6 +4,7 @@ import { Document } from "mongoose";
 import connectDB from "@/db/connectDB";
 import fetchFromAPIBySloid from "@/lib/fetchFromAPIBySloid";
 import getPlatformModel from "@/models/platform";
+import PlatformToStore from "@/models/platform";
 
 /**
  * Fetches data from the specified API endpoint by SLOID,
@@ -22,7 +23,7 @@ export default async function fetchAndStorePlatformBySloidToDB<
   selectFieldsFn: (data: any[]) => T[],
   sloid: string,
 ): Promise<any | null> {
-  console.log(`fetchAndSaveDataBySloid called with sloid: ${sloid}`);
+  console.log(`fetchAndStorePlatformBySloidToDB called with sloid: ${sloid}`);
   await connectDB();
 
   try {
@@ -41,7 +42,7 @@ export default async function fetchAndStorePlatformBySloidToDB<
 
       const selectedFields = selectFieldsFn(data);
 
-      const PlatformModel = getPlatformModel();
+      const PlatformModel = PlatformToStore();
       for (const item of selectedFields) {
         console.log(`Upserting item with ID: ${item.id}`);
         await PlatformModel.updateOne(

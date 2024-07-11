@@ -1,5 +1,5 @@
 import connectDB from "@/db/connectDB";
-import StopPointToStoreForDemo from "@/models/stopPoint";
+import StopPointToStoreForDemo from "@/models/stopPointForDemo";
 import redis from "@/cache/redisClient";
 
 export async function fetchStopPointsRedis(): Promise<any> {

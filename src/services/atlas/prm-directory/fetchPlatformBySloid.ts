@@ -2,7 +2,6 @@
 
 import fetchAndStorePlatformBySloidToDB from "@/lib/fetchAndStorePlatformBySloidToDB";
 import { storePlatformToDB } from "@/db/storePlatformToDB";
-import PlatformToStore from "@/models/platform";
 
 /**
  * Fetches platform data by SLOID from the API.
