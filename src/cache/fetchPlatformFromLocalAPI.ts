@@ -1,5 +1,3 @@
-"use server";
-
 import redis from "@/cache/redisClient";
 import connectDB from "@/db/connectDB";
 import fetchPlatformBySloid from "@/services/atlas/prm-directory/fetchPlatformBySloid";

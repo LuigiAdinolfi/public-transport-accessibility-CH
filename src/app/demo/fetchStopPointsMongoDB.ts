@@ -1,5 +1,3 @@
-"use server";
-
 import connectDB from "@/db/connectDB";
 import StopPointToStoreForDemo from "@/models/stopPointForDemo";
 import fetchStopPointsForDemo from "@/services/atlas/prm-directory/fetchStopPointsForDemo";

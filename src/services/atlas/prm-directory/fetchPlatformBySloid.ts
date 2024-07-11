@@ -1,5 +1,3 @@
-"use server";
-
 import fetchAndStorePlatformBySloidToDB from "@/lib/fetchAndStorePlatformBySloidToDB";
 import { storePlatformToDB } from "@/db/storePlatformToDB";
 

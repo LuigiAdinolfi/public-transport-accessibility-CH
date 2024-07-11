@@ -1,5 +1,3 @@
-"use server";
-
 import fetchFromAPI from "@/lib/fetchFromAPI";
 import connectDB from "@/db/connectDB";
 import StopPointToStoreForDemo from "@/models/stopPointForDemo";

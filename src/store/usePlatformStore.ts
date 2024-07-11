@@ -1,5 +1,3 @@
-// In usePlatformStore.ts
-
 import { create } from "zustand";
 import { Platform } from "@/types/Platform";
 
