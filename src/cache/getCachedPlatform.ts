@@ -28,9 +28,17 @@ export async function getCachedPlatformFromOrigin(
 
   if (sloid.startsWith("ch:1:")) {
     // Fetch platform data using the sloid
-    const platform = await fetchPlatformClient(sloid);
-    setPlatformOrigin(platform); // Update platform in state
-    return platform; // Return fetched platform data
+    try {
+      const platform = await fetchPlatformClient(sloid);
+      setPlatformOrigin(platform); // Update platform in state
+      return platform; // Return fetched platform data
+    } catch (error) {
+      console.error(
+        `Error fetching platform for origin sloid ${sloid}:`,
+        error,
+      );
+      return {}; // Return empty object if error occurs
+    }
   } else {
     // Fetch platform data from Explorer API if sloid not prefixed with ch:1:
     const platformFromBehig = await fetchFromExplorerAPI(stopPlaceName);
@@ -39,9 +47,14 @@ export async function getCachedPlatformFromOrigin(
       if (platformFromBehig.results && platformFromBehig.results.length > 0) {
         const sloid = platformFromBehig.results[0].kanten_sloid;
         if (!sloid) return {}; // Return empty object if sloid is missing
-        const platform = await fetchPlatformClient(sloid);
-        setPlatformOrigin(platform); // Update platform in state
-        return platform; // Return fetched platform data
+        try {
+          const platform = await fetchPlatformClient(sloid);
+          setPlatformOrigin(platform); // Update platform in state
+          return platform; // Return fetched platform data
+        } catch (error) {
+          console.error(`Error fetching platform for sloid ${sloid}:`, error);
+          return {}; // Return empty object if error occurs
+        }
       }
     } else {
       console.error("No results found in platformFromBehig");
@@ -74,10 +87,18 @@ export async function getCachedPlatformFromDestination(
   const sloid = stopPlaceRef.startsWith("ch:1:") ? stopPlaceRef : stopPlaceName;
 
   if (sloid.startsWith("ch:1:")) {
-    // Fetch platform data using the sloid
-    const platform = await fetchPlatformClient(sloid);
-    setPlatformDestination(platform); // Update platform in state
-    return platform; // Return fetched platform data
+    try {
+      // Fetch platform data using the sloid
+      const platform = await fetchPlatformClient(sloid);
+      setPlatformDestination(platform); // Update platform in state
+      return platform; // Return fetched platform data
+    } catch (error) {
+      console.error(
+        `Error fetching platform for origin sloid ${sloid}:`,
+        error,
+      );
+      return {};
+    }
   } else {
     // Fetch platform data from Explorer API if sloid not prefixed with ch:1:
     const platformFromBehig = await fetchFromExplorerAPI(stopPlaceName);

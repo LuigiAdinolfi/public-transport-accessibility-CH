@@ -1,3 +1,5 @@
+"use server";
+
 import connectDB from "@/db/connectDB";
 import StopPointToStoreForDemo from "@/models/stopPointForDemo";
 import fetchStopPointsForDemo from "@/services/atlas/prm-directory/fetchStopPointsForDemo";
@@ -19,7 +21,10 @@ export async function fetchStopPointsMongoDB(): Promise<any> {
         { upsert: true },
       );
     }
-    return await StopPointModel.find().exec();
+    console.log(
+      "Selected fields saved to MongoDB with upsert (fetchStopPointsMongoDB)",
+    );
+    return stopPoints;
   }
 
   return null;
