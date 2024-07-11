@@ -11,10 +11,7 @@ export async function fetchPlatformClient(sloid: string): Promise<any> {
     const { data, ok } = await fetchPlatformFromLocalAPI(sloid);
 
     if (!ok) {
-      console.error(
-        `Failed to fetch platform for SLOID ${sloid}: ${data.message}`,
-      );
-      throw new Error("Failed to fetch platform");
+      console.error(`Error fetching platform for SLOID ${sloid}:`, data);
     }
     return data;
   } catch (error) {
