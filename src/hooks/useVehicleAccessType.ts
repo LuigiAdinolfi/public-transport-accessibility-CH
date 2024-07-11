@@ -22,7 +22,7 @@ export function useFromStopPointVehicleAccessType(
     if (selectedTripLeg) {
       fetchVehicleAccessType().then((r) => r);
     }
-  }, [selectedTripLeg]);
+  }, [vehicleAccessType, selectedTripLeg]);
 
   return vehicleAccessType;
 }
@@ -42,7 +42,7 @@ export function useToStopPointVehicleAccessType(selectedTripLeg: OJP.TripLeg) {
     if (selectedTripLeg) {
       fetchVehicleAccessType().then((r) => r);
     }
-  }, [selectedTripLeg]);
+  }, [vehicleAccessType, selectedTripLeg]);
 
   return vehicleAccessType;
 }
