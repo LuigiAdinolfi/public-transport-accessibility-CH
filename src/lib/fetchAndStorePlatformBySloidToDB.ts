@@ -3,7 +3,6 @@
 import { Document } from "mongoose";
 import connectDB from "@/db/connectDB";
 import fetchFromAPIBySloid from "@/lib/fetchFromAPIBySloid";
-import getPlatformModel from "@/models/platform";
 import PlatformToStore from "@/models/platform";
 
 /**
