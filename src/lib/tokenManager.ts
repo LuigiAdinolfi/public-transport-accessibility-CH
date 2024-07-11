@@ -1,5 +1,3 @@
-"use server";
-
 import qs from "qs";
 
 let accessToken: string | null = null;
@@ -17,6 +15,7 @@ async function fetchAccessToken(): Promise<string | null> {
     const clientId = process.env.CLIENT_ID;
     const clientSecret = process.env.CLIENT_SECRET;
     const scope = process.env.SCOPE;
+    const redirectUri = process.env.REDIRECT_URI;
 
     if (!tokenEndpoint || !clientId || !clientSecret || !scope) {
       console.error("Environment variables are not properly defined");
@@ -31,9 +30,10 @@ async function fetchAccessToken(): Promise<string | null> {
       },
       body: qs.stringify({
         grant_type: "client_credentials",
-        scope: scope,
         client_id: clientId,
         client_secret: clientSecret,
+        scope: scope,
+        redirect_uri: redirectUri,
       }),
     });
 
