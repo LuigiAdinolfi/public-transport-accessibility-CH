@@ -23,19 +23,22 @@ async function fetchAccessToken(): Promise<string | null> {
     }
 
     // Make the token request
-    const response = await fetch(tokenEndpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+    const response = await fetch(
+      "https://login.microsoftonline.com/2cda5d11-f0ac-46b3-967d-af1b2e1bd01a/oauth2/v2.0/token",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: qs.stringify({
+          grant_type: "client_credentials",
+          client_id: clientId,
+          client_secret: clientSecret,
+          scope: scope,
+          redirect_uri: redirectUri,
+        }),
       },
-      body: qs.stringify({
-        grant_type: "client_credentials",
-        client_id: clientId,
-        client_secret: clientSecret,
-        scope: scope,
-        redirect_uri: redirectUri,
-      }),
-    });
+    );
 
     if (!response.ok) {
       console.error(
