@@ -31,7 +31,7 @@ export async function getBehigRecordFromOrigin(
 
   const behigRecordResponse = await fetchFromExplorerAPI(sloid);
   setBehigRecord(behigRecordResponse.results[0]);
-  console.log("BehigRecordResponse: ", behigRecordResponse);
+  console.log("BehigRecordResponseOrigin: ", behigRecordResponse);
 
   return behigRecordResponse.results
     ? behigRecordResponse.results[0]
@@ -65,7 +65,7 @@ export async function getBehigRecordFromDestination(
 
   const behigRecordResponse = await fetchFromExplorerAPI(sloid);
   setBehigRecord(behigRecordResponse.results[0]);
-  console.log("BehigRecordResponse: ", behigRecordResponse);
+  console.log("BehigRecordResponseDestination: ", behigRecordResponse);
 
   return behigRecordResponse.results
     ? behigRecordResponse.results[0]

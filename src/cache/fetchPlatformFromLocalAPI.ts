@@ -3,7 +3,7 @@
 import redis from "@/cache/redisClient";
 import connectDB from "@/db/connectDB";
 import fetchPlatformBySloid from "@/services/atlas/prm-directory/fetchPlatformBySloid";
-import { storePlatformBySloidToDB } from "@/db/storePlatformBySloidToDB";
+import { storePlatformToDB } from "@/db/storePlatformToDB";
 import PlatformToStore from "@/models/platform";
 
 /**
@@ -44,7 +44,7 @@ export async function fetchPlatformFromLocalAPI(sloid: string): Promise<any> {
   if (platformFromAPI) {
     console.log(`Redis: Retrieved platform data from API for sloid ${sloid}`);
     // Store the platform data in the database
-    const selectedFields = storePlatformBySloidToDB([platformFromAPI]);
+    const selectedFields = storePlatformToDB([platformFromAPI]);
     for (const item of selectedFields) {
       await PlatformModel.updateOne(
         { id: item.id },

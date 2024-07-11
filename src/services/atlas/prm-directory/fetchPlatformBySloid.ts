@@ -1,7 +1,7 @@
 "use server";
 
 import fetchAndStoreDataBySloidToDB from "@/lib/fetchAndStoreDataBySloidToDB";
-import { storePlatformBySloidToDB } from "@/db/storePlatformBySloidToDB";
+import { storePlatformToDB } from "@/db/storePlatformToDB";
 import PlatformToStore from "@/models/platform";
 
 /**
@@ -16,7 +16,7 @@ export default async function fetchPlatformBySloid(
   try {
     return await fetchAndStoreDataBySloidToDB(
       "/prm-directory/v1/platforms",
-      storePlatformBySloidToDB,
+      storePlatformToDB,
       PlatformToStore,
       sloid,
     );

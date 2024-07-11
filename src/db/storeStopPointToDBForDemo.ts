@@ -1,0 +1,40 @@
+import { StopPointForDemo } from "@/types/StopPointForDemo";
+
+export function storeStopPointToDBForDemo(
+  stopPointsData: StopPointForDemo[],
+): any[] {
+  return stopPointsData.map((stopPoint: StopPointForDemo) => ({
+    creationDate: stopPoint.creationDate,
+    creator: stopPoint.creator,
+    editionDate: stopPoint.editionDate,
+    editor: stopPoint.editor,
+    status: stopPoint.status,
+    id: stopPoint.id,
+    validFrom: stopPoint.validFrom,
+    validTo: stopPoint.validTo,
+    etagVersion: stopPoint.etagVersion,
+    sloid: stopPoint.sloid,
+    meansOfTransport: stopPoint.meansOfTransport,
+    freeText: stopPoint.freeText,
+    address: stopPoint.address,
+    zipCode: stopPoint.zipCode,
+    city: stopPoint.city,
+    alternativeTransport: stopPoint.alternativeTransport,
+    alternativeTransportCondition: stopPoint.alternativeTransportCondition,
+    assistanceAvailability: stopPoint.assistanceAvailability,
+    assistanceCondition: stopPoint.assistanceCondition,
+    assistanceService: stopPoint.assistanceService,
+    audioTicketMachine: stopPoint.audioTicketMachine,
+    additionalInformation: stopPoint.additionalInformation,
+    dynamicAudioSystem: stopPoint.dynamicAudioSystem,
+    dynamicOpticSystem: stopPoint.dynamicOpticSystem,
+    infoTicketMachine: stopPoint.infoTicketMachine,
+    interoperable: stopPoint.interoperable,
+    url: stopPoint.url,
+    visualInfo: stopPoint.visualInfo,
+    wheelchairTicketMachine: stopPoint.wheelchairTicketMachine,
+    assistanceRequestFulfilled: stopPoint.assistanceRequestFulfilled,
+    ticketMachine: stopPoint.ticketMachine,
+    reduced: stopPoint.reduced,
+  }));
+}
