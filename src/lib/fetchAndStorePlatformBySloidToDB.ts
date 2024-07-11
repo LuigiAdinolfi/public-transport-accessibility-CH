@@ -1,3 +1,5 @@
+"use server";
+
 import { Document } from "mongoose";
 import connectDB from "@/db/connectDB";
 import fetchFromAPIBySloid from "@/lib/fetchFromAPIBySloid";
