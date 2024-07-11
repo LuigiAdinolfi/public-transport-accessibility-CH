@@ -1,5 +1,3 @@
-"use client";
-
 import { Card } from "@/components/ui/card";
 import * as React from "react";
 import SelectOptionsHeader from "@/components/select/select-options-header";

@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { MultipleConnection } from "@/components/select/multiple-connection";
 import { DirectConnection } from "@/components/select/direct-connection";

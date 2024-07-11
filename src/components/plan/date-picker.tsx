@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { useEffect } from "react";
 import { toZonedTime, format } from "date-fns-tz";

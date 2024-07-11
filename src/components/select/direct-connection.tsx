@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { CommunityRatingSelect } from "@/components/select/community-rating-select";
