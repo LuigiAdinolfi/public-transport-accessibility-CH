@@ -9,14 +9,11 @@ import StopPointToStoreForDemo from "@/models/stopPoint";
  *
  * @param {string} endpoint - The API endpoint to fetch data from.
  * @param {Function} selectFieldsFn - A function to select specific fields from the fetched data.
- * @param {Model<Document>} Model - The Mongoose model to save the data to.
  * @returns {Promise<any | null>} The response data or null if the request failed.
  */
-export default async function fetchAndStoreDataToDB<T extends { id: string }>(
-  endpoint: string,
-  selectFieldsFn: (data: any[]) => T[],
-  Model: any,
-): Promise<any | null> {
+export default async function fetchAndStoreStopPointsToDB<
+  T extends { id: string },
+>(endpoint: string, selectFieldsFn: (data: any[]) => T[]): Promise<any | null> {
   console.log("Connecting to database...");
   await connectDB();
   console.log("Database connected");

@@ -12,14 +12,14 @@ import getPlatformModel from "@/models/platform";
  * Logs errors and success messages for debugging purposes.
  * @param {string} endpoint - The API endpoint to fetch data from.
  * @param {Function} selectFieldsFn - A function to select fields from the fetched data.
- * @param Model - The Mongoose model to upsert the selected fields into.
  * @param {string} sloid - The specific SLOID to fetch data for.
  * @returns {Promise<any | null>} The response from the API or null if the operation fails.
  */
-export default async function fetchAndStoreDataBySloidToDB<T extends Document>(
+export default async function fetchAndStorePlatformBySloidToDB<
+  T extends Document,
+>(
   endpoint: string,
   selectFieldsFn: (data: any[]) => T[],
-  Model: any,
   sloid: string,
 ): Promise<any | null> {
   console.log(`fetchAndSaveDataBySloid called with sloid: ${sloid}`);
