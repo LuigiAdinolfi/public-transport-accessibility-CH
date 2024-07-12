@@ -1,5 +1,3 @@
-"use server";
-
 import getAccessToken from "@/lib/tokenManager";
 
 /**

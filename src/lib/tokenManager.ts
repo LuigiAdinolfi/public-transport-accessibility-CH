@@ -15,7 +15,6 @@ async function fetchAccessToken(): Promise<string | null> {
     const clientId = process.env.CLIENT_ID;
     const clientSecret = process.env.CLIENT_SECRET;
     const scope = process.env.SCOPE;
-    const redirectUri = process.env.REDIRECT_URI;
 
     if (!tokenEndpoint || !clientId || !clientSecret || !scope) {
       console.error("Environment variables are not properly defined");
@@ -23,22 +22,18 @@ async function fetchAccessToken(): Promise<string | null> {
     }
 
     // Make the token request
-    const response = await fetch(
-      "https://login.microsoftonline.com/2cda5d11-f0ac-46b3-967d-af1b2e1bd01a/oauth2/v2.0/token",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: qs.stringify({
-          grant_type: "client_credentials",
-          client_id: clientId,
-          client_secret: clientSecret,
-          scope: scope,
-          redirect_uri: redirectUri,
-        }),
+    const response = await fetch(tokenEndpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
       },
-    );
+      body: qs.stringify({
+        grant_type: "client_credentials",
+        scope: scope,
+        client_id: clientId,
+        client_secret: clientSecret,
+      }),
+    });
 
     if (!response.ok) {
       console.error(
