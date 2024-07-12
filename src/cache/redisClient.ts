@@ -1,7 +1,7 @@
 import Redis from "ioredis";
 
 // Initialize Redis client using the provided URL from environment variables
-const redis: Redis = new Redis(process.env.NEXT_PUBLIC_REDIS_URL!);
+const redis: Redis = new Redis(process.env.REDIS_URL!);
 
 // Log a message when successfully connected to Redis
 redis.on("connect", () => {
