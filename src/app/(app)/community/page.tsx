@@ -12,13 +12,9 @@ export default function CommunityPage() {
 
   return (
     <>
-      {/* Breadcrumb Navigation */}
-      <div className="mb-0"> {/* Remove margin between breadcrumb and main content */}
-        <MyBreadcrumb currentPage={currentPage} />
-      </div>
-
+      
       {/* Main Content */}
-      <div className="flex min-h-screen w-full flex-col items-center justify-center py-0 lg:p-0"> {/* Remove padding around main content */}
+      <div className="flex min-h-screen w-full flex-col items-center justify-start py-0 lg:p-0"> {/* Adjusted for content to be at the top and centered */} {/* Remove padding around main content */}
       
         <CommunityCard />
       </div>
