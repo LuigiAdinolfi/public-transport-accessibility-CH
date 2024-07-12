@@ -11,10 +11,10 @@ let tokenExpiryTime: number | null = null;
 async function fetchAccessToken(): Promise<string | null> {
   try {
     // Check that environment variables are defined
-    const tokenEndpoint = process.env.TOKEN_ENDPOINT;
-    const clientId = process.env.CLIENT_ID;
-    const clientSecret = process.env.CLIENT_SECRET;
-    const scope = process.env.SCOPE;
+    const tokenEndpoint = process.env.NEXT_PUBLIC_TOKEN_ENDPOINT;
+    const clientId = process.env.NEXT_PUBLIC_CLIENT_ID;
+    const clientSecret = process.env.NEXT_PUBLIC_CLIENT_SECRET;
+    const scope = process.env.NEXT_PUBLIC_SCOPE;
 
     if (!tokenEndpoint || !clientId || !clientSecret || !scope) {
       console.error("Environment variables are not properly defined");
