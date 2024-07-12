@@ -1,7 +1,12 @@
 import Redis from "ioredis";
 
 // Initialize Redis client using the provided URL from environment variables
-const redis: Redis = new Redis(process.env.REDIS_URL!);
+const redis: Redis = new Redis({
+  port: 12441, // Redis port
+  host: process.env.REDIS_HOST,
+  username: "default",
+  password: process.env.REDIS_PASSWORD,
+});
 
 // Log a message when successfully connected to Redis
 redis.on("connect", () => {
