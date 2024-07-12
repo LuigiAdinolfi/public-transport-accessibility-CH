@@ -11,10 +11,11 @@ let tokenExpiryTime: number | null = null;
 async function fetchAccessToken(): Promise<string | null> {
   try {
     // Check that environment variables are defined
-    const tokenEndpoint = process.env.NEXT_PUBLIC_TOKEN_ENDPOINT;
-    const clientId = process.env.NEXT_PUBLIC_CLIENT_ID;
-    const clientSecret = process.env.NEXT_PUBLIC_CLIENT_SECRET;
-    const scope = process.env.NEXT_PUBLIC_SCOPE;
+    const tokenEndpoint =
+      "https://login.microsoftonline.com/2cda5d11-f0ac-46b3-967d-af1b2e1bd01a/oauth2/v2.0/token";
+    const clientId = "5fe0faa8-64d3-46ab-b4e7-a65a309155af";
+    const clientSecret = "cR18Q~33Aha~V4kIj5VwQF.Gay9ZAx8V6WklZa8n";
+    const scope = "api://f3cdcb3e-1e95-4591-b664-4526d00f5d66/.default";
 
     if (!tokenEndpoint || !clientId || !clientSecret || !scope) {
       console.error("Environment variables are not properly defined");

@@ -23,7 +23,7 @@ export default async function fetchFromAPIByParentSloid(
 
   try {
     // Construct the full URL for the API request
-    const url = `${process.env.NEXT_PUBLIC_BASE_URL}${endpoint}/overview/${parentServicePointSloid}`;
+    const url = `https://atlas.api.sbb.ch:443${endpoint}/overview/${parentServicePointSloid}`;
 
     // Make the API request with the access token
     const response = await fetch(url, {
