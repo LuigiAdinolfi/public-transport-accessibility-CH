@@ -2,110 +2,157 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardHeader
+  CardHeader,
 } from "@/components/ui/card";
 import * as React from "react";
 import { Button } from "@/components/ui/button";
-import { LightTrainProfile, DarkTrainProfile } from "@/assets/icons/train-profile";
-import { DarkIr16, LightIr16 } from "@/assets/icons/ir-16";
-import { DarkIc6, LightIc6 } from "@/assets/icons/ic-6";
 import { useTheme } from "next-themes";
+import { useRecentJourneysStore } from "@/store/useRecentJourneysStore";
+import { handleFormSubmit } from "@/utils/handleSearchSubmit";
+import { useJourneyStore } from "@/store/useJourneyStore";
+import { useRouter } from "next/navigation";
+import { formatDate, formatDateSmall } from "@/utils/handleDate";
+import { useMediaQuery } from "react-responsive";
+import { getVehicleIcon } from "@/utils/handleVehicleIcon";
 
 /**
- * Component representing a card displaying recent journeys.
- * @returns {JSX.Element} JSX Element
+ * CardRecentJourneys component for selecting a recent journey.
+ * @returns {React.ReactElement} CardRecentJourneys component.
  */
-export function CardRecentJourneys() {
+export function CardRecentJourneys(): React.ReactElement {
   const { resolvedTheme } = useTheme();
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+  const recentJourneys = useRecentJourneysStore((state) =>
+    state.getRecentJourneys(),
+  );
+  const { setTripDetails } = useJourneyStore();
+  const router = useRouter();
 
   return (
     <Card>
-      <CardHeader className="pb-8">
-        <CardDescription className="text-zinc-600 md:text-base">
-          Eine frühere Reise auswählen.
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-8 lg:pb-12">
-        {/*<Card className="flex justify-between items-center min-h-48">*/}
-        {/*  <CardDescription className="flex justify-center w-full text-base">*/}
-        {/*    Keine früheren Reisen vorhanden.*/}
-        {/*  </CardDescription>*/}
-        {/*</Card>*/}
-        <Button
-          className="grid min-h-32 w-full items-center align-middle md:flex lg:min-h-32 md:justify-between"
-          variant="outline"
-        >
-          <div className="inline-flex h-full w-full items-center justify-start">
-            {/* Journey Details Grid */}
-            <div className="text-text/90 flex w-full items-center justify-between">
-              {/* Left section */}
-              <div className="grid w-full grid-flow-col grid-rows-2 justify-start gap-6 px-4">
-                <div className="flex justify-start">
-                  <div className="flex items-center px-1 text-lg lg:text-xl font-semibold">
-                    Basel SBB
-                  </div>
-                </div>
-                <div className="flex justify-start">
-                  <div className="flex items-center px-1 md:text-base">Di, 07.05.2024</div>
-                </div>
-              </div>
-
-              {/* Middle section */}
-              <div className="hidden md:grid w-full grid-flow-col grid-rows-2 justify-center gap-7 px-4">
-                <div className="flex justify-center">
-                  <div className="mr-2 hidden md:flex items-center px-1 text-sm lg:text-base lg:font-semibold">
-                    Zug
-                  </div>
-                  <div className="hidden md:flex items-center px-1 text-base font-normal">
-                    {resolvedTheme === "dark" ? (
-                      <DarkTrainProfile className="h-6 w-6" />
-                    ) : (
-                      <LightTrainProfile className="h-6 w-6" />
-                    )}
-                  </div>
-                  <div className="hidden md:flex items-center px-1 text-base font-normal">
-                    {resolvedTheme === "dark" ? (
-                      <DarkIc6 className="h-6 w-6" />
-                    ) : (
-                      <LightIc6 className="h-6 w-6" />
-                    )}
-                  </div>
-                </div>
-                <div className="flex justify-center">
-                  <div className="mr-2 hidden md:flex items-center px-1 text-sm lg:text-base lg:font-semibold">
-                    Zug
-                  </div>
-                  <div className="hidden md:flex items-center px-1 text-base font-normal">
-                    {resolvedTheme === "dark" ? (
-                      <DarkTrainProfile className="h-8 w-8" />
-                    ) : (
-                      <LightTrainProfile className="h-8 w-8" />
-                    )}
-                  </div>
-                  <div className="hidden md:flex items-center px-1 text-base font-normal">
-                    {resolvedTheme === "dark" ? (
-                      <DarkIr16 className="h-6 w-6" />
-                    ) : (
-                      <LightIr16 className="h-6 w-6" />
-                    )}
-                  </div>
-                </div>
-              </div>
-
-              {/* Right section */}
-              <div className="grid w-full grid-flow-col grid-rows-2 justify-end gap-6 px-4">
-                <div className="flex justify-end">
-                  <div className="flex items-center px-1 text-lg lg:text-xl font-semibold">
-                    Brugg AG
-                  </div>
-                </div>
-                <div className="flex justify-end">
-                  <div className="flex items-center px-1 md:text-base">46 min Reisezeit</div>
-                </div>
-              </div>
-            </div>
+      {recentJourneys.length !== 0 && (
+        <CardHeader className="pb-8">
+          <CardDescription className="text-zinc-600 md:text-base">
+            Eine frühere Reise auswählen.
+          </CardDescription>
+        </CardHeader>
+      )}
+      <CardContent className="space-y-6">
+        {recentJourneys.length === 0 ? (
+          <div className="flex min-h-48 items-center justify-center">
+            <CardDescription className="flex w-full justify-center text-base font-medium text-zinc-700 dark:text-zinc-200">
+              Keine früheren Reisen vorhanden.
+            </CardDescription>
           </div>
-        </Button>
+        ) : (
+          recentJourneys.map((journey, index) => {
+            const origin = journey.fromLocation?.locationName ?? "";
+            const destination = journey.toLocation?.locationName ?? "";
+            const date =
+              journey.journeyDate instanceof Date
+                ? journey.journeyDate.toISOString()
+                : journey.journeyDate ?? "";
+            const now = new Date().toISOString();
+            const formattedDateBigScreen = formatDate(new Date(date));
+            const formattedDateSmallScreen = formatDateSmall(new Date(date));
+            const VehicleIcon = getVehicleIcon(
+              journey.vehicleType,
+              resolvedTheme,
+            );
+            return (
+              <Button
+                key={index}
+                className="grid min-h-32 w-full items-center border-zinc-400 align-middle md:flex md:justify-between lg:min-h-32"
+                variant="outline"
+                onClick={() =>
+                  handleFormSubmit(
+                    journey.fromLocation,
+                    journey.toLocation,
+                    now,
+                    "Dep",
+                    setTripDetails,
+                    router.push,
+                  )
+                }
+              >
+                <div className="inline-flex h-full w-full items-center justify-start">
+                  <div className="text-text/90 flex w-full items-center justify-between">
+                    <div className="grid w-full grid-flow-col grid-rows-2 justify-start gap-6 px-4">
+                      <div className="flex justify-start">
+                        <div className="flex items-center px-1 text-base font-semibold lg:text-xl">
+                          {origin}
+                        </div>
+                      </div>
+                      <div className="flex justify-start">
+                        <div className="flex items-center px-1 md:text-base">
+                          {isMobile
+                            ? formattedDateSmallScreen
+                            : formattedDateBigScreen}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="hidden w-full grid-flow-col grid-rows-2 justify-center gap-7 px-4 md:grid">
+                      {journey.isMultipleConnection ? (
+                        journey.connections.map((conn, connIndex) => {
+                          const ConnectionIcon = getVehicleIcon(
+                            conn.vehicleType,
+                            resolvedTheme,
+                          );
+                          return (
+                            <div
+                              key={connIndex}
+                              className="flex justify-center"
+                            >
+                              <div className="mr-2 items-center px-1 text-sm md:flex lg:text-base lg:font-medium">
+                                {conn.vehicleType}
+                              </div>
+                              <div className="text-lg:text-base items-center px-1 md:flex lg:font-medium">
+                                {ConnectionIcon && (
+                                  <ConnectionIcon className="h-6 w-6" />
+                                )}
+                              </div>
+                              <div className="items-center px-1 md:flex lg:text-base lg:font-medium">
+                                {conn.vehicleNumber}
+                              </div>
+                            </div>
+                          );
+                        })
+                      ) : (
+                        <div className="flex justify-center">
+                          <div className="mr-2 items-center px-1 text-sm md:flex lg:text-base lg:font-medium">
+                            {journey.vehicleType}
+                          </div>
+                          <div className="text-lg:text-base items-center px-1 md:flex lg:font-medium">
+                            {VehicleIcon && <VehicleIcon className="h-6 w-6" />}
+                          </div>
+                          <div className="items-center px-1 md:flex lg:text-base lg:font-medium">
+                            {journey.vehicleNumber}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                    <div className="grid w-full grid-flow-col grid-rows-2 justify-end gap-6 px-4">
+                      <div className="flex justify-end">
+                        <div className="flex items-center px-1 text-base font-semibold lg:text-xl">
+                          {destination}
+                        </div>
+                      </div>
+                      <div className="flex justify-end">
+                        <div className="flex items-center px-1 md:text-base">
+                          {isMobile ? (
+                            journey.journeyDuration.replace(/ Reisezeit/g, "")
+                          ) : (
+                            <>{journey.journeyDuration}</>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Button>
+            );
+          })
+        )}
       </CardContent>
     </Card>
   );

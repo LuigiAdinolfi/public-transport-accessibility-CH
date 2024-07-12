@@ -1,86 +1,42 @@
 "use client";
 
-import { HelpButton } from "@/components/shared/help-button";
-import * as React from "react";
-import { BackButton } from "@/components/shared/back-button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useState } from "react";
-import { useTheme } from "next-themes";
-import { DarkActiveCircle, LightActiveCircle } from "@/assets/icons/active-circle";
-import { DarkInactiveCircle, LightInactiveCircle } from "@/assets/icons/inactive-circle";
-import { CardPath } from "@/components/details/card-path";
-import { DummyMap } from "@/components/details/dummy-map";
+import React, { useState, useEffect } from "react";
+import { useJourneyStore } from "@/store/useJourneyStore";
+import HeaderButtons from "@/components/shared/header-buttons";
+import TabNavigation from "@/components/details/tab-navigation";
 
 /**
- * Component displaying journey details with tabs for different routes.
- * @returns {JSX.Element} JourneyDetails component.
+ * JourneyDetails component displays details of a journey including header buttons and tab navigation.
+ *
+ * @returns {React.ReactElement} The rendered JourneyDetails component.
  */
-export function JourneyDetails() {
-  const [activeRouteTab, setActiveRouteTab] = useState("first-route");
-  const { resolvedTheme } = useTheme();
+export function JourneyDetails(): React.ReactElement {
+  const [activeLegTab, setActiveLegTab] = useState<string>("leg-0");
+  const { allLegs, indexTripSelected } = useJourneyStore();
+
+  // Filter out only TimedLegs
+  const legs = allLegs.filter((leg) => leg.legType === "TimedLeg") || [];
+
+  // Set active leg tab when indexTripSelected or allLegs change
+  useEffect(() => {
+    if (allLegs && allLegs.length > 0) {
+      setActiveLegTab(`leg-${indexTripSelected}`);
+    }
+  }, [indexTripSelected, allLegs]);
+
+  // If no TimedLegs are found, return empty fragment
+  if (legs.length === 0) return <></>;
 
   return (
-    <div className="w-full lg:w-[960px]">
-      <div className="mt-1 flex items-center justify-between">
-        <BackButton />
-        <HelpButton />
-      </div>
-      <Tabs
-        defaultValue={activeRouteTab}
-        onValueChange={(value) => setActiveRouteTab(value)}
-      >
-        <div className="flex items-center justify-between pt-3">
-          <TabsList className="grid grid-cols-2 lg:h-12 lg:w-full">
-            {/* First Route Tab */}
-            <TabsTrigger
-              className="mx-1 text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:h-10 lg:text-base"
-              value="first-route"
-            >
-              {resolvedTheme === "dark" ? (
-                activeRouteTab === "first-route" ? (
-                  <DarkActiveCircle />
-                ) : (
-                  <DarkInactiveCircle />
-                )
-              ) : activeRouteTab === "first-route" ? (
-                <LightActiveCircle />
-              ) : (
-                <LightInactiveCircle />
-              )}
-              <div className="pl-1 lg:pl-2 md:text-base">Basel SBB - Olten</div>
-            </TabsTrigger>
-
-            {/* Second Route Tab */}
-            <TabsTrigger
-              className="mx-1 text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:h-10 lg:text-base"
-              value="second-route"
-            >
-              {resolvedTheme === "dark" ? (
-                activeRouteTab === "second-route" ? (
-                  <DarkActiveCircle />
-                ) : (
-                  <DarkInactiveCircle />
-                )
-              ) : activeRouteTab === "second-route" ? (
-                <LightActiveCircle />
-              ) : (
-                <LightInactiveCircle />
-              )}
-              <div className="pl-1 lg:pl-2 md:text-base">Olten - Brugg AG</div>
-            </TabsTrigger>
-          </TabsList>
-        </div>
-
-        {/* Content for First Route Tab */}
-        <TabsContent value="first-route" className="flex flex-col gap-8">
-          <CardPath />
-          <DummyMap />
-        </TabsContent>
-
-        {/* <TabsContent value="second-route">
-          <CardSecondPath />
-        </TabsContent> */}
-      </Tabs>
+    <div className="mx-auto w-full max-w-screen-lg px-0">
+      <HeaderButtons />
+      <TabNavigation
+        legs={legs}
+        activeLegTab={activeLegTab}
+        setActiveLegTab={setActiveLegTab}
+      />
     </div>
   );
 }
+
+export default JourneyDetails;

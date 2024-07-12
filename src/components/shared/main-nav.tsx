@@ -9,9 +9,9 @@ import { cn } from "@/lib/utils";
 
 /**
  * Component representing the main navigation menu.
- * @returns {JSX.Element} - MainNav component.
+ * @returns {React.ReactElement} - The main navigation menu component.
  */
-export function MainNav() {
+export function MainNav(): React.ReactElement {
   // Get the current pathname using the usePathname hook from next/navigation
   const pathname = usePathname();
   // Get the resolved theme using the useTheme hook from next-themes
@@ -30,24 +30,20 @@ export function MainNav() {
     if (resolvedTheme === "dark") {
       return cn(
         "transition-colors text-white",
-        isActive
-          ? "bg-zinc-700 dark:zinc-700 text-white dark:text-white font-semibold"
-          : "text-white hover:bg-zinc-800 hover:text-white font-semibold",
+        isActive ? "text-zinc-50 font-semibold" : "text-zinc-400",
         "text-lg",
         "rounded-md p-2",
         "px-6 py-2.5",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:after:ring-0 focus-visible:rounded-sm focus-visible:ring-black dark:focus-visible:ring-white"
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:after:ring-0 focus-visible:rounded-sm focus-visible:ring-black dark:focus-visible:ring-white",
       );
     } else {
       return cn(
         "transition-colors text-zinc-950",
-        isActive
-          ? "bg-zinc-200 text-zinc-950 font-semibold dark:bg-zinc-700 dark:text-white"
-          : "text-zinc-950 dark:text-white hover:bg-zinc-100 hover:text-zinc-950 font-semibold dark:hover:bg-zinc-800",
+        isActive ? "text-zinc-950 font-semibold" : "text-zinc-600",
         "text-lg",
         "rounded-md p-2",
         "px-6 py-2.5",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:after:ring-0 focus-visible:rounded-sm focus-visible:ring-black dark:focus-visible:ring-white"
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:after:ring-0 focus-visible:rounded-sm focus-visible:ring-black dark:focus-visible:ring-white",
       );
     }
   }
@@ -57,9 +53,18 @@ export function MainNav() {
    * @param {Object} props - Component props.
    * @param {string} props.href - The URL path for the link.
    * @param {string} props.currentPath - The current path to compare with the link's URL.
-   * @returns {JSX.Element} - NavLink component.
+   * @param {React.ReactNode} props.children - The content to display within the link.
+   * @returns {React.ReactElement} - The rendered navigation link.
    */
-  function NavLink({ href, currentPath, children }: { href: string; currentPath: string; children: React.ReactNode }): JSX.Element {
+  function NavLink({
+    href,
+    currentPath,
+    children,
+  }: {
+    href: string;
+    currentPath: string;
+    children: React.ReactNode;
+  }): React.ReactElement {
     const linkClasses = getClasses(currentPath);
 
     return (
@@ -71,7 +76,7 @@ export function MainNav() {
 
   // Render the main navigation menu
   return (
-    <div className="hidden lg:flex">
+    <div className="hidden md:flex">
       <nav className="flex items-center gap-4 text-sm">
         {/* Navigation links */}
         <NavLink href="/" currentPath="/">

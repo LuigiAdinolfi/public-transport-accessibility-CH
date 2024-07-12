@@ -1,92 +1,123 @@
 "use client";
 
 import * as React from "react";
-import { DarkTrainProfile, LightTrainProfile } from "@/assets/icons/train-profile";
-import { DarkIr16, LightIr16 } from "@/assets/icons/ir-16";
-import { useTheme } from "next-themes";
-import { DarkWheelchairReservation, LightWheelchairReservation } from "@/assets/icons/wheelchair-reservation";
-import { DarkWheelchair, LightWheelchair } from "@/assets/icons/wheelchair";
 import { CommunityRatingSelect } from "@/components/select/community-rating-select";
 import { useMediaQuery } from "react-responsive";
+import * as OJP from "ojp-sdk";
+import {
+  getArrivalTime,
+  getDepartureTime,
+  getVehicleNumber,
+  getVehicleType,
+  truncateTo12Chars,
+} from "@/utils/handleLocation";
+import { getVehicleIcon } from "@/utils/handleVehicleIcon";
+import { useTheme } from "next-themes";
+import { getAccessIcon } from "@/utils/handleAccessibilityIcon";
 
 /**
  * Component representing the last connection in a journey.
- * @returns {JSX.Element} JSX Element
+ * @param {Object} props - Component props.
+ * @param {OJP.TripLeg[]} props.allLegs - Array of trip legs representing the journey details.
+ * @returns {React.ReactElement} JSX Element representing the last connection component.
  */
-export function LastConnection() {
-  const { resolvedTheme } = useTheme();
+export function LastConnection({
+  allLegs,
+}: {
+  allLegs: OJP.TripLeg[];
+}): React.ReactElement {
   const isMobile = useMediaQuery({ maxWidth: 767 });
+  const { resolvedTheme } = useTheme();
+  const lastLeg = allLegs[allLegs.length - 1];
+  const fromLocationName = lastLeg.fromLocation.locationName;
+  const fromLocation = truncateTo12Chars(fromLocationName ?? "N/A");
+  const toLocationName = lastLeg.toLocation.locationName;
+  const toLocation = truncateTo12Chars(toLocationName ?? "N/A");
+  const trainNumber = getVehicleNumber(lastLeg);
+  const departureTime = getDepartureTime(lastLeg);
+  const arrivalTime = getArrivalTime(lastLeg);
+  const vehicleType = getVehicleType(lastLeg);
+  const VehicleIcon = getVehicleIcon(vehicleType, resolvedTheme);
+
+  const accessIconFromLocationProps = getAccessIcon(
+    "PLATFORM_ACCESS_WITH_ASSISTANCE",
+    resolvedTheme,
+  );
+  const AccessIconFromLocation = accessIconFromLocationProps?.icon;
+  const accessTextFromLocation = accessIconFromLocationProps?.text;
+
+  const accessIconToLocationProps = getAccessIcon(
+    "PLATFORM_ACCESS_WITHOUT_ASSISTANCE",
+    resolvedTheme,
+  );
+  const AccessIconToLocation = accessIconToLocationProps?.icon;
+  const accessTextToLocation = accessIconToLocationProps?.text;
 
   return (
     <div className="flex basis-1/2 justify-start rounded-lg bg-zinc-50 dark:bg-zinc-900">
       <div className="w-full py-2">
         {/* Time and Station */}
-        <div className="flex w-full items-center justify-between px-3 pt-1 pb-3 font-normal">
-          <div className="flex justify-start">21:02</div>
-          <div className="flex justify-end">21:28</div>
+        <div className="flex w-full items-center justify-between px-3 pb-2 pt-1 font-normal">
+          <div className="flex justify-start">{departureTime}</div>
+          <div className="flex justify-end">{arrivalTime}</div>
         </div>
         {/* Departure and Arrival Stations */}
-        <div className={`flex w-full items-center justify-between px-3 ${!isMobile ? "pt-2 pb-3" : ""}`}>
-          <div className="md:text-lg text-base items-center font-semibold">
-            Olten
+        <div
+          className={`flex w-full items-center justify-between px-3 ${!isMobile ? "pt-2" : ""}`}
+        >
+          <div className="items-center text-base font-semibold md:text-lg">
+            {fromLocation}
           </div>
-          <div className="flex justify-center items-center font-normal">
-            {!isMobile &&  <div className="flex items-center pr-2">
-              Zug
-            </div>
-            }
-            <div>
-              {resolvedTheme === "dark" ? (
-                <DarkTrainProfile className="h-6 w-6" />
-              ) : (
-                <LightTrainProfile className="h-6 w-6" />
-              )}
-            </div>
+          <div className="flex items-center justify-center font-medium">
             {!isMobile && (
-            <div>
-              {resolvedTheme === "dark" ? (
-                <DarkIr16 className="h-6 w-6" />
-              ) : (
-                <LightIr16 className="h-6 w-6" />
-              )}
-            </div>
+              <div className="flex items-center pr-2 font-medium">
+                {vehicleType}
+              </div>
             )}
+            <div>{VehicleIcon && <VehicleIcon className="h-6 w-6" />}</div>
+            {!isMobile && <div className="pl-2 font-medium">{trainNumber}</div>}
           </div>
-          <div className="md:text-lg text-base items-center font-semibold">
-            Brugg AG
+          <div className="items-center overflow-hidden overflow-ellipsis text-base font-semibold md:text-lg">
+            {toLocation}
           </div>
         </div>
         {/* Accessibility Information */}
-        <div className={`flex w-full justify-between px-3 ${isMobile ? "py-2" : "py-3"} font-medium`}>
-          <div className="flex basis-1/2 justify-start items-center">
-            {resolvedTheme === "dark" ? (
-              <DarkWheelchairReservation className="h-6 w-6" />
-            ) : (
-              <LightWheelchairReservation className="h-6 w-6" />
-            )}
-            {!isMobile && (
-            <div className="pl-2 flex flex-col">
-              <span>Mit Personalhilfe</span>
-              <span>ein-/aussteigen</span>
+        <div
+          className={`flex w-full justify-between px-3 ${isMobile ? "py-2" : "min-h-24"} font-medium`}
+        >
+          <div className="flex flex-1 items-center justify-start">
+            <div className="min-w-[24px] flex-shrink-0">
+              {AccessIconFromLocation && (
+                <AccessIconFromLocation className="h-6 w-6" />
+              )}
             </div>
+            {!isMobile && (
+              <div className="flex flex-col pl-2">
+                <span className="whitespace-pre-wrap text-left">
+                  {accessTextFromLocation}
+                </span>
+              </div>
             )}
           </div>
-          <div className="flex basis-1/2 justify-end items-center">
+          <div className="flex flex-1 items-center justify-end">
             {!isMobile && (
-            <div className="pr-2 flex flex-col text-right">
-              <span>Selber ein-/</span>
-              <span>aussteigen</span>
+              <div className="flex flex-col pr-2 text-right">
+                <span className="whitespace-pre-wrap text-right">
+                  {accessTextToLocation}
+                </span>
+              </div>
+            )}
+            <div className="min-w-[24px] flex-shrink-0">
+              {AccessIconToLocation && (
+                <AccessIconToLocation className="h-6 w-6" />
+              )}
             </div>
-            )}
-            {resolvedTheme === "dark" ? (
-              <DarkWheelchair className="h-6 w-6" />
-            ) : (
-              <LightWheelchair className="h-6 w-6" />
-            )}
           </div>
         </div>
         {/* Community Rating */}
-        <div className={`flex w-full ${isMobile ? "justify-center" : "items-center justify-start pt-4"} px-3 pb-2 font-normal`}>
+        <div
+          className={`flex w-full ${isMobile ? "justify-center" : "items-center justify-start"} px-3 pb-2 font-normal`}
+        >
           {!isMobile && <div className="pr-3">Bewertung der Community:</div>}
           <CommunityRatingSelect value={4} />
         </div>

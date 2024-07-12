@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { toZonedTime, format } from "date-fns-tz";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -9,20 +9,22 @@ import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
-  PopoverTrigger
+  PopoverTrigger,
 } from "@/components/ui/popover";
 import { de } from "date-fns/locale";
-import { formatISO } from "date-fns";
+import { useJourneyStore } from "@/store/useJourneyStore";
+import { formatDateForUI, handleTimeChange } from "@/utils/handleDate";
 
 const timeZone = "Europe/Zurich";
 
-interface Props {
-  onDateChange: (date: string) => void; // Callback function to handle date change
-}
-
-export function DatePicker({ onDateChange }: Props) {
-  const [date, setDate] = useState<Date>(new Date());
-  const [time, setTime] = useState<string>("");
+/**
+ * DatePicker component for selecting date and time.
+ * Manages state for date and time selection.
+ * @returns {React.ReactElement} DatePicker component.
+ */
+export function DatePicker(): React.ReactElement {
+  const { date, setDate, time, setTime } = useJourneyStore();
+  const setSelectedDate = useJourneyStore((state) => state.setSelectedDate);
 
   // Initialize with current date and time
   useEffect(() => {
@@ -31,43 +33,15 @@ export function DatePicker({ onDateChange }: Props) {
     const formattedTime = format(zonedTime, "HH:mm"); // Format time to HH:mm
     setDate(zonedTime);
     setTime(formattedTime);
-    onDateChange(formatISO(zonedTime)); // Initial date selection
-  }, []);
-
-  /**
-   * Handles changes in the time input field.
-   * Updates the date state with the new time.
-   * @param {React.ChangeEvent<HTMLInputElement>} event - The change event object
-   */
-  const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newTime = event.target.value;
-    setTime(newTime);
-    if (date) {
-      const [hours, minutes] = newTime.split(":");
-      const newDate = new Date(date);
-      newDate.setHours(parseInt(hours, 10));
-      newDate.setMinutes(parseInt(minutes, 10));
-      setDate(newDate);
-      onDateChange(formatISO(newDate)); // Update parent with new date
-    }
-  };
-
-  /**
-   * Formats the provided date into a localized string with date and time.
-   * @param {Date | null} date - The date object to format
-   * @returns {string} Formatted date string in "EEE dd. MMMM yyyy, HH:mm" format
-   */
-  const formatDateForUI = (date: Date | null) => {
-    if (!date) return "";
-    return format(date, "EEE dd. MMMM yyyy, HH:mm", { locale: de });
-  };
+    setSelectedDate(zonedTime); // Update parent with initial date
+  }, [setSelectedDate, setDate, setTime]);
 
   return (
     <Popover>
       <PopoverTrigger asChild>
         <Button
           variant={"outline"}
-          className="text-base w-full justify-between text-left font-normal lg:w-[280px]"
+          className="w-full justify-between text-left text-base font-normal lg:w-80"
           aria-label="Select Date and Time"
           suppressHydrationWarning
         >
@@ -85,7 +59,7 @@ export function DatePicker({ onDateChange }: Props) {
               newDate.setHours(parseInt(hours, 10));
               newDate.setMinutes(parseInt(minutes, 10));
               setDate(newDate);
-              onDateChange(formatISO(newDate)); // Update parent with new date
+              setSelectedDate(newDate); // Update parent with new date
             }
           }}
           initialFocus
@@ -97,7 +71,7 @@ export function DatePicker({ onDateChange }: Props) {
             htmlFor="time"
             className="block pl-4 text-sm font-medium text-gray-700"
           >
-            Time
+            Zeit
           </label>
           <input
             type="time"
