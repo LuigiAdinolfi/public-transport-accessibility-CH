@@ -49,6 +49,7 @@ export function CardForum() {
         <div className="flex justify-between items-center">
           <Input placeholder="Suche im Forum..." className="flex-grow mr-4" />
           <Button variant="outline" className="self-start">Suche</Button>
+          <Button variant="outline" className="self-start ml-2">Filter</Button>
         </div>
         <Button variant="outline" className="self-start">Neuer Beitrag</Button>
       </CardHeader>
