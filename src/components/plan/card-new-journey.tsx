@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { ArrowRightLeft } from "lucide-react";
 import { useTheme } from "next-themes";

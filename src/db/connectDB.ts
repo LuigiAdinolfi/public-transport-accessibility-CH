@@ -13,9 +13,12 @@ async function connectDB() {
   }
 
   try {
-    const db = await mongoose.connect(process.env.MONGODB_URI!, {
-      dbName: "ip6-database",
-    });
+    const db = await mongoose.connect(
+      "mongodb+srv://luigiadinolfi:ip6-mongodb@ip6-cluster.ceqgh9e.mongodb.net/?retryWrites=true&w=majority&appName=ip6-Cluster",
+      {
+        dbName: "ip6-database",
+      },
+    );
     connection.isConnected = db.connections[0].readyState;
     console.log("Database connected successfully");
   } catch (error) {

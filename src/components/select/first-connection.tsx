@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { CommunityRatingSelect } from "@/components/select/community-rating-select";
 import { useMediaQuery } from "react-responsive";

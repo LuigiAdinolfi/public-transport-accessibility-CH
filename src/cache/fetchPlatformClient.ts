@@ -1,3 +1,5 @@
+import { fetchPlatformFromLocalAPI } from "@/cache/fetchPlatformFromLocalAPI";
+
 /**
  * Fetches platform data from the server using the provided SLOID.
  * @param {string} sloid - The SLOID (Service Location IDentifier) to fetch platform data for.
@@ -5,17 +7,15 @@
  * @throws {Error} If the fetch request fails or the response is not OK.
  */
 export async function fetchPlatformClient(sloid: string): Promise<any> {
-  const response = await fetch("/api/platform", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ sloid }),
-  });
+  try {
+    const { data, ok } = await fetchPlatformFromLocalAPI(sloid);
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch platform");
+    if (!ok) {
+      console.error(`Error fetching platform for SLOID ${sloid}:`, data);
+    }
+    return data;
+  } catch (error) {
+    console.error(`Error fetching platform for SLOID ${sloid}:`, error);
+    throw error;
   }
-
-  return response.json();
 }

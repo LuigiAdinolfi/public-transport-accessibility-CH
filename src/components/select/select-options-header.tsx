@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { useJourneyStore } from "@/store/useJourneyStore";
 import { formatDate } from "@/utils/formatDate";
