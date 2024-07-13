@@ -35,11 +35,11 @@ export function MultipleConnection({
 
   const timedLegs = allLegs.filter((leg) => leg.legType === "TimedLeg");
 
-  const fromLocationVehicleAccessTypes = timedLegs.map((leg) =>
-    useFromStopPointVehicleAccessType(leg),
+  const fromLocationVehicleAccessTypes = timedLegs.map(
+    useFromStopPointVehicleAccessType,
   );
-  const toLocationVehicleAccessTypes = timedLegs.map((leg) =>
-    useToStopPointVehicleAccessType(leg),
+  const toLocationVehicleAccessTypes = timedLegs.map(
+    useToStopPointVehicleAccessType,
   );
 
   const accessIcons = fromLocationVehicleAccessTypes.map((type, index) => ({

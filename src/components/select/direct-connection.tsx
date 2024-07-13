@@ -29,11 +29,11 @@ export function DirectConnection({
   const { resolvedTheme } = useTheme();
   const details = allLegs[0];
 
-  const fromLocationVehicleAccessTypes = allLegs.map((leg) =>
-    useFromStopPointVehicleAccessType(leg),
+  const fromLocationVehicleAccessTypes = allLegs.map(
+    useFromStopPointVehicleAccessType,
   );
-  const toLocationVehicleAccessTypes = allLegs.map((leg) =>
-    useToStopPointVehicleAccessType(leg),
+  const toLocationVehicleAccessTypes = allLegs.map(
+    useToStopPointVehicleAccessType,
   );
 
   const accessIcons = fromLocationVehicleAccessTypes.map((type, index) => ({
