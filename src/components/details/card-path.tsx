@@ -22,7 +22,7 @@ import {
   getCachedPlatformFromOrigin,
 } from "@/cache/getCachedPlatform";
 import { Platform } from "@/types/Platform";
-import { accessIconProps, accessProps } from "@/helpers/accessIconProps";
+import { accessIconProps } from "@/helpers/accessIconProps";
 
 interface CardPathProps {
   index: number;
@@ -64,16 +64,6 @@ export default function CardPath({
     useFromStopPointVehicleAccessType(selectedLeg);
   const toLocationVehicleAccessType =
     useToStopPointVehicleAccessType(selectedLeg);
-
-  const accessIconFromLocationProps = getAccessIcon(
-    fromLocationVehicleAccessType,
-    resolvedTheme,
-  );
-
-  const accessIconToLocationProps = getAccessIcon(
-    toLocationVehicleAccessType,
-    resolvedTheme,
-  );
 
   useEffect(() => {
     setSelectedTripLeg(selectedLeg);
