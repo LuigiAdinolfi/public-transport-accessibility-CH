@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import * as OJP from "ojp-sdk";
+import { accessIconProps } from "@/helpers/accessIconProps";
 
 /**
  * Interface defining the state structure for journey-related data.
@@ -18,6 +19,7 @@ interface JourneyState {
   firstLeg: OJP.TripLeg | null; // First leg of the journey
   lastLeg: OJP.TripLeg | null; // Last leg of the journey
   allLegs: OJP.TripLeg[]; // All legs of the journey
+  accessIcons: accessIconProps[]; // Access icons for journey
 
   // Setter functions
   setDate: (date: Date) => void; // Function to set journey date
@@ -35,6 +37,7 @@ interface JourneyState {
   setFirstLeg: (leg: OJP.TripLeg | null) => void; // Function to set the first leg of the journey
   setLastLeg: (leg: OJP.TripLeg | null) => void; // Function to set the last leg of the journey
   setAllLegs: (legs: OJP.TripLeg[]) => void; // Function to set all legs of the journey
+  setAccessIcons: (icons: accessIconProps[]) => void; // Function to set access icons for journey
 }
 
 /**
@@ -55,6 +58,7 @@ export const useJourneyStore = create<JourneyState>((set) => ({
   firstLeg: null,
   lastLeg: null,
   allLegs: [],
+  accessIcons: [],
 
   // Setter functions
   setDate: (date) => set({ date }),
@@ -73,4 +77,5 @@ export const useJourneyStore = create<JourneyState>((set) => ({
   setFirstLeg: (leg) => set({ firstLeg: leg }),
   setLastLeg: (leg) => set({ lastLeg: leg }),
   setAllLegs: (legs) => set({ allLegs: legs }),
+  setAccessIcons: (icons) => set({ accessIcons: icons }),
 }));

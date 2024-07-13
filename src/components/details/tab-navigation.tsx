@@ -26,12 +26,12 @@ export default function TabNavigation({
   setActiveLegTab,
 }: TabNavigationProps): React.ReactElement {
   const { resolvedTheme } = useTheme();
-  const { allLegs } = useJourneyStore();
+  const { accessIcons } = useJourneyStore();
 
-  // Filter TransferLegs from allLegs
-  const timedLegs = allLegs.filter((leg) => leg.legType === "TimedLeg") || [];
+  // Filter TransferLegs from legs
+  const timedLegs = legs.filter((leg) => leg.legType === "TimedLeg") || [];
   const transferLegs =
-    allLegs.filter((leg) => leg.legType === "TransferLeg") || [];
+    legs.filter((leg) => leg.legType === "TransferLeg") || [];
 
   return (
     <Tabs
@@ -42,9 +42,9 @@ export default function TabNavigation({
         {/* TabsList for displaying leg tabs */}
         <TabsList
           className="grid w-full grid-cols-2 lg:h-12"
-          style={{ gridTemplateColumns: `repeat(${legs.length}, 1fr)` }}
+          style={{ gridTemplateColumns: `repeat(${timedLegs.length}, 1fr)` }}
         >
-          {legs.map((leg, index) => {
+          {timedLegs.map((leg, index) => {
             const fromLocationName = leg.fromLocation.locationName;
             let fromLocation = handleLocation(
               fromLocationName,
@@ -77,14 +77,16 @@ export default function TabNavigation({
       </div>
 
       {/* TabsContent for rendering details of each leg */}
-      {legs.map((_leg, index) => {
+      {timedLegs.map((leg, index) => {
         const legDuration = transferLegs[index]?.legDuration?.totalMinutes;
+        console.log("Leg Duration in TabNavigation: ", legDuration);
         return (
           <TabsContent key={index} value={`leg-${index}`}>
             <CardPath
               index={index}
-              legs={legs}
+              leg={leg}
               legDuration={legDuration ?? 0}
+              accessIcons={accessIcons[index]}
             />
             <DummyMap />
           </TabsContent>

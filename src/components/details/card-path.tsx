@@ -7,12 +7,6 @@ import CommunityRatingSection from "@/components/details/community-rating-sectio
 import { useJourneyStore } from "@/store/useJourneyStore";
 import { useMediaQuery } from "react-responsive";
 import {
-  useFromStopPointVehicleAccessType,
-  useToStopPointVehicleAccessType,
-} from "@/hooks/useVehicleAccessType";
-import { getAccessIcon } from "@/utils/handleAccessibilityIcon";
-import { useTheme } from "next-themes";
-import {
   getPlatformNumberFromDestination,
   getPlatformNumberFromOrigin,
 } from "@/utils/getPlatformNumber";
@@ -22,11 +16,13 @@ import {
   getCachedPlatformFromOrigin,
 } from "@/cache/getCachedPlatform";
 import { Platform } from "@/types/Platform";
+import { accessIconProps } from "@/helpers/accessIconProps";
 
 interface CardPathProps {
   index: number;
-  legs: OJP.TripLeg[];
+  leg: OJP.TripLeg;
   legDuration: number;
+  accessIcons: accessIconProps;
 }
 
 /**
@@ -37,11 +33,11 @@ interface CardPathProps {
  */
 export default function CardPath({
   index,
-  legs,
+  leg,
   legDuration,
+  accessIcons,
 }: CardPathProps): React.ReactElement {
-  const { resolvedTheme } = useTheme();
-  const selectedLeg = legs[index];
+  const selectedLeg = leg;
   const fromLocationName = selectedLeg.fromLocation.locationName ?? "N/A";
   const toLocationName = selectedLeg.toLocation.locationName ?? "N/A";
   const platformNrFromLocation = getPlatformNumberFromOrigin(selectedLeg);
@@ -56,21 +52,6 @@ export default function CardPath({
   );
   const [platformDestination, setLocalPlatformDestination] =
     useState<Platform | null>(null);
-
-  const fromLocationVehicleAccessType =
-    useFromStopPointVehicleAccessType(selectedLeg);
-  const toLocationVehicleAccessType =
-    useToStopPointVehicleAccessType(selectedLeg);
-
-  const accessIconFromLocationProps = getAccessIcon(
-    fromLocationVehicleAccessType,
-    resolvedTheme,
-  );
-
-  const accessIconToLocationProps = getAccessIcon(
-    toLocationVehicleAccessType,
-    resolvedTheme,
-  );
 
   useEffect(() => {
     setSelectedTripLeg(selectedLeg);
@@ -94,6 +75,8 @@ export default function CardPath({
     setPlatformDestination,
   ]);
 
+  console.log("Leg Duration in CardPath: ", legDuration);
+
   return (
     <Card>
       <InfoSection leg={selectedLeg} legDuration={legDuration} />
@@ -102,14 +85,14 @@ export default function CardPath({
           locationName={fromLocationName}
           platform={platformOrigin}
           platformNr={platformNrFromLocation}
-          accessIconLocationProps={accessIconFromLocationProps}
+          accessIconLocationProps={accessIcons.origin}
           aria-label={`Departure from ${fromLocationName} at ${platformNrFromLocation}`}
         />
         <LocationSection
           locationName={toLocationName}
           platform={platformDestination}
           platformNr={platformNrToLocation}
-          accessIconLocationProps={accessIconToLocationProps}
+          accessIconLocationProps={accessIcons.destination}
           aria-label={`Arrival at ${toLocationName} at ${platformNrToLocation}`}
         />
       </div>

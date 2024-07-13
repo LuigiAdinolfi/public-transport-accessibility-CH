@@ -14,9 +14,6 @@ export function JourneyDetails(): React.ReactElement {
   const [activeLegTab, setActiveLegTab] = useState<string>("leg-0");
   const { allLegs, indexTripSelected } = useJourneyStore();
 
-  // Filter out only TimedLegs
-  const legs = allLegs.filter((leg) => leg.legType === "TimedLeg") || [];
-
   // Set active leg tab when indexTripSelected or allLegs change
   useEffect(() => {
     if (allLegs && allLegs.length > 0) {
@@ -25,13 +22,13 @@ export function JourneyDetails(): React.ReactElement {
   }, [indexTripSelected, allLegs]);
 
   // If no TimedLegs are found, return empty fragment
-  if (legs.length === 0) return <></>;
+  if (allLegs.length === 0) return <></>;
 
   return (
     <div className="mx-auto w-full max-w-screen-lg px-0">
       <HeaderButtons />
       <TabNavigation
-        legs={legs}
+        legs={allLegs}
         activeLegTab={activeLegTab}
         setActiveLegTab={setActiveLegTab}
       />

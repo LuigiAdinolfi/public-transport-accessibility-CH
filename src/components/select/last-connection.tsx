@@ -4,16 +4,12 @@ import { useMediaQuery } from "react-responsive";
 import * as OJP from "ojp-sdk";
 import { getVehicleIcon } from "@/utils/handleVehicleIcon";
 import { useTheme } from "next-themes";
-import { getAccessIcon } from "@/utils/handleAccessibilityIcon";
-import {
-  useFromStopPointVehicleAccessType,
-  useToStopPointVehicleAccessType,
-} from "@/hooks/useVehicleAccessType";
 import { truncateTo12Chars } from "@/utils/truncateTo12Chars";
 import { getVehicleNumber } from "@/utils/getVehicleNumber";
 import { getDepartureTime } from "@/utils/getDepartureTime";
 import { getArrivalTime } from "@/utils/getArrivalTime";
 import { getVehicleType } from "@/utils/getVehicleType";
+import { accessProps } from "@/helpers/accessIconProps";
 
 /**
  * Component representing the last connection in a journey.
@@ -23,15 +19,16 @@ import { getVehicleType } from "@/utils/getVehicleType";
  */
 export function LastConnection({
   allLegs,
+  accessIconOrigin,
+  accessIconDestination,
 }: {
   allLegs: OJP.TripLeg[];
+  accessIconOrigin: accessProps | null;
+  accessIconDestination: accessProps | null;
 }): React.ReactElement {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const { resolvedTheme } = useTheme();
   const lastLeg = allLegs[allLegs.length - 1];
-  const fromLocationVehicleAccessType =
-    useFromStopPointVehicleAccessType(lastLeg);
-  const toLocationVehicleAccessType = useToStopPointVehicleAccessType(lastLeg);
 
   const fromLocationName = lastLeg.fromLocation.locationName;
   const fromLocation = truncateTo12Chars(fromLocationName ?? "N/A");
@@ -43,19 +40,11 @@ export function LastConnection({
   const vehicleType = getVehicleType(lastLeg);
   const VehicleIcon = getVehicleIcon(vehicleType, resolvedTheme);
 
-  const accessIconFromLocationProps = getAccessIcon(
-    fromLocationVehicleAccessType,
-    resolvedTheme,
-  );
-  const AccessIconFromLocation = accessIconFromLocationProps?.icon;
-  const accessTextFromLocation = accessIconFromLocationProps?.text;
+  const AccessIconFromLocation = accessIconOrigin?.icon;
+  const accessTextFromLocation = accessIconOrigin?.text;
 
-  const accessIconToLocationProps = getAccessIcon(
-    toLocationVehicleAccessType,
-    resolvedTheme,
-  );
-  const AccessIconToLocation = accessIconToLocationProps?.icon;
-  const accessTextToLocation = accessIconToLocationProps?.text;
+  const AccessIconToLocation = accessIconDestination?.icon;
+  const accessTextToLocation = accessIconDestination?.text;
 
   return (
     <div className="flex basis-1/2 justify-start rounded-lg bg-zinc-50 dark:bg-zinc-900">
