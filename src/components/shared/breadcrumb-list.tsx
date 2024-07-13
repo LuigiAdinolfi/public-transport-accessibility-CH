@@ -1,7 +1,7 @@
 /**
  * Interface representing a breadcrumb item with a name and URL.
  */
-interface BreadcrumbItem {
+export interface MyBreadcrumbItem {
   name: string;
   url: string;
 }
@@ -10,7 +10,7 @@ interface BreadcrumbItem {
  * Array of breadcrumb items for journey planning navigation.
  * @type {BreadcrumbItem[]}
  */
-const MyBreadcrumbList: BreadcrumbItem[] = [
+const JourneyBreadcrumbList: MyBreadcrumbItem[] = [
   {
     name: "Reise planen",
     url: "/",
@@ -29,4 +29,15 @@ const MyBreadcrumbList: BreadcrumbItem[] = [
   },
 ];
 
-export { MyBreadcrumbList };
+/**
+ * Array of breadcrumb items for community navigation.
+ * @type {BreadcrumbItem[]}
+ */
+const CommunityBreadcrumbList: MyBreadcrumbItem[] = [
+  {
+    name: "Community",
+    url: "/community",
+  },
+];
+
+export { JourneyBreadcrumbList, CommunityBreadcrumbList };
