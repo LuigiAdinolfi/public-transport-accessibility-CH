@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -56,13 +56,17 @@ export default function LocationSection({
   const AccessIconLocation = accessIconLocationProps?.icon;
   const accessTextLocation = accessIconLocationProps?.text;
 
-  const haltekanteAccess = getPlatformAccess(platform);
-  const accessInfo = platform?.adviceAccessInfo;
-  const additionalinformation = platform?.additionalInformation;
-  const tactileSystem = getTactileSystem(platform);
-  const boardingDevice = getBoardingDevice(platform);
-  const dynamicVisual = getDynamicVisual(platform);
-  const dynamicAudio = getDynamicAudio(platform);
+  const platformInfo = useMemo(() => {
+    return {
+      haltekanteAccess: getPlatformAccess(platform),
+      accessInfo: platform?.adviceAccessInfo,
+      additionalInformation: platform?.additionalInformation,
+      tactileSystem: getTactileSystem(platform),
+      boardingDevice: getBoardingDevice(platform),
+      dynamicVisual: getDynamicVisual(platform),
+      dynamicAudio: getDynamicAudio(platform),
+    };
+  }, [platform]);
 
   /**
    * Handles click on "Info zur Haltestelle" button.
@@ -113,7 +117,7 @@ export default function LocationSection({
         <div className="hei px-4 py-2 text-sm font-normal leading-relaxed">
           {/*Zugang zum Bahnsteig ohne Hilfe*/}
           Haltekante Zugang: &nbsp;
-          {haltekanteAccess}
+          {platformInfo.haltekanteAccess}
         </div>
       </div>
       {/* Accordion for Zugkomposition */}
@@ -145,46 +149,48 @@ export default function LocationSection({
             Zugänglichkeitsinformationen
           </AccordionTrigger>
           <AccordionContent className="px-2">
-            {boardingDevice && (
+            {platformInfo.boardingDevice && (
               <div className="py-2 leading-relaxed">
                 <span className="font-semibold">
                   Hilfsmittel für Rollstuhl:&nbsp;
                 </span>
-                <span>{boardingDevice}</span>
+                <span>{platformInfo.boardingDevice}</span>
               </div>
             )}
-            {tactileSystem && (
-              <div className="py-2 leading-relaxed">{tactileSystem}</div>
-            )}
-            {additionalinformation && (
+            {platformInfo.tactileSystem && (
               <div className="py-2 leading-relaxed">
-                {additionalinformation}
+                {platformInfo.tactileSystem}
               </div>
             )}
-            {accessInfo && (
+            {platformInfo.additionalInformation && (
+              <div className="py-2 leading-relaxed">
+                {platformInfo.additionalInformation}
+              </div>
+            )}
+            {platformInfo.accessInfo && (
               <div className="py-2 leading-relaxed">
                 <div className="font-semibold">
                   Hinweise zum Zugang zum Verkehrsmittel:
                 </div>
-                <div>{accessInfo}</div>
+                <div>{platformInfo.accessInfo}</div>
               </div>
             )}
-            {dynamicVisual && (
+            {platformInfo.dynamicVisual && (
               <div className="py-2 leading-relaxed">
-                <div>{dynamicVisual}</div>
+                <div>{platformInfo.dynamicVisual}</div>
               </div>
             )}
-            {dynamicAudio && (
+            {platformInfo.dynamicAudio && (
               <div className="py-2 leading-relaxed">
-                <div>{dynamicAudio}</div>
+                <div>{platformInfo.dynamicAudio}</div>
               </div>
             )}
-            {!boardingDevice &&
-              !tactileSystem &&
-              !additionalinformation &&
-              !accessInfo &&
-              !dynamicVisual &&
-              !dynamicAudio && (
+            {!platformInfo.boardingDevice &&
+              !platformInfo.tactileSystem &&
+              !platformInfo.additionalInformation &&
+              !platformInfo.accessInfo &&
+              !platformInfo.dynamicVisual &&
+              !platformInfo.dynamicAudio && (
                 <div className="py-2 leading-relaxed">
                   Keine Informationen vorhanden.
                 </div>
