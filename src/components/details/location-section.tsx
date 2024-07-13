@@ -11,7 +11,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useJourneyStore } from "@/store/useJourneyStore";
 import { useMediaQuery } from "react-responsive";
-import { useBehigRecordStore } from "@/store/useBehigRecordStore";
 import { truncateTo40Chars } from "@/utils/truncateTo40Chars";
 import { truncateTo20Chars } from "@/utils/truncateTo20Chars";
 import { Platform } from "@/types/Platform";
@@ -19,6 +18,7 @@ import getTactileSystem from "@/utils/getTactileSystem";
 import getBoardingDevice from "@/utils/getBoardingDevice";
 import getDynamicVisual from "@/utils/getDynamicVisual";
 import getDynamicAudio from "@/utils/getDynamicAudio";
+import { getPlatformAccess } from "@/utils/getPlatformAccess";
 
 interface LocationSectionProps {
   locationName: string;
@@ -56,21 +56,7 @@ export default function LocationSection({
   const AccessIconLocation = accessIconLocationProps?.icon;
   const accessTextLocation = accessIconLocationProps?.text;
 
-  const { behigRecord } = useBehigRecordStore();
-  let haltekanteAccess;
-  if (!behigRecord)
-    return (
-      <>
-        <div className="flex w-full justify-center py-12">
-          No available data for this connection
-        </div>
-      </>
-    );
-  if (behigRecord.bpvh_verkehrsmittel_text_de === "TRAIN") {
-    haltekanteAccess = behigRecord.level_access_wheelchair_calculated;
-  } else {
-    haltekanteAccess = behigRecord.haltekante_access_gerechnet;
-  }
+  const haltekanteAccess = getPlatformAccess(platform);
   const accessInfo = platform?.adviceAccessInfo;
   const additionalinformation = platform?.additionalInformation;
   const tactileSystem = getTactileSystem(platform);
@@ -193,6 +179,16 @@ export default function LocationSection({
                 <div>{dynamicAudio}</div>
               </div>
             )}
+            {!boardingDevice &&
+              !tactileSystem &&
+              !additionalinformation &&
+              !accessInfo &&
+              !dynamicVisual &&
+              !dynamicAudio && (
+                <div className="py-2 leading-relaxed">
+                  Keine Informationen vorhanden.
+                </div>
+              )}
           </AccordionContent>
         </AccordionItem>
       </Accordion>

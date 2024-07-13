@@ -30,47 +30,33 @@ export function MultipleConnection({
   allLegs: OJP.TripLeg[];
   duration: string;
 }): React.ReactElement {
-  const handleClick = useHandleClick(allLegs, duration);
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const { resolvedTheme } = useTheme();
-  const firstLeg = allLegs[0];
-  const lastLeg = allLegs[allLegs.length - 1];
 
-  const fromLocationVehicleAccessFirstLeg =
-    useFromStopPointVehicleAccessType(firstLeg);
-  const toLocationVehicleAccessFirstLeg =
-    useToStopPointVehicleAccessType(firstLeg);
+  const timedLegs = allLegs.filter((leg) => leg.legType === "TimedLeg");
 
-  const fromLocationVehicleAccessLastLeg =
-    useFromStopPointVehicleAccessType(lastLeg);
-  const toLocationVehicleAccessLastLeg =
-    useToStopPointVehicleAccessType(lastLeg);
-
-  const accessIconFromLocationFirstLeg = getAccessIcon(
-    fromLocationVehicleAccessFirstLeg,
-    resolvedTheme,
+  const fromLocationVehicleAccessTypes = timedLegs.map((leg) =>
+    useFromStopPointVehicleAccessType(leg),
+  );
+  const toLocationVehicleAccessTypes = timedLegs.map((leg) =>
+    useToStopPointVehicleAccessType(leg),
   );
 
-  const accessIconToLocationFirstLeg = getAccessIcon(
-    toLocationVehicleAccessFirstLeg,
-    resolvedTheme,
-  );
+  const accessIcons = fromLocationVehicleAccessTypes.map((type, index) => ({
+    origin: getAccessIcon(type, resolvedTheme),
+    destination: getAccessIcon(
+      toLocationVehicleAccessTypes[index],
+      resolvedTheme,
+    ),
+  }));
 
-  const accessIconFromLocationLastLeg = getAccessIcon(
-    fromLocationVehicleAccessLastLeg,
-    resolvedTheme,
-  );
-
-  const accessIconToLocationLastLeg = getAccessIcon(
-    toLocationVehicleAccessLastLeg,
-    resolvedTheme,
-  );
+  const handleClick = useHandleClick(allLegs, duration, accessIcons);
 
   const worstIconProps = getWorstIconMultipleConnections(
-    accessIconFromLocationFirstLeg,
-    accessIconToLocationFirstLeg,
-    accessIconFromLocationLastLeg,
-    accessIconToLocationLastLeg,
+    accessIcons[0].origin,
+    accessIcons[0].destination,
+    accessIcons[accessIcons.length - 1].origin,
+    accessIcons[accessIcons.length - 1].destination,
   );
 
   const WorstIcon = worstIconProps?.icon;
@@ -105,13 +91,23 @@ export function MultipleConnection({
         {/* Connection Details */}
         <div className="mb-2 flex flex-col sm:flex-row">
           <div className={`w-full ${isMobile ? "mb-1" : ""}`}>
-            <FirstConnection allLegs={allLegs} />
+            <FirstConnection
+              allLegs={timedLegs}
+              accessIconOrigin={accessIcons[0].origin}
+              accessIconDestination={accessIcons[0].destination}
+            />
           </div>
           <div className="flex items-center justify-center px-2">
             {isMobile ? <ChevronDown /> : <ChevronRight />}
           </div>
           <div className={`w-full ${isMobile ? "mt-1" : ""}`}>
-            <LastConnection allLegs={allLegs} />
+            <LastConnection
+              allLegs={timedLegs}
+              accessIconOrigin={accessIcons[accessIcons.length - 1].origin}
+              accessIconDestination={
+                accessIcons[accessIcons.length - 1].destination
+              }
+            />
           </div>
         </div>
       </div>

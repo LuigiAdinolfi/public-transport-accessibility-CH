@@ -35,6 +35,8 @@ export default function InfoSection({
   const vehicleType = getVehicleType(leg);
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
+  console.log("Leg Duration in InfoSection: ", legDuration);
+
   const VehicleIcon = getVehicleIcon(vehicleType, resolvedTheme);
 
   return (

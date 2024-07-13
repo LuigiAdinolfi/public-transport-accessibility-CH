@@ -22,11 +22,13 @@ import {
   getCachedPlatformFromOrigin,
 } from "@/cache/getCachedPlatform";
 import { Platform } from "@/types/Platform";
+import { accessIconProps, accessProps } from "@/helpers/accessIconProps";
 
 interface CardPathProps {
   index: number;
-  legs: OJP.TripLeg[];
+  leg: OJP.TripLeg;
   legDuration: number;
+  accessIcons: accessIconProps;
 }
 
 /**
@@ -37,11 +39,12 @@ interface CardPathProps {
  */
 export default function CardPath({
   index,
-  legs,
+  leg,
   legDuration,
+  accessIcons,
 }: CardPathProps): React.ReactElement {
   const { resolvedTheme } = useTheme();
-  const selectedLeg = legs[index];
+  const selectedLeg = leg;
   const fromLocationName = selectedLeg.fromLocation.locationName ?? "N/A";
   const toLocationName = selectedLeg.toLocation.locationName ?? "N/A";
   const platformNrFromLocation = getPlatformNumberFromOrigin(selectedLeg);
@@ -94,6 +97,8 @@ export default function CardPath({
     setPlatformDestination,
   ]);
 
+  console.log("Leg Duration in CardPath: ", legDuration);
+
   return (
     <Card>
       <InfoSection leg={selectedLeg} legDuration={legDuration} />
@@ -102,14 +107,14 @@ export default function CardPath({
           locationName={fromLocationName}
           platform={platformOrigin}
           platformNr={platformNrFromLocation}
-          accessIconLocationProps={accessIconFromLocationProps}
+          accessIconLocationProps={accessIcons.origin}
           aria-label={`Departure from ${fromLocationName} at ${platformNrFromLocation}`}
         />
         <LocationSection
           locationName={toLocationName}
           platform={platformDestination}
           platformNr={platformNrToLocation}
-          accessIconLocationProps={accessIconToLocationProps}
+          accessIconLocationProps={accessIcons.destination}
           aria-label={`Arrival at ${toLocationName} at ${platformNrToLocation}`}
         />
       </div>
