@@ -7,12 +7,6 @@ import CommunityRatingSection from "@/components/details/community-rating-sectio
 import { useJourneyStore } from "@/store/useJourneyStore";
 import { useMediaQuery } from "react-responsive";
 import {
-  useFromStopPointVehicleAccessType,
-  useToStopPointVehicleAccessType,
-} from "@/hooks/useVehicleAccessType";
-import { getAccessIcon } from "@/utils/handleAccessibilityIcon";
-import { useTheme } from "next-themes";
-import {
   getPlatformNumberFromDestination,
   getPlatformNumberFromOrigin,
 } from "@/utils/getPlatformNumber";
@@ -43,7 +37,6 @@ export default function CardPath({
   legDuration,
   accessIcons,
 }: CardPathProps): React.ReactElement {
-  const { resolvedTheme } = useTheme();
   const selectedLeg = leg;
   const fromLocationName = selectedLeg.fromLocation.locationName ?? "N/A";
   const toLocationName = selectedLeg.toLocation.locationName ?? "N/A";
@@ -59,11 +52,6 @@ export default function CardPath({
   );
   const [platformDestination, setLocalPlatformDestination] =
     useState<Platform | null>(null);
-
-  const fromLocationVehicleAccessType =
-    useFromStopPointVehicleAccessType(selectedLeg);
-  const toLocationVehicleAccessType =
-    useToStopPointVehicleAccessType(selectedLeg);
 
   useEffect(() => {
     setSelectedTripLeg(selectedLeg);
