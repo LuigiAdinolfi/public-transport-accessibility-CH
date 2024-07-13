@@ -1,21 +1,24 @@
+import React from "react";
 import { MyBreadcrumb } from "@/components/shared/bread-nav";
 import { CommunityCard } from "@/components/community/card-community";
-
-import * as React from "react";
+import { CommunityBreadcrumbList } from "@/components/shared/breadcrumb-list";
 
 /**
  * Component for the Community page, displaying community-related content.
- * @returns {JSX.Element} - CommunityPage component.
+ * @returns {React.ReactElement} - CommunityPage component.
  */
-export default function CommunityPage() {
+export default function CommunityPage(): React.ReactElement {
   const currentPage = "/community";
 
   return (
     <>
-      
-      {/* Main Content */}
-      <div className="flex min-h-screen w-full flex-col items-center justify-start py-0 lg:p-0"> {/* Adjusted for content to be at the top and centered */} {/* Remove padding around main content */}
-      
+      <div className="w-full max-w-screen-lg px-0">
+        <MyBreadcrumb
+          currentPage={currentPage}
+          breadcrumbList={CommunityBreadcrumbList}
+        />
+      </div>
+      <div className="flex min-h-screen w-full flex-col items-center justify-between py-6 lg:p-10">
         <CommunityCard />
       </div>
     </>

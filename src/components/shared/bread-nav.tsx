@@ -9,7 +9,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { MyBreadcrumbList } from "@/components/shared/breadcrumb-list";
+import { MyBreadcrumbItem } from "@/components/shared/breadcrumb-list";
 import { useRouter } from "next/navigation";
 
 /**
@@ -20,10 +20,12 @@ import { useRouter } from "next/navigation";
  */
 export function MyBreadcrumb({
   currentPage,
+  breadcrumbList,
 }: {
   currentPage: string;
+  breadcrumbList: MyBreadcrumbItem[];
 }): React.ReactElement {
-  const currentIndex = MyBreadcrumbList.findIndex(
+  const currentIndex = breadcrumbList.findIndex(
     (item) => item.url === currentPage,
   );
   const router = useRouter();
@@ -46,7 +48,7 @@ export function MyBreadcrumb({
   return (
     <Breadcrumb className="w-full text-left">
       <BreadcrumbList className="md:text-lg">
-        {MyBreadcrumbList.slice(0, currentIndex + 1).map((item, index) => {
+        {breadcrumbList.slice(0, currentIndex + 1).map((item, index) => {
           const isLastPath = currentIndex === index;
 
           return (

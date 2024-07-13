@@ -2,61 +2,70 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardHeader
+  CardHeader,
 } from "@/components/ui/card";
 import * as React from "react";
-import { useTheme } from "next-themes";
-import { useRouter } from "next/router"; // Import useRouter from next/router
+import { Button } from "@/components/ui/button";
 
 /**
  * Component representing a card displaying news.
- * @returns {JSX.Element} JSX Element
+ * @returns {React.ReactElement} JSX Element
  */
-export function CardNews() {
-  const { resolvedTheme } = useTheme();
- // const router = useRouter(); // Use useRouter hook for navigation
-
+export function CardNews(): React.ReactElement {
   // Example news data, replace with actual data fetching logic
   const newsItems = [
     {
       id: 1, // Assume each news item has a unique ID
       title: "Neue Zuggeneration vorgestellt",
       date: "08.05.2024",
-      summary: "Eine innovative Zuggeneration wurde heute von der Bahnindustrie vorgestellt, die...",
+      summary:
+        "Eine innovative Zuggeneration wurde heute von der Bahnindustrie vorgestellt, die...",
     },
     {
       id: 2, // Assume each news item has a unique ID
       title: "Erweiterung des Schienennetzes",
       date: "15.04.2024",
-      summary: "Die Regierung hat Pläne zur Erweiterung des nationalen Schienennetzes bekanntgegeben...",
+      summary:
+        "Die Regierung hat Pläne zur Erweiterung des nationalen Schienennetzes bekanntgegeben...",
     },
   ];
-
-  // Function to handle news click
-  const handleNewsClick = (newsId: number) => {
-    // Navigate to the news's page using its ID
-   // router.push(`/news/${newsId}`);
-  };
 
   return (
     <Card>
       <CardHeader className="pb-8">
-        <CardDescription className="text-zinc-600 md:text-base">
+        <CardDescription className="text-sm text-zinc-600 md:text-base">
           Aktuelle Nachrichten
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-8 lg:pb-12">
+      <CardContent className="space-y-6">
         {newsItems.length > 0 ? (
           newsItems.map((news) => (
             // Added a border and padding to create a frame around clickable elements
-            <div key={news.id} className="border-2 border-gray-300 p-4 rounded-lg cursor-pointer hover:border-gray-400" onClick={() => handleNewsClick(news.id)}>
-              <h3 className="text-lg font-semibold">{news.title}</h3>
-              <p className="text-sm text-gray-500">{news.date}</p>
-              <p className="mt-2 text-base">{news.summary}</p>
-            </div>
+            <Button
+              key={news.id}
+              className="ml-auto flex h-auto w-full flex-col items-start justify-start border-zinc-400 md:min-h-36"
+              variant="outline"
+              onClick={() => {}}
+            >
+              <div className="flex px-5 pt-3 text-lg font-semibold">
+                <p className="hyphens-auto whitespace-normal break-words text-left">
+                  {news.title}
+                </p>
+              </div>
+              <div className="flex px-5 pt-1 text-sm text-gray-500">
+                <p className="hyphens-auto whitespace-normal break-words text-left">
+                  {news.date}
+                </p>
+              </div>
+              <div className="flex px-5 pb-2 pt-6 text-base">
+                <p className="hyphens-auto whitespace-normal break-words text-left">
+                  {news.summary}
+                </p>
+              </div>
+            </Button>
           ))
         ) : (
-          <CardDescription className="flex justify-center w-full text-base">
+          <CardDescription className="flex w-full justify-center text-base">
             Keine aktuellen Nachrichten vorhanden.
           </CardDescription>
         )}
