@@ -52,7 +52,7 @@ export function CardNews(): React.ReactElement {
                   {news.title}
                 </p>
               </div>
-              <div className="flex px-5 pt-1 text-sm text-gray-500">
+              <div className="flex px-5 pt-1 text-sm text-zinc-600">
                 <p className="hyphens-auto whitespace-normal break-words text-left">
                   {news.date}
                 </p>
