@@ -10,6 +10,8 @@ import {
   useToStopPointVehicleAccessType,
 } from "@/hooks/useVehicleAccessType";
 import { SingleConnection } from "@/components/select/single-Connection";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 /**
  * Component representing a direct connection in a journey.
@@ -28,6 +30,8 @@ export function DirectConnection({
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const { resolvedTheme } = useTheme();
   const details = allLegs[0];
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const fromLocationVehicleAccessTypes = allLegs.map(
     useFromStopPointVehicleAccessType,
@@ -44,7 +48,18 @@ export function DirectConnection({
     ),
   }));
 
-  const handleClick = useHandleClick(allLegs, duration, accessIcons);
+  const handleClick = useHandleClick(
+    allLegs,
+    duration,
+    accessIcons,
+    router.push,
+  );
+
+  const handleButtonClick = async () => {
+    setLoading(true);
+    handleClick();
+    setLoading(false);
+  };
 
   const worstIconProps = getWorstIcon(
     accessIcons[0].origin,
@@ -56,8 +71,10 @@ export function DirectConnection({
   return (
     <Button
       className="flex h-full w-full justify-start border-zinc-400"
-      variant="outline"
-      onClick={handleClick}
+      variant={loading ? "ghost" : "outline"}
+      disabled={loading}
+      onClick={handleButtonClick}
+      aria-label="Select journey with multiple connections"
     >
       <div className={`w-full ${!isMobile ? "grid" : ""}`}>
         {/* Accessibility and Travel Time */}

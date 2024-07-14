@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -55,17 +55,30 @@ export default function LocationSection({
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const AccessIconLocation = accessIconLocationProps?.icon;
   const accessTextLocation = accessIconLocationProps?.text;
+  const [platformInfo, setPlatformInfo] = useState({
+    haltekanteAccess: "",
+    accessInfo: "",
+    additionalInformation: "",
+    tactileSystem: "",
+    boardingDevice: "",
+    dynamicVisual: "",
+    dynamicAudio: "",
+  });
 
-  const platformInfo = useMemo(() => {
-    return {
-      haltekanteAccess: getPlatformAccess(platform),
-      accessInfo: platform?.adviceAccessInfo,
-      additionalInformation: platform?.additionalInformation,
-      tactileSystem: getTactileSystem(platform),
-      boardingDevice: getBoardingDevice(platform),
-      dynamicVisual: getDynamicVisual(platform),
-      dynamicAudio: getDynamicAudio(platform),
-    };
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (platform) {
+      setPlatformInfo({
+        haltekanteAccess: getPlatformAccess(platform),
+        accessInfo: platform?.adviceAccessInfo || "",
+        additionalInformation: platform?.additionalInformation || "",
+        tactileSystem: getTactileSystem(platform) || "",
+        boardingDevice: getBoardingDevice(platform) || "",
+        dynamicVisual: getDynamicVisual(platform) || "",
+        dynamicAudio: getDynamicAudio(platform) || "",
+      });
+    }
   }, [platform]);
 
   /**
@@ -76,8 +89,10 @@ export default function LocationSection({
    */
   const handleClick = (stop: string | null) => {
     if (!stop) return;
+    setIsLoading(true); // Start loading state
     setSelectedStop(stop);
     router.push("/select/details/stop");
+    setIsLoading(false); // End loading state after navigation
   };
 
   return (
@@ -201,13 +216,20 @@ export default function LocationSection({
       {/* Button for "Information zur Haltestelle" */}
       <div className="mt-6 flex justify-center">
         <Button
-          variant="outline"
+          variant={isLoading ? "ghost" : "outline"}
           onClick={() => handleClick(locationName)}
           className="flex w-full items-center p-2 md:text-base"
+          disabled={isLoading}
         >
-          <div>Info zur Haltestelle &nbsp;</div>
-          <div>{location}</div>
-          <ArrowUpRight className="ml-1 h-4 w-4" />
+          {isLoading ? (
+            "Loading..."
+          ) : (
+            <>
+              <div>Info zur Haltestelle &nbsp;</div>
+              <div>{location}</div>
+              <ArrowUpRight className="ml-1 h-4 w-4" />
+            </>
+          )}
         </Button>
       </div>
     </div>

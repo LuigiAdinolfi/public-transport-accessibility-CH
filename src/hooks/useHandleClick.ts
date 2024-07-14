@@ -1,26 +1,27 @@
-import { useRouter } from "next/navigation";
 import { useJourneyStore } from "@/store/useJourneyStore";
-import * as OJP from "ojp-sdk";
 import { useRecentJourneysStore } from "@/store/useRecentJourneysStore";
 import { getVehicleType } from "@/utils/getVehicleType";
 import { getVehicleNumber } from "@/utils/getVehicleNumber";
 import { accessIconProps } from "@/helpers/accessIconProps";
+import * as OJP from "ojp-sdk";
 
 /**
  * Custom hook to handle click events for selecting trip details and navigating to the details page.
  * @param {OJP.TripLeg[]} allLegs - Array of trip legs to set in the journey store.
  * @param duration - Total duration of the journey.
  * @param accessIcons - Array of access icons to set in the journey store.
+ * @param {(url: string) => void} push - Function to navigate to a new URL.
  * @returns Click event handler function.
  */
-export const useHandleClick = (
+export function useHandleClick(
   allLegs: OJP.TripLeg[],
   duration: string,
   accessIcons: accessIconProps[],
-) => {
-  const router = useRouter();
+  push: (url: string) => void,
+) {
   const { setAllLegs, setAccessIcons } = useJourneyStore();
   const { addRecentJourney } = useRecentJourneysStore();
+
   return () => {
     setAllLegs(allLegs); // Set all trip legs in the journey store
     setAccessIcons(accessIcons); // Set access icons in the journey store
@@ -54,6 +55,6 @@ export const useHandleClick = (
     // Add the recent journey to the store
     addRecentJourney(journey);
 
-    router.push("/select/details"); // Navigate to the details page
+    push("/select/details"); // Navigate to the details page
   };
-};
+}

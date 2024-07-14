@@ -79,7 +79,6 @@ export default function TabNavigation({
       {/* TabsContent for rendering details of each leg */}
       {timedLegs.map((leg, index) => {
         const legDuration = transferLegs[index]?.legDuration?.totalMinutes;
-        console.log("Leg Duration in TabNavigation: ", legDuration);
         return (
           <TabsContent key={index} value={`leg-${index}`}>
             <CardPath
