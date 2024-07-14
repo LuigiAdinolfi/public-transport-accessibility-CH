@@ -15,6 +15,8 @@ import {
   getAccessIcon,
   getWorstIconMultipleConnections,
 } from "@/utils/handleAccessibilityIcon";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 /**
  * Component representing a journey with multiple connections.
@@ -32,6 +34,8 @@ export function MultipleConnection({
 }): React.ReactElement {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const { resolvedTheme } = useTheme();
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const timedLegs = allLegs.filter((leg) => leg.legType === "TimedLeg");
 
@@ -50,7 +54,18 @@ export function MultipleConnection({
     ),
   }));
 
-  const handleClick = useHandleClick(allLegs, duration, accessIcons);
+  const handleClick = useHandleClick(
+    allLegs,
+    duration,
+    accessIcons,
+    router.push,
+  );
+
+  const handleButtonClick = async () => {
+    setLoading(true);
+    handleClick();
+    setLoading(false);
+  };
 
   const worstIconProps = getWorstIconMultipleConnections(
     accessIcons[0].origin,
@@ -65,8 +80,9 @@ export function MultipleConnection({
   return (
     <Button
       className="flex h-full w-full justify-start border-zinc-400"
-      variant="outline"
-      onClick={handleClick}
+      variant={loading ? "ghost" : "outline"}
+      disabled={loading}
+      onClick={handleButtonClick}
       aria-label="Select journey with multiple connections"
     >
       <div className={`w-full ${!isMobile ? "grid" : ""}`}>

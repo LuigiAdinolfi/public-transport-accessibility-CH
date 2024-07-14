@@ -17,6 +17,7 @@ import { handleFormSubmit } from "@/utils/handleFormSubmit";
 import { useRouter } from "next/navigation";
 import { CircleIcons } from "@/components/details/circle-icons";
 import { swapLocations } from "@/utils/swapLocations";
+import { useState } from "react";
 
 type SearchTab = "Dep" | "Arr";
 
@@ -40,6 +41,21 @@ export function CardNewJourney(): React.ReactElement {
   const inputOrigin = origin?.locationName ?? "";
   const inputDestination = destination?.locationName ?? "";
   const date = selectedDate?.toISOString() ?? "";
+
+  const [loading, setLoading] = useState(false);
+
+  const handleClick = async () => {
+    setLoading(true);
+    await handleFormSubmit(
+      origin,
+      destination,
+      date,
+      activeSearchTab,
+      setTripDetails,
+      router.push,
+    );
+    setLoading(false);
+  };
 
   return (
     <Card>
@@ -134,18 +150,11 @@ export function CardNewJourney(): React.ReactElement {
                 id="submit"
                 type="submit"
                 className="w-full md:text-base lg:mb-2 lg:w-44"
-                onClick={() =>
-                  handleFormSubmit(
-                    origin,
-                    destination,
-                    date,
-                    activeSearchTab,
-                    setTripDetails,
-                    router.push,
-                  )
-                }
+                onClick={handleClick}
+                variant={loading ? "secondary" : "default"}
+                disabled={loading}
               >
-                Suche
+                {loading ? "Loading..." : "Suche"}
               </Button>
             </div>
           </div>
