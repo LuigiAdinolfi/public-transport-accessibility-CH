@@ -1,6 +1,5 @@
 import { StopPoint } from "@/types/StopPoint";
 import { create } from "zustand";
-import { BehigRecord } from "@/types/BehigRecord";
 
 interface StopPointStore {
   stopPoint: StopPoint | null;
