@@ -7,6 +7,8 @@ import {
 } from "@/components/ui/accordion";
 import { useMediaQuery } from "react-responsive";
 import { useBehigRecordStore } from "@/store/useBehigRecordStore";
+import { SquareCheckBig } from "lucide-react";
+import { useParkingLotStore } from "@/store/useParkingLotStore";
 
 /**
  * Component displaying accordion sections based on media query for responsiveness.
@@ -17,6 +19,11 @@ export default function AccordionSections(): React.ReactElement {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const { behigRecord } = useBehigRecordStore();
   const assistancecondition = behigRecord.assistancecondition;
+  const { parkingLot } = useParkingLotStore();
+
+  const parkingLotsAvailable = parkingLot?.placesAvailable === "YES";
+  const wheelchairPlaces = parkingLot?.prmPlacesAvailable === "YES";
+  const parkingLotsAdditionalInfo = parkingLot?.additionalInformation;
 
   return (
     <div
@@ -44,12 +51,42 @@ export default function AccordionSections(): React.ReactElement {
           <AccordionTrigger className={`py-6 ${isMobile ? "text-sm" : ""}`}>
             Parkplatz-Informationen
           </AccordionTrigger>
-          <AccordionContent className="px-2">
-            <div
-              className={`py-3 ${isMobile ? "text-sm" : ""} leading-relaxed`}
-            >
-              Parkplatz-Informationen
-            </div>
+          <AccordionContent className="px-2 py-2">
+            {Object.keys(parkingLot).length > 0 ? (
+              <>
+                {parkingLotsAvailable && (
+                  <div className="flex flex-row items-center py-2 align-middle">
+                    <SquareCheckBig size={isMobile ? 12 : 16} />
+                    <div
+                      className={`pl-2 align-middle text-sm font-normal ${isMobile ? "text-sm" : "text-sm"}`}
+                    >
+                      Parkplätze vorhanden
+                    </div>
+                  </div>
+                )}
+                {wheelchairPlaces && (
+                  <div className="flex flex-row items-center py-2 align-middle">
+                    <SquareCheckBig size={isMobile ? 12 : 16} />
+                    <div
+                      className={`pl-2 align-middle text-sm font-normal ${isMobile ? "text-sm" : "text-sm"}`}
+                    >
+                      Parkplätze für Gehbehinderte vorhanden
+                    </div>
+                  </div>
+                )}
+                {parkingLotsAdditionalInfo && (
+                  <div
+                    className={`py-3 ${isMobile ? "text-sm" : ""} leading-relaxed`}
+                  >
+                    Zusätzliche Informationen: {parkingLotsAdditionalInfo}
+                  </div>
+                )}
+              </>
+            ) : (
+              <div className="leading-relaxed">
+                Keine Parkplatzinformationen verfügbar.
+              </div>
+            )}
           </AccordionContent>
         </AccordionItem>
       </Accordion>

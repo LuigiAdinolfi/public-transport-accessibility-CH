@@ -19,6 +19,7 @@ import getBoardingDevice from "@/utils/getBoardingDevice";
 import getDynamicVisual from "@/utils/getDynamicVisual";
 import getDynamicAudio from "@/utils/getDynamicAudio";
 import { getPlatformAccess } from "@/utils/getPlatformAccess";
+import { useParkingLotStore } from "@/store/useParkingLotStore";
 
 interface LocationSectionProps {
   locationName: string;
@@ -63,6 +64,7 @@ export default function LocationSection({
     boardingDevice: "",
     dynamicVisual: "",
     dynamicAudio: "",
+    parentSloid: "",
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -77,9 +79,12 @@ export default function LocationSection({
         boardingDevice: getBoardingDevice(platform) || "",
         dynamicVisual: getDynamicVisual(platform) || "",
         dynamicAudio: getDynamicAudio(platform) || "",
+        parentSloid: platform?.parentServicePointSloid || "",
       });
     }
   }, [platform]);
+
+  const { setParentServicePointSloid } = useParkingLotStore();
 
   /**
    * Handles click on "Info zur Haltestelle" button.
@@ -91,6 +96,7 @@ export default function LocationSection({
     if (!stop) return;
     setIsLoading(true); // Start loading state
     setSelectedStop(stop);
+    setParentServicePointSloid(platformInfo.parentSloid);
     router.push("/select/details/stop");
     setIsLoading(false); // End loading state after navigation
   };

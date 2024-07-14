@@ -75,8 +75,6 @@ export default function CardPath({
     setPlatformDestination,
   ]);
 
-  console.log("Leg Duration in CardPath: ", legDuration);
-
   return (
     <Card>
       <InfoSection leg={selectedLeg} legDuration={legDuration} />

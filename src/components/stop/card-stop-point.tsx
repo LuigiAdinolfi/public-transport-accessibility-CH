@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { useTheme } from "next-themes";
 import { useMediaQuery } from "react-responsive";
@@ -9,6 +9,8 @@ import AccordionSections from "@/components/stop/accordion-sections";
 import InfoSection from "@/components/stop/info-section";
 import { getVehicleIcon } from "@/utils/handleVehicleIcon";
 import { getVehicleType } from "@/utils/getVehicleType";
+import { getCachedParkingLot } from "@/cache/getCachedParkingLot";
+import { useParkingLotStore } from "@/store/useParkingLotStore";
 
 /**
  * Component displaying detailed information about a stop point in a card format.
@@ -18,6 +20,8 @@ export default function CardStopPoint(): React.ReactElement {
   const { resolvedTheme } = useTheme();
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const { selectedStop, selectedTripLeg } = useJourneyStore();
+  const { parentServicePointSloid, setParkingLot } = useParkingLotStore();
+  const parentSloid = parentServicePointSloid;
 
   // Determine vehicle type based on selected trip leg
   let vehicleType = "N/A";
@@ -25,6 +29,21 @@ export default function CardStopPoint(): React.ReactElement {
     vehicleType = getVehicleType(selectedTripLeg);
   }
   const VehicleIcon = getVehicleIcon(vehicleType, resolvedTheme);
+
+  useEffect(() => {
+    if (!parentSloid) return;
+
+    async function fetchParkingLot() {
+      try {
+        const parkingLot = await getCachedParkingLot(parentSloid);
+        setParkingLot(parkingLot); // Set parkingLot state regardless of null or not
+      } catch (error) {
+        console.error("Error fetching parking lot:", error);
+      }
+    }
+
+    fetchParkingLot().then((r) => r);
+  }, [parentSloid]);
 
   return (
     <Card className="mt-3">
