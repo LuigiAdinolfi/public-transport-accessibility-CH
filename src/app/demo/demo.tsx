@@ -42,6 +42,7 @@ const Demo = () => {
     data: any;
     time: number;
   } | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const handleFetchData = async () => {
     // Uncomment the following lines to fetch data in parallel
@@ -56,25 +57,38 @@ const Demo = () => {
     // setMongoResult(mongoData);
     // setRedisResult(redisData);
 
-    const apiData = await fetchDirectly(endpoint);
-    const mongoData = await fetchFromMongoDB();
-    const redisData = await fetchFromRedisCacheWrapper();
+    setLoading(true);
 
-    setApiResult(apiData);
-    setMongoResult(mongoData);
-    setRedisResult(redisData);
+    try {
+      const apiData = await fetchDirectly(endpoint);
+      const mongoData = await fetchFromMongoDB();
+      const redisData = await fetchFromRedisCacheWrapper();
+
+      setApiResult(apiData);
+      setMongoResult(mongoData);
+      setRedisResult(redisData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="mt-14 flex flex-col items-center space-y-16">
-      <Button className="w-48 px-4 py-2" onClick={handleFetchData}>
-        Fetch Data
+      <Button
+        className="w-48 px-4 py-2"
+        onClick={handleFetchData}
+        disabled={loading}
+      >
+        {loading ? "Loading..." : "Fetch Data"}
       </Button>
       <div className="flex w-full flex-wrap justify-around">
         <div className="w-full p-4 md:w-1/3">
           <div className="rounded-md border p-4">
             <h2 className="mb-2 text-[1.5rem] font-bold">API Direct Call</h2>
-            {apiResult && (
+            {loading && <p>Loading...</p>}
+            {apiResult && !loading && (
               <div className="max-w-full overflow-x-auto">
                 <div className="pb-8">
                   <span className="mb-2 text-[1.3rem]">Time: </span>
@@ -90,7 +104,8 @@ const Demo = () => {
         <div className="w-full p-4 md:w-1/3">
           <div className="rounded-md border p-4">
             <h2 className="mb-2 text-[1.5rem] font-bold">MongoDB Call</h2>
-            {mongoResult && (
+            {loading && <p>Loading...</p>}
+            {mongoResult && !loading && (
               <div className="max-w-full overflow-x-auto">
                 <div className="pb-8">
                   <span className="mb-2 text-[1.3rem]">Time: </span>
@@ -106,7 +121,8 @@ const Demo = () => {
         <div className="w-full p-4 md:w-1/3">
           <div className="rounded-md border p-4">
             <h2 className="mb-2 text-[1.5rem] font-bold">Redis Cache Call</h2>
-            {redisResult && (
+            {loading && <p>Loading...</p>}
+            {redisResult && !loading && (
               <div className="max-w-full overflow-x-auto">
                 <div className="pb-8">
                   <span className="mb-2 text-[1.3rem]">Time: </span>
