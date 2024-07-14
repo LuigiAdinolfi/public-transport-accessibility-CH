@@ -6,9 +6,9 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useMediaQuery } from "react-responsive";
-import { useBehigRecordStore } from "@/store/useBehigRecordStore";
 import { SquareCheckBig } from "lucide-react";
 import { useParkingLotStore } from "@/store/useParkingLotStore";
+import { useStopPointStore } from "@/store/useStopPointStore";
 
 /**
  * Component displaying accordion sections based on media query for responsiveness.
@@ -17,8 +17,8 @@ import { useParkingLotStore } from "@/store/useParkingLotStore";
 export default function AccordionSections(): React.ReactElement {
   // Determine if the screen width is considered mobile
   const isMobile = useMediaQuery({ maxWidth: 767 });
-  const { behigRecord } = useBehigRecordStore();
-  const assistancecondition = behigRecord.assistancecondition;
+  const { stopPoint } = useStopPointStore();
+  const assistancecondition = stopPoint?.assistanceCondition;
   const { parkingLot } = useParkingLotStore();
 
   const parkingLotsAvailable = parkingLot?.placesAvailable === "YES";

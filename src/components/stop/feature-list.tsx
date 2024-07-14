@@ -1,7 +1,7 @@
 import React from "react";
 import { SquareCheckBig } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
-import { useBehigRecordStore } from "@/store/useBehigRecordStore";
+import { useStopPointStore } from "@/store/useStopPointStore";
 
 /**
  * Component displaying a list of features with checkboxes.
@@ -10,21 +10,19 @@ import { useBehigRecordStore } from "@/store/useBehigRecordStore";
 export default function FeatureList(): React.ReactElement {
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
-  const { behigRecord } = useBehigRecordStore();
+  const { stopPoint } = useStopPointStore();
 
-  const assistanceavailability = behigRecord.assistanceavailability;
-  const assistanceservice = behigRecord.assistanceservice;
-  const audioticketmachine = behigRecord.audioticketmachine;
-  const contrastingareas = behigRecord.contrastingareas;
-  const dynamicaudiosystem = behigRecord.dynamicaudiosystem;
-  const dynamicopticsystem = behigRecord.dynamicopticsystem;
-  const wheelchairticketmachine = behigRecord.wheelchairticketmachine;
+  const assistanceavailability = stopPoint?.assistanceAvailability;
+  const assistanceservice = stopPoint?.assistanceService;
+  const audioticketmachine = stopPoint?.audioTicketMachine;
+  const dynamicaudiosystem = stopPoint?.dynamicAudioSystem;
+  const dynamicopticsystem = stopPoint?.dynamicOpticSystem;
+  const wheelchairticketmachine = stopPoint?.wheelchairTicketMachine;
 
   const featureMappings = [
     { value: assistanceavailability, text: "Unterstützung verfügbar" },
     { value: assistanceservice, text: "Rollstuhl-Assistenzdienst" },
     { value: audioticketmachine, text: "Audioticketmaschine" },
-    { value: contrastingareas, text: "Kontrastierende Bereiche" },
     { value: dynamicaudiosystem, text: "Dynamisches Audiosystem" },
     { value: dynamicopticsystem, text: "Dynamisches optisches System" },
     { value: wheelchairticketmachine, text: "Rollstuhl-Ticket-Maschine" },

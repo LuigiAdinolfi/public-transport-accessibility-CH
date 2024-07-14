@@ -11,6 +11,8 @@ import { getVehicleIcon } from "@/utils/handleVehicleIcon";
 import { getVehicleType } from "@/utils/getVehicleType";
 import { getCachedParkingLot } from "@/cache/getCachedParkingLot";
 import { useParkingLotStore } from "@/store/useParkingLotStore";
+import { getCachedStopPoint } from "@/cache/getCachedStopPoint";
+import { useStopPointStore } from "@/store/useStopPointStore";
 
 /**
  * Component displaying detailed information about a stop point in a card format.
@@ -21,6 +23,7 @@ export default function CardStopPoint(): React.ReactElement {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const { selectedStop, selectedTripLeg } = useJourneyStore();
   const { parentServicePointSloid, setParkingLot } = useParkingLotStore();
+  const { setStopPoint } = useStopPointStore();
   const parentSloid = parentServicePointSloid;
 
   // Determine vehicle type based on selected trip leg
@@ -42,7 +45,18 @@ export default function CardStopPoint(): React.ReactElement {
       }
     }
 
+    async function fetchStopPoint() {
+      try {
+        const stopPoint = await getCachedStopPoint(parentSloid);
+        setStopPoint(stopPoint); // Set stopPoint state regardless of null or not
+      } catch (error) {
+        console.error("Error fetching stop point:", error);
+        setStopPoint(null);
+      }
+    }
+
     fetchParkingLot().then((r) => r);
+    fetchStopPoint().then((r) => r);
   }, [parentSloid]);
 
   return (

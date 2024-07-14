@@ -1,6 +1,6 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
-import { useBehigRecordStore } from "@/store/useBehigRecordStore";
+import { useStopPointStore } from "@/store/useStopPointStore";
 
 /**
  * Component displaying information about ticket machine assistance.
@@ -8,8 +8,8 @@ import { useBehigRecordStore } from "@/store/useBehigRecordStore";
  */
 export default function InfoSection(): React.ReactElement {
   const isMobile = useMediaQuery({ maxWidth: 767 });
-  const { behigRecord } = useBehigRecordStore();
-  const infoticketmachine = behigRecord.infoticketmachine;
+  const { stopPoint } = useStopPointStore();
+  const infoticketmachine = stopPoint?.infoTicketMachine;
 
   return (
     <div
