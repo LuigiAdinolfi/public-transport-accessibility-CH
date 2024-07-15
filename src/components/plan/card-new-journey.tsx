@@ -126,6 +126,7 @@ export function CardNewJourney(): React.ReactElement {
                     className="w-32 items-center text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:w-32"
                     value="Dep"
                     aria-controls={"Departure"}
+                    id={"Departure"}
                   >
                     <CircleIcons
                       active={activeSearchTab === "Dep"}
@@ -139,6 +140,7 @@ export function CardNewJourney(): React.ReactElement {
                     className="w-32 text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:w-32"
                     value="Arr"
                     aria-controls={"Arrival"}
+                    id={"Arrival"}
                   >
                     <CircleIcons
                       active={activeSearchTab === "Arr"}

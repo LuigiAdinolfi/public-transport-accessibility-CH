@@ -59,7 +59,6 @@ export default function JourneyPointInput({
           className="text-base"
           aria-autocomplete="list"
           aria-haspopup="listbox"
-          aria-expanded={menuOpen}
         />
         {menuOpen && options.length > 0 && (
           <div
