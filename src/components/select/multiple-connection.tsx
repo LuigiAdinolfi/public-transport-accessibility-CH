@@ -84,6 +84,7 @@ export function MultipleConnection({
       disabled={loading}
       onClick={handleButtonClick}
       aria-label={`Reise mit niedrigste Barrierefreiheit: ${worstText}`}
+      aria-labelledby={`Reise mit niedrigste Barrierefreiheit: ${worstText}`}
     >
       <div className={`w-full ${!isMobile ? "grid" : ""}`}>
         {/* Accessibility and Travel Time */}
