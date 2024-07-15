@@ -24,7 +24,6 @@ const timeZone = "Europe/Zurich";
 export function DatePicker(): React.ReactElement {
   const { date, setDate, time, setTime } = useJourneyStore();
   const setSelectedDate = useJourneyStore((state) => state.setSelectedDate);
-  const [isDateInitialized, setIsDateInitialized] = useState(false);
 
   // Initialize with current date and time
   useEffect(() => {
@@ -35,19 +34,13 @@ export function DatePicker(): React.ReactElement {
       setDate(zonedTime);
       setTime(formattedTime);
       setSelectedDate(zonedTime); // Update parent with initial date
-      setIsDateInitialized(true);
     };
 
-    if (!isDateInitialized) {
-      updateDateTime();
-    }
     const intervalId = setInterval(updateDateTime, 60000); // Update every minute
 
     // Clean up the interval on unmount
     return () => clearInterval(intervalId);
-  }, [isDateInitialized, setSelectedDate, setDate, setTime]);
-
-  if (!isDateInitialized) return <></>; // Render null until the date is initialized
+  }, [setSelectedDate, setDate, setTime]);
 
   return (
     <Popover>
