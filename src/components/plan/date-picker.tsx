@@ -35,7 +35,7 @@ export function DatePicker(): React.ReactElement {
       setTime(formattedTime);
       setSelectedDate(zonedTime); // Update parent with initial date
     };
-
+    updateDateTime();
     const intervalId = setInterval(updateDateTime, 60000); // Update every minute
 
     // Clean up the interval on unmount
