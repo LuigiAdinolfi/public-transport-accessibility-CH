@@ -10,6 +10,5 @@ export async function fetchStopPointClient(sloid: string) {
     return data;
   } catch (error) {
     console.error(`Error fetching stop point for SLOID ${sloid}:`, error);
-    throw error;
   }
 }

@@ -1,6 +1,6 @@
 import mongoose, { Document, Schema } from "mongoose";
 
-interface IStopPoint extends Document {
+export interface IStopPoint extends Document {
   id: number;
   sloid: string;
   meansOfTransport: string[];
@@ -50,9 +50,9 @@ const StopPointSchema: Schema = new Schema({
 
 StopPointSchema.index({ id: 1, sloid: 1 }, { unique: true });
 
-let StopPoint: mongoose.Model;
+let StopPoint: mongoose.Model<IStopPoint>;
 
-export function StopPointToStore(): mongoose.Model {
+export function StopPointToStore(): mongoose.Model<IStopPoint> {
   if (!StopPoint) {
     StopPoint =
       mongoose.models?.StopPoint ||
@@ -60,5 +60,3 @@ export function StopPointToStore(): mongoose.Model {
   }
   return StopPoint;
 }
-
-export default StopPointToStore;

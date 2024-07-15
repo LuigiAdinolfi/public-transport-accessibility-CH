@@ -9,7 +9,7 @@ import { useStopPointStore } from "@/store/useStopPointStore";
 export default function InfoSection(): React.ReactElement {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const { stopPoint } = useStopPointStore();
-  const infoticketmachine = stopPoint?.infoTicketMachine;
+  const infoticketmachine = stopPoint.infoTicketMachine;
 
   return (
     <div

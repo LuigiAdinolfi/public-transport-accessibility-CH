@@ -14,7 +14,8 @@ export async function getCachedStopPoint(sloid: string) {
       console.error(`Error fetching stop point for SLOID ${sloid}:`, error);
       return {};
     }
+  } else {
+    console.error(`SLOID ${sloid} does not start with ch:1:`);
+    return {};
   }
-
-  return {};
 }

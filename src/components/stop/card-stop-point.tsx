@@ -51,7 +51,6 @@ export default function CardStopPoint(): React.ReactElement {
         setStopPoint(stopPoint); // Set stopPoint state regardless of null or not
       } catch (error) {
         console.error("Error fetching stop point:", error);
-        setStopPoint(null);
       }
     }
 

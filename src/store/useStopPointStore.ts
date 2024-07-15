@@ -1,12 +1,12 @@
-import { StopPoint } from "@/types/StopPoint";
 import { create } from "zustand";
+import { StopPoint } from "@/types/StopPoint";
 
 interface StopPointStore {
-  stopPoint: StopPoint | null;
-  setStopPoint: (stopPoint: StopPoint | null) => void;
+  stopPoint: StopPoint;
+  setStopPoint: (stopPoint: StopPoint) => void;
 }
 
 export const useStopPointStore = create<StopPointStore>((set) => ({
-  stopPoint: null,
-  setStopPoint: (stopPoint) => set({ stopPoint }),
+  stopPoint: {} as StopPoint,
+  setStopPoint: (stopPoint: StopPoint) => set({ stopPoint }),
 }));

@@ -2,9 +2,10 @@
 
 import redis from "@/cache/redisClient";
 import connectDB from "@/db/connectDB";
-import StopPointToStore from "@/models/stopPoint";
+
 import fetchStopPointBySloid from "@/services/atlas/prm-directory/fetchStopPointBySloid";
 import { storeStopPointToDB } from "@/db/storeStopPointToDB";
+import { StopPointToStore } from "@/models/stopPoint";
 
 export async function fetchStopPointFromLocalAPI(sloid: string) {
   try {
@@ -60,10 +61,6 @@ export async function fetchStopPointFromLocalAPI(sloid: string) {
 
     return { data: { message: "Stop point not found" }, ok: false };
   } catch (error) {
-    console.error(
-      `Error in fetchStopPointFromLocalAPI for SLOID ${sloid}:`,
-      error,
-    );
-    return { data: { message: "Error fetching stop point" }, ok: false };
+    return { data: { message: error }, ok: false };
   }
 }

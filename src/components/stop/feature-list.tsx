@@ -12,12 +12,12 @@ export default function FeatureList(): React.ReactElement {
 
   const { stopPoint } = useStopPointStore();
 
-  const assistanceavailability = stopPoint?.assistanceAvailability;
-  const assistanceservice = stopPoint?.assistanceService;
-  const audioticketmachine = stopPoint?.audioTicketMachine;
-  const dynamicaudiosystem = stopPoint?.dynamicAudioSystem;
-  const dynamicopticsystem = stopPoint?.dynamicOpticSystem;
-  const wheelchairticketmachine = stopPoint?.wheelchairTicketMachine;
+  const assistanceavailability = stopPoint.assistanceAvailability;
+  const assistanceservice = stopPoint.assistanceService;
+  const audioticketmachine = stopPoint.audioTicketMachine;
+  const dynamicaudiosystem = stopPoint.dynamicAudioSystem;
+  const dynamicopticsystem = stopPoint.dynamicOpticSystem;
+  const wheelchairticketmachine = stopPoint.wheelchairTicketMachine;
 
   const featureMappings = [
     { value: assistanceavailability, text: "Unterstützung verfügbar" },

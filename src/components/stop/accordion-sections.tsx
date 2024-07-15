@@ -18,7 +18,7 @@ export default function AccordionSections(): React.ReactElement {
   // Determine if the screen width is considered mobile
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const { stopPoint } = useStopPointStore();
-  const assistancecondition = stopPoint?.assistanceCondition;
+  const assistancecondition = stopPoint.assistanceCondition;
   const { parkingLot } = useParkingLotStore();
 
   const parkingLotsAvailable = parkingLot?.placesAvailable === "YES";
