@@ -55,7 +55,7 @@ export function DatePicker(): React.ReactElement {
         <Button
           variant={"outline"}
           className="w-full justify-between text-left text-base font-normal lg:w-80"
-          aria-label="Select Date and Time"
+          aria-label={`Select Date and Time ${formatDateForUI(date)}`}
           suppressHydrationWarning
         >
           {date ? formatDateForUI(date) : ""}

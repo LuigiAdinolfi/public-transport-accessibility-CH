@@ -73,6 +73,8 @@ export function CardNewJourney(): React.ReactElement {
               onLocationSelected={setOrigin}
               value={inputOrigin}
               description="Gib den Abfahrtsort ein."
+              aria-label="Abfahrtsort"
+              aria-expanded="true"
             />
             <div className="flex w-full items-center justify-center pt-4 lg:w-2/12 lg:pb-6">
               {/* Button to swap origin and destination */}
@@ -93,6 +95,8 @@ export function CardNewJourney(): React.ReactElement {
               onLocationSelected={setDestination}
               value={inputDestination}
               description="Gib den Zielort ein."
+              aria-label="Zielort"
+              aria-expanded="true"
             />
           </div>
         </div>
@@ -121,6 +125,7 @@ export function CardNewJourney(): React.ReactElement {
                   <TabsTrigger
                     className="w-32 items-center text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:w-32"
                     value="Dep"
+                    aria-controls={"Departure"}
                   >
                     <CircleIcons
                       active={activeSearchTab === "Dep"}
@@ -133,6 +138,7 @@ export function CardNewJourney(): React.ReactElement {
                   <TabsTrigger
                     className="w-32 text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:w-32"
                     value="Arr"
+                    aria-controls={"Arrival"}
                   >
                     <CircleIcons
                       active={activeSearchTab === "Arr"}

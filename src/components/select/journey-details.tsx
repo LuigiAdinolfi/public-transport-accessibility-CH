@@ -23,9 +23,19 @@ export default function JourneyDetails(): React.ReactElement {
         const duration = formatDuration(totalDuration);
 
         return legs.length === 1 ? (
-          <DirectConnection key={index} allLegs={legs} duration={duration} />
+          <DirectConnection
+            key={index}
+            allLegs={legs}
+            duration={duration}
+            aria-label="Direct connection"
+          />
         ) : (
-          <MultipleConnection key={index} allLegs={legs} duration={duration} />
+          <MultipleConnection
+            key={index}
+            allLegs={legs}
+            duration={duration}
+            aria-label="Multiple connections"
+          />
         );
       })}
     </div>
