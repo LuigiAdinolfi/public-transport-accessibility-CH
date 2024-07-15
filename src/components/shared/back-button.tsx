@@ -18,7 +18,7 @@ export function BackButton(): React.ReactElement {
       className="md:text-base"
       type="button"
       onClick={() => router.back()}
-      aria-label="Back"
+      aria-label="Zurück"
     >
       <ArrowLeft className="mr-2 h-4 w-4" aria-hidden="true" />
       Zurück

@@ -74,7 +74,7 @@ export function DirectConnection({
       variant={loading ? "ghost" : "outline"}
       disabled={loading}
       onClick={handleButtonClick}
-      aria-label="Select journey with multiple connections"
+      aria-label={`Reise mit niedrigste Barrierefreiheit: ${worstText}`}
     >
       <div className={`w-full ${!isMobile ? "grid" : ""}`}>
         {/* Accessibility and Travel Time */}
