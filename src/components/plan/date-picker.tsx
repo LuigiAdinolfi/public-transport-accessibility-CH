@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toZonedTime, format } from "date-fns-tz";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -24,6 +24,7 @@ const timeZone = "Europe/Zurich";
 export function DatePicker(): React.ReactElement {
   const { date, setDate, time, setTime } = useJourneyStore();
   const setSelectedDate = useJourneyStore((state) => state.setSelectedDate);
+  const [isDateInitialized, setIsDateInitialized] = useState(false);
 
   // Initialize with current date and time
   useEffect(() => {
@@ -34,13 +35,19 @@ export function DatePicker(): React.ReactElement {
       setDate(zonedTime);
       setTime(formattedTime);
       setSelectedDate(zonedTime); // Update parent with initial date
+      setIsDateInitialized(true);
     };
-    updateDateTime();
+
+    if (!isDateInitialized) {
+      updateDateTime();
+    }
     const intervalId = setInterval(updateDateTime, 60000); // Update every minute
 
     // Clean up the interval on unmount
     return () => clearInterval(intervalId);
-  }, [setSelectedDate, setDate, setTime]);
+  }, [isDateInitialized, setSelectedDate, setDate, setTime]);
+
+  if (!isDateInitialized) return <></>; // Render null until the date is initialized
 
   return (
     <Popover>
