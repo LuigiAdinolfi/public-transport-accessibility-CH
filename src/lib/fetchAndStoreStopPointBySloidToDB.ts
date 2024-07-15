@@ -1,7 +1,7 @@
 import { Document } from "mongoose";
 import connectDB from "@/db/connectDB";
 import fetchFromAPIBySloid from "@/lib/fetchFromAPIBySloid";
-import StopPointToStore from "@/models/stopPoint";
+import { StopPointToStore } from "@/models/stopPoint";
 
 export default async function fetchAndStoreStopPointBySloidToDB<
   T extends Document,
