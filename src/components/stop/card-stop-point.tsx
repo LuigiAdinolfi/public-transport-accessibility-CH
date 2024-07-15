@@ -56,7 +56,7 @@ export default function CardStopPoint(): React.ReactElement {
 
     fetchParkingLot().then((r) => r);
     fetchStopPoint().then((r) => r);
-  }, [parentSloid]);
+  }, [parentSloid, setParkingLot, setStopPoint]);
 
   return (
     <Card className="mt-3">

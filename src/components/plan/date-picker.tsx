@@ -27,12 +27,19 @@ export function DatePicker(): React.ReactElement {
 
   // Initialize with current date and time
   useEffect(() => {
-    const now = new Date();
-    const zonedTime = toZonedTime(now, timeZone); // Convert to specified time zone
-    const formattedTime = format(zonedTime, "HH:mm"); // Format time to HH:mm
-    setDate(zonedTime);
-    setTime(formattedTime);
-    setSelectedDate(zonedTime); // Update parent with initial date
+    const updateDateTime = () => {
+      const now = new Date();
+      const zonedTime = toZonedTime(now, timeZone); // Convert to specified time zone
+      const formattedTime = format(zonedTime, "HH:mm"); // Format time to HH:mm
+      setDate(zonedTime);
+      setTime(formattedTime);
+      setSelectedDate(zonedTime); // Update parent with initial date
+    };
+    updateDateTime();
+    const intervalId = setInterval(updateDateTime, 60000); // Update every minute
+
+    // Clean up the interval on unmount
+    return () => clearInterval(intervalId);
   }, [setSelectedDate, setDate, setTime]);
 
   return (
