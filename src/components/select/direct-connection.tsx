@@ -68,14 +68,15 @@ export function DirectConnection({
   const WorstIcon = worstIconProps?.icon;
   const worstText = worstIconProps?.text;
 
+  const accessibilityLabel = `Reise mit niedrigste Barrierefreiheit: ${worstText}`;
+
   return (
     <Button
       className="flex h-full w-full justify-start border-zinc-400"
       variant={loading ? "ghost" : "outline"}
       disabled={loading}
       onClick={handleButtonClick}
-      aria-label={`Reise mit niedrigste Barrierefreiheit: ${worstText}`}
-      aria-labelledby={`Reise mit niedrigste Barrierefreiheit: ${worstText}`}
+      aria-label={accessibilityLabel}
     >
       <div className={`w-full ${!isMobile ? "grid" : ""}`}>
         {/* Accessibility and Travel Time */}
