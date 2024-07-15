@@ -65,6 +65,8 @@ export default function JourneyPointInput({
             ref={menuRef}
             className="absolute left-0 top-full z-10 w-full rounded-b-md border border-t-0 border-gray-300 bg-zinc-50 text-zinc-950 dark:bg-zinc-800 dark:text-zinc-50"
             role="listbox"
+            aria-labelledby={placeholder}
+            aria-label={placeholder}
           >
             {options.map((option, index) => (
               <div

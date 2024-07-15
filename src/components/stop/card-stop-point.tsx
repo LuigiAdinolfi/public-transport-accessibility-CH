@@ -65,9 +65,9 @@ export default function CardStopPoint(): React.ReactElement {
         className={`flex flex-row items-center space-y-1.5 ${!isMobile ? "px-14 pb-6 pt-8" : "px-8 pb-2 pt-4"}`}
       >
         {/* Stop name */}
-        <h1 className="items-center text-xl font-bold text-zinc-900 dark:text-zinc-100">
+        <div className="items-center text-xl font-bold text-zinc-900 dark:text-zinc-100">
           {selectedStop}
-        </h1>
+        </div>
         {/* Vehicle type and icon */}
         <div
           className={`flex items-center pb-1.5 ${!isMobile ? "pl-16" : "pl-8"}`}

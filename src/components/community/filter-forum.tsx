@@ -14,16 +14,29 @@ export function SelectDemo() {
   return (
     <Select>
       <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Filtern nach..." />
+        <SelectValue
+          placeholder="Filtern nach..."
+          aria-label="Filtern nach..."
+        />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>Filtern</SelectLabel>
-          <SelectItem value="date">Datum</SelectItem>
-          <SelectItem value="accessibility">Zugänglichkeit</SelectItem>
-          <SelectItem value="views">Meist gesehen</SelectItem>
-          <SelectItem value="news">Neuigkeiten</SelectItem>
-          <SelectItem value="malfunctions">Störungen</SelectItem>
+          <SelectLabel aria-label="Filtern">Filtern</SelectLabel>
+          <SelectItem value="date" aria-label="Datum">
+            Datum
+          </SelectItem>
+          <SelectItem value="accessibility" aria-label="Zugänglichkeit">
+            Zugänglichkeit
+          </SelectItem>
+          <SelectItem value="views" aria-label="Meist gesehen">
+            Meist gesehen
+          </SelectItem>
+          <SelectItem value="news" aria-label="Neuigkeiten">
+            Neuigkeiten
+          </SelectItem>
+          <SelectItem value="malfunctions" aria-label="Störungen">
+            Störungen
+          </SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
