@@ -3,7 +3,6 @@ import { ArrowRightLeft } from "lucide-react";
 import { useTheme } from "next-themes";
 import { DatePicker } from "@/components/plan/date-picker";
 import JourneyPointInput from "@/components/plan/journey-point-input";
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import {
   Card,
