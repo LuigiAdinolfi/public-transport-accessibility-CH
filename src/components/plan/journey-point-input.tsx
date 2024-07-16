@@ -56,14 +56,14 @@ export default function JourneyPointInput({
           onChange={(e) => setInputValue(e.target.value)}
           onFocus={() => setMenuOpen(true)}
           onKeyDown={handleKeyDown}
-          className="text-base"
+          className="border border-zinc-800 bg-white text-base dark:border-zinc-300 dark:bg-zinc-900"
           aria-autocomplete="list"
           aria-haspopup="listbox"
         />
         {menuOpen && options.length > 0 && (
           <div
             ref={menuRef}
-            className="absolute left-0 top-full z-10 w-full rounded-b-md border border-t-0 border-gray-300 bg-zinc-50 text-zinc-950 dark:bg-zinc-800 dark:text-zinc-50"
+            className="absolute left-0 top-full z-10 w-full rounded-b-md border border-t-0 border-zinc-300 bg-zinc-50 text-zinc-950 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-50"
             role="listbox"
             aria-labelledby={placeholder}
             aria-label={placeholder}

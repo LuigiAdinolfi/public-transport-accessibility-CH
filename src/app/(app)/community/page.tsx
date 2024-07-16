@@ -19,6 +19,7 @@ export default function CommunityPage(): React.ReactElement {
         />
       </div>
       <div className="flex min-h-screen w-full flex-col items-center justify-between py-6 lg:p-10">
+        <h1 className="sr-only">Community</h1>
         <CommunityCard />
       </div>
     </>

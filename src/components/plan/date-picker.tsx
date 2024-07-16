@@ -47,7 +47,7 @@ export function DatePicker(): React.ReactElement {
       <PopoverTrigger asChild>
         <Button
           variant={"outline"}
-          className="w-full justify-between text-left text-base font-normal lg:w-80"
+          className="w-full justify-between border border-zinc-800 bg-white text-left text-base font-normal dark:border-zinc-300 dark:bg-zinc-900 lg:w-80"
           aria-label={`Select Date and Time ${formatDateForUI(date)}`}
           suppressHydrationWarning
         >
@@ -75,7 +75,7 @@ export function DatePicker(): React.ReactElement {
         <div className="p-4">
           <label
             htmlFor="time"
-            className="block pl-4 text-sm font-medium text-gray-700"
+            className="block pl-4 text-sm font-medium text-zinc-700"
           >
             Zeit
           </label>
@@ -84,7 +84,7 @@ export function DatePicker(): React.ReactElement {
             id="time"
             value={time}
             onChange={handleTimeChange}
-            className="mt-1 block w-full rounded-md border border-gray-300 py-2 pl-3 pr-12 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+            className="mt-1 block w-full rounded-md border border-zinc-300 py-2 pl-3 pr-3 shadow-sm focus:border-zinc-500 focus:outline-none focus:ring-zinc-500 sm:text-sm"
             aria-label="Select time"
           />
         </div>

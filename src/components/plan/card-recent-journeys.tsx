@@ -63,7 +63,7 @@ export function CardRecentJourneys(): React.ReactElement {
             return (
               <Button
                 key={index}
-                className="grid min-h-32 w-full items-center border-zinc-400 align-middle md:flex md:justify-between lg:min-h-32"
+                className="grid min-h-32 w-full items-center border border-zinc-800 bg-white align-middle dark:border-zinc-300 dark:bg-zinc-900 md:flex md:justify-between lg:min-h-32"
                 variant="outline"
                 onClick={() =>
                   handleFormSubmit(

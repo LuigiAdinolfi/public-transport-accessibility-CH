@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Plus } from "lucide-react";
 import { SelectDemo } from "@/components/community/filter-forum";
+import { Label } from "@/components/ui/label";
 
 /**
  * Component representing a card displaying forum posts.
@@ -39,10 +40,17 @@ export function CardForum(): React.ReactElement {
 
   return (
     <Card>
-      <CardHeader className="flex flex-col pb-4 pt-8">
-        <div className="flex items-center justify-between">
-          <div className="flex w-full items-center space-x-4">
-            <Input type="search" placeholder="Suche im Forum..." />
+      <CardHeader className="flex w-full flex-col pb-4 pt-8">
+        <div className="flex w-full items-center justify-between">
+          <div className="flex w-full items-center gap-8">
+            <Label htmlFor="search" className="sr-only">
+              Suche im Forum
+            </Label>
+            <Input
+              type="search"
+              placeholder="Suche im Forum..."
+              className="border border-zinc-800 bg-white dark:border-zinc-300 dark:bg-zinc-900"
+            />
             <Button type="submit" variant="secondary" className="lg:w-48">
               Suche
             </Button>
@@ -61,7 +69,7 @@ export function CardForum(): React.ReactElement {
           forumPosts.map((post) => (
             <Button
               key={post.id}
-              className="ml-auto flex h-auto w-full flex-col items-start justify-start border-zinc-400 md:min-h-36"
+              className="ml-auto flex h-auto w-full flex-col items-start justify-start border border-zinc-800 bg-white dark:border-zinc-300 dark:bg-zinc-900 md:min-h-36"
               variant="outline"
               onClick={() => {}}
             >

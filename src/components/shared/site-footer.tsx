@@ -15,7 +15,6 @@ export function SiteFooter(): React.ReactElement {
           Built by{" "}
           <a
             href={siteConfig.links.github_luigi}
-            target="_blank"
             rel="noopener noreferrer"
             className="px-1 font-medium underline underline-offset-4 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:after:ring-0 dark:focus-visible:ring-white"
           >
@@ -24,7 +23,6 @@ export function SiteFooter(): React.ReactElement {
           &nbsp;&&nbsp;
           <a
             href={siteConfig.links.github_raveena}
-            target="_blank"
             rel="noopener noreferrer"
             className="px-1 font-medium underline underline-offset-4 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:after:ring-0 dark:focus-visible:ring-white"
           >
@@ -33,7 +31,6 @@ export function SiteFooter(): React.ReactElement {
           . The source code is available on {/* Link to GitLab */}
           <a
             href={siteConfig.links.gitlab}
-            target="_blank"
             rel="noopener noreferrer"
             className="px-1 font-medium underline underline-offset-4 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:after:ring-0 dark:focus-visible:ring-white"
           >

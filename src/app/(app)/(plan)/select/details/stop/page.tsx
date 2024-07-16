@@ -25,6 +25,7 @@ export default function StopPointPage(): React.ReactElement {
         />
       </div>
       <div className="flex min-h-screen w-full flex-col items-center justify-between py-6 lg:p-10">
+        <h1 className="sr-only">Haltestellen Details</h1>
         <StopPoint />
       </div>
     </>

@@ -66,7 +66,7 @@ export function CardNewJourney(): React.ReactElement {
       <CardContent className="space-y-10 pb-6 lg:space-y-12 lg:pb-12">
         {/* Origin and Destination Inputs */}
         <div className="space-y-1">
-          <div className="flex flex-col items-center justify-between lg:flex-row">
+          <div className="flex flex-col items-center justify-between align-middle lg:flex-row">
             <JourneyPointInput
               placeholder="Von"
               onLocationSelected={setOrigin}
@@ -100,7 +100,7 @@ export function CardNewJourney(): React.ReactElement {
           </div>
         </div>
         {/* Date and Time Picker */}
-        <div className="space-y-1">
+        <div className="space-y-1 pt-4">
           <div className="flex flex-col items-center justify-between align-middle lg:flex-row">
             <div className="w-full space-y-1 lg:w-4/12">
               <div
@@ -115,9 +115,10 @@ export function CardNewJourney(): React.ReactElement {
               </CardDescription>
             </div>
             {/* Tabs for Departure and Arrival */}
-            <div className="mt-8 flex w-full content-center justify-center space-y-1 lg:mt-0 lg:pb-2">
+            <div className="flex w-full content-center justify-center">
               <Tabs
                 defaultValue={activeSearchTab}
+                className="lg:h-14"
                 onValueChange={(value: string) =>
                   setActiveSearchTab(value as SearchTab)
                 } // Cast value to SearchTab
@@ -159,7 +160,7 @@ export function CardNewJourney(): React.ReactElement {
               <Button
                 id="submit"
                 type="submit"
-                className="w-full md:text-base lg:mb-2 lg:w-44"
+                className="w-full md:text-base lg:mb-4 lg:w-44"
                 onClick={handleClick}
                 variant={loading ? "secondary" : "default"}
                 disabled={loading}

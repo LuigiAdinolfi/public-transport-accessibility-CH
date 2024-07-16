@@ -22,6 +22,7 @@ export default function JourneyDetailsPage(): React.ReactElement {
 
       {/* Main Content */}
       <div className="flex min-h-screen w-full flex-col items-center justify-between py-6 lg:p-10">
+        <h1 className="sr-only">Reise Details</h1>
         <JourneyDetails />
       </div>
     </>

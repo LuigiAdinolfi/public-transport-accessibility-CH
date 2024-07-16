@@ -43,7 +43,7 @@ export function CardNews(): React.ReactElement {
             // Added a border and padding to create a frame around clickable elements
             <Button
               key={news.id}
-              className="ml-auto flex h-auto w-full flex-col items-start justify-start border-zinc-400 md:min-h-36"
+              className="ml-auto flex h-auto w-full flex-col items-start justify-start border border-zinc-800 bg-white dark:border-zinc-300 dark:bg-zinc-900 md:min-h-36"
               variant="outline"
               onClick={() => {}}
             >

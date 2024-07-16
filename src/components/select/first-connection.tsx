@@ -58,32 +58,21 @@ export function FirstConnection({
         <div
           className={`flex w-full items-center justify-between px-3 ${!isMobile ? "pt-2" : ""}`}
         >
-          <div
-            id="fromLocation"
-            className="items-center text-base font-semibold md:text-lg"
-          >
+          <div className="items-center text-base font-semibold md:text-lg">
             {fromLocation}
           </div>
           <div className="flex items-center justify-center font-medium">
             {!isMobile && (
-              <div
-                id="vehicleType"
-                className="flex items-center pr-2 font-medium"
-              >
+              <div className="flex items-center pr-2 font-medium">
                 {vehicleType}
               </div>
             )}
             <div>{VehicleIcon && <VehicleIcon className="h-6 w-6" />}</div>
             {!isMobile && (
-              <div id="vehicleNumber" className="pl-2 font-medium">
-                {vehicleNumber}
-              </div>
+              <div className="pl-2 font-medium">{vehicleNumber}</div>
             )}
           </div>
-          <div
-            id="toLocation"
-            className="items-center text-base font-semibold md:text-lg"
-          >
+          <div className="items-center text-base font-semibold md:text-lg">
             {toLocation}
           </div>
         </div>
@@ -99,10 +88,7 @@ export function FirstConnection({
             </div>
             {!isMobile && (
               <div className="flex flex-col pl-2">
-                <span
-                  id="accessibilityFromLocation"
-                  className="whitespace-pre-wrap text-left"
-                >
+                <span className="whitespace-pre-wrap text-left">
                   {accessTextFromLocation}
                 </span>
               </div>
@@ -111,10 +97,7 @@ export function FirstConnection({
           <div className="flex flex-1 items-center justify-end">
             {!isMobile && (
               <div className="flex flex-col pr-2 text-right">
-                <span
-                  id="accessibilityToLocation"
-                  className="whitespace-pre-wrap text-right"
-                >
+                <span className="whitespace-pre-wrap text-right">
                   {accessTextToLocation}
                 </span>
               </div>
@@ -130,11 +113,7 @@ export function FirstConnection({
         <div
           className={`flex w-full ${isMobile ? "justify-center" : "items-center justify-start"} px-3 pb-2 font-normal`}
         >
-          {!isMobile && (
-            <div className="pr-3" id="bewertung">
-              Bewertung der Community:
-            </div>
-          )}
+          {!isMobile && <div className="pr-3">Bewertung der Community:</div>}
           <CommunityRatingSelect value={3} />
         </div>
       </div>

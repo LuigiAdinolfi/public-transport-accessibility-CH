@@ -30,21 +30,19 @@ export function MainNav(): React.ReactElement {
     if (resolvedTheme === "dark") {
       return cn(
         "transition-colors text-white",
-        isActive ? "text-zinc-50 font-semibold" : "text-zinc-400 font-semibold",
+        isActive ? "text-zinc-50 font-semibold" : "text-zinc-400",
         "text-lg",
         "rounded-md p-2",
-        "px-6 py-2.5",
+        "px-6 py-3",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:after:ring-0 focus-visible:rounded-sm focus-visible:ring-black dark:focus-visible:ring-white",
       );
     } else {
       return cn(
         "transition-colors text-zinc-950",
-        isActive
-          ? "text-zinc-950 font-semibold"
-          : "text-zinc-600 font-semibold",
+        isActive ? "text-zinc-950 font-semibold" : "text-zinc-600",
         "text-lg",
         "rounded-md p-2",
-        "px-6 py-2.5",
+        "px-6 py-3",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:after:ring-0 focus-visible:rounded-sm focus-visible:ring-black dark:focus-visible:ring-white",
       );
     }
@@ -80,16 +78,23 @@ export function MainNav(): React.ReactElement {
   return (
     <div className="hidden md:flex">
       <nav className="flex items-center gap-4 text-sm">
-        {/* Navigation links */}
-        <NavLink href="/" currentPath="/">
-          Reise planen
-        </NavLink>
-        <NavLink href="/community" currentPath="/community">
-          Community
-        </NavLink>
-        <NavLink href="/settings" currentPath="/settings">
-          Einstellungen
-        </NavLink>
+        <ul className="flex space-x-4">
+          <li>
+            <NavLink href="/" currentPath="/">
+              Reise planen
+            </NavLink>
+          </li>
+          <li>
+            <NavLink href="/community" currentPath="/community">
+              Community
+            </NavLink>
+          </li>
+          <li>
+            <NavLink href="/settings" currentPath="/settings">
+              Einstellungen
+            </NavLink>
+          </li>
+        </ul>
       </nav>
     </div>
   );
