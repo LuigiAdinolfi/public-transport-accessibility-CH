@@ -104,10 +104,13 @@ export function CardNewJourney(): React.ReactElement {
         <div className="space-y-1">
           <div className="flex flex-col items-center justify-between align-middle lg:flex-row">
             <div className="w-full space-y-1 lg:w-4/12">
-              <Label className="text-base" htmlFor="datetime">
+              <div
+                className="text-base font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                id="datetime-label"
+              >
                 Wann
-              </Label>
-              <DatePicker />
+              </div>
+              <DatePicker aria-labelledby="datetime-label" />
               <CardDescription className="pt-2 text-zinc-600 md:text-base">
                 Gib Datum und Uhrzeit ein.
               </CardDescription>

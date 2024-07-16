@@ -20,6 +20,7 @@ export default function Homepage(): React.ReactElement {
         />
       </div>
       <div className="flex min-h-screen w-full flex-col items-center justify-between py-6 lg:p-10">
+        <h1 className="sr-only mb-6 text-2xl font-bold">Reise planen</h1>
         <PlanJourney />
       </div>
     </>

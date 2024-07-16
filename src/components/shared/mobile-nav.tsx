@@ -17,13 +17,9 @@ export function MobileNav() {
 
   return (
     <div className="flex w-full md:hidden">
-      <Link
-        href="/"
-        passHref
-        className="flex items-center justify-start rounded-md focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black dark:focus-visible:ring-white"
-      >
+      <div className="flex items-center justify-start rounded-md focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black dark:focus-visible:ring-white">
         <Accessibility className="h-6 w-6 sm:block md:hidden" />
-      </Link>
+      </div>
       <nav className="flex w-full justify-center gap-2 sm:gap-4">
         <Button
           variant="secondary"
