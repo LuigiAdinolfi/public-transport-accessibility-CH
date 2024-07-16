@@ -22,7 +22,7 @@ export default function SiteHeader(): React.ReactElement {
         <div className="flex w-full items-center justify-between space-x-1 sm:justify-end">
           <MainNav />
           <MobileNav />
-          <nav className="flex items-center">
+          <nav className="flex items-center" aria-label="Theme Mode Toggle">
             <ModeToggle />
           </nav>
         </div>

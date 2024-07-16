@@ -68,22 +68,23 @@ export function DirectConnection({
   const WorstIcon = worstIconProps?.icon;
   const worstText = worstIconProps?.text;
 
-  const accessibilityLabel = `Reise mit niedrigste Barrierefreiheit: ${worstText}`;
-
   return (
     <Button
       className="flex h-full w-full justify-start border-zinc-400"
       variant={loading ? "ghost" : "outline"}
       disabled={loading}
       onClick={handleButtonClick}
-      aria-label={accessibilityLabel}
+      aria-labelledby="accessibility-label duration-label accessibilityFromLocation fromLocation vehicleType vehicleNumber toLocation accessibilityToLocation bewertung"
     >
       <div className={`w-full ${!isMobile ? "grid" : ""}`}>
         {/* Accessibility and Travel Time */}
         <div
           className={`mb-1 flex w-full items-center justify-start ${isMobile ? "flex-col" : "px-3"} py-4 text-zinc-950 dark:text-zinc-50`}
         >
-          <div className="flex w-full items-center justify-start">
+          <div
+            id="accessibility-label"
+            className="flex w-full items-center justify-start"
+          >
             <div className="pr-2 md:text-base">
               Niedrigste Barrierefreiheit:
             </div>
@@ -92,6 +93,7 @@ export function DirectConnection({
             {!isMobile && <div className="pl-2 md:text-base">{worstText}</div>}
           </div>
           <div
+            id="duration-label"
             className={`${isMobile ? "flex w-full justify-start pt-1" : "justify-end md:text-base"}`}
           >
             {duration}

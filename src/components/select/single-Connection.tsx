@@ -48,18 +48,30 @@ export function SingleConnection({
           </div>
           {/* Departure and Arrival Stations */}
           <div className="flex w-full items-center justify-between px-3">
-            <div className="items-center text-base font-semibold md:text-lg">
+            <div
+              id="fromLocation"
+              className="items-center text-base font-semibold md:text-lg"
+            >
               {fromLocationName}
             </div>
             <div className="flex items-center justify-center font-medium">
               {!isMobile && (
-                <div className="flex items-center pr-2">{vehicleType}</div>
+                <div id="vehicleType" className="flex items-center pr-2">
+                  {vehicleType}
+                </div>
               )}
               {/* Vehicle Profile Icon */}
               <div>{VehicleIcon && <VehicleIcon className="h-6 w-6" />}</div>
-              {!isMobile && <div className="pl-2">{vehicleNumber}</div>}
+              {!isMobile && (
+                <div className="pl-2" id="vehicleNumber">
+                  {vehicleNumber}
+                </div>
+              )}
             </div>
-            <div className="items-center text-base font-semibold md:text-lg">
+            <div
+              id="toLocation"
+              className="items-center text-base font-semibold md:text-lg"
+            >
               {toLocationName}
             </div>
           </div>
@@ -73,15 +85,22 @@ export function SingleConnection({
                 <AccessIconFromLocation className="h-6 w-6" />
               )}
               {!isMobile && (
-                <div className="flex flex-col pl-2">
-                  <span>{accessTextFromLocation}</span>
+                <div id="accessibility-label" className="flex flex-col pl-2">
+                  <span id="accessibilityFromLocation">
+                    {accessTextFromLocation}
+                  </span>
                 </div>
               )}
             </div>
             <div className="flex basis-1/2 items-center justify-end pt-2">
               {!isMobile && (
-                <div className="flex flex-col pr-2 text-right">
-                  <span>{accessTextToLocation}</span>
+                <div
+                  id="accessibility-label"
+                  className="flex flex-col pr-2 text-right"
+                >
+                  <span id="accessibilityToLocation">
+                    {accessTextToLocation}
+                  </span>
                 </div>
               )}
               {/* Wheelchair Accessibility Icon */}
@@ -94,7 +113,11 @@ export function SingleConnection({
           <div
             className={`flex w-full ${isMobile ? "justify-center" : "items-center justify-start pt-4"} px-3 pb-2 font-normal`}
           >
-            {!isMobile && <div className="pr-3">Bewertung der Community:</div>}
+            {!isMobile && (
+              <div className="pr-3" id="bewertung">
+                Bewertung der Community:
+              </div>
+            )}
             <CommunityRatingSelect value={3} />
           </div>
         </div>
