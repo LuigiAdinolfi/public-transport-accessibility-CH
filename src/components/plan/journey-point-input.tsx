@@ -20,13 +20,13 @@ export default function JourneyPointInput({
   description,
   value,
 }: JourneyPointProps): React.ReactElement {
-  const { inputValue, setInputValue, selectedOption, handleOptionSelect } =
-    useHandleOptionSelect(onLocationSelected);
-  const { options, menuOpen, setMenuOpen } = useFetchOptions(
-    inputValue,
-    selectedOption,
-  );
   const [highlightedIndex, setHighlightedIndex] = useState<number | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const { inputValue, setInputValue, selectedOption, handleOptionSelect } =
+    useHandleOptionSelect(onLocationSelected, setMenuOpen);
+  const { options } = useFetchOptions(inputValue, selectedOption);
+
   const handleKeyDown = useHandleKeyDown(
     menuOpen,
     options,
@@ -42,6 +42,25 @@ export default function JourneyPointInput({
   useEffect(() => {
     setInputValue(value);
   }, [value, setInputValue]);
+
+  useEffect(() => {
+    const handleDocumentClick = (event: MouseEvent) => {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node) &&
+        inputRef.current &&
+        !inputRef.current.contains(event.target as Node)
+      ) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleDocumentClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleDocumentClick);
+    };
+  }, [setMenuOpen]);
 
   return (
     <div className="w-full space-y-1 lg:w-96">
@@ -73,7 +92,11 @@ export default function JourneyPointInput({
                 key={index}
                 onClick={() => handleOptionSelect(option)}
                 onMouseEnter={() => handleMouseEnter(index)}
-                className={`cursor-pointer p-2 ${highlightedIndex === index ? "bg-gray-200 dark:bg-zinc-700 dark:text-zinc-50" : ""}`}
+                className={`cursor-pointer p-2 ${
+                  highlightedIndex === index
+                    ? "bg-gray-200 dark:bg-zinc-700 dark:text-zinc-50"
+                    : ""
+                }`}
                 role="option"
                 aria-selected={highlightedIndex === index}
               >
