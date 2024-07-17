@@ -8,6 +8,7 @@ import { KeyboardEvent, useCallback } from "react";
  * @param {number | null} highlightedIndex - Index of the currently highlighted option.
  * @param {function} setHighlightedIndex - Setter function for highlighted index.
  * @param {function} handleOptionSelect - Function to handle selection of an option.
+ * @param setMenuOpen - Add setMenuOpen as a parameter
  * @returns a function to handle keydown events.
  */
 export const useHandleKeyDown = (
@@ -16,9 +17,10 @@ export const useHandleKeyDown = (
   highlightedIndex: number | null,
   setHighlightedIndex: (index: number | null) => void,
   handleOptionSelect: (option: OJP.Location) => void,
+  setMenuOpen: (open: boolean) => void, // Add setMenuOpen as a parameter
 ) => {
   return useCallback(
-    (event: KeyboardEvent<HTMLInputElement>) => {
+    (event: KeyboardEvent) => {
       if (!menuOpen || !options.length) return;
 
       if (event.key === "ArrowDown") {
@@ -35,11 +37,12 @@ export const useHandleKeyDown = (
             ? options.length - 1
             : highlightedIndex - 1;
         setHighlightedIndex(nextIndex);
-      } else if (event.key === "Enter") {
-        event.preventDefault();
+      } else if (event.key === "Enter" || event.key === "Tab") {
+        // Handle Tab key as well
         if (highlightedIndex !== null) {
           handleOptionSelect(options[highlightedIndex]);
         }
+        setMenuOpen(false); // Close the menu when an option is selected
       }
     },
     [
@@ -48,6 +51,7 @@ export const useHandleKeyDown = (
       highlightedIndex,
       setHighlightedIndex,
       handleOptionSelect,
+      setMenuOpen,
     ],
   );
 };

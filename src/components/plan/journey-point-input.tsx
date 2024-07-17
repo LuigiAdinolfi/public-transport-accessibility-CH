@@ -33,6 +33,7 @@ export default function JourneyPointInput({
     highlightedIndex,
     setHighlightedIndex,
     handleOptionSelect,
+    setMenuOpen, // Pass setMenuOpen to useHandleKeyDown
   );
   const handleMouseEnter = useHandleMouseEnter(setHighlightedIndex);
 
