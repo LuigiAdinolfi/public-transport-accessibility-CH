@@ -70,7 +70,7 @@ export function DirectConnection({
 
   return (
     <Button
-      className="flex h-full w-full justify-start border border-zinc-800 bg-white dark:border-zinc-300 dark:bg-zinc-900"
+      className="flex h-full w-full justify-start border border-zinc-800 bg-white dark:border-zinc-300 dark:bg-zinc-950"
       variant={loading ? "ghost" : "outline"}
       disabled={loading}
       onClick={handleButtonClick}
