@@ -28,9 +28,9 @@ const AccessibilityMap = {
     score: 6,
   },
   WALK: {
-    light: LightWheelchair,
-    dark: DarkWheelchair,
-    text: "Selber fahren",
+    light: null,
+    dark: null,
+    text: "",
     score: 5,
   },
   Wheelchair: {

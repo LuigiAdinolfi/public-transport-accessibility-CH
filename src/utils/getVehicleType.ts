@@ -12,7 +12,7 @@ export const getVehicleType = (selectedTripLeg: OJP.TripLeg | null): string => {
     selectedTripLeg.legType === "TransferLeg" ||
     selectedTripLeg.legType === "ContinousLeg"
   ) {
-    return "Rollstuhl";
+    return "Fussweg";
   }
   return isTripTimedLeg(selectedTripLeg)
     ? selectedTripLeg.service.ptMode.name ?? "N/A"

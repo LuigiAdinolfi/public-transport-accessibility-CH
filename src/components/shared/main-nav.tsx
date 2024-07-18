@@ -66,9 +66,10 @@ export function MainNav(): React.ReactElement {
     children: React.ReactNode;
   }): React.ReactElement {
     const linkClasses = getClasses(currentPath);
+    const ariaLabel = `Go to ${children}`;
 
     return (
-      <Link href={href} className={linkClasses}>
+      <Link href={href} className={linkClasses} aria-label={ariaLabel}>
         {children}
       </Link>
     );

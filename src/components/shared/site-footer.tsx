@@ -17,6 +17,7 @@ export function SiteFooter(): React.ReactElement {
             href={siteConfig.links.github_luigi}
             rel="noopener noreferrer"
             className="px-1 font-medium underline underline-offset-4 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:after:ring-0 dark:focus-visible:ring-white"
+            aria-label="Luigi Adinolfi GitHub Profile"
           >
             Luigi Adinolfi
           </a>
@@ -25,6 +26,7 @@ export function SiteFooter(): React.ReactElement {
             href={siteConfig.links.github_raveena}
             rel="noopener noreferrer"
             className="px-1 font-medium underline underline-offset-4 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:after:ring-0 dark:focus-visible:ring-white"
+            aria-label="Raveena Ramany GitHub Profile"
           >
             Raveena Ramany
           </a>
@@ -33,6 +35,7 @@ export function SiteFooter(): React.ReactElement {
             href={siteConfig.links.gitlab}
             rel="noopener noreferrer"
             className="px-1 font-medium underline underline-offset-4 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:after:ring-0 dark:focus-visible:ring-white"
+            aria-label="View Source Code on GitLab"
           >
             GitLab
           </a>

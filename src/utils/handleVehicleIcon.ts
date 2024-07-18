@@ -75,7 +75,7 @@ const vehicleTypeMap: { [key: string]: keyof typeof iconMap } = {
   Kabinenbahn: "CableCar",
   Auto: "Car",
   Standseilbahn: "Funicular",
-  Rollstuhl: "Wheelchair",
+  Fussweg: "Wheelchair",
   ICE: "ICE",
   EC: "EC",
 };
