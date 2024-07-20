@@ -3,7 +3,6 @@ import { Card } from "@/components/ui/card";
 import { useTheme } from "next-themes";
 import { useMediaQuery } from "react-responsive";
 import { useJourneyStore } from "@/store/useJourneyStore";
-import { TripLeg } from "ojp-sdk";
 import FeatureList from "@/components/stop/feature-list";
 import AccordionSections from "@/components/stop/accordion-sections";
 import InfoSection from "@/components/stop/info-section";
@@ -21,14 +20,23 @@ import { useStopPointStore } from "@/store/useStopPointStore";
 export default function CardStopPoint(): React.ReactElement {
   const { resolvedTheme } = useTheme();
   const isMobile = useMediaQuery({ maxWidth: 767 });
-  const { selectedStop, selectedTripLeg } = useJourneyStore();
+  const { selectedStop, selectedTripLeg, setSelectedTripLeg } =
+    useJourneyStore();
   const { parentServicePointSloid, setParkingLot } = useParkingLotStore();
   const { setStopPoint } = useStopPointStore();
   const parentSloid = parentServicePointSloid;
 
+  // Restore selectedTripLeg from localStorage if it exists
+  useEffect(() => {
+    const savedTripLeg = localStorage.getItem("selectedTripLeg");
+    if (savedTripLeg) {
+      setSelectedTripLeg(JSON.parse(savedTripLeg));
+    }
+  }, [setSelectedTripLeg]);
+
   // Determine vehicle type based on selected trip leg
   let vehicleType = "N/A";
-  if (selectedTripLeg instanceof TripLeg) {
+  if (selectedTripLeg) {
     vehicleType = getVehicleType(selectedTripLeg);
   }
   const VehicleIcon = getVehicleIcon(vehicleType, resolvedTheme);

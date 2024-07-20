@@ -1,7 +1,11 @@
+"use client";
+
 import { MyBreadcrumb } from "@/components/shared/bread-nav";
 import { JourneyDetails } from "@/components/details/journey-details";
 import * as React from "react";
 import { JourneyBreadcrumbList } from "@/components/shared/breadcrumb-list";
+import { useJourneyStore } from "@/store/useJourneyStore";
+import { useEffect } from "react";
 
 /**
  * Component for displaying journey details page.
@@ -9,6 +13,16 @@ import { JourneyBreadcrumbList } from "@/components/shared/breadcrumb-list";
  */
 export default function JourneyDetailsPage(): React.ReactElement {
   const currentPage = "/select/details";
+  const { setAllLegs, setAccessIcons } = useJourneyStore();
+
+  useEffect(() => {
+    const storedJourneyData = localStorage.getItem("journeyData");
+    if (storedJourneyData) {
+      const { allLegs, accessIcons } = JSON.parse(storedJourneyData);
+      setAllLegs(allLegs);
+      setAccessIcons(accessIcons);
+    }
+  }, [setAllLegs, setAccessIcons]);
 
   return (
     <>

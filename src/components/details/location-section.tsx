@@ -97,6 +97,8 @@ export default function LocationSection({
     setIsLoading(true); // Start loading state
     setSelectedStop(stop);
     setParentServicePointSloid(platformInfo.parentSloid);
+    localStorage.setItem("selectedStop", stop);
+    localStorage.setItem("parentSloid", platformInfo.parentSloid);
     router.push("/select/details/stop");
     setIsLoading(false); // End loading state after navigation
   };

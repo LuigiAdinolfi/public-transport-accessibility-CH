@@ -3,8 +3,9 @@
 import { StopPoint } from "@/components/stop/stop-point";
 import { useJourneyStore } from "@/store/useJourneyStore";
 import { JourneyBreadcrumbList } from "@/components/shared/breadcrumb-list";
-import React from "react";
+import React, { useEffect } from "react";
 import { MyBreadcrumb } from "@/components/shared/bread-nav";
+import { useParkingLotStore } from "@/store/useParkingLotStore";
 
 /**
  * Component for displaying stop point page.
@@ -13,8 +14,22 @@ import { MyBreadcrumb } from "@/components/shared/bread-nav";
 
 export default function StopPointPage(): React.ReactElement {
   const currentPage = "/select/details/stop";
-  const { selectedStop } = useJourneyStore();
+  const { selectedStop, setSelectedStop } = useJourneyStore();
   JourneyBreadcrumbList[3].name = selectedStop;
+  const { setParentServicePointSloid } = useParkingLotStore();
+
+  useEffect(() => {
+    const savedStop = localStorage.getItem("selectedStop");
+    const savedParentSloid = localStorage.getItem("parentSloid");
+
+    if (savedStop) {
+      setSelectedStop(savedStop);
+    }
+
+    if (savedParentSloid) {
+      setParentServicePointSloid(savedParentSloid);
+    }
+  }, [setSelectedStop, setParentServicePointSloid]);
 
   return (
     <>

@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/shared/theme-provider";
 import { siteConfig } from "@/config/site";
 import SiteHeader from "@/components/shared/site-header";
 import { SiteFooter } from "@/components/shared/site-footer";
+import "@smastrom/react-rating/style.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,7 +27,9 @@ export const metadata: Metadata = {
  */
 export default function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>): React.ReactElement {
+}: {
+  children: React.ReactNode;
+}): React.ReactElement {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>

@@ -68,11 +68,27 @@ export const useJourneyStore = create<JourneyState>((set) => ({
   setDestination: (destination) => set({ destination }),
   setSelectedDate: (date) => set({ selectedDate: date }),
   setSelectedStop: (stop) => set({ selectedStop: stop }),
-  setSelectedTripLeg: (tripLeg) => set({ selectedTripLeg: tripLeg }),
-  setTripDetails: (tripDetails) => set({ tripDetails }),
+  setSelectedTripLeg: (tripLeg) => {
+    set({ selectedTripLeg: tripLeg });
+    window.localStorage.setItem("selectedTripLeg", JSON.stringify(tripLeg));
+  },
+  setTripDetails: (tripDetails) => {
+    set({ tripDetails });
+    window.localStorage.setItem("tripDetails", JSON.stringify(tripDetails));
+  },
   addTripDetail: (tripDetail) =>
-    set((state) => ({ tripDetails: [...state.tripDetails, tripDetail] })),
-  clearTripDetails: () => set({ tripDetails: [] }),
+    set((state) => {
+      const updatedTripDetails = [...state.tripDetails, tripDetail];
+      window.localStorage.setItem(
+        "tripDetails",
+        JSON.stringify(updatedTripDetails),
+      );
+      return { tripDetails: updatedTripDetails };
+    }),
+  clearTripDetails: () => {
+    set({ tripDetails: [] });
+    window.localStorage.removeItem("tripDetails");
+  },
   setIndexTripSelected: (index) => set({ indexTripSelected: index }),
   setFirstLeg: (leg) => set({ firstLeg: leg }),
   setLastLeg: (leg) => set({ lastLeg: leg }),

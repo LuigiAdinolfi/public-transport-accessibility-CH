@@ -23,6 +23,14 @@ export function useHandleClick(
   const { addRecentJourney } = useRecentJourneysStore();
 
   return () => {
+    localStorage.setItem(
+      "journeyData",
+      JSON.stringify({
+        allLegs,
+        duration,
+        accessIcons,
+      }),
+    );
     setAllLegs(allLegs); // Set all trip legs in the journey store
     setAccessIcons(accessIcons); // Set access icons in the journey store
     // Extract necessary details for recent journey

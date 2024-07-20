@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { MultipleConnection } from "@/components/select/multiple-connection";
 import { DirectConnection } from "@/components/select/direct-connection";
 import { useJourneyStore } from "@/store/useJourneyStore";
@@ -11,7 +11,15 @@ import { formatDuration } from "@/utils/formatDuration";
  * @returns {React.ReactElement} - The rendered journey details component.
  */
 export default function JourneyDetails(): React.ReactElement {
-  const { tripDetails } = useJourneyStore();
+  const { tripDetails, setTripDetails } = useJourneyStore();
+
+  useEffect(() => {
+    const tripDetails = window.localStorage.getItem("tripDetails");
+    if (tripDetails) {
+      const parsedTripDetails = JSON.parse(tripDetails);
+      setTripDetails(parsedTripDetails);
+    }
+  }, [setTripDetails]);
 
   return (
     <div className="space-y-6 p-6 pt-0">
