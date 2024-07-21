@@ -84,6 +84,7 @@ export default function CardPath({
           platform={platformOrigin}
           platformNr={platformNrFromLocation}
           accessIconLocationProps={accessIcons.origin}
+          selectedLeg={selectedLeg}
           aria-label={`Departure from ${fromLocationName} at ${platformNrFromLocation}`}
         />
         <LocationSection
@@ -91,6 +92,7 @@ export default function CardPath({
           platform={platformDestination}
           platformNr={platformNrToLocation}
           accessIconLocationProps={accessIcons.destination}
+          selectedLeg={selectedLeg}
           aria-label={`Arrival at ${toLocationName} at ${platformNrToLocation}`}
         />
       </div>

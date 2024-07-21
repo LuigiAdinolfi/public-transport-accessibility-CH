@@ -1,12 +1,12 @@
 import { Platform } from "@/types/Platform";
 
 export function getPlatformAccess(platform: Platform | null): string {
-  if (!platform) return "Haltekante autonom benutzbar";
+  if (!platform) return "autonom zugänglich";
   if (platform.vehicleAccess === "PLATFORM_ACCESS_WITHOUT_ASSISTANCE") {
-    return "Haltekante autonom benutzbar";
+    return "autonom zugänglich";
   } else if (platform.vehicleAccess === "PLATFORM_ACCESS_WITH_ASSISTANCE") {
-    return "Haltekante mit Assistenz benutzbar";
+    return "mit Personalhilfe zugänglich";
   } else {
-    return "Haltekante autonom benutzbar";
+    return "autonom zugänglich";
   }
 }

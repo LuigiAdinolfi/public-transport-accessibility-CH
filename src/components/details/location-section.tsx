@@ -23,12 +23,15 @@ import { useParkingLotStore } from "@/store/useParkingLotStore";
 import { accessProps } from "@/helpers/accessIconProps";
 import { useTheme } from "next-themes";
 import { getAccessibilityIconByText } from "@/utils/handleAccessibilityIcon";
+import * as OJP from "ojp-sdk";
+import { getVehicleType } from "@/utils/getVehicleType";
 
 interface LocationSectionProps {
   locationName: string;
   platform: Platform | null;
   platformNr: string;
   accessIconLocationProps: accessProps | null;
+  selectedLeg: OJP.TripLeg;
 }
 
 /**
@@ -46,10 +49,12 @@ export default function LocationSection({
   platform,
   platformNr,
   accessIconLocationProps,
+  selectedLeg,
 }: LocationSectionProps): React.ReactElement {
   const router = useRouter();
   const { resolvedTheme } = useTheme();
   const { setSelectedStop } = useJourneyStore();
+  const vehicleType = getVehicleType(selectedLeg);
 
   const locationTitle = truncateTo40Chars(locationName);
   const location = truncateTo20Chars(locationName);
@@ -115,15 +120,24 @@ export default function LocationSection({
       </div>
       <div className="flex flex-row p-2 pb-4">
         <div className={`font-medium ${!isMobile ? "" : "text-sm"}`}>
-          Rollstuhlgerechte Waggons:
+          Rollstuhlzugang:
         </div>
         <div
           className={`pl-3 pr-1 font-semibold ${!isMobile ? "" : "text-sm"}`}
         >
-          {`Gleis ${platformNr}`}
+          {vehicleType === "Zug"
+            ? `Gleis ${platformNr}`
+            : `Kante ${platformNr}`}
         </div>
-        <div className={`pl-1 font-semibold ${!isMobile ? "" : "text-sm"}`}>
-          Sektor B
+        <div
+          className={`pl-3 pr-1 font-semibold ${!isMobile ? "" : "text-sm"}`}
+        >
+          {vehicleType === "Zug" ? "Sektor B" : ""}
+        </div>
+        <div
+          className={`pl-3 pr-1 font-semibold ${!isMobile ? "" : "text-sm"}`}
+        >
+          {vehicleType === "Zug" ? "Waggon Nr. 5" : ""}
         </div>
       </div>
       <div className="flex flex-row items-center pb-2 pt-1 align-middle">
@@ -139,13 +153,15 @@ export default function LocationSection({
           </div>
         </div>
       </div>
-      <div className="flex flex-row items-center pb-2 pt-1 align-middle">
-        <div className="hei px-4 py-2 text-sm font-normal leading-relaxed">
-          {/*Zugang zum Bahnsteig ohne Hilfe*/}
-          Haltekante Zugang: &nbsp;
-          {platformInfo.haltekanteAccess}
+      {vehicleType === "Zug" ? (
+        <div className="flex flex-row items-center pb-2 pt-1 align-middle">
+          <div className="hei px-4 py-2 text-sm font-normal leading-relaxed">
+            {/*Zugang zum Bahnsteig ohne Hilfe*/}
+            Zugang zum Perron: &nbsp;
+            {platformInfo.haltekanteAccess}
+          </div>
         </div>
-      </div>
+      ) : null}
       {/* Accordion for Zugkomposition */}
       <Accordion type="single" collapsible className="px-2">
         <AccordionItem value="item-1">
