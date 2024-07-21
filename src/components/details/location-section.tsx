@@ -25,6 +25,8 @@ import { useTheme } from "next-themes";
 import { getAccessibilityIconByText } from "@/utils/handleAccessibilityIcon";
 import * as OJP from "ojp-sdk";
 import { getVehicleType } from "@/utils/getVehicleType";
+import { getArrivalTime } from "@/utils/getArrivalTime";
+import { getDepartureTime } from "@/utils/getDepartureTime";
 
 interface LocationSectionProps {
   locationName: string;
@@ -32,6 +34,7 @@ interface LocationSectionProps {
   platformNr: string;
   accessIconLocationProps: accessProps | null;
   selectedLeg: OJP.TripLeg;
+  time: string;
 }
 
 /**
@@ -50,6 +53,7 @@ export default function LocationSection({
   platformNr,
   accessIconLocationProps,
   selectedLeg,
+  time,
 }: LocationSectionProps): React.ReactElement {
   const router = useRouter();
   const { resolvedTheme } = useTheme();
@@ -116,7 +120,14 @@ export default function LocationSection({
       <div
         className={`flex items-center ${!isMobile ? "mb-3 p-2" : "mb-2 px-2 py-1"}`}
       >
-        <div className="text-lg font-semibold">{locationTitle}</div>
+        {/*<div className="flex w-full items-center">*/}
+        {/*  <div className="flex justify-end">{time}</div>*/}
+        {/*  <div className="pl-6 text-lg font-semibold">{locationTitle}</div>*/}
+        {/*</div>*/}
+        <div className="flex w-full items-center justify-between">
+          <div className="text-lg font-semibold">{locationTitle}</div>
+          <div className="flex justify-end">{time}</div>
+        </div>
       </div>
       <div className="flex flex-row p-2 pb-4">
         <div className={`font-medium ${!isMobile ? "" : "text-sm"}`}>
@@ -163,24 +174,26 @@ export default function LocationSection({
         </div>
       ) : null}
       {/* Accordion for Zugkomposition */}
-      <Accordion type="single" collapsible className="px-2">
-        <AccordionItem value="item-1">
-          <AccordionTrigger
-            className={`${!isMobile ? "py-6" : "py-4 text-sm"}`}
-          >
-            Zugkomposition
-          </AccordionTrigger>
-          <AccordionContent>
-            <Image
-              src="/train-composition.png"
-              alt="Zugkomposition"
-              width={320}
-              height={200}
-              className="flex h-full w-full px-2"
-            />
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
+      {vehicleType === "Zug" ? (
+        <Accordion type="single" collapsible className="px-2">
+          <AccordionItem value="item-1">
+            <AccordionTrigger
+              className={`${!isMobile ? "py-6" : "py-4 text-sm"}`}
+            >
+              Zugkomposition
+            </AccordionTrigger>
+            <AccordionContent>
+              <Image
+                src="/train-composition.png"
+                alt="Zugkomposition"
+                width={320}
+                height={200}
+                className="flex h-full w-full px-2"
+              />
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      ) : null}
       {/* Accordion for Ein- und Aussteigen für Rollstuhlfahrer */}
       <Accordion type="single" collapsible className="px-2">
         <AccordionItem value="item-2">

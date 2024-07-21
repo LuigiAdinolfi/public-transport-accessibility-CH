@@ -17,6 +17,8 @@ import {
 } from "@/cache/getCachedPlatform";
 import { Platform } from "@/types/Platform";
 import { accessIconProps } from "@/helpers/accessIconProps";
+import { getArrivalTime } from "@/utils/getArrivalTime";
+import { getDepartureTime } from "@/utils/getDepartureTime";
 
 interface CardPathProps {
   index: number;
@@ -43,6 +45,8 @@ export default function CardPath({
   const platformNrFromLocation = getPlatformNumberFromOrigin(selectedLeg);
   const platformNrToLocation = getPlatformNumberFromDestination(selectedLeg);
   const isMobile = useMediaQuery({ maxWidth: 767 });
+  const departureTime = getDepartureTime(selectedLeg);
+  const arrivalTime = getArrivalTime(selectedLeg);
 
   const { setSelectedTripLeg } = useJourneyStore();
   const { setPlatformOrigin, setPlatformDestination } = usePlatformStore();
@@ -85,6 +89,7 @@ export default function CardPath({
           platformNr={platformNrFromLocation}
           accessIconLocationProps={accessIcons.origin}
           selectedLeg={selectedLeg}
+          time={departureTime}
           aria-label={`Departure from ${fromLocationName} at ${platformNrFromLocation}`}
         />
         <LocationSection
@@ -93,6 +98,7 @@ export default function CardPath({
           platformNr={platformNrToLocation}
           accessIconLocationProps={accessIcons.destination}
           selectedLeg={selectedLeg}
+          time={arrivalTime}
           aria-label={`Arrival at ${toLocationName} at ${platformNrToLocation}`}
         />
       </div>
