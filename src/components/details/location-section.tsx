@@ -20,16 +20,15 @@ import getDynamicVisual from "@/utils/getDynamicVisual";
 import getDynamicAudio from "@/utils/getDynamicAudio";
 import { getPlatformAccess } from "@/utils/getPlatformAccess";
 import { useParkingLotStore } from "@/store/useParkingLotStore";
+import { accessProps } from "@/helpers/accessIconProps";
+import { useTheme } from "next-themes";
+import { getAccessibilityIconByText } from "@/utils/handleAccessibilityIcon";
 
 interface LocationSectionProps {
   locationName: string;
   platform: Platform | null;
   platformNr: string;
-  accessIconLocationProps: {
-    icon: any;
-    text: string;
-    score: number;
-  } | null;
+  accessIconLocationProps: accessProps | null;
 }
 
 /**
@@ -49,13 +48,17 @@ export default function LocationSection({
   accessIconLocationProps,
 }: LocationSectionProps): React.ReactElement {
   const router = useRouter();
+  const { resolvedTheme } = useTheme();
   const { setSelectedStop } = useJourneyStore();
 
   const locationTitle = truncateTo40Chars(locationName);
   const location = truncateTo20Chars(locationName);
   const isMobile = useMediaQuery({ maxWidth: 767 });
-  const AccessIconLocation = accessIconLocationProps?.icon;
   const accessTextLocation = accessIconLocationProps?.text;
+  const AccessIconLocation = getAccessibilityIconByText(
+    accessTextLocation,
+    resolvedTheme,
+  );
   const [platformInfo, setPlatformInfo] = useState({
     haltekanteAccess: "",
     accessInfo: "",

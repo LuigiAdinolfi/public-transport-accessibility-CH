@@ -12,20 +12,20 @@ export default function FeatureList(): React.ReactElement {
 
   const { stopPoint } = useStopPointStore();
 
-  const assistanceavailability = stopPoint.assistanceAvailability;
   const assistanceservice = stopPoint.assistanceService;
+  const wheelchairticketmachine = stopPoint.wheelchairTicketMachine;
+  const assistanceavailability = stopPoint.assistanceAvailability;
   const audioticketmachine = stopPoint.audioTicketMachine;
   const dynamicaudiosystem = stopPoint.dynamicAudioSystem;
   const dynamicopticsystem = stopPoint.dynamicOpticSystem;
-  const wheelchairticketmachine = stopPoint.wheelchairTicketMachine;
 
   const featureMappings = [
-    { value: assistanceavailability, text: "Unterstützung verfügbar" },
     { value: assistanceservice, text: "Rollstuhl-Assistenzdienst" },
+    { value: wheelchairticketmachine, text: "Rollstuhl-Ticket-Maschine" },
+    { value: assistanceavailability, text: "Unterstützung verfügbar" },
     { value: audioticketmachine, text: "Audioticketmaschine" },
     { value: dynamicaudiosystem, text: "Dynamisches Audiosystem" },
     { value: dynamicopticsystem, text: "Dynamisches optisches System" },
-    { value: wheelchairticketmachine, text: "Rollstuhl-Ticket-Maschine" },
   ];
 
   const features = featureMappings
@@ -37,7 +37,7 @@ export default function FeatureList(): React.ReactElement {
   } else {
     return (
       <div
-        className={`${!isMobile ? "grid grid-cols-3 px-12" : "flex flex-col px-8"} gap-x-1 gap-y-6 py-4`}
+        className={`${!isMobile ? "grid grid-cols-3 px-12" : "flex flex-col px-8"} gap-x-1 gap-y-6 py-6`}
       >
         {features.map((feature, index) => (
           <div key={index} className="flex flex-row items-center px-2">

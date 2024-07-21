@@ -19,6 +19,7 @@ export function storeStopPointToDB(stopPointsData: StopPoint[]): any[] {
     dynamicAudioSystem: stopPoint.dynamicAudioSystem,
     dynamicOpticSystem: stopPoint.dynamicOpticSystem,
     infoTicketMachine: stopPoint.infoTicketMachine,
+    interoperable: stopPoint.interoperable,
     visualInfo: stopPoint.visualInfo,
     wheelchairTicketMachine: stopPoint.wheelchairTicketMachine,
     assistanceRequestFulfilled: stopPoint.assistanceRequestFulfilled,

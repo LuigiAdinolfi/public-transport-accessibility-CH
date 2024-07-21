@@ -16,6 +16,7 @@ export interface StopPoint {
   dynamicAudioSystem: string;
   dynamicOpticSystem: string;
   infoTicketMachine: string;
+  interoperable: boolean;
   visualInfo: string;
   wheelchairTicketMachine: string;
   assistanceRequestFulfilled: string;

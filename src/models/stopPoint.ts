@@ -18,6 +18,7 @@ export interface IStopPoint extends Document {
   dynamicAudioSystem: string;
   dynamicOpticSystem: string;
   infoTicketMachine: string;
+  interoperable: boolean;
   visualInfo: string;
   wheelchairTicketMachine: string;
   assistanceRequestFulfilled: string;
@@ -42,6 +43,7 @@ const StopPointSchema: Schema = new Schema({
   dynamicAudioSystem: { type: String },
   dynamicOpticSystem: { type: String },
   infoTicketMachine: { type: String },
+  interoperable: { type: Boolean },
   visualInfo: { type: String },
   wheelchairTicketMachine: { type: String },
   assistanceRequestFulfilled: { type: String },

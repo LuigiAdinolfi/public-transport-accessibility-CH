@@ -106,6 +106,37 @@ export const getAccessIcon = (
     : null;
 };
 
+export function getAccessibilityIconByText(
+  text: string | undefined,
+  theme: string | undefined,
+) {
+  if (text === "Selber\nein-/aussteigen") {
+    return theme === "dark" ? DarkWheelchair : LightWheelchair;
+  } else if (text === "Mit Hilfe Fahrpersonal\nein-/aussteigen") {
+    return theme === "dark"
+      ? DarkWheelchairPartially
+      : LightWheelchairPartially;
+  } else if (text === "Mit Personalhilfe ein-/aussteigen, vorher anmelden") {
+    return theme === "dark"
+      ? DarkWheelchairReservation
+      : LightWheelchairReservation;
+  } else if (
+    text === "Mit Shuttle zur barrierefreien Haltestelle, vorher anmelden"
+  ) {
+    return theme === "dark"
+      ? DarkWheelchairSubstituteTransport
+      : LightWheelchairSubstituteTransport;
+  } else if (text === "Nicht rollstuhlgängig") {
+    return theme === "dark"
+      ? DarkWheelchairInaccessible
+      : LightWheelchairInaccessible;
+  } else {
+    return theme === "dark"
+      ? DarkWheelchairUncertain
+      : LightWheelchairUncertain;
+  }
+}
+
 export const getWorstIcon = (
   accessIconFromLocationProps: {
     icon: any;

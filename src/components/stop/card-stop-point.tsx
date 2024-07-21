@@ -23,7 +23,7 @@ export default function CardStopPoint(): React.ReactElement {
   const { selectedStop, selectedTripLeg, setSelectedTripLeg } =
     useJourneyStore();
   const { parentServicePointSloid, setParkingLot } = useParkingLotStore();
-  const { setStopPoint } = useStopPointStore();
+  const { stopPoint, setStopPoint } = useStopPointStore();
   const parentSloid = parentServicePointSloid;
 
   // Restore selectedTripLeg from localStorage if it exists
@@ -66,11 +66,17 @@ export default function CardStopPoint(): React.ReactElement {
     fetchStopPoint().then((r) => r);
   }, [parentSloid, setParkingLot, setStopPoint]);
 
+  const interop = stopPoint.interoperable;
+
+  const interoperable = interop
+    ? "Haltestelle ist komplett autonom benutzbar"
+    : "Haltestelle ist nicht autonom benutzbar";
+
   return (
     <Card className="mt-3">
       {/* Header Section */}
       <div
-        className={`flex flex-row items-center space-y-1.5 ${!isMobile ? "px-14 pb-6 pt-8" : "px-8 pb-2 pt-4"}`}
+        className={`flex flex-row items-center space-y-1.5 ${!isMobile ? "px-14 pb-8 pt-8" : "px-8 pb-2 pt-4"}`}
       >
         {/* Stop name */}
         <div className="items-center text-xl font-bold text-zinc-900 dark:text-zinc-100">
@@ -85,6 +91,13 @@ export default function CardStopPoint(): React.ReactElement {
             {VehicleIcon && <VehicleIcon className="h-6 w-6" />}
           </div>
         </div>
+        {interoperable && (
+          <div
+            className={`flex items-center pb-1.5 ${!isMobile ? "pl-16" : "pl-8"}`}
+          >
+            <div className="text-lg font-bold">{interoperable}</div>
+          </div>
+        )}
       </div>
 
       {/* Feature List Section */}

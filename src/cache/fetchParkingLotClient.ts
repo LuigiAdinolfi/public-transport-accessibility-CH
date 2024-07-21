@@ -12,7 +12,7 @@ export async function fetchParkingLotClient(parentServicePointSloid: string) {
         data,
       );
     }
-    return JSON.parse(JSON.stringify(data));
+    return JSON.parse(JSON.stringify(data)); // Ensure plain object
   } catch (error) {
     console.log(
       `Parking lot with parent SLOID ${parentServicePointSloid} not found!`,

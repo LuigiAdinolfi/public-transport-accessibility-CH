@@ -26,20 +26,20 @@ export async function fetchParkingLotFromLocalAPI(
 
     // Check the database next
     const ParkingLotModel = ParkingLotToStore();
-    const parkingLotFromDB = await ParkingLotModel.findOne({
+    let parkingLotFromDB = await ParkingLotModel.findOne({
       parentServicePointSloid,
     });
     if (parkingLotFromDB) {
       console.log(
         `MongoDB: Retrieved parking lot data for parent SLOID ${parentServicePointSloid}`,
       );
-      // Save the parking lot data to Redis cache
+      parkingLotFromDB = parkingLotFromDB.toObject(); // Convert to plain object
       await redis.set(
         `parkingLot:${parentServicePointSloid}`,
         JSON.stringify(parkingLotFromDB),
         "EX",
         86400,
-      ); // Set cache for 1 day
+      );
       return { data: parkingLotFromDB, ok: true };
     }
 
@@ -51,7 +51,6 @@ export async function fetchParkingLotFromLocalAPI(
       console.log(
         `API: Retrieved parking lot data for parent SLOID ${parentServicePointSloid}`,
       );
-      // Store the parking lot data in the database
       const selectedFields = storeParkingLotToDB([parkingLotFromAPI]);
       for (const item of selectedFields) {
         await ParkingLotModel.updateOne(
@@ -60,15 +59,12 @@ export async function fetchParkingLotFromLocalAPI(
           { upsert: true },
         );
       }
-
-      // Save the parking lot data to Redis cache
       await redis.set(
         `parkingLot:${parentServicePointSloid}`,
         JSON.stringify(parkingLotFromAPI),
         "EX",
         86400,
-      ); // Set cache for 1 day
-
+      );
       return { data: parkingLotFromAPI, ok: true };
     }
 
