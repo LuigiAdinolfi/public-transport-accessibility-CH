@@ -14,6 +14,7 @@ export default function FeatureList(): React.ReactElement {
 
   const assistanceservice = stopPoint.assistanceService;
   const wheelchairticketmachine = stopPoint.wheelchairTicketMachine;
+  const wheelchairToilet = "YES";
   const assistanceavailability = stopPoint.assistanceAvailability;
   const audioticketmachine = stopPoint.audioTicketMachine;
   const dynamicaudiosystem = stopPoint.dynamicAudioSystem;
@@ -22,6 +23,7 @@ export default function FeatureList(): React.ReactElement {
   const featureMappings = [
     { value: assistanceservice, text: "Rollstuhl-Assistenzdienst" },
     { value: wheelchairticketmachine, text: "Rollstuhl-Ticket-Maschine" },
+    { value: wheelchairToilet, text: "Rollstuhlgängige Toilette" },
     { value: assistanceavailability, text: "Unterstützung verfügbar" },
     { value: audioticketmachine, text: "Audioticketmaschine" },
     { value: dynamicaudiosystem, text: "Dynamisches Audiosystem" },

@@ -95,7 +95,7 @@ export default function CardStopPoint(): React.ReactElement {
           <div
             className={`flex items-center pb-1.5 ${!isMobile ? "pl-16" : "pl-8"}`}
           >
-            <div className="text-lg font-bold">{interoperable}</div>
+            <div className="text-lg font-semibold">{interoperable}</div>
           </div>
         )}
       </div>
