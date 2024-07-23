@@ -8,7 +8,7 @@ import { HelpButton } from "@/components/shared/help-button";
  */
 export default function HeaderButtons(): React.ReactElement {
   return (
-    <div className="mt-1 flex items-center justify-between">
+    <div className="flex items-center justify-between">
       <BackButton />
       <HelpButton />
     </div>

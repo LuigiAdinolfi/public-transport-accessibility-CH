@@ -28,14 +28,14 @@ export function CommunityCard(): React.ReactElement {
         <div className="flex items-center justify-between">
           <TabsList className="grid w-full grid-cols-2 md:w-1/2 lg:h-12">
             <TabsTrigger
-              className="mx-1 items-center text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:h-10 lg:text-base"
+              className="mx-1 items-center text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:h-10"
               value="news"
             >
               <CircleIcons
                 active={activeTab === "news"}
                 darkTheme={resolvedTheme === "dark"}
               />
-              <div className="pl-1 md:text-base lg:pl-2">News</div>
+              <div className="pl-1 md:text-lg lg:pl-2">News</div>
             </TabsTrigger>
             <TabsTrigger
               className="mx-1 text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:h-10 lg:text-base"
@@ -45,7 +45,7 @@ export function CommunityCard(): React.ReactElement {
                 active={activeTab === "forum"}
                 darkTheme={resolvedTheme === "dark"}
               />
-              <div className="pl-1 md:text-base lg:pl-2">Forum</div>
+              <div className="pl-1 md:text-lg lg:pl-2">Forum</div>
             </TabsTrigger>
           </TabsList>
         </div>

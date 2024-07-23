@@ -5,7 +5,7 @@ import * as OJP from "ojp-sdk";
 import { useMediaQuery } from "react-responsive";
 import { useTheme } from "next-themes";
 import { FirstConnection } from "@/components/select/first-connection";
-import { ChevronDown, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronRight, TriangleAlert } from "lucide-react";
 import { LastConnection } from "@/components/select/last-connection";
 import {
   useFromStopPointVehicleAccessType,
@@ -38,6 +38,8 @@ export function MultipleConnection({
   const router = useRouter();
 
   const timedLegs = allLegs.filter((leg) => leg.legType === "TimedLeg");
+  const transferLegs =
+    allLegs.filter((leg) => leg.legType === "TransferLeg") || [];
 
   const fromLocationVehicleAccessTypes = timedLegs.map(
     useFromStopPointVehicleAccessType,
@@ -77,9 +79,14 @@ export function MultipleConnection({
   const WorstIcon = worstIconProps?.icon;
   const worstText = worstIconProps?.text;
 
+  // Check if any transfer leg duration is less than 15 minutes
+  const showWarningMessage = transferLegs.some(
+    (leg) => leg.legDuration && leg.legDuration.totalMinutes < 15,
+  );
+
   return (
     <Button
-      className="flex h-full w-full justify-start border border-zinc-800 bg-white dark:border-zinc-300 dark:bg-zinc-950"
+      className="flex h-full w-full justify-start border border-zinc-800 dark:border-zinc-500"
       variant={loading ? "ghost" : "outline"}
       disabled={loading}
       onClick={handleButtonClick}
@@ -89,12 +96,10 @@ export function MultipleConnection({
         <div
           className={`mb-1 flex w-full items-center justify-start ${isMobile ? "flex-col" : "px-3"} py-4 text-zinc-950 dark:text-zinc-50`}
         >
-          <div className="flex w-full items-center justify-start">
-            <div className="pr-2 md:text-base">
-              Niedrigste Barrierefreiheit:
-            </div>
+          <div className="flex w-full items-center justify-start font-semibold md:text-xl">
+            <div className="pr-2">Barrierefreiheit:</div>
             {WorstIcon && <WorstIcon className="h-6 w-6" />}
-            {!isMobile && <div className="pl-2 md:text-base">{worstText}</div>}
+            {!isMobile && <div className="pl-2">{worstText}</div>}
           </div>
           <div
             className={`${isMobile ? "flex w-full justify-start pt-1" : "justify-end"} md:text-base`}
@@ -112,8 +117,15 @@ export function MultipleConnection({
               accessIconDestination={accessIcons[0].destination}
             />
           </div>
-          <div className="flex items-center justify-center px-2">
-            {isMobile ? <ChevronDown /> : <ChevronRight />}
+          <div className="flex justify-center px-2 pt-14">
+            {/*{isMobile ? <ChevronDown /> : <ChevronRight />}*/}
+            {showWarningMessage ? (
+              <TriangleAlert size={24} className="flex-shrink-0" />
+            ) : isMobile ? (
+              <ChevronDown />
+            ) : (
+              <ChevronRight />
+            )}
           </div>
           <div className={`w-full ${isMobile ? "mt-1" : ""}`}>
             <LastConnection

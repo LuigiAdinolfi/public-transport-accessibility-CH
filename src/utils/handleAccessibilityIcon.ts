@@ -42,19 +42,19 @@ const AccessibilityMap = {
   WheelchairPartially: {
     light: LightWheelchairPartially,
     dark: DarkWheelchairPartially,
-    text: "Mit Hilfe Fahrpersonal\nein-/aussteigen",
+    text: "Mit Personalhilfe\nein-/aussteigen",
     score: 3,
   },
   WheelchairReservation: {
     light: LightWheelchairReservation,
     dark: DarkWheelchairReservation,
-    text: "Mit Personalhilfe ein-/aussteigen, vorher anmelden",
+    text: "Mit Personalhilfe\nein-/aussteigen,\nvorher anmelden",
     score: 3,
   },
   WheelchairSubstituteTransport: {
     light: LightWheelchairSubstituteTransport,
     dark: DarkWheelchairSubstituteTransport,
-    text: "Mit Shuttle zur barrierefreien Haltestelle, vorher anmelden",
+    text: "Mit Shuttle zur\nbarrierefreien Haltestelle,\nvorher anmelden",
     score: 1,
   },
   WheelchairInaccessible: {
@@ -112,16 +112,16 @@ export function getAccessibilityIconByText(
 ) {
   if (text === "Selber\nein-/aussteigen") {
     return theme === "dark" ? DarkWheelchair : LightWheelchair;
-  } else if (text === "Mit Hilfe Fahrpersonal\nein-/aussteigen") {
+  } else if (text === "Mit Personalhilfe\nein-/aussteigen") {
     return theme === "dark"
       ? DarkWheelchairPartially
       : LightWheelchairPartially;
-  } else if (text === "Mit Personalhilfe ein-/aussteigen, vorher anmelden") {
+  } else if (text === "Mit Personalhilfe\nein-/aussteigen,\nvorher anmelden") {
     return theme === "dark"
       ? DarkWheelchairReservation
       : LightWheelchairReservation;
   } else if (
-    text === "Mit Shuttle zur barrierefreien Haltestelle, vorher anmelden"
+    text === "Mit Shuttle zur\nbarrierefreien Haltestelle,\nvorher anmelden"
   ) {
     return theme === "dark"
       ? DarkWheelchairSubstituteTransport

@@ -12,6 +12,9 @@ import { getCachedParkingLot } from "@/cache/getCachedParkingLot";
 import { useParkingLotStore } from "@/store/useParkingLotStore";
 import { getCachedStopPoint } from "@/cache/getCachedStopPoint";
 import { useStopPointStore } from "@/store/useStopPointStore";
+import { Map } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 /**
  * Component displaying detailed information about a stop point in a card format.
@@ -25,6 +28,7 @@ export default function CardStopPoint(): React.ReactElement {
   const { parentServicePointSloid, setParkingLot } = useParkingLotStore();
   const { stopPoint, setStopPoint } = useStopPointStore();
   const parentSloid = parentServicePointSloid;
+  const router = useRouter();
 
   // Restore selectedTripLeg from localStorage if it exists
   useEffect(() => {
@@ -76,28 +80,35 @@ export default function CardStopPoint(): React.ReactElement {
     <Card className="mt-3">
       {/* Header Section */}
       <div
-        className={`flex flex-row items-center space-y-1.5 ${!isMobile ? "px-14 pb-8 pt-8" : "px-8 pb-2 pt-4"}`}
+        className={`flex flex-row items-center justify-between space-y-1.5 align-middle ${!isMobile ? "px-14 pb-8 pt-8" : "px-8 pb-2 pt-4"}`}
       >
         {/* Stop name */}
-        <div className="items-center text-xl font-bold text-zinc-900 dark:text-zinc-100">
-          {selectedStop}
-        </div>
-        {/* Vehicle type and icon */}
-        <div
-          className={`flex items-center pb-1.5 ${!isMobile ? "pl-16" : "pl-8"}`}
-        >
-          <div className="pr-2 text-base font-normal">{vehicleType}</div>
-          <div className="text-base font-normal">
-            {VehicleIcon && <VehicleIcon className="h-6 w-6" />}
+        <div className="flex items-center">
+          <div className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
+            {selectedStop}
+          </div>
+          {/* Vehicle type and icon */}
+          <div className={`flex items-center ${!isMobile ? "pl-8" : "pl-8"}`}>
+            <div className="pr-2 text-base font-normal">{vehicleType}</div>
+            <div className="text-base font-normal">
+              {VehicleIcon && <VehicleIcon className="h-6 w-6" />}
+            </div>
           </div>
         </div>
+
         {interoperable && (
-          <div
-            className={`flex items-center pb-1.5 ${!isMobile ? "pl-16" : "pl-8"}`}
-          >
+          <div className="flex items-center pb-1.5">
             <div className="text-lg font-semibold">{interoperable}</div>
           </div>
         )}
+        <Button
+          className="ml-4 h-12 md:text-base"
+          variant="outline"
+          onClick={() => router.push("/select/details/stop")}
+        >
+          Bahnhofsplan
+          <Map className="ml-2 h-4 w-4" />
+        </Button>
       </div>
 
       {/* Feature List Section */}

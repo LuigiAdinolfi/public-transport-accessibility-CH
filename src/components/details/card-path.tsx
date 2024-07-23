@@ -45,8 +45,10 @@ export default function CardPath({
   const platformNrFromLocation = getPlatformNumberFromOrigin(selectedLeg);
   const platformNrToLocation = getPlatformNumberFromDestination(selectedLeg);
   const isMobile = useMediaQuery({ maxWidth: 767 });
-  const departureTime = getDepartureTime(selectedLeg);
-  const arrivalTime = getArrivalTime(selectedLeg);
+  const depTime = getDepartureTime(selectedLeg);
+  const departureTime = "Abfahrt  " + depTime;
+  const arrTime = getArrivalTime(selectedLeg);
+  const arrivalTime = "Ankunft  " + arrTime;
 
   const { setSelectedTripLeg } = useJourneyStore();
   const { setPlatformOrigin, setPlatformDestination } = usePlatformStore();

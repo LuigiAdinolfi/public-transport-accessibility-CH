@@ -2,7 +2,7 @@ import React from "react";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Map } from "lucide-react";
+import { Map, TriangleAlert } from "lucide-react";
 import * as OJP from "ojp-sdk";
 import { getVehicleIcon } from "@/utils/handleVehicleIcon";
 import { useMediaQuery } from "react-responsive";
@@ -39,30 +39,63 @@ export default function InfoSection({
 
   return (
     <div
-      className={`flex items-center justify-between ${!isMobile ? "p-6 px-8 pb-6" : "flex-col gap-3 p-4 px-2 pb-6"} `}
+      className={`flex items-center justify-between ${!isMobile ? "px-8 py-6" : "flex-col gap-3 p-4 px-2 pb-6"} `}
     >
       {/* Vehicle information display */}
-      <div className="flex items-center space-x-1.5 md:h-10">
-        {!isMobile && (
-          <div className="pr-1 text-base font-medium">{vehicleType}</div>
-        )}
-        {/* Vehicle profile icon based on theme */}
-        <div className="text-base font-normal">
-          {VehicleIcon && <VehicleIcon className="h-6 w-6" />}
+      {legDuration === 0 ? (
+        <div className="flex items-center space-x-1.5 md:h-12">
+          {!isMobile && (
+            <div className="pr-1 text-base font-medium">{vehicleType}</div>
+          )}
+          {/* Vehicle profile icon based on theme */}
+          <div className="text-base font-normal">
+            {VehicleIcon && <VehicleIcon className="h-6 w-6" />}
+          </div>
+          <div className="pl-1 text-base font-medium">{vehicleNumber}</div>
+          <div className="pl-2 text-base font-normal">
+            Richtung {vehicleDestinationStopPlace}
+          </div>
         </div>
-        <div className="pl-1 text-base font-medium">{vehicleNumber}</div>
-        <div className="pl-2 text-base font-normal">
-          Richtung {vehicleDestinationStopPlace}
+      ) : (
+        <div className="flex-col items-center space-y-2.5 md:h-12 md:w-56">
+          <div className="flex items-center space-x-1.5">
+            {!isMobile && (
+              <div className="pr-1 text-base font-medium">{vehicleType}</div>
+            )}
+            {/* Vehicle profile icon based on theme */}
+            <div className="text-base font-normal">
+              {VehicleIcon && <VehicleIcon className="h-6 w-6" />}
+            </div>
+            <div className="pl-1 text-base font-medium">{vehicleNumber}</div>
+          </div>
+          <div className="text-base font-normal">
+            Richtung {vehicleDestinationStopPlace}
+          </div>
         </div>
-      </div>
+      )}
       {/* Optional display of transfer duration and navigation button */}
       {legDuration !== 0 && (
         <>
-          <div className="flex-grow text-center text-base font-semibold">
-            {legDuration} Minuten zum Umsteigen
-          </div>
+          {legDuration > 15 ? (
+            <div className="flex-grow text-center text-xl font-bold">
+              {legDuration} Minuten zum Umsteigen
+            </div>
+          ) : (
+            <div className="max-w-96 flex-col text-center text-xl font-bold">
+              <div className="flex-grow text-center text-xl font-bold">
+                {legDuration} Minuten zum Umsteigen
+              </div>
+              <div className="flex items-center py-4">
+                <TriangleAlert size={32} className="flex-shrink-0" />
+                <div className="flex-grow text-center text-base font-medium leading-relaxed">
+                  Achtung, die Umsteigezeit für Rollstuhlfahrer ist
+                  möglicherweise nicht ausreichend
+                </div>
+              </div>
+            </div>
+          )}
           <Button
-            className="ml-4 md:text-base"
+            className="ml-4 h-12 md:text-base"
             variant="outline"
             onClick={() => router.push("/select/details")}
           >

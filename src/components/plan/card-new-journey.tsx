@@ -75,7 +75,7 @@ export function CardNewJourney(): React.ReactElement {
               aria-label="Abfahrtsort"
               aria-expanded="true"
             />
-            <div className="flex w-full items-center justify-center pt-4 lg:w-2/12 lg:pb-6">
+            <div className="flex w-full items-center justify-center pt-5 lg:w-2/12 lg:pb-5">
               {/* Button to swap origin and destination */}
               <Button
                 className="w-16"
@@ -115,7 +115,7 @@ export function CardNewJourney(): React.ReactElement {
               </CardDescription>
             </div>
             {/* Tabs for Departure and Arrival */}
-            <div className="flex w-full content-center justify-center">
+            <div className="flex w-full content-center justify-center pt-3">
               <Tabs
                 defaultValue={activeSearchTab}
                 className="lg:h-14"
@@ -160,7 +160,7 @@ export function CardNewJourney(): React.ReactElement {
               <Button
                 id="submit"
                 type="submit"
-                className="w-full md:text-base lg:mb-4 lg:w-44"
+                className="w-full md:text-base lg:mb-2 lg:w-44"
                 onClick={handleClick}
                 variant={loading ? "secondary" : "default"}
                 disabled={loading}

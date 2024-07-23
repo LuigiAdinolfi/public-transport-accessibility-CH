@@ -13,15 +13,18 @@ import {
 export function SelectDemo() {
   return (
     <Select>
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="md:w-[220px] md:text-base">
         <SelectValue
           placeholder="Filtern nach..."
           aria-label="Filtern nach..."
+          className="md:text-base"
         />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel aria-label="Filtern">Filtern</SelectLabel>
+          <SelectLabel className="md:text-base" aria-label="Filtern">
+            Filtern
+          </SelectLabel>
           <SelectItem value="date" aria-label="Datum">
             Datum
           </SelectItem>

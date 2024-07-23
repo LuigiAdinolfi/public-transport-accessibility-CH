@@ -70,7 +70,7 @@ export function DirectConnection({
 
   return (
     <Button
-      className="flex h-full w-full justify-start border border-zinc-800 bg-white dark:border-zinc-300 dark:bg-zinc-950"
+      className="flex h-full w-full justify-start border border-zinc-800 dark:border-zinc-500"
       variant={loading ? "ghost" : "outline"}
       disabled={loading}
       onClick={handleButtonClick}
@@ -80,13 +80,11 @@ export function DirectConnection({
         <div
           className={`mb-1 flex w-full items-center justify-start ${isMobile ? "flex-col" : "px-3"} py-4 text-zinc-950 dark:text-zinc-50`}
         >
-          <div className="flex w-full items-center justify-start">
-            <div className="pr-2 md:text-base">
-              Niedrigste Barrierefreiheit:
-            </div>
+          <div className="flex w-full items-center justify-start font-semibold md:text-xl">
+            <div className="pr-2">Barrierefreiheit:</div>
             {/* Wheelchair Accessibility Icon */}
             {WorstIcon && <WorstIcon className="h-6 w-6" />}
-            {!isMobile && <div className="pl-2 md:text-base">{worstText}</div>}
+            {!isMobile && <div className="pl-2">{worstText}</div>}
           </div>
           <div
             className={`${isMobile ? "flex w-full justify-start pt-1" : "justify-end md:text-base"}`}

@@ -22,7 +22,7 @@ export default function JourneyDetails(): React.ReactElement {
   }, [setTripDetails]);
 
   return (
-    <div className="space-y-6 p-6 pt-0">
+    <div className="space-y-6 px-6 pt-0">
       {tripDetails.map((trip, index) => {
         const {
           legs,

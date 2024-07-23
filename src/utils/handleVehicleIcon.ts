@@ -29,11 +29,19 @@ const iconMap = {
     light: LightTrainProfile,
     dark: DarkTrainProfile,
   },
+  IC: {
+    light: LightTrainProfile,
+    dark: DarkTrainProfile,
+  },
   EC: {
     light: LightTrainProfile,
     dark: DarkTrainProfile,
   },
   RE: {
+    light: LightTrainProfile,
+    dark: DarkTrainProfile,
+  },
+  S: {
     light: LightTrainProfile,
     dark: DarkTrainProfile,
   },
@@ -81,8 +89,10 @@ const vehicleTypeMap: { [key: string]: keyof typeof iconMap } = {
   Standseilbahn: "Funicular",
   Fussweg: "Wheelchair",
   ICE: "ICE",
+  IC: "IC",
   EC: "EC",
   RE: "RE",
+  S: "S",
 };
 
 type Theme = "light" | "dark";

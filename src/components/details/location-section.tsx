@@ -25,8 +25,6 @@ import { useTheme } from "next-themes";
 import { getAccessibilityIconByText } from "@/utils/handleAccessibilityIcon";
 import * as OJP from "ojp-sdk";
 import { getVehicleType } from "@/utils/getVehicleType";
-import { getArrivalTime } from "@/utils/getArrivalTime";
-import { getDepartureTime } from "@/utils/getDepartureTime";
 
 interface LocationSectionProps {
   locationName: string;
@@ -125,48 +123,70 @@ export default function LocationSection({
         {/*  <div className="pl-6 text-lg font-semibold">{locationTitle}</div>*/}
         {/*</div>*/}
         <div className="flex w-full items-center justify-between">
-          <div className="text-lg font-semibold">{locationTitle}</div>
-          <div className="flex justify-end">{time}</div>
+          <div className="text-xl font-semibold">{locationTitle}</div>
+          <div className="flex justify-end whitespace-pre font-medium">
+            {time}
+          </div>
         </div>
       </div>
-      <div className="flex flex-row p-2 pb-4">
-        <div className={`font-medium ${!isMobile ? "" : "text-sm"}`}>
+      <div className="flex flex-row items-center p-2 pb-4 pr-0 pt-3 align-middle">
+        <div className={`font-medium ${!isMobile ? "text-lg" : "text-sm"}`}>
           Rollstuhlzugang:
         </div>
         <div
-          className={`pl-3 pr-1 font-semibold ${!isMobile ? "" : "text-sm"}`}
+          className={`pl-3 font-semibold ${!isMobile ? "text-lg" : "text-sm"}`}
         >
-          {vehicleType === "Zug"
+          {vehicleType === "Zug" ||
+          vehicleType === "EC" ||
+          vehicleType === "RE" ||
+          vehicleType === "S" ||
+          vehicleType === "ICE"
             ? `Gleis ${platformNr}`
             : `Kante ${platformNr}`}
         </div>
         <div
-          className={`pl-3 pr-1 font-semibold ${!isMobile ? "" : "text-sm"}`}
+          className={`pl-3 font-semibold ${!isMobile ? "text-lg" : "text-sm"}`}
         >
-          {vehicleType === "Zug" ? "Sektor B" : ""}
+          {vehicleType === "Zug" ||
+          vehicleType === "EC" ||
+          vehicleType === "RE" ||
+          vehicleType === "S" ||
+          vehicleType === "ICE"
+            ? "Sektor B"
+            : ""}
         </div>
         <div
-          className={`pl-3 pr-1 font-semibold ${!isMobile ? "" : "text-sm"}`}
+          className={`pl-3 font-semibold ${!isMobile ? "text-lg" : "text-sm"}`}
         >
-          {vehicleType === "Zug" ? "Waggon Nr. 5" : ""}
+          {vehicleType === "Zug" ||
+          vehicleType === "EC" ||
+          vehicleType === "RE" ||
+          vehicleType === "S" ||
+          vehicleType === "ICE"
+            ? "Waggon 5"
+            : ""}
         </div>
       </div>
-      <div className="flex flex-row items-center pb-2 pt-1 align-middle">
-        <div className="px-4 text-sm font-normal">
+      <div className="flex flex-row items-center pb-2 pt-4 align-middle">
+        <div className="pl-4 text-sm font-normal">
           <div className="flex basis-1/2 items-center justify-start">
             {/* Wheelchair Accessibility Icon */}
             {AccessIconLocation && <AccessIconLocation className="h-6 w-6" />}
             {!isMobile && (
-              <div className="flex flex-col pl-2">
+              <div className="flex flex-col pl-2 text-base">
                 <span>{accessTextLocation}</span>
               </div>
             )}
           </div>
         </div>
       </div>
-      {vehicleType === "Zug" ? (
-        <div className="flex flex-row items-center pb-2 pt-1 align-middle">
-          <div className="hei px-4 py-2 text-sm font-normal leading-relaxed">
+      {vehicleType === "Zug" ||
+      vehicleType === "EC" ||
+      vehicleType === "RE" ||
+      vehicleType === "S" ||
+      vehicleType === "ICE" ? (
+        <div className="flex flex-row items-center pb-3 pt-1 align-middle">
+          <div className="py-2 pl-4 text-base font-normal leading-relaxed">
             {/*Zugang zum Bahnsteig ohne Hilfe*/}
             Zugang zum Perron: &nbsp;
             {platformInfo.haltekanteAccess}
@@ -174,7 +194,11 @@ export default function LocationSection({
         </div>
       ) : null}
       {/* Accordion for Zugkomposition */}
-      {vehicleType === "Zug" ? (
+      {vehicleType === "Zug" ||
+      vehicleType === "EC" ||
+      vehicleType === "RE" ||
+      vehicleType === "S" ||
+      vehicleType === "ICE" ? (
         <Accordion type="single" collapsible className="px-2">
           <AccordionItem value="item-1">
             <AccordionTrigger
@@ -254,9 +278,9 @@ export default function LocationSection({
         </AccordionItem>
       </Accordion>
       {/* Button for "Information zur Haltestelle" */}
-      <div className="mt-6 flex justify-center">
+      <div className="mb-2 mt-8 flex justify-center">
         <Button
-          variant={isLoading ? "ghost" : "outline"}
+          variant={isLoading ? "outline" : "default"}
           onClick={() => handleClick(locationName)}
           className="flex w-full items-center p-2 md:text-base"
           disabled={isLoading}

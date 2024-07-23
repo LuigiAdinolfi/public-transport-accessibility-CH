@@ -38,29 +38,29 @@ export function PlanJourney(): React.ReactElement {
         <div className="flex items-center justify-between">
           <TabsList className="grid w-full grid-cols-2 md:w-1/2 lg:h-12">
             <TabsTrigger
-              className="mx-1 items-center text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:h-10 lg:text-base"
+              className="mx-1 items-center text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:h-10"
               value="new-journey"
             >
               <CircleIcons
                 active={activeJourneyTab === "new-journey"}
                 darkTheme={resolvedTheme === "dark"}
               />
-              <div className="pl-1 md:text-base lg:pl-2">Neue Reise</div>
+              <div className="pl-1 md:text-lg lg:pl-2">Neue Reise</div>
             </TabsTrigger>
             <TabsTrigger
-              className="mx-1 text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:h-10 lg:text-base"
+              className="mx-1 text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:h-10"
               value="recent-journeys"
             >
               <CircleIcons
                 active={activeJourneyTab === "recent-journeys"}
                 darkTheme={resolvedTheme === "dark"}
               />
-              <div className="pl-1 md:text-base lg:pl-2">Letzte Reisen</div>
+              <div className="pl-1 md:text-lg lg:pl-2">Letzte Reisen</div>
             </TabsTrigger>
           </TabsList>
 
           {/* Desktop variant of HelpButton */}
-          <div className="hidden md:flex">
+          <div className="mb-2 hidden md:flex">
             <HelpButton />
           </div>
         </div>

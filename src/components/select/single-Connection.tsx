@@ -42,16 +42,16 @@ export function SingleConnection({
       <div className="flex w-full justify-start rounded-lg bg-zinc-50 dark:bg-zinc-900">
         <div className="w-full py-2">
           {/* Time and Station */}
-          <div className="flex w-full items-center justify-between px-3 pb-3 pt-1 font-normal">
-            <div className="flex justify-start">{departureTime}</div>
-            <div className="flex justify-end">{arrivalTime}</div>
+          <div className="flex w-full items-center justify-between px-3 pb-3 pt-1 font-medium">
+            <div className="flex justify-start text-base">{departureTime}</div>
+            <div className="flex justify-end text-base">{arrivalTime}</div>
           </div>
           {/* Departure and Arrival Stations */}
           <div className="flex w-full items-center justify-between px-3">
-            <div className="items-center text-base font-semibold md:text-lg">
+            <div className="items-center text-lg font-semibold md:text-lg">
               {fromLocationName}
             </div>
-            <div className="flex items-center justify-center font-medium">
+            <div className="flex items-center justify-center text-base font-medium">
               {!isMobile && (
                 <div className="flex items-center pr-2">{vehicleType}</div>
               )}
@@ -59,13 +59,13 @@ export function SingleConnection({
               <div>{VehicleIcon && <VehicleIcon className="h-6 w-6" />}</div>
               {!isMobile && <div className="pl-2">{vehicleNumber}</div>}
             </div>
-            <div className="items-center text-base font-semibold md:text-lg">
+            <div className="items-center text-lg font-semibold md:text-lg">
               {toLocationName}
             </div>
           </div>
           {/* Accessibility Information */}
           <div
-            className={`flex w-full justify-between px-3 ${isMobile ? "py-2" : "py-3"} font-medium`}
+            className={`flex w-full justify-between px-3 ${isMobile ? "py-2" : "py-4"} font-medium`}
           >
             <div className="flex basis-1/2 items-center justify-start pt-2">
               {/* Wheelchair Accessibility Icon */}

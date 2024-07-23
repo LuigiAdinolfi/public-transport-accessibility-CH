@@ -38,10 +38,10 @@ export default function TabNavigation({
       defaultValue={activeLegTab}
       onValueChange={(value) => setActiveLegTab(value)}
     >
-      <div className="flex items-center justify-between pt-3">
+      <div className="flex items-center justify-between pt-4">
         {/* TabsList for displaying leg tabs */}
         <TabsList
-          className="grid w-full grid-cols-2 lg:h-12"
+          className="grid w-full grid-cols-2 lg:h-14"
           style={{ gridTemplateColumns: `repeat(${timedLegs.length}, 1fr)` }}
         >
           {timedLegs.map((leg, index) => {
@@ -59,7 +59,7 @@ export default function TabNavigation({
             return (
               <TabsTrigger
                 key={index}
-                className="mx-1 bg-zinc-100 text-zinc-700 active:text-zinc-950 dark:bg-zinc-800 dark:text-zinc-300 dark:active:text-white lg:h-10 lg:text-base"
+                className="mx-1 bg-zinc-100 text-zinc-700 active:text-zinc-950 dark:bg-zinc-800 dark:text-zinc-300 dark:active:text-white lg:h-12 lg:text-base"
                 value={`leg-${index}`}
               >
                 {/* CircleIcons component indicating active tab */}
@@ -67,7 +67,7 @@ export default function TabNavigation({
                   active={activeLegTab === `leg-${index}`}
                   darkTheme={resolvedTheme === "dark"}
                 />
-                <div className="pl-1 md:text-base lg:pl-2">
+                <div className="pl-1 font-semibold md:text-lg lg:pl-2">
                   {fromLocation} - {toLocation}
                 </div>
               </TabsTrigger>

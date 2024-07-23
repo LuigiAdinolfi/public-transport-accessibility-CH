@@ -17,7 +17,7 @@ export default function CommunityRatingSection({
 }: CommunityRatingSectionProps): React.ReactElement {
   return (
     <div
-      className="flex w-full items-center justify-center px-3 py-6 font-normal"
+      className="flex w-full items-center justify-center px-3 py-8 font-normal"
       role="region"
       aria-label={`Community rating section with a value of ${value} out of 5`}
     >

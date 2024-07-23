@@ -30,8 +30,8 @@ export function MainNav(): React.ReactElement {
     if (resolvedTheme === "dark") {
       return cn(
         "transition-colors text-white",
-        isActive ? "text-zinc-50 font-semibold" : "text-zinc-400",
-        "text-lg",
+        isActive ? "text-zinc-50 font-bold" : "text-zinc-400",
+        "text-xl",
         "rounded-md p-2",
         "px-6 py-3",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:after:ring-0 focus-visible:rounded-sm focus-visible:ring-black dark:focus-visible:ring-white",
@@ -39,8 +39,8 @@ export function MainNav(): React.ReactElement {
     } else {
       return cn(
         "transition-colors text-zinc-950",
-        isActive ? "text-zinc-950 font-semibold" : "text-zinc-600",
-        "text-lg",
+        isActive ? "text-zinc-950 font-bold" : "text-zinc-600",
+        "text-xl",
         "rounded-md p-2",
         "px-6 py-3",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:after:ring-0 focus-visible:rounded-sm focus-visible:ring-black dark:focus-visible:ring-white",

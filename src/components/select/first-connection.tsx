@@ -50,18 +50,18 @@ export function FirstConnection({
     <div className="flex basis-1/2 justify-start rounded-lg bg-zinc-50 dark:bg-zinc-900">
       <div className="w-full py-2">
         {/* Time and Station */}
-        <div className="flex w-full items-center justify-between px-3 pb-2 pt-1 font-normal">
-          <div className="flex justify-start">{departureTime}</div>
-          <div className="flex justify-end">{arrivalTime}</div>
+        <div className="flex w-full items-center justify-between px-3 pb-2 pt-1 font-medium">
+          <div className="flex justify-start text-base">{departureTime}</div>
+          <div className="flex justify-end text-base">{arrivalTime}</div>
         </div>
         {/* Departure and Arrival Stations */}
         <div
           className={`flex w-full items-center justify-between px-3 ${!isMobile ? "pt-2" : ""}`}
         >
-          <div className="items-center text-base font-semibold md:text-lg">
+          <div className="items-center text-lg font-semibold md:text-lg">
             {fromLocation}
           </div>
-          <div className="flex items-center justify-center font-medium">
+          <div className="flex items-center justify-center text-base font-medium">
             {!isMobile && (
               <div className="flex items-center pr-2 font-medium">
                 {vehicleType}
@@ -72,7 +72,7 @@ export function FirstConnection({
               <div className="pl-2 font-medium">{vehicleNumber}</div>
             )}
           </div>
-          <div className="items-center text-base font-semibold md:text-lg">
+          <div className="items-center text-lg font-semibold md:text-lg">
             {toLocation}
           </div>
         </div>
