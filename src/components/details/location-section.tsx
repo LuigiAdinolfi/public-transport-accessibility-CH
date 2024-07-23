@@ -25,6 +25,7 @@ import { useTheme } from "next-themes";
 import { getAccessibilityIconByText } from "@/utils/handleAccessibilityIcon";
 import * as OJP from "ojp-sdk";
 import { getVehicleType } from "@/utils/getVehicleType";
+import { renderAccessTextLocation } from "@/components/details/render-access-text-location";
 
 interface LocationSectionProps {
   locationName: string;
@@ -79,6 +80,8 @@ export default function LocationSection({
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const vehicleTypesWithPlatformInfo = ["Zug", "EC", "RE", "S", "ICE", "IC"];
+
   useEffect(() => {
     if (platform) {
       setPlatformInfo({
@@ -96,21 +99,15 @@ export default function LocationSection({
 
   const { setParentServicePointSloid } = useParkingLotStore();
 
-  /**
-   * Handles click on "Info zur Haltestelle" button.
-   * Sets selected stop and navigates to stop details page.
-   *
-   * @param {string} stop - The name of the stop.
-   */
   const handleClick = (stop: string | null) => {
     if (!stop) return;
-    setIsLoading(true); // Start loading state
+    setIsLoading(true);
     setSelectedStop(stop);
     setParentServicePointSloid(platformInfo.parentSloid);
     localStorage.setItem("selectedStop", stop);
     localStorage.setItem("parentSloid", platformInfo.parentSloid);
     router.push("/select/details/stop");
-    setIsLoading(false); // End loading state after navigation
+    setIsLoading(false);
   };
 
   return (
@@ -118,10 +115,6 @@ export default function LocationSection({
       <div
         className={`flex items-center ${!isMobile ? "mb-3 p-2" : "mb-2 px-2 py-1"}`}
       >
-        {/*<div className="flex w-full items-center">*/}
-        {/*  <div className="flex justify-end">{time}</div>*/}
-        {/*  <div className="pl-6 text-lg font-semibold">{locationTitle}</div>*/}
-        {/*</div>*/}
         <div className="flex w-full items-center justify-between">
           <div className="text-xl font-semibold">{locationTitle}</div>
           <div className="flex justify-end whitespace-pre font-medium">
@@ -136,35 +129,19 @@ export default function LocationSection({
         <div
           className={`pl-3 font-semibold ${!isMobile ? "text-lg" : "text-sm"}`}
         >
-          {vehicleType === "Zug" ||
-          vehicleType === "EC" ||
-          vehicleType === "RE" ||
-          vehicleType === "S" ||
-          vehicleType === "ICE"
+          {vehicleTypesWithPlatformInfo.includes(vehicleType)
             ? `Gleis ${platformNr}`
             : `Kante ${platformNr}`}
         </div>
         <div
           className={`pl-3 font-semibold ${!isMobile ? "text-lg" : "text-sm"}`}
         >
-          {vehicleType === "Zug" ||
-          vehicleType === "EC" ||
-          vehicleType === "RE" ||
-          vehicleType === "S" ||
-          vehicleType === "ICE"
-            ? "Sektor B"
-            : ""}
+          {vehicleTypesWithPlatformInfo.includes(vehicleType) ? "Sektor B" : ""}
         </div>
         <div
           className={`pl-3 font-semibold ${!isMobile ? "text-lg" : "text-sm"}`}
         >
-          {vehicleType === "Zug" ||
-          vehicleType === "EC" ||
-          vehicleType === "RE" ||
-          vehicleType === "S" ||
-          vehicleType === "ICE"
-            ? "Waggon 5"
-            : ""}
+          {vehicleTypesWithPlatformInfo.includes(vehicleType) ? "Waggon 5" : ""}
         </div>
       </div>
       <div className="flex flex-row items-center pb-2 pt-4 align-middle">
@@ -174,51 +151,42 @@ export default function LocationSection({
             {AccessIconLocation && <AccessIconLocation className="h-6 w-6" />}
             {!isMobile && (
               <div className="flex flex-col pl-2 text-base">
-                <span>{accessTextLocation}</span>
+                <span>{renderAccessTextLocation(accessTextLocation)}</span>
               </div>
             )}
           </div>
         </div>
       </div>
-      {vehicleType === "Zug" ||
-      vehicleType === "EC" ||
-      vehicleType === "RE" ||
-      vehicleType === "S" ||
-      vehicleType === "ICE" ? (
-        <div className="flex flex-row items-center pb-3 pt-1 align-middle">
-          <div className="py-2 pl-4 text-base font-normal leading-relaxed">
-            {/*Zugang zum Bahnsteig ohne Hilfe*/}
-            Zugang zum Perron: &nbsp;
-            {platformInfo.haltekanteAccess}
+      {vehicleTypesWithPlatformInfo.includes(vehicleType) && (
+        <>
+          <div className="flex flex-row items-center pb-3 pt-1 align-middle">
+            <div className="py-2 pl-4 text-base font-normal leading-relaxed">
+              {/*Zugang zum Bahnsteig ohne Hilfe*/}
+              Zugang zum Perron: &nbsp;
+              {platformInfo.haltekanteAccess}
+            </div>
           </div>
-        </div>
-      ) : null}
-      {/* Accordion for Zugkomposition */}
-      {vehicleType === "Zug" ||
-      vehicleType === "EC" ||
-      vehicleType === "RE" ||
-      vehicleType === "S" ||
-      vehicleType === "ICE" ? (
-        <Accordion type="single" collapsible className="px-2">
-          <AccordionItem value="item-1">
-            <AccordionTrigger
-              className={`${!isMobile ? "py-6" : "py-4 text-sm"}`}
-            >
-              Zugkomposition
-            </AccordionTrigger>
-            <AccordionContent>
-              <Image
-                src="/train-composition.png"
-                alt="Zugkomposition"
-                width={320}
-                height={200}
-                className="flex h-full w-full px-2"
-              />
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      ) : null}
-      {/* Accordion for Ein- und Aussteigen für Rollstuhlfahrer */}
+          {/* Accordion for Zugkomposition */}
+          <Accordion type="single" collapsible className="px-2">
+            <AccordionItem value="item-1">
+              <AccordionTrigger
+                className={`${!isMobile ? "py-6" : "py-4 text-sm"}`}
+              >
+                Zugkomposition
+              </AccordionTrigger>
+              <AccordionContent>
+                <Image
+                  src="/train-composition.png"
+                  alt="Zugkomposition"
+                  width={320}
+                  height={200}
+                  className="flex h-full w-full px-2"
+                />
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </>
+      )}
       <Accordion type="single" collapsible className="px-2">
         <AccordionItem value="item-2">
           <AccordionTrigger
