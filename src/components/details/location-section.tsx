@@ -130,37 +130,43 @@ export default function LocationSection({
           className={`pl-3 font-semibold ${!isMobile ? "text-lg" : "text-sm"}`}
         >
           {vehicleTypesWithPlatformInfo.includes(vehicleType)
-            ? `Gleis ${platformNr}`
+            ? `${isMobile ? "Gl." : "Gleis"} ${platformNr}`
             : `Kante ${platformNr}`}
         </div>
         <div
           className={`pl-3 font-semibold ${!isMobile ? "text-lg" : "text-sm"}`}
         >
-          {vehicleTypesWithPlatformInfo.includes(vehicleType) ? "Sektor B" : ""}
+          {vehicleTypesWithPlatformInfo.includes(vehicleType)
+            ? `${isMobile ? "Sekt. B" : "Sektor B"}`
+            : ""}
         </div>
         <div
           className={`pl-3 font-semibold ${!isMobile ? "text-lg" : "text-sm"}`}
         >
-          {vehicleTypesWithPlatformInfo.includes(vehicleType) ? "Waggon 5" : ""}
+          {vehicleTypesWithPlatformInfo.includes(vehicleType)
+            ? `${isMobile ? "Wag. 5" : "Waggon 5"}`
+            : ""}
         </div>
       </div>
       <div className="flex flex-row items-center pb-2 pt-4 align-middle">
         <div className="pl-4 text-sm font-normal">
           <div className="flex basis-1/2 items-center justify-start">
             {/* Wheelchair Accessibility Icon */}
-            {AccessIconLocation && <AccessIconLocation className="h-6 w-6" />}
-            {!isMobile && (
-              <div className="flex flex-col pl-2 text-base">
-                <span>{renderAccessTextLocation(accessTextLocation)}</span>
-              </div>
+            {AccessIconLocation && (
+              <AccessIconLocation className="h-6 w-6 flex-shrink-0" />
             )}
+            <div
+              className={`flex flex-col pl-2 text-sm md:text-base ${isMobile ? "text-right" : ""}`}
+            >
+              <span>{renderAccessTextLocation(accessTextLocation)}</span>
+            </div>
           </div>
         </div>
       </div>
       {vehicleTypesWithPlatformInfo.includes(vehicleType) && (
         <>
           <div className="flex flex-row items-center pb-3 pt-1 align-middle">
-            <div className="py-2 pl-4 text-base font-normal leading-relaxed">
+            <div className="py-2 pl-4 text-sm font-normal leading-relaxed md:text-base">
               {/*Zugang zum Bahnsteig ohne Hilfe*/}
               Zugang zum Perron: &nbsp;
               {platformInfo.haltekanteAccess}

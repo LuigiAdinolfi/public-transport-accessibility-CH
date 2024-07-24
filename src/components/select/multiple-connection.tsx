@@ -117,7 +117,9 @@ export function MultipleConnection({
               accessIconDestination={accessIcons[0].destination}
             />
           </div>
-          <div className="flex justify-center px-2 pt-14">
+          <div
+            className={`flex justify-center px-2 ${isMobile ? "" : "pt-14"}`}
+          >
             {/*{isMobile ? <ChevronDown /> : <ChevronRight />}*/}
             {showWarningMessage ? (
               <TriangleAlert size={24} className="flex-shrink-0" />

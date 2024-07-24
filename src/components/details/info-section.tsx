@@ -86,7 +86,10 @@ export default function InfoSection({
                 {legDuration} Minuten zum Umsteigen
               </div>
               <div className="flex items-center py-4">
-                <TriangleAlert size={32} className="flex-shrink-0" />
+                <TriangleAlert
+                  size={`${isMobile ? 24 : 32}`}
+                  className="flex-shrink-0"
+                />
                 <div className="flex-grow text-center text-base font-medium leading-relaxed">
                   Achtung, die Umsteigezeit für Rollstuhlfahrer ist
                   möglicherweise nicht ausreichend
