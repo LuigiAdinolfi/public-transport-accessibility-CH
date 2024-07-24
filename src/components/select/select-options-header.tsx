@@ -3,7 +3,6 @@
 import React from "react";
 import { useJourneyStore } from "@/store/useJourneyStore";
 import { formatDate } from "@/utils/formatDate";
-import { Button } from "@/components/ui/button";
 
 /**
  * Component for displaying the header with journey options and the selected date.
@@ -21,16 +20,6 @@ export default function SelectOptionsHeader(): React.ReactElement {
         <div className="flex w-full justify-end font-normal text-zinc-950 dark:text-zinc-400 md:text-base">
           {formatDate(selectedDate)}
         </div>
-      </div>
-      <div className="mt-6 flex w-full justify-center">
-        <Button
-          className="flex w-full text-base font-medium"
-          variant="secondary"
-          aria-label="Previous Connections"
-          onClick={() => console.log("Previous Connections")}
-        >
-          Frühere Verbindungen
-        </Button>
       </div>
     </div>
   );
