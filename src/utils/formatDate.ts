@@ -2,9 +2,11 @@ import { format } from "date-fns-tz";
 import { de } from "date-fns/locale";
 
 /**
- * Formats a date string for display in a specific format and locale.
- * @param date - The date string to format (should be in ISO format).
- * @returns A formatted date string suitable for display.
+ * Formats a date for display in a specific format and locale.
+ *
+ * @param {Date | null} date - The date to format. If `null`, an empty string is returned.
+ * @returns {string} A formatted date string suitable for display.
+ *                    Returns an empty string if the input date is `null`.
  */
 export const formatDate = (date: Date | null): string => {
   if (!date) return "";

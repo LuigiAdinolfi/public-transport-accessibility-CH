@@ -26,7 +26,9 @@ export function JourneyDetails(): React.ReactElement {
 
   return (
     <div className="mx-auto w-full max-w-screen-lg px-0">
+      {/* Render header buttons */}
       <HeaderButtons />
+      {/* Render tab navigation with journey legs */}
       <TabNavigation
         legs={allLegs}
         activeLegTab={activeLegTab}

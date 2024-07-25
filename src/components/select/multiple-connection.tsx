@@ -20,27 +20,34 @@ import { useRouter } from "next/navigation";
 
 /**
  * Component representing a journey with multiple connections.
+ *
+ * This component displays details of a journey with multiple connections, including accessibility
+ * information, travel time, and connection details for the first and last legs. It also handles
+ * user interactions and displays appropriate icons based on accessibility and warning conditions.
+ *
  * @param {Object} props - Component props.
  * @param {OJP.TripLeg[]} props.allLegs - Array of trip legs representing the journey details.
  * @param {string} props.duration - Total duration of the journey.
  * @returns {React.ReactElement} JSX Element representing the journey with multiple connections.
  */
 export function MultipleConnection({
-  allLegs,
-  duration,
-}: {
+                                     allLegs,
+                                     duration,
+                                   }: {
   allLegs: OJP.TripLeg[];
   duration: string;
 }): React.ReactElement {
-  const isMobile = useMediaQuery({ maxWidth: 767 });
-  const { resolvedTheme } = useTheme();
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
+  const isMobile = useMediaQuery({ maxWidth: 767 }); // Determine if the device is mobile
+  const { resolvedTheme } = useTheme(); // Get the current theme
+  const [loading, setLoading] = useState(false); // Loading state
+  const router = useRouter(); // Router for navigation
 
+  // Filter trip legs into timed and transfer legs
   const timedLegs = allLegs.filter((leg) => leg.legType === "TimedLeg");
   const transferLegs =
     allLegs.filter((leg) => leg.legType === "TransferLeg") || [];
 
+  // Get accessibility types for from and to locations
   const fromLocationVehicleAccessTypes = timedLegs.map(
     useFromStopPointVehicleAccessType,
   );
@@ -48,6 +55,7 @@ export function MultipleConnection({
     useToStopPointVehicleAccessType,
   );
 
+  // Get accessibility icons for each leg
   const accessIcons = fromLocationVehicleAccessTypes.map((type, index) => ({
     origin: getAccessIcon(type, resolvedTheme),
     destination: getAccessIcon(
@@ -56,6 +64,7 @@ export function MultipleConnection({
     ),
   }));
 
+  // Handle button click to initiate a specific action
   const handleClick = useHandleClick(
     allLegs,
     duration,
@@ -63,12 +72,14 @@ export function MultipleConnection({
     router.push,
   );
 
+  // Function to handle button click with loading state
   const handleButtonClick = async () => {
     setLoading(true);
     handleClick();
     setLoading(false);
   };
 
+  // Get the worst accessibility icon and text for the journey
   const worstIconProps = getWorstIconMultipleConnections(
     accessIcons[0].origin,
     accessIcons[0].destination,
@@ -79,7 +90,7 @@ export function MultipleConnection({
   const WorstIcon = worstIconProps?.icon;
   const worstText = worstIconProps?.text;
 
-  // Check if any transfer leg duration is less than 15 minutes
+  // Check if any transfer leg duration is less than 15 minutes and show warning if true
   const showWarningMessage = transferLegs.some(
     (leg) => leg.legDuration && leg.legDuration.totalMinutes < 15,
   );
@@ -120,7 +131,6 @@ export function MultipleConnection({
           <div
             className={`flex justify-center px-2 ${isMobile ? "" : "pt-14"}`}
           >
-            {/*{isMobile ? <ChevronDown /> : <ChevronRight />}*/}
             {showWarningMessage ? (
               <TriangleAlert size={24} className="flex-shrink-0" />
             ) : isMobile ? (

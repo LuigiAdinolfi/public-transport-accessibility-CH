@@ -1,3 +1,6 @@
+/**
+ * Interface for the StopPoint object
+ */
 export interface StopPoint {
   id: number;
   sloid: string;

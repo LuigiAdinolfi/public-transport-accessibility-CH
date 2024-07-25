@@ -13,22 +13,28 @@ import { accessProps } from "@/helpers/accessIconProps";
 
 /**
  * Component representing the last connection in a journey.
+ *
+ * This component displays details of the last trip leg, including departure and arrival times,
+ * station names, vehicle information, accessibility icons, and community rating.
+ *
  * @param {Object} props - Component props.
  * @param {OJP.TripLeg[]} props.allLegs - Array of trip legs representing the journey details.
+ * @param {accessProps | null} props.accessIconOrigin - Accessibility icon and text for the origin stop.
+ * @param {accessProps | null} props.accessIconDestination - Accessibility icon and text for the destination stop.
  * @returns {React.ReactElement} JSX Element representing the last connection component.
  */
 export function LastConnection({
-  allLegs,
-  accessIconOrigin,
-  accessIconDestination,
-}: {
+                                 allLegs,
+                                 accessIconOrigin,
+                                 accessIconDestination,
+                               }: {
   allLegs: OJP.TripLeg[];
   accessIconOrigin: accessProps | null;
   accessIconDestination: accessProps | null;
 }): React.ReactElement {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const { resolvedTheme } = useTheme();
-  const lastLeg = allLegs[allLegs.length - 1];
+  const lastLeg = allLegs[allLegs.length - 1]; // Get the last trip leg from the array
 
   const fromLocationName = lastLeg.fromLocation.locationName;
   const fromLocation = truncateTo12Chars(fromLocationName ?? "N/A");
@@ -50,7 +56,7 @@ export function LastConnection({
     <div className="flex basis-1/2 justify-start rounded-lg bg-zinc-50 dark:bg-zinc-900">
       <div className="w-full py-2">
         {/* Time and Station */}
-        <div className="font-mediuml flex w-full items-center justify-between px-3 pb-2 pt-1">
+        <div className="flex w-full items-center justify-between px-3 pb-2 pt-1 font-medium">
           <div className="flex justify-start text-base">{departureTime}</div>
           <div className="flex justify-end text-base">{arrivalTime}</div>
         </div>

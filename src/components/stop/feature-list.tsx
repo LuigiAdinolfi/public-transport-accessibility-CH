@@ -5,21 +5,28 @@ import { useStopPointStore } from "@/store/useStopPointStore";
 
 /**
  * Component displaying a list of features with checkboxes.
- * @returns {React.ReactElement} - FeatureList component.
+ * Features are conditionally rendered based on their availability status from the stop point store.
+ * The list is responsive and adapts layout based on screen size.
+ *
+ * @returns {React.ReactElement} - The FeatureList component.
  */
 export default function FeatureList(): React.ReactElement {
+  // Determine if the screen width is considered mobile (less than 768px)
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
+  // Access stop point data from the store
   const { stopPoint } = useStopPointStore();
 
+  // Destructure relevant features from stop point data
   const assistanceservice = stopPoint.assistanceService;
   const wheelchairticketmachine = stopPoint.wheelchairTicketMachine;
-  const wheelchairToilet = "YES";
+  const wheelchairToilet = "YES"; // Hardcoded as "YES"
   const assistanceavailability = stopPoint.assistanceAvailability;
   const audioticketmachine = stopPoint.audioTicketMachine;
   const dynamicaudiosystem = stopPoint.dynamicAudioSystem;
   const dynamicopticsystem = stopPoint.dynamicOpticSystem;
 
+  // Define feature mappings with their corresponding labels
   const featureMappings = [
     { value: assistanceservice, text: "Rollstuhl-Assistenzdienst" },
     { value: wheelchairticketmachine, text: "Rollstuhl-Ticket-Maschine" },
@@ -30,10 +37,12 @@ export default function FeatureList(): React.ReactElement {
     { value: dynamicopticsystem, text: "Dynamisches optisches System" },
   ];
 
+  // Filter and map features that are available
   const features = featureMappings
     .filter((feature) => feature.value === "YES")
     .map((feature) => feature.text);
 
+  // If no features are available, return an empty div
   if (features.length === 0) {
     return <div></div>;
   } else {

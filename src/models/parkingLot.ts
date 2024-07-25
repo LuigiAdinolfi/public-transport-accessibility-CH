@@ -1,5 +1,6 @@
 import mongoose, { Document, Schema } from "mongoose";
 
+// Define an interface for the ParkingLot document that extends Mongoose's Document
 interface IParkingLot extends Document {
   id: string;
   sloid: string;
@@ -26,7 +27,14 @@ ParkingLotSchema.index({ id: 1 }, { unique: true });
 
 let ParkingLot: mongoose.Model<IParkingLot>;
 
-// Define the model for the ParkingLot collection
+/**
+ * Returns the Mongoose model for the ParkingLot collection.
+ *
+ * If the model does not already exist, it creates it using the schema defined.
+ * Utilizes Mongoose's model caching to avoid creating multiple models with the same name.
+ *
+ * @returns {mongoose.Model<IParkingLot>} The Mongoose model for the ParkingLot collection.
+ */
 export function ParkingLotToStore(): mongoose.Model<IParkingLot> {
   if (!ParkingLot) {
     ParkingLot =

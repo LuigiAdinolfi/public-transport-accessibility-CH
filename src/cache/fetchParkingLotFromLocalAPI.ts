@@ -6,6 +6,17 @@ import fetchParkingLotsByParentSloid from "@/services/atlas/prm-directory/fetchP
 import { storeParkingLotToDB } from "@/db/storeParkingLotToDB";
 import ParkingLotToStore from "@/models/parkingLot";
 
+/**
+ * Fetches parking lot data for a given parent service point SLOID from local sources.
+ *
+ * This function first attempts to retrieve parking lot data from Redis cache. If the data is not present in
+ * the cache, it then queries MongoDB. If the data is not found in MongoDB, it fetches the data from an external API.
+ * It also updates Redis and MongoDB with the fetched data for future use.
+ *
+ * @param {string} parentServicePointSloid - The SLOID (Service Location Object ID) of the parent service point.
+ * @returns {Promise<{ data: object, ok: boolean }>} - A promise that resolves to an object containing the parking
+ * lot data and a boolean indicating the success of the operation.
+ */
 export async function fetchParkingLotFromLocalAPI(
   parentServicePointSloid: string,
 ) {
@@ -38,7 +49,7 @@ export async function fetchParkingLotFromLocalAPI(
         `parkingLot:${parentServicePointSloid}`,
         JSON.stringify(parkingLotFromDB),
         "EX",
-        86400,
+        86400, // Cache expiration time set to 24 hours
       );
       return { data: parkingLotFromDB, ok: true };
     }
@@ -63,13 +74,14 @@ export async function fetchParkingLotFromLocalAPI(
         `parkingLot:${parentServicePointSloid}`,
         JSON.stringify(parkingLotFromAPI),
         "EX",
-        86400,
+        86400, // Cache expiration time set to 24 hours
       );
       return { data: parkingLotFromAPI, ok: true };
     }
 
     return { data: {}, ok: false };
   } catch (error) {
+    // Log the error if something goes wrong
     console.log(
       `Error in fetchParkingLotFromLocalAPI for parent SLOID ${parentServicePointSloid}:`,
       error,

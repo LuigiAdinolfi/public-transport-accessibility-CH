@@ -1,3 +1,6 @@
+/**
+ * Interface for ParkingLot
+ */
 export interface ParkingLot {
   id: string;
   sloid: string;

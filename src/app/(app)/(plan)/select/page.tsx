@@ -4,8 +4,10 @@ import * as React from "react";
 import { JourneyBreadcrumbList } from "@/components/shared/breadcrumb-list";
 
 /**
- * Component for the Select page, displaying journey selection.
- * @returns {React.ReactElement} The Select page component.
+ * Component for the Select page, which displays the journey selection interface.
+ * This component includes breadcrumb navigation and the main content area for journey selection.
+ *
+ * @returns {React.ReactElement} The Select page component containing breadcrumb navigation and journey selection.
  */
 export default function SelectPage(): React.ReactElement {
   const currentPage = "/select";
@@ -22,6 +24,7 @@ export default function SelectPage(): React.ReactElement {
 
       {/* Main Content */}
       <div className="flex min-h-screen w-full flex-col items-center justify-between py-6 lg:p-10">
+        {/* Journey selection interface */}
         <SelectJourney />
       </div>
     </>

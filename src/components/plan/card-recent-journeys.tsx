@@ -17,8 +17,9 @@ import { formatDateSmall } from "@/utils/formatDateSmall";
 import { formatDate } from "@/utils/formatDate";
 
 /**
- * CardRecentJourneys component for selecting a recent journey.
- * @returns {React.ReactElement} CardRecentJourneys component.
+ * CardRecentJourneys component displays a list of recent journeys that users can select.
+ *
+ * @returns {React.ReactElement} The rendered CardRecentJourneys component.
  */
 export function CardRecentJourneys(): React.ReactElement {
   const { resolvedTheme } = useTheme();

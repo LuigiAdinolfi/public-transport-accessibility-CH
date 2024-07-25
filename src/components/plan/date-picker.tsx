@@ -19,7 +19,8 @@ const timeZone = "Europe/Zurich";
 /**
  * DatePicker component for selecting date and time.
  * Manages state for date and time selection.
- * @returns {React.ReactElement} DatePicker component.
+ *
+ * @returns {React.ReactElement} The rendered DatePicker component.
  */
 export function DatePicker(): React.ReactElement {
   const { date, setDate, time, setTime } = useJourneyStore();
@@ -28,11 +29,11 @@ export function DatePicker(): React.ReactElement {
   // Initialize with current date and time
   useEffect(() => {
     const now = new Date();
-    const zonedTime = toZonedTime(now, timeZone); // Convert to specified time zone
-    const formattedTime = format(zonedTime, "HH:mm"); // Format time to HH:mm
+    const zonedTime = toZonedTime(now, timeZone); // Convert current time to the specified time zone
+    const formattedTime = format(zonedTime, "HH:mm"); // Format time to "HH:mm"
     setDate(zonedTime);
     setTime(formattedTime);
-    setSelectedDate(zonedTime); // Update parent with initial date
+    setSelectedDate(zonedTime); // Update parent component with the initial date and time
   }, [setSelectedDate, setDate, setTime]);
 
   return (
@@ -51,19 +52,20 @@ export function DatePicker(): React.ReactElement {
       <PopoverContent className="w-auto p-0">
         <Calendar
           mode="single"
-          selected={date} // Pass non-null value
+          selected={date} // Pass the currently selected date
           onSelect={(newDate) => {
             if (newDate) {
+              // If a new date is selected, update the time portion
               const [hours, minutes] = time.split(":");
               newDate.setHours(parseInt(hours, 10));
               newDate.setMinutes(parseInt(minutes, 10));
               setDate(newDate);
-              setSelectedDate(newDate); // Update parent with new date
+              setSelectedDate(newDate); // Update parent component with the new date and time
             }
           }}
           initialFocus
           today={new Date()}
-          locale={de}
+          locale={de} // Set locale to German
         />
         <div className="p-4">
           <label
@@ -76,7 +78,7 @@ export function DatePicker(): React.ReactElement {
             type="time"
             id="time"
             value={time}
-            onChange={handleTimeChange}
+            onChange={handleTimeChange} // Handle changes to the time input
             className="mt-1 block w-full rounded-md border border-zinc-300 py-2 pl-3 pr-3 shadow-sm focus:border-zinc-500 focus:outline-none focus:ring-zinc-500 sm:text-sm"
             aria-label="Select time"
           />

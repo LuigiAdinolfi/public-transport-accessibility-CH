@@ -34,11 +34,11 @@ interface CardPathProps {
  * @returns {React.ReactElement} The CardPath component.
  */
 export default function CardPath({
-  index,
-  leg,
-  legDuration,
-  accessIcons,
-}: CardPathProps): React.ReactElement {
+                                   index,
+                                   leg,
+                                   legDuration,
+                                   accessIcons,
+                                 }: CardPathProps): React.ReactElement {
   const selectedLeg = leg;
   const fromLocationName = selectedLeg.fromLocation.locationName ?? "N/A";
   const toLocationName = selectedLeg.toLocation.locationName ?? "N/A";
@@ -60,18 +60,22 @@ export default function CardPath({
     useState<Platform | null>(null);
 
   useEffect(() => {
+    // Set the selected trip leg in the journey store
     setSelectedTripLeg(selectedLeg);
 
     async function fetchPlatform() {
+      // Fetch platform data from the origin and destination
       const originPlatform = await getCachedPlatformFromOrigin(selectedLeg);
       const destinationPlatform =
         await getCachedPlatformFromDestination(selectedLeg);
+      // Update local and global state with the fetched platform data
       setLocalPlatformOrigin(originPlatform);
       setLocalPlatformDestination(destinationPlatform);
       setPlatformOrigin(originPlatform);
       setPlatformDestination(destinationPlatform);
     }
 
+    // Invoke the fetchPlatform function
     fetchPlatform().then((r) => r);
   }, [
     index,

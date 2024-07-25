@@ -20,12 +20,14 @@ interface InfoSectionProps {
  * destination stop place, and optionally, duration and navigation button.
  *
  * @param {InfoSectionProps} props - Props for InfoSection component.
+ * @param {OJP.TripLeg} props.leg - The trip leg containing details of the journey segment.
+ * @param {number} props.legDuration - The duration of the leg in minutes.
  * @returns {React.ReactElement} InfoSection component.
  */
 export default function InfoSection({
-  leg,
-  legDuration,
-}: InfoSectionProps): React.ReactElement {
+                                      leg,
+                                      legDuration,
+                                    }: InfoSectionProps): React.ReactElement {
   const { resolvedTheme } = useTheme();
   const router = useRouter();
 
@@ -35,6 +37,7 @@ export default function InfoSection({
   const vehicleType = getVehicleType(leg);
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
+  // Get vehicle icon based on vehicle type and current theme
   const VehicleIcon = getVehicleIcon(vehicleType, resolvedTheme);
 
   return (

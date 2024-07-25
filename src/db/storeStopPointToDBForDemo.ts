@@ -1,8 +1,16 @@
 import { StopPointForDemo } from "@/types/StopPointForDemo";
 
+/**
+ * Converts an array of `StopPointForDemo` objects into a format suitable for database storage.
+ * This function maps each `StopPointForDemo` object to a new object with the same properties, including metadata and additional fields.
+ *
+ * @param {StopPointForDemo[]} stopPointsData - An array of `StopPointForDemo` objects to be converted.
+ * @returns {any[]} - An array of objects formatted for database storage.
+ */
 export function storeStopPointToDBForDemo(
   stopPointsData: StopPointForDemo[],
 ): any[] {
+  // Map each StopPointForDemo object to a new format suitable for database storage
   return stopPointsData.map((stopPoint: StopPointForDemo) => ({
     creationDate: stopPoint.creationDate,
     creator: stopPoint.creator,

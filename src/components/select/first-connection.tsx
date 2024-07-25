@@ -13,36 +13,53 @@ import { accessProps } from "@/helpers/accessIconProps";
 
 /**
  * Component representing the first connection in a journey.
+ *
+ * This component displays information about the first connection leg of a journey, including
+ * departure and arrival times, locations, vehicle type and number, accessibility information,
+ * and community rating. It adapts its layout for mobile and desktop views.
+ *
  * @param {Object} props - Component props.
  * @param {OJP.TripLeg[]} props.allLegs - Array of trip legs representing the first connection.
+ * @param {accessProps | null} props.accessIconOrigin - Accessibility icon and text for the origin stop point.
+ * @param {accessProps | null} props.accessIconDestination - Accessibility icon and text for the destination stop point.
  * @returns {React.ReactElement} - The rendered first connection component.
  */
 export function FirstConnection({
-  allLegs,
-  accessIconOrigin,
-  accessIconDestination,
-}: {
+                                  allLegs,
+                                  accessIconOrigin,
+                                  accessIconDestination,
+                                }: {
   allLegs: OJP.TripLeg[];
   accessIconOrigin: accessProps | null;
   accessIconDestination: accessProps | null;
 }): React.ReactElement {
+  // Check if the screen size is mobile
   const isMobile = useMediaQuery({ maxWidth: 767 });
+
+  // Get the current theme (light or dark) from the theme hook
   const { resolvedTheme } = useTheme();
+
+  // Extract the first trip leg details
   const firstLeg = allLegs[0];
 
+  // Get and truncate location names
   const fromLocationName = firstLeg.fromLocation.locationName;
   const fromLocation = truncateTo12Chars(fromLocationName ?? "N/A");
   const toLocationName = firstLeg.toLocation.locationName;
   const toLocation = truncateTo12Chars(toLocationName ?? "N/A");
+
+  // Get vehicle number, departure and arrival times, and vehicle type
   const vehicleNumber = getVehicleNumber(firstLeg);
   const departureTime = getDepartureTime(firstLeg);
   const arrivalTime = getArrivalTime(firstLeg);
   const vehicleType = getVehicleType(firstLeg);
+
+  // Get the appropriate vehicle icon for the current theme
   const VehicleIcon = getVehicleIcon(vehicleType, resolvedTheme);
 
+  // Get accessibility icons and text
   const AccessIconFromLocation = accessIconOrigin?.icon;
   const accessTextFromLocation = accessIconOrigin?.text;
-
   const AccessIconToLocation = accessIconDestination?.icon;
   const accessTextToLocation = accessIconDestination?.text;
 

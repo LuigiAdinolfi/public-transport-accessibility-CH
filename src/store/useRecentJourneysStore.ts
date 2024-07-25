@@ -1,6 +1,9 @@
 import { create } from "zustand";
 import * as OJP from "ojp-sdk";
 
+/**
+ * Interface defining the structure of a recent journey.
+ */
 interface RecentJourney {
   fromLocation: OJP.Location | null;
   toLocation: OJP.Location | null;
@@ -12,12 +15,19 @@ interface RecentJourney {
   connections: { vehicleType: string; vehicleNumber: string }[];
 }
 
+/**
+ * Interface defining the state structure for recent journeys.
+ */
 interface JourneyState {
   recentJourneys: RecentJourney[]; // Array to store recent journeys
   addRecentJourney: (journey: RecentJourney) => void; // Function to add a recent journey
   getRecentJourneys: () => RecentJourney[]; // Function to get recent journeys
 }
 
+/**
+ * Zustand hook for managing recent journeys state.
+ * @returns {JourneyState} - The state and setter functions for recent journeys.
+ */
 export const useRecentJourneysStore = create<JourneyState>((set, get) => {
   // Initialize recent journeys from localStorage or empty array
   const initialRecentJourneys: RecentJourney[] =

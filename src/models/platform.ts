@@ -1,7 +1,6 @@
-// platform.ts
-
 import mongoose, { Document, Schema } from "mongoose";
 
+// Define an interface for the Platform document that extends Mongoose's Document
 interface IPlatform extends Document {
   id: string;
   sloid: string;
@@ -58,7 +57,14 @@ PlatformSchema.index({ id: 1 }, { unique: true });
 
 let Platform: mongoose.Model<IPlatform>;
 
-// Export the model function to ensure it's called after the connection is established
+/**
+ * Returns the Mongoose model for the Platform collection.
+ *
+ * If the model does not already exist, it creates it using the schema defined.
+ * Utilizes Mongoose's model caching to avoid creating multiple models with the same name.
+ *
+ * @returns {mongoose.Model<IPlatform>} The Mongoose model for the Platform collection.
+ */
 export function PlatformToStore(): mongoose.Model<IPlatform> {
   if (!Platform) {
     Platform =

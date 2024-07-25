@@ -8,42 +8,54 @@ import { useHandleKeyDown } from "@/hooks/useHandleKeyDown";
 import { useHandleMouseEnter } from "@/hooks/useHandleMouseEnter";
 
 /**
- * Component for input field with location search and selection functionality.
+ * Component for an input field with location search and selection functionality.
+ * Displays a search input and a dropdown list of options for location selection.
  *
- * @param {JourneyPointProps} props - Props object containing placeholder, onLocationSelected callback,
- * description, and value.
- * @returns {React.ReactElement} JSX element representing the JourneyPointInput component.
+ * @param {JourneyPointProps} props - The props object for the component.
+ * @param {string} props.placeholder - Placeholder text for the input field.
+ * @param {(location: { locationName: string }) => void} props.onLocationSelected - Callback function invoked when a location is selected.
+ * @param {string} props.description - Description text displayed below the input field.
+ * @param {string} props.value - Current value of the input field.
+ * @returns {React.ReactElement} The rendered JSX element representing the JourneyPointInput component.
  */
 export default function JourneyPointInput({
-  placeholder,
-  onLocationSelected,
-  description,
-  value,
-}: JourneyPointProps): React.ReactElement {
+                                            placeholder,
+                                            onLocationSelected,
+                                            description,
+                                            value,
+                                          }: JourneyPointProps): React.ReactElement {
   const [highlightedIndex, setHighlightedIndex] = useState<number | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // Hook for handling option selection and state management
   const { inputValue, setInputValue, selectedOption, handleOptionSelect } =
     useHandleOptionSelect(onLocationSelected, setMenuOpen);
+
+  // Hook for fetching options based on the current input value
   const { options } = useFetchOptions(inputValue, selectedOption);
 
+  // Hook for handling keyboard navigation within the options menu
   const handleKeyDown = useHandleKeyDown(
     menuOpen,
     options,
     highlightedIndex,
     setHighlightedIndex,
     handleOptionSelect,
-    setMenuOpen, // Pass setMenuOpen to useHandleKeyDown
+    setMenuOpen,
   );
+
+  // Hook for handling mouse hover over options in the menu
   const handleMouseEnter = useHandleMouseEnter(setHighlightedIndex);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
+  // Initialize input value when component mounts or value changes
   useEffect(() => {
     setInputValue(value);
   }, [value, setInputValue]);
 
+  // Close the menu if a click occurs outside the input or menu
   useEffect(() => {
     const handleDocumentClick = (event: MouseEvent) => {
       if (

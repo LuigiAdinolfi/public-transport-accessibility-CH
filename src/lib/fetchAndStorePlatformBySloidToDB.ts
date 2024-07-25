@@ -4,14 +4,18 @@ import fetchFromAPIBySloid from "@/lib/fetchFromAPIBySloid";
 import PlatformToStore from "@/models/platform";
 
 /**
- * Fetches data from the specified API endpoint by SLOID,
- * processes the data using a provided function to select fields,
- * and saves the selected fields to MongoDB with upsert.
- * Logs errors and success messages for debugging purposes.
- * @param {string} endpoint - The API endpoint to fetch data from.
- * @param {Function} selectFieldsFn - A function to select fields from the fetched data.
- * @param {string} sloid - The specific SLOID to fetch data for.
- * @returns {Promise<any | null>} The response from the API or null if the operation fails.
+ * Fetches data from the specified API endpoint using a given SLOID,
+ * processes the data using a provided function to select specific fields,
+ * and then saves or updates the selected fields in MongoDB. Logs both
+ * errors and success messages for debugging purposes.
+ *
+ * @template T - The type of document to be stored in MongoDB.
+ * @param {string} endpoint - The API endpoint from which to fetch data.
+ * @param {(data: any[]) => T[]} selectFieldsFn - A function that processes the fetched data
+ * and returns an array of objects conforming to the document type T.
+ * @param {string} sloid - The specific SLOID used to fetch the data.
+ * @returns {Promise<any | null>} - A promise that resolves to the API response data if successful,
+ * or null if the operation fails or if the response structure is invalid.
  */
 export default async function fetchAndStorePlatformBySloidToDB<
   T extends Document,
@@ -21,15 +25,20 @@ export default async function fetchAndStorePlatformBySloidToDB<
   sloid: string,
 ): Promise<any | null> {
   console.log(`fetchAndStorePlatformBySloidToDB called with sloid: ${sloid}`);
+
+  // Connect to MongoDB
   await connectDB();
 
   try {
     console.log(
       `Fetching data from endpoint: ${endpoint} with sloid: ${sloid}`,
     );
+
+    // Fetch data from the API
     const response = await fetchFromAPIBySloid(endpoint, sloid);
 
     if (response) {
+      // Process the response data
       let data = Array.isArray(response)
         ? response
         : response.objects
@@ -37,9 +46,13 @@ export default async function fetchAndStorePlatformBySloidToDB<
           : [response];
       console.log("Data fetched successfully, processing data...");
 
+      // Apply the provided function to select specific fields from the data
       const selectedFields = selectFieldsFn(data);
 
+      // Get the MongoDB model for platforms
       const PlatformModel = PlatformToStore();
+
+      // Upsert each item into MongoDB
       for (const item of selectedFields) {
         console.log(`Upserting item with ID: ${item.id}`);
         await PlatformModel.updateOne(
@@ -56,6 +69,7 @@ export default async function fetchAndStorePlatformBySloidToDB<
       return null;
     }
   } catch (error) {
+    // Log error if something goes wrong
     console.error("Failed to fetch or save data:", error);
     return null;
   }

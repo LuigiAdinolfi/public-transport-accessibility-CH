@@ -15,24 +15,35 @@ import { useRouter } from "next/navigation";
 
 /**
  * Component representing a direct connection in a journey.
+ *
+ * This component displays a button for a direct connection which includes accessibility information
+ * and duration. It also integrates with the `useHandleClick` hook for handling click actions,
+ * and manages loading state for the button.
+ *
  * @param {Object} props - Component props.
  * @param {OJP.TripLeg[]} props.allLegs - Array of trip legs representing the direct connection.
  * @param {string} props.duration - Duration of the direct connection.
  * @returns {React.ReactElement} - The rendered direct connection component.
  */
 export function DirectConnection({
-  allLegs,
-  duration,
-}: {
+                                   allLegs,
+                                   duration,
+                                 }: {
   allLegs: OJP.TripLeg[];
   duration: string;
 }): React.ReactElement {
+  // Media query hook to determine if the device is mobile
   const isMobile = useMediaQuery({ maxWidth: 767 });
+
+  // Theme hook to get the current theme (light or dark)
   const { resolvedTheme } = useTheme();
+
+  // Destructure the first trip leg details
   const details = allLegs[0];
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  // Get vehicle access types for origin and destination
   const fromLocationVehicleAccessTypes = allLegs.map(
     useFromStopPointVehicleAccessType,
   );
@@ -40,6 +51,7 @@ export function DirectConnection({
     useToStopPointVehicleAccessType,
   );
 
+  // Generate accessibility icons based on vehicle access types
   const accessIcons = fromLocationVehicleAccessTypes.map((type, index) => ({
     origin: getAccessIcon(type, resolvedTheme),
     destination: getAccessIcon(
@@ -48,6 +60,7 @@ export function DirectConnection({
     ),
   }));
 
+  // Handle click events using the custom hook
   const handleClick = useHandleClick(
     allLegs,
     duration,
@@ -55,12 +68,14 @@ export function DirectConnection({
     router.push,
   );
 
+  // Click handler with loading state management
   const handleButtonClick = async () => {
     setLoading(true);
     handleClick();
     setLoading(false);
   };
 
+  // Get the worst accessibility icon and text
   const worstIconProps = getWorstIcon(
     accessIcons[0].origin,
     accessIcons[0].destination,

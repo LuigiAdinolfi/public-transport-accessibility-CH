@@ -5,11 +5,28 @@ import { Button } from "@/components/ui/button";
 import { Accessibility, Home, Settings, Users } from "lucide-react";
 import { useRouter } from "next/navigation";
 
+/**
+ * Mobile navigation component for responsive design.
+ *
+ * This component renders a mobile-friendly navigation menu with buttons for
+ * different sections (Home, Community, Settings). It highlights the active
+ * link and updates the route based on user interaction.
+ *
+ * @returns {React.ReactElement} - The mobile navigation component.
+ */
 export function MobileNav() {
+  // State to track the currently active link
   const [activeLink, setActiveLink] = useState("/");
   const router = useRouter();
 
-  function handleLinkClick(s: string) {
+  /**
+   * Handle navigation link clicks.
+   *
+   * Updates the active link state and navigates to the specified route.
+   *
+   * @param {string} s - The URL path to navigate to.
+   */
+  function handleLinkClick(s: string): void {
     setActiveLink(s);
     router.push(s);
   }
@@ -20,6 +37,7 @@ export function MobileNav() {
         <Accessibility className="h-6 w-6 sm:block md:hidden" />
       </div>
       <nav className="flex w-full justify-center gap-2 sm:gap-4">
+        {/* Home Button */}
         <Button
           variant="secondary"
           className={`flex items-center gap-4 px-2.5 ${activeLink === "/" ? "text-foreground" : "text-muted-foreground"} hover:text-foreground`}
@@ -28,6 +46,8 @@ export function MobileNav() {
           <Home className="h-6 w-6" />
           <div className="sr-only">Reise Planen</div>
         </Button>
+
+        {/* Community Button */}
         <Button
           variant="secondary"
           className={`flex items-center gap-4 px-2.5 ${activeLink === "/community" ? "text-foreground" : "text-muted-foreground"} hover:text-foreground`}
@@ -36,6 +56,8 @@ export function MobileNav() {
           <Users className="h-6 w-6" />
           <div className="sr-only">Community</div>
         </Button>
+
+        {/* Settings Button */}
         <Button
           variant="secondary"
           className={`flex items-center gap-4 px-2.5 ${activeLink === "/settings" ? "text-foreground" : "text-muted-foreground"} hover:text-foreground`}

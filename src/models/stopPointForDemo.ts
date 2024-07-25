@@ -1,6 +1,7 @@
 import mongoose, { Document, Schema } from "mongoose";
 
-interface IStopPointDemo extends Document {
+// Define an interface for the StopPointDemo document that extends Mongoose's Document
+export interface IStopPointDemo extends Document {
   creationDate: string;
   creator: string;
   editionDate: string;
@@ -35,6 +36,7 @@ interface IStopPointDemo extends Document {
   reduced: boolean;
 }
 
+// Define the schema for the StopPointDemo collection
 const StopPointDemoSchema: Schema = new Schema({
   creationDate: { type: String },
   creator: { type: String },
@@ -70,10 +72,19 @@ const StopPointDemoSchema: Schema = new Schema({
   reduced: { type: Boolean },
 });
 
+// Define a unique index on the 'id' field to enforce uniqueness
 StopPointDemoSchema.index({ id: 1 }, { unique: true });
 
 let StopPointDemo: mongoose.Model<IStopPointDemo>;
 
+/**
+ * Returns the Mongoose model for the StopPointDemo collection.
+ *
+ * If the model does not already exist, it creates it using the schema defined.
+ * Utilizes Mongoose's model caching to avoid creating multiple models with the same name.
+ *
+ * @returns {mongoose.Model<IStopPointDemo>} The Mongoose model for the StopPointDemo collection.
+ */
 export function StopPointToStoreForDemo(): mongoose.Model<IStopPointDemo> {
   if (!StopPointDemo) {
     StopPointDemo =

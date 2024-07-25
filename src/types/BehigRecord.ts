@@ -1,3 +1,6 @@
+/**
+ * Interface for the BehigRecord object
+ */
 export interface BehigRecord {
   sloid: string;
   bezeichnung_offiziell: string;

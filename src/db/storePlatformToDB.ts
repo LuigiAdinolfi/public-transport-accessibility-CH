@@ -1,6 +1,14 @@
 import { Platform } from "@/types/Platform";
 
+/**
+ * Converts an array of `Platform` objects into a format suitable for storage in a database.
+ * This function maps each `Platform` object to a new object with transformed properties.
+ *
+ * @param {Platform[]} platformsData - An array of `Platform` objects to be converted.
+ * @returns {any[]} - An array of objects formatted for database storage.
+ */
 export function storePlatformToDB(platformsData: Platform[]): any[] {
+  // Map each Platform object to a new format suitable for database storage
   return platformsData.map((platform: Platform) => ({
     id: platform.id.toString(),
     sloid: platform.sloid,

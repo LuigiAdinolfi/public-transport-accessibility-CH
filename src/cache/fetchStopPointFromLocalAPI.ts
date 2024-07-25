@@ -2,11 +2,18 @@
 
 import redis from "@/cache/redisClient";
 import connectDB from "@/db/connectDB";
-
 import fetchStopPointBySloid from "@/services/atlas/prm-directory/fetchStopPointBySloid";
 import { storeStopPointToDB } from "@/db/storeStopPointToDB";
 import { StopPointToStore } from "@/models/stopPoint";
 
+/**
+ * Fetches stop point data by SLOID (Service Location IDentifier) from Redis cache,
+ * MongoDB database, or API, in that order of priority.
+ * Caches the retrieved data in Redis for future use.
+ *
+ * @param {string} sloid - The SLOID to fetch stop point data for.
+ * @returns {Promise<{data: any, ok: boolean}>} A promise that resolves to an object containing the stop point data and a success status.
+ */
 export async function fetchStopPointFromLocalAPI(sloid: string) {
   try {
     // Check Redis cache first
@@ -30,7 +37,7 @@ export async function fetchStopPointFromLocalAPI(sloid: string) {
         JSON.stringify(stopPointFromDB),
         "EX",
         86400,
-      ); // Set cache for 1 day
+      ); // Set cache expiration for 1 day
       return { data: stopPointFromDB, ok: true };
     }
 
@@ -54,13 +61,14 @@ export async function fetchStopPointFromLocalAPI(sloid: string) {
         JSON.stringify(stopPointFromAPI),
         "EX",
         86400,
-      ); // Set cache for 1 day
+      ); // Set cache expiration for 1 day
 
       return { data: stopPointFromAPI, ok: true };
     }
 
     return { data: { message: "Stop point not found" }, ok: false };
   } catch (error) {
-    return { data: { message: error }, ok: false };
+    console.error(`Error fetching stop point for sloid ${sloid}:`, error);
+    return { data: { message: error || "An error occurred" }, ok: false };
   }
 }

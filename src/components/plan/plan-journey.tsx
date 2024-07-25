@@ -12,15 +12,18 @@ import { CircleIcons } from "@/components/details/circle-icons";
 type ActiveTab = "new-journey" | "recent-journeys";
 
 /**
- * Component representing the journey planning card.
- * @returns {React.ReactElement} The journey planning card.
+ * Component representing the journey planning card with tabs for new and recent journeys.
+ *
+ * Manages the state for the active tab and handles theme changes.
+ *
+ * @returns {React.ReactElement} The rendered JSX element representing the PlanJourney component.
  */
 export function PlanJourney(): React.ReactElement {
-  // State variables
+  // State to keep track of the currently active tab
   const [activeJourneyTab, setActiveJourneyTab] =
     useState<ActiveTab>("new-journey");
 
-  // Theme hook
+  // Theme hook to determine the current theme
   const { resolvedTheme } = useTheme();
 
   return (

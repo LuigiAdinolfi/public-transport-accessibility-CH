@@ -7,9 +7,15 @@ import {
 
 /**
  * Custom hook to fetch location options based on user input.
- * @param {string} inputValue - The current input value from the user.
- * @param {OJP.Location | null} selectedOption - The currently selected location option.
- * @returns an object containing the fetched options, menu open state, and setter function.
+ * This hook is used to fetch and manage location options from the Open Journey Planner API.
+ * It handles updating the list of options based on user input and manages the state of the menu.
+ *
+ * @param {string} inputValue - The current input value from the user. This is used to query location options.
+ * @param {OJP.Location | null} selectedOption - The currently selected location option. Used to avoid refetching the same location.
+ * @returns {object} An object containing:
+ *   - {OJP.Location[]} options - The list of fetched location options.
+ *   - {boolean} menuOpen - The state indicating whether the options menu is open.
+ *   - {Function} setMenuOpen - A function to set the state of the menu open/closed.
  */
 export const useFetchOptions = (
   inputValue: string,
@@ -21,6 +27,7 @@ export const useFetchOptions = (
   useEffect(() => {
     if (inputValue.length > 1 && inputValue !== selectedOption?.locationName) {
       fetchJourneyPoints(inputValue).then((locations: MapLocations) => {
+        // Combine all fetched locations into a single array.
         const allLocations: OJP.Location[] = [
           ...locations.stop,
           // ...locations.address,
@@ -31,6 +38,7 @@ export const useFetchOptions = (
         setMenuOpen(true);
       });
     } else {
+      // Clear options and close the menu if input is empty or matches the selected option.
       setOptions([]);
       setMenuOpen(false);
     }

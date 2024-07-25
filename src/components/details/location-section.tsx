@@ -43,17 +43,20 @@ interface LocationSectionProps {
  * @param {Object} props - Props for LocationSection component.
  * @param {string} props.locationName - Name of the location.
  * @param {Platform} props.platform - Platform information.
- * @param {string} props.platformNr - Platform information.
+ * @param {string} props.platformNr - Platform number.
+ * @param {accessProps | null} props.accessIconLocationProps - Accessibility icon properties.
+ * @param {OJP.TripLeg} props.selectedLeg - Selected leg of the trip.
+ * @param {string} props.time - Time of arrival or departure.
  * @returns {React.ReactElement} LocationSection component.
  */
 export default function LocationSection({
-  locationName,
-  platform,
-  platformNr,
-  accessIconLocationProps,
-  selectedLeg,
-  time,
-}: LocationSectionProps): React.ReactElement {
+                                          locationName,
+                                          platform,
+                                          platformNr,
+                                          accessIconLocationProps,
+                                          selectedLeg,
+                                          time,
+                                        }: LocationSectionProps): React.ReactElement {
   const router = useRouter();
   const { resolvedTheme } = useTheme();
   const { setSelectedStop } = useJourneyStore();
@@ -82,6 +85,7 @@ export default function LocationSection({
 
   const vehicleTypesWithPlatformInfo = ["Zug", "EC", "RE", "S", "ICE", "IC"];
 
+  // Update platform information when platform data changes
   useEffect(() => {
     if (platform) {
       setPlatformInfo({
@@ -99,6 +103,11 @@ export default function LocationSection({
 
   const { setParentServicePointSloid } = useParkingLotStore();
 
+  /**
+   * Handles click event to navigate to stop details.
+   *
+   * @param {string | null} stop - The stop name.
+   */
   const handleClick = (stop: string | null) => {
     if (!stop) return;
     setIsLoading(true);
@@ -167,12 +176,12 @@ export default function LocationSection({
         <>
           <div className="flex flex-row items-center pb-3 pt-1 align-middle">
             <div className="py-2 pl-4 text-sm font-normal leading-relaxed md:text-base">
-              {/*Zugang zum Bahnsteig ohne Hilfe*/}
+              {/* Platform accessibility information */}
               Zugang zum Perron: &nbsp;
               {platformInfo.haltekanteAccess}
             </div>
           </div>
-          {/* Accordion for Zugkomposition */}
+          {/* Accordion for train composition */}
           <Accordion type="single" collapsible className="px-2">
             <AccordionItem value="item-1">
               <AccordionTrigger
@@ -198,7 +207,7 @@ export default function LocationSection({
           <AccordionTrigger
             className={`${!isMobile ? "py-6" : "py-4 text-sm"}`}
           >
-            {/*Ein- und Aussteigen für Rollstuhlfahrer*/}
+            {/* Accessibility information */}
             Zugänglichkeitsinformationen
           </AccordionTrigger>
           <AccordionContent className="px-2">
@@ -238,6 +247,7 @@ export default function LocationSection({
                 <div>{platformInfo.dynamicAudio}</div>
               </div>
             )}
+            {/* No accessibility information available */}
             {!platformInfo.boardingDevice &&
               !platformInfo.tactileSystem &&
               !platformInfo.additionalInformation &&

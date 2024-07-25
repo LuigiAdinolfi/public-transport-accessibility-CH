@@ -1,3 +1,6 @@
+/**
+ * Interface for the StopPointForDemo object
+ */
 export interface StopPointForDemo {
   creationDate: string;
   creator: string;

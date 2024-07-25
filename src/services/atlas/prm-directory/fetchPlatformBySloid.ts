@@ -2,22 +2,27 @@ import fetchAndStorePlatformBySloidToDB from "@/lib/fetchAndStorePlatformBySloid
 import { storePlatformToDB } from "@/db/storePlatformToDB";
 
 /**
- * Fetches platform data by SLOID from the API.
+ * Fetches platform data for a given SLOID from the API and stores it in the database.
  *
- * @param {string} sloid - The SLOID to append to the endpoint.
- * @returns {Promise<any | null>} The response data or null if the request failed.
+ * This function retrieves platform data using the provided `sloid` by appending it to the API endpoint.
+ * The fetched data is then stored in the database using the `storePlatformToDB` function.
+ *
+ * @param {string} sloid - The SLOID used to query the platform data from the API.
+ * @returns {Promise<any | null>} A promise that resolves to the fetched platform data, or `null` if the request fails.
  */
 export default async function fetchPlatformBySloid(
   sloid: string,
 ): Promise<any | null> {
   try {
+    // Fetch platform data from the API and store it in the database
     return await fetchAndStorePlatformBySloidToDB(
       "/prm-directory/v1/platforms",
       storePlatformToDB,
       sloid,
     );
   } catch (error) {
-    console.error(`Failed to fetch platforms for SLOID ${sloid}:`, error);
+    // Log any errors encountered during the fetch or store process
+    console.error(`Failed to fetch platform data for SLOID ${sloid}:`, error);
     return null;
   }
 }

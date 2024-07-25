@@ -2,11 +2,16 @@ import { format } from "date-fns-tz";
 import { de } from "date-fns/locale";
 
 /**
- * Formats a date string for display in a specific format and locale.
- * @param date - The date string to format (should be in ISO format).
- * @returns A formatted date string suitable for small display.
+ * Formats a date object for small display using a specific format and locale.
+ *
+ * @param {Date | null} date - The date object to format. If `null`, an empty string is returned.
+ * @returns {string} A formatted date string suitable for small display.
+ *                    Returns an empty string if the input date is `null`.
  */
 export const formatDateSmall = (date: Date | null): string => {
+  // Check if the date is null and return an empty string if it is
   if (!date) return "";
-  return format(new Date(date), "EEE dd. MMMM yyyy", { locale: de });
+
+  // Format the date to a string with the format "EEE dd. MMMM yyyy"
+  return format(date, "EEE dd. MMMM yyyy", { locale: de });
 };

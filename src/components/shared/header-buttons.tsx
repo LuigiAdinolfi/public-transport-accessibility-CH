@@ -4,7 +4,13 @@ import { HelpButton } from "@/components/shared/help-button";
 
 /**
  * Header component displaying back and help buttons.
- * @returns {React.ReactElement} HeaderButtons component.
+ *
+ * This component renders a header section with two buttons:
+ * one for navigating back and another for accessing help.
+ * The buttons are arranged in a flex container to be displayed
+ * side by side.
+ *
+ * @returns {React.ReactElement} - The HeaderButtons component.
  */
 export default function HeaderButtons(): React.ReactElement {
   return (

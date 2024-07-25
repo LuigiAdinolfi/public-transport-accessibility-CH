@@ -13,15 +13,20 @@ import { MyBreadcrumbItem } from "@/components/shared/breadcrumb-list";
 import { useRouter } from "next/navigation";
 
 /**
- * Breadcrumb component displaying navigation links.
- * @param {Object} props - Props for MyBreadcrumb component.
- * @param {string} props.currentPage - The current page URL.
- * @returns {React.ReactElement} - MyBreadcrumb component.
+ * Breadcrumb component for displaying navigation links in a hierarchical structure.
+ *
+ * This component renders a list of breadcrumb links based on the provided `breadcrumbList`
+ * and highlights the current page. It also supports keyboard navigation for accessibility.
+ *
+ * @param {Object} props - Component props.
+ * @param {string} props.currentPage - The URL of the current page to highlight.
+ * @param {MyBreadcrumbItem[]} props.breadcrumbList - List of breadcrumb items to display.
+ * @returns {React.ReactElement} The rendered Breadcrumb component.
  */
 export function MyBreadcrumb({
-  currentPage,
-  breadcrumbList,
-}: {
+                               currentPage,
+                               breadcrumbList,
+                             }: {
   currentPage: string;
   breadcrumbList: MyBreadcrumbItem[];
 }): React.ReactElement {
@@ -31,7 +36,10 @@ export function MyBreadcrumb({
   const router = useRouter();
 
   /**
-   * Handle key down event for accessibility navigation.
+   * Handles the key down event for keyboard accessibility.
+   *
+   * Allows users to navigate to a different page by pressing "Enter" on a breadcrumb link.
+   *
    * @param {React.KeyboardEvent<HTMLAnchorElement>} e - The keyboard event.
    * @param {string} url - The URL to navigate to.
    */
@@ -73,7 +81,7 @@ export function MyBreadcrumb({
                   </BreadcrumbPage>
                 )}
               </BreadcrumbItem>
-              {isLastPath ? null : <BreadcrumbSeparator />}
+              {!isLastPath && <BreadcrumbSeparator />}
             </Fragment>
           );
         })}

@@ -9,6 +9,11 @@ import { cn } from "@/lib/utils";
 
 /**
  * Component representing the main navigation menu.
+ *
+ * This component renders a navigation menu with links to various pages.
+ * It highlights the active link based on the current pathname and applies
+ * different styles based on the theme (dark or light).
+ *
  * @returns {React.ReactElement} - The main navigation menu component.
  */
 export function MainNav(): React.ReactElement {
@@ -19,6 +24,10 @@ export function MainNav(): React.ReactElement {
 
   /**
    * Function to generate CSS classes based on the current path and theme.
+   *
+   * This function determines the CSS classes for navigation links, including
+   * active link styles and theme-based colors.
+   *
    * @param {string} currentPath - The current path to compare with the pathname.
    * @returns {string} - CSS classes for the navigation links.
    */
@@ -50,6 +59,11 @@ export function MainNav(): React.ReactElement {
 
   /**
    * Component representing a navigation link with active state styling.
+   *
+   * This component renders a link with styles applied based on whether it is
+   * active (i.e., if the link's URL matches the current pathname). It also
+   * provides an aria-label for accessibility.
+   *
    * @param {Object} props - Component props.
    * @param {string} props.href - The URL path for the link.
    * @param {string} props.currentPath - The current path to compare with the link's URL.
@@ -57,10 +71,10 @@ export function MainNav(): React.ReactElement {
    * @returns {React.ReactElement} - The rendered navigation link.
    */
   function NavLink({
-    href,
-    currentPath,
-    children,
-  }: {
+                     href,
+                     currentPath,
+                     children,
+                   }: {
     href: string;
     currentPath: string;
     children: React.ReactNode;

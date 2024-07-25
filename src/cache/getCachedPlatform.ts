@@ -5,13 +5,17 @@ import fetchFromExplorerAPI from "@/services/explorer/fetchFromExplorerAPI";
 
 /**
  * Retrieves and caches platform information for the origin stop of a trip leg.
- * @param {any} selectedTripLeg - The selected trip leg object.
- * @returns {Promise<any>} The platform information retrieved or an empty object if not found.
+ * This function first attempts to fetch platform data from the cache or database.
+ * If not available, it fetches from an external API and caches the result.
+ *
+ * @param {any} selectedTripLeg - The selected trip leg object which includes information about the origin stop.
+ * @returns {Promise<any>} A promise that resolves to the platform information or an empty object if not found.
  */
 export async function getCachedPlatformFromOrigin(
   selectedTripLeg: any,
 ): Promise<any> {
   const { setPlatformOrigin } = usePlatformStore.getState();
+
   // Return early if selectedTripLeg is falsy
   if (!selectedTripLeg) return {};
 
@@ -65,13 +69,17 @@ export async function getCachedPlatformFromOrigin(
 
 /**
  * Retrieves and caches platform information for the destination stop of a trip leg.
- * @param {any} selectedTripLeg - The selected trip leg object.
- * @returns {Promise<any>} The platform information retrieved or an empty object if not found.
+ * This function first attempts to fetch platform data from the cache or database.
+ * If not available, it fetches from an external API and caches the result.
+ *
+ * @param {any} selectedTripLeg - The selected trip leg object which includes information about the destination stop.
+ * @returns {Promise<any>} A promise that resolves to the platform information or an empty object if not found.
  */
 export async function getCachedPlatformFromDestination(
   selectedTripLeg: any,
 ): Promise<any> {
   const { setPlatformDestination } = usePlatformStore.getState();
+
   // Return early if selectedTripLeg is falsy
   if (!selectedTripLeg) return {};
 
@@ -94,10 +102,10 @@ export async function getCachedPlatformFromDestination(
       return platform; // Return fetched platform data
     } catch (error) {
       console.error(
-        `Error fetching platform for origin sloid ${sloid}:`,
+        `Error fetching platform for destination sloid ${sloid}:`,
         error,
       );
-      return {};
+      return {}; // Return empty object if error occurs
     }
   } else {
     // Fetch platform data from Explorer API if sloid not prefixed with ch:1:
@@ -107,9 +115,14 @@ export async function getCachedPlatformFromDestination(
       if (platformFromBehig.results && platformFromBehig.results.length > 0) {
         const sloid = platformFromBehig.results[0].kanten_sloid;
         if (!sloid) return {}; // Return empty object if sloid is missing
-        const platform = await fetchPlatformClient(sloid);
-        setPlatformDestination(platform); // Update platform in state
-        return platform; // Return fetched platform data
+        try {
+          const platform = await fetchPlatformClient(sloid);
+          setPlatformDestination(platform); // Update platform in state
+          return platform; // Return fetched platform data
+        } catch (error) {
+          console.error(`Error fetching platform for sloid ${sloid}:`, error);
+          return {}; // Return empty object if error occurs
+        }
       }
     } else {
       console.error("No results found in platformFromBehig");

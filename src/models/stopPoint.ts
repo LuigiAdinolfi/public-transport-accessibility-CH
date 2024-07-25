@@ -1,5 +1,6 @@
 import mongoose, { Document, Schema } from "mongoose";
 
+// Define an interface for the StopPoint document that extends Mongoose's Document
 export interface IStopPoint extends Document {
   id: number;
   sloid: string;
@@ -25,6 +26,7 @@ export interface IStopPoint extends Document {
   ticketMachine: string;
 }
 
+// Define the schema for the StopPoint collection
 const StopPointSchema: Schema = new Schema({
   id: { type: Number, unique: true, required: true },
   sloid: { type: String, required: true },
@@ -50,10 +52,19 @@ const StopPointSchema: Schema = new Schema({
   ticketMachine: { type: String },
 });
 
+// Define a unique index on the combination of 'id' and 'sloid' fields
 StopPointSchema.index({ id: 1, sloid: 1 }, { unique: true });
 
 let StopPoint: mongoose.Model<IStopPoint>;
 
+/**
+ * Returns the Mongoose model for the StopPoint collection.
+ *
+ * If the model does not already exist, it creates it using the schema defined.
+ * Utilizes Mongoose's model caching to avoid creating multiple models with the same name.
+ *
+ * @returns {mongoose.Model<IStopPoint>} The Mongoose model for the StopPoint collection.
+ */
 export function StopPointToStore(): mongoose.Model<IStopPoint> {
   if (!StopPoint) {
     StopPoint =
@@ -62,3 +73,5 @@ export function StopPointToStore(): mongoose.Model<IStopPoint> {
   }
   return StopPoint;
 }
+
+export default StopPointToStore;

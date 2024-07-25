@@ -10,8 +10,11 @@ import PlatformToStore from "@/models/platform";
  * Fetches platform data by SLOID (Service Location IDentifier) from Redis cache,
  * MongoDB database, or API, in that order of priority.
  * Caches retrieved data in Redis for future use.
+ *
  * @param {string} sloid - The SLOID to fetch platform data for.
- * @returns {Promise<{data: any, ok: boolean}>} The platform data and status.
+ * @returns {Promise<{data: any, ok: boolean}>} A promise that resolves to an object containing:
+ *   - `data`: The platform data retrieved from the cache, database, or API.
+ *   - `ok`: A boolean indicating whether the data was successfully retrieved.
  */
 export async function fetchPlatformFromLocalAPI(
   sloid: string,
@@ -38,7 +41,7 @@ export async function fetchPlatformFromLocalAPI(
         JSON.stringify(platformFromDB),
         "EX",
         86400,
-      ); // Set cache for 1 day
+      ); // Set cache expiration to 1 day
       return { data: platformFromDB, ok: true };
     }
 
@@ -62,7 +65,7 @@ export async function fetchPlatformFromLocalAPI(
         JSON.stringify(platformFromAPI),
         "EX",
         86400,
-      ); // Set cache for 1 day
+      ); // Set cache expiration to 1 day
 
       return { data: platformFromAPI, ok: true };
     }
@@ -73,6 +76,6 @@ export async function fetchPlatformFromLocalAPI(
       `Error in fetchPlatformFromLocalAPI for SLOID ${sloid}:`,
       error,
     );
-    return { data: { message: error }, ok: false };
+    return { data: { message: error || "Unknown error" }, ok: false };
   }
 }

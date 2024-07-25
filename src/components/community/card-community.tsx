@@ -9,17 +9,21 @@ import { useTheme } from "next-themes";
 import { CircleIcons } from "@/components/details/circle-icons";
 
 type ActiveTab = "news" | "forum";
+
 /**
  * Component representing the community card for news and forum.
- * @returns {React.ReactElement} - CommunityCard component.
+ * Provides a tabbed interface to switch between news and forum content.
+ * @returns {React.ReactElement} The CommunityCard component.
  */
 export function CommunityCard(): React.ReactElement {
-  // Theme hook
+  // Retrieve the current theme (light or dark) using the useTheme hook from next-themes
   const { resolvedTheme } = useTheme();
+  // State to manage the active tab, initialized to "news"
   const [activeTab, setActiveTab] = useState<ActiveTab>("news");
 
   return (
     <Tabs
+      // Set the default active tab and manage tab value change
       defaultValue={activeTab}
       className="mx-auto w-full max-w-screen-lg px-0"
       onValueChange={(value) => setActiveTab(value as ActiveTab)}

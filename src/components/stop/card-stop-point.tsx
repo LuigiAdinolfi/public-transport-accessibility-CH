@@ -18,16 +18,26 @@ import { useRouter } from "next/navigation";
 
 /**
  * Component displaying detailed information about a stop point in a card format.
- * @returns {React.ReactElement} - CardStopPoint component.
+ * It includes the stop name, vehicle type, a button to view the station map, and additional information sections.
+ * The component also manages data fetching for parking lot and stop point details.
+ *
+ * @returns {React.ReactElement} - The CardStopPoint component.
  */
 export default function CardStopPoint(): React.ReactElement {
+  // Get the current theme resolved by next-themes
   const { resolvedTheme } = useTheme();
+
+  // Determine if the screen width is considered mobile (less than 768px)
   const isMobile = useMediaQuery({ maxWidth: 767 });
+
+  // Access state and setters from the journey, parking lot, and stop point stores
   const { selectedStop, selectedTripLeg, setSelectedTripLeg } =
     useJourneyStore();
   const { parentServicePointSloid, setParkingLot } = useParkingLotStore();
   const { stopPoint, setStopPoint } = useStopPointStore();
   const parentSloid = parentServicePointSloid;
+
+  // Hook for programmatic navigation
   const router = useRouter();
 
   // Restore selectedTripLeg from localStorage if it exists
@@ -38,10 +48,11 @@ export default function CardStopPoint(): React.ReactElement {
     }
   }, [setSelectedTripLeg]);
 
-  // Determine vehicle type based on selected trip leg
+  // Determine the vehicle type based on the selected trip leg
   const vehicleType = selectedTripLeg ? getVehicleType(selectedTripLeg) : "N/A";
   const VehicleIcon = getVehicleIcon(vehicleType, resolvedTheme);
 
+  // Fetch parking lot data
   const fetchParkingLot = useCallback(async () => {
     if (!parentSloid) return;
     try {
@@ -52,6 +63,7 @@ export default function CardStopPoint(): React.ReactElement {
     }
   }, [parentSloid, setParkingLot]);
 
+  // Fetch stop point data
   const fetchStopPoint = useCallback(async () => {
     if (!parentSloid) return;
     try {
@@ -62,13 +74,14 @@ export default function CardStopPoint(): React.ReactElement {
     }
   }, [parentSloid, setStopPoint]);
 
+  // Fetch parking lot and stop point data on component mount or when parentSloid changes
   useEffect(() => {
     fetchParkingLot().then((r) => r);
     fetchStopPoint().then((r) => r);
   }, [fetchParkingLot, fetchStopPoint]);
 
+  // Determine the interoperability message based on stop point data
   const interop = stopPoint?.interoperable;
-
   const interoperableMessage = interop
     ? "Haltestelle ist komplett autonom benutzbar"
     : "Haltestelle ist nicht autonom benutzbar";

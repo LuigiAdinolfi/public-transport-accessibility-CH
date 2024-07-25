@@ -1,3 +1,6 @@
+/**
+ * Platform interface
+ */
 export interface Platform {
   id: string;
   sloid: string;

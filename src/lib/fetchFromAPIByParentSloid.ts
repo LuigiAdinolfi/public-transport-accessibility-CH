@@ -3,16 +3,23 @@
 import getAccessToken from "@/lib/tokenManager";
 
 /**
- * Fetches data from the specified API endpoint using an access token and parentServicePointSloid.
+ * Fetches data from the specified API endpoint using an access token and appends the given parentServicePointSloid to the endpoint.
+ * This function performs the following steps:
+ * 1. Retrieves an access token using `getAccessToken`.
+ * 2. Constructs the full URL for the API request by appending the `parentServicePointSloid` to the endpoint.
+ * 3. Makes the API request with the access token in the Authorization header.
+ * 4. Checks the response status and handles errors.
+ * 5. Returns the response data in JSON format or null if the request failed.
  *
- * @param {string} endpoint - The API endpoint to fetch data from.
- * @param {string} parentServicePointSloid - The specific parentServicePointSloid to append to the endpoint.
- * @returns {Promise<any | null>} The response data or null if the request failed.
+ * @param {string} endpoint - The API endpoint to fetch data from. This should be a path relative to the base URL.
+ * @param {string} parentServicePointSloid - The specific parentServicePointSloid to append to the endpoint, forming part of the final URL.
+ * @returns {Promise<any | null>} - A promise that resolves to the response data in JSON format, or null if the request failed or an error occurred.
  */
 export default async function fetchFromAPIByParentSloid(
   endpoint: string,
   parentServicePointSloid: string,
 ): Promise<any | null> {
+  // Retrieve an access token
   const accessToken = await getAccessToken();
 
   // Check if access token retrieval was successful

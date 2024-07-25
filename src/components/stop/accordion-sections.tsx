@@ -11,16 +11,20 @@ import { useParkingLotStore } from "@/store/useParkingLotStore";
 import { useStopPointStore } from "@/store/useStopPointStore";
 
 /**
- * Component displaying accordion sections based on media query for responsiveness.
- * @returns {React.ReactElement} - AccordionSections component.
+ * Component that displays accordion sections for displaying information
+ * based on screen size and store data. The content of the accordions adjusts
+ * for mobile and desktop views.
+ *
+ * @returns {React.ReactElement} - The AccordionSections component.
  */
 export default function AccordionSections(): React.ReactElement {
-  // Determine if the screen width is considered mobile
+  // Determine if the screen width is considered mobile (less than 768px)
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const { stopPoint } = useStopPointStore();
-  const assistancecondition = stopPoint.assistanceCondition;
+  const assistanceCondition = stopPoint.assistanceCondition;
   const { parkingLot } = useParkingLotStore();
 
+  // Determine parking lot availability and specific features
   const parkingLotsAvailable = parkingLot?.placesAvailable === "YES";
   const wheelchairPlaces = parkingLot?.prmPlacesAvailable === "YES";
   const parkingLotsAdditionalInfo = parkingLot?.additionalInformation;
@@ -39,7 +43,7 @@ export default function AccordionSections(): React.ReactElement {
             <div
               className={`py-3 ${isMobile ? "text-sm" : ""} leading-relaxed`}
             >
-              {assistancecondition || "N/A"}
+              {assistanceCondition || "N/A"}
             </div>
           </AccordionContent>
         </AccordionItem>
@@ -54,6 +58,7 @@ export default function AccordionSections(): React.ReactElement {
           <AccordionContent className="px-2 py-2">
             {Object.keys(parkingLot).length > 0 ? (
               <>
+                {/* Check for available parking lots */}
                 {parkingLotsAvailable && (
                   <div className="flex flex-row items-center py-2 align-middle">
                     <SquareCheckBig size={isMobile ? 12 : 16} />
@@ -64,6 +69,7 @@ export default function AccordionSections(): React.ReactElement {
                     </div>
                   </div>
                 )}
+                {/* Check for wheelchair accessible parking */}
                 {wheelchairPlaces && (
                   <div className="flex flex-row items-center py-2 align-middle">
                     <SquareCheckBig size={isMobile ? 12 : 16} />
@@ -74,6 +80,7 @@ export default function AccordionSections(): React.ReactElement {
                     </div>
                   </div>
                 )}
+                {/* Display additional parking lot information */}
                 {parkingLotsAdditionalInfo && (
                   <div
                     className={`py-3 ${isMobile ? "text-sm" : ""} leading-relaxed`}

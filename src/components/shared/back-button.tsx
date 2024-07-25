@@ -6,8 +6,12 @@ import * as React from "react";
 import { useRouter } from "next/navigation";
 
 /**
- * Back button component that navigates back in the router history.
- * @returns {React.ReactElement} The back button component.
+ * A button component that navigates back to the previous page in the router history.
+ *
+ * This component utilizes the `router.back()` method to navigate backward in the application's history.
+ * It includes an icon (ArrowLeft) and a label ("Zurück") to indicate the back action.
+ *
+ * @returns {React.ReactElement} The rendered back button component.
  */
 export function BackButton(): React.ReactElement {
   const router = useRouter();
@@ -20,6 +24,7 @@ export function BackButton(): React.ReactElement {
       onClick={() => router.back()}
       aria-label="Zurück"
     >
+      {/* Arrow icon indicating the back action */}
       <ArrowLeft className="mr-2 h-4 w-4" aria-hidden="true" />
       Zurück
     </Button>

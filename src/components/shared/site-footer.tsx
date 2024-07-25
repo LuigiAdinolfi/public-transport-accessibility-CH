@@ -3,7 +3,9 @@ import React from "react";
 
 /**
  * Component representing the site footer with attribution and links.
- * @returns {React.ReactElement} - The site footer component.
+ * This footer includes information about the creators and a link to the source code repository.
+ *
+ * @returns {React.ReactElement} - The site footer component with attribution and links.
  */
 export function SiteFooter(): React.ReactElement {
   return (
@@ -11,7 +13,7 @@ export function SiteFooter(): React.ReactElement {
       <div className="container flex flex-col items-center justify-between gap-4 md:h-24">
         {/* Text content */}
         <p className="text-balance text-center text-sm leading-loose text-muted-foreground text-zinc-600 dark:text-zinc-400 md:text-left">
-          {/* Attribution */}
+          {/* Attribution to the creators */}
           Built by{" "}
           <a
             href={siteConfig.links.github_luigi}

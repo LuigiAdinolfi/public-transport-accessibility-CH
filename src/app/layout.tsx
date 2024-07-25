@@ -16,6 +16,9 @@ const inter = Inter({
 
 /**
  * Metadata for the application.
+ * Contains the title and description for the site, which are used in the HTML head.
+ *
+ * @type {Metadata}
  */
 export const metadata: Metadata = {
   title: `${siteConfig.name}`,
@@ -24,35 +27,36 @@ export const metadata: Metadata = {
 
 /**
  * Root layout component for the application.
- * Provides the base HTML structure with theme provider, header, main content, and footer.
- * @param {Object} props - Props for RootLayout component.
- * @param {React.ReactNode} props.children - The children components to render within the layout.
- * @returns {React.ReactElement} The root layout component.
+ * Provides the base HTML structure including the theme provider, site header, main content area, and site footer.
+ *
+ * @param {Object} props - Props for the RootLayout component.
+ * @param {React.ReactNode} props.children - The child components to render within the layout.
+ * @returns {React.ReactElement} The root layout component with a theme provider, header, main content, and footer.
  */
 export default function RootLayout({
-  children,
-}: {
+                                     children,
+                                   }: {
   children: React.ReactNode;
 }): React.ReactElement {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <title>{siteConfig.name}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </head>
-      <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          disableTransitionOnChange
-        >
-          <SiteHeader />
-          <main className="flex min-h-screen w-full flex-col items-center justify-between p-6 lg:py-10">
-            {children}
-          </main>
-          <SiteFooter />
-        </ThemeProvider>
-      </body>
+    <head>
+      <title>{siteConfig.name}</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body className={inter.className}>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="light"
+      disableTransitionOnChange
+    >
+      <SiteHeader />
+      <main className="flex min-h-screen w-full flex-col items-center justify-between p-6 lg:py-10">
+        {children}
+      </main>
+      <SiteFooter />
+    </ThemeProvider>
+    </body>
     </html>
   );
 }

@@ -4,7 +4,12 @@ import * as React from "react";
 
 /**
  * Component representing a help button with an icon and text.
- * @returns {React.ReactElement} The rendered help button.
+ *
+ * This component renders a button with a question mark icon and the text
+ * "Brauchst du Hilfe?" ("Do you need help?"). It uses a secondary button
+ * variant for styling and aligns the icon and text horizontally.
+ *
+ * @returns {React.ReactElement} - The rendered help button.
  */
 export function HelpButton(): React.ReactElement {
   return (

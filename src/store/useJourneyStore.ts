@@ -61,6 +61,7 @@ export const useJourneyStore = create<JourneyState>((set) => ({
   accessIcons: [],
 
   // Setter functions
+
   setDate: (date) => set({ date }),
   setTime: (time) => set({ time }),
   setActiveSearchTab: (tab) => set({ activeSearchTab: tab }),

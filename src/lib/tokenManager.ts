@@ -6,17 +6,24 @@ let tokenExpiryTime: number | null = null;
 /**
  * Fetches a new access token from the token endpoint using client credentials.
  *
- * @returns {Promise<string | null>} The access token, or null if the request failed.
+ * This function performs the following steps:
+ * 1. Checks if the required environment variables are defined.
+ * 2. Makes a POST request to the token endpoint with the client credentials.
+ * 3. Parses the response to retrieve the access token and its expiry time.
+ * 4. Stores the access token and its expiry time for future use.
+ *
+ * @returns {Promise<string | null>} The access token if successful, or null if the request failed.
  */
 async function fetchAccessToken(): Promise<string | null> {
   try {
-    // Check that environment variables are defined
+    // Define the token endpoint and client credentials
     const tokenEndpoint =
       "https://login.microsoftonline.com/2cda5d11-f0ac-46b3-967d-af1b2e1bd01a/oauth2/v2.0/token";
     const clientId = "5fe0faa8-64d3-46ab-b4e7-a65a309155af";
     const clientSecret = "cR18Q~33Aha~V4kIj5VwQF.Gay9ZAx8V6WklZa8n";
     const scope = "api://f3cdcb3e-1e95-4591-b664-4526d00f5d66/.default";
 
+    // Check if environment variables are properly defined
     if (!tokenEndpoint || !clientId || !clientSecret || !scope) {
       console.error("Environment variables are not properly defined");
       return null;
@@ -36,6 +43,7 @@ async function fetchAccessToken(): Promise<string | null> {
       }),
     });
 
+    // Check if the response status is not OK
     if (!response.ok) {
       console.error(
         "Failed to fetch access token:",
@@ -71,13 +79,21 @@ async function fetchAccessToken(): Promise<string | null> {
 }
 
 /**
- * Retrieves a valid access token. Fetches a new token if the current one is expired or not present.
+ * Retrieves a valid access token. If the current token is expired or not present, fetches a new one.
  *
- * @returns {Promise<string | null>} The valid access token, or null if the request failed.
+ * This function performs the following steps:
+ * 1. Checks if the current access token is valid (i.e., not expired).
+ * 2. If the token is valid, returns it.
+ * 3. If the token is expired or not present, fetches a new token using `fetchAccessToken`.
+ *
+ * @returns {Promise<string | null>} The valid access token if successful, or null if the request failed.
  */
 export default async function getValidAccessToken(): Promise<string | null> {
+  // Check if the current access token is valid
   if (accessToken && tokenExpiryTime && Date.now() < tokenExpiryTime) {
     return accessToken;
   }
+
+  // Fetch a new access token if the current one is expired or not present
   return await fetchAccessToken();
 }

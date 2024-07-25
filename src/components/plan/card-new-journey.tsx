@@ -21,8 +21,9 @@ import { useState } from "react";
 type SearchTab = "Dep" | "Arr";
 
 /**
- * CardNewJourney component for entering journey details and search.
- * @returns {React.ReactElement} CardNewJourney component.
+ * CardNewJourney component allows users to enter journey details and perform a search.
+ *
+ * @returns {React.ReactElement} The rendered CardNewJourney component.
  */
 export function CardNewJourney(): React.ReactElement {
   const {
@@ -43,6 +44,10 @@ export function CardNewJourney(): React.ReactElement {
 
   const [loading, setLoading] = useState(false);
 
+  /**
+   * Handles form submission by invoking the handleFormSubmit function.
+   * Updates the loading state while the form is being processed.
+   */
   const handleClick = async () => {
     setLoading(true);
     await handleFormSubmit(
