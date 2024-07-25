@@ -79,9 +79,9 @@ export default function CardStopPoint(): React.ReactElement {
         className={`flex ${isMobile ? "flex-col" : "flex-row"} items-center justify-between space-y-1.5 px-8 pt-4 align-middle ${!isMobile && "px-14 pb-8"}`}
       >
         <div className="flex items-center">
-          <div className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
+          <h1 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
             {selectedStop}
-          </div>
+          </h1>
           <div className="flex items-center pl-8">
             <div className="pr-2 text-base font-normal">{vehicleType}</div>
             {VehicleIcon && <VehicleIcon className="h-6 w-6" />}
@@ -89,13 +89,13 @@ export default function CardStopPoint(): React.ReactElement {
         </div>
 
         {interop !== undefined && (
-          <div className="flex items-center p-1.5">
+          <h2 className="flex items-center p-1.5">
             <div
               className={`text-lg font-semibold ${isMobile ? "text-center" : ""}`}
             >
               {interoperableMessage}
             </div>
-          </div>
+          </h2>
         )}
 
         <Button

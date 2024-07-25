@@ -116,13 +116,13 @@ export default function LocationSection({
         className={`flex items-center ${!isMobile ? "mb-3 p-2" : "mb-2 px-2 py-1"}`}
       >
         <div className="flex w-full items-center justify-between">
-          <div className="text-xl font-semibold">{locationTitle}</div>
+          <h1 className="text-xl font-semibold">{locationTitle}</h1>
           <div className="flex justify-end whitespace-pre font-medium">
             {time}
           </div>
         </div>
       </div>
-      <div className="flex flex-row items-center p-2 pb-4 pr-0 pt-3 align-middle">
+      <h2 className="flex flex-row items-center p-2 pb-4 pr-0 pt-3 align-middle">
         <div className={`font-medium ${!isMobile ? "text-lg" : "text-sm"}`}>
           Rollstuhlzugang:
         </div>
@@ -147,7 +147,7 @@ export default function LocationSection({
             ? `${isMobile ? "Wag. 5" : "Waggon 5"}`
             : ""}
         </div>
-      </div>
+      </h2>
       <div className="flex flex-row items-center pb-2 pt-4 align-middle">
         <div className="pl-4 text-sm font-normal">
           <div className="flex basis-1/2 items-center justify-start">
