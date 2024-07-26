@@ -71,10 +71,10 @@ export function MainNav(): React.ReactElement {
    * @returns {React.ReactElement} - The rendered navigation link.
    */
   function NavLink({
-                     href,
-                     currentPath,
-                     children,
-                   }: {
+    href,
+    currentPath,
+    children,
+  }: {
     href: string;
     currentPath: string;
     children: React.ReactNode;
@@ -105,8 +105,8 @@ export function MainNav(): React.ReactElement {
             </NavLink>
           </li>
           <li>
-            <NavLink href="/settings" currentPath="/settings">
-              Einstellungen
+            <NavLink href="/account" currentPath="/account">
+              Mein Konto
             </NavLink>
           </li>
         </ul>

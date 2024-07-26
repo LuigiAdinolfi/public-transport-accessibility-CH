@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Accessibility, Home, Settings, Users } from "lucide-react";
+import { Accessibility, Home, UserCog, Users } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 /**
@@ -57,14 +57,14 @@ export function MobileNav() {
           <div className="sr-only">Community</div>
         </Button>
 
-        {/* Settings Button */}
+        {/* Account Button */}
         <Button
           variant="secondary"
-          className={`flex items-center gap-4 px-2.5 ${activeLink === "/settings" ? "text-foreground" : "text-muted-foreground"} hover:text-foreground`}
-          onClick={() => handleLinkClick("/settings")}
+          className={`flex items-center gap-4 px-2.5 ${activeLink === "/account" ? "text-foreground" : "text-muted-foreground"} hover:text-foreground`}
+          onClick={() => handleLinkClick("/account")}
         >
-          <Settings className="h-6 w-6" />
-          <div className="sr-only">Einstellungen</div>
+          <UserCog className="h-6 w-6" />
+          <div className="sr-only">Mein Konto</div>
         </Button>
       </nav>
     </div>

@@ -31,8 +31,8 @@ export const docsConfig: DocsConfig = {
       href: "/community", // URL path of the navigation item
     },
     {
-      title: "Einstellungen", // Title of the navigation item
-      href: "/settings", // URL path of the navigation item
+      title: "Mein Konto", // Title of the navigation item
+      href: "/account", // URL path of the navigation item
     },
   ],
 };
