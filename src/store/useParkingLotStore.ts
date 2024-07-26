@@ -6,11 +6,11 @@ import { create } from "zustand";
  */
 interface UseParkingLotState {
   parentServicePointSloid: string;
-  parkingLot: ParkingLot;
+  parkingLot: ParkingLot[];
 
   // Setter functions
   setParentServicePointSloid: (parentServicePointSloid: string) => void;
-  setParkingLot: (parkingLot: ParkingLot) => void;
+  setParkingLot: (parkingLot: ParkingLot[]) => void;
 }
 
 /**
@@ -19,8 +19,8 @@ interface UseParkingLotState {
  */
 export const useParkingLotStore = create<UseParkingLotState>((set) => ({
   parentServicePointSloid: "",
-  parkingLot: {} as ParkingLot,
+  parkingLot: [] as ParkingLot[],
   setParentServicePointSloid: (parentServicePointSloid: string) =>
     set({ parentServicePointSloid }),
-  setParkingLot: (parkingLot: ParkingLot) => set({ parkingLot }),
+  setParkingLot: (parkingLot: ParkingLot[]) => set({ parkingLot }),
 }));

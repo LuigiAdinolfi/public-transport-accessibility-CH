@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -24,10 +24,26 @@ export default function AccordionSections(): React.ReactElement {
   const assistanceCondition = stopPoint.assistanceCondition;
   const { parkingLot } = useParkingLotStore();
 
+  const [parkingLotAvailable, setParkingLotAvailable] = useState(false);
+  const [wheelchairPlaces, setWheelchairPlaces] = useState(false);
+  const [parkingLotAdditionalInfo, setParkingLotAdditionalInfo] = useState("");
+
   // Determine parking lot availability and specific features
-  const parkingLotsAvailable = parkingLot?.placesAvailable === "YES";
-  const wheelchairPlaces = parkingLot?.prmPlacesAvailable === "YES";
-  const parkingLotsAdditionalInfo = parkingLot?.additionalInformation;
+  useEffect(() => {
+    if (parkingLot && parkingLot.length > 0) {
+      const parkingLotsAvailable = parkingLot[0]?.placesAvailable === "YES";
+      const wheelchairPlaces = parkingLot[0]?.prmPlacesAvailable === "YES";
+      const parkingLotsAdditionalInfo =
+        parkingLot[0]?.additionalInformation || "";
+
+      setParkingLotAvailable(parkingLotsAvailable);
+      setWheelchairPlaces(wheelchairPlaces);
+      setParkingLotAdditionalInfo(parkingLotsAdditionalInfo);
+    }
+  }, [parkingLot]);
+
+  const noParkingInfoAvailable =
+    !parkingLotAvailable && !wheelchairPlaces && !parkingLotAdditionalInfo;
 
   return (
     <div
@@ -56,10 +72,14 @@ export default function AccordionSections(): React.ReactElement {
             Parkplatz-Informationen
           </AccordionTrigger>
           <AccordionContent className="px-2 py-2">
-            {Object.keys(parkingLot).length > 0 ? (
+            {noParkingInfoAvailable ? (
+              <div className="leading-relaxed">
+                Keine Parkplatzinformationen verfügbar.
+              </div>
+            ) : (
               <>
                 {/* Check for available parking lots */}
-                {parkingLotsAvailable && (
+                {parkingLotAvailable && (
                   <div className="flex flex-row items-center py-2 align-middle">
                     <SquareCheckBig size={isMobile ? 12 : 16} />
                     <div
@@ -81,18 +101,14 @@ export default function AccordionSections(): React.ReactElement {
                   </div>
                 )}
                 {/* Display additional parking lot information */}
-                {parkingLotsAdditionalInfo && (
+                {parkingLotAdditionalInfo && (
                   <div
                     className={`py-3 ${isMobile ? "text-sm" : ""} leading-relaxed`}
                   >
-                    Zusätzliche Informationen: {parkingLotsAdditionalInfo}
+                    Zusätzliche Informationen: {parkingLotAdditionalInfo}
                   </div>
                 )}
               </>
-            ) : (
-              <div className="leading-relaxed">
-                Keine Parkplatzinformationen verfügbar.
-              </div>
             )}
           </AccordionContent>
         </AccordionItem>
