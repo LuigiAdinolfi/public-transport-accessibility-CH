@@ -35,7 +35,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Team
 
-**[Luigi Adinolfi](https://gitlab.fhnw.ch/luigi.adinolfi)**<br>
+**[Luigi Adinolfi](https://gitlab.fhnw.ch/luigi.adinolfi)**
+</br>
 **[Raveena Ramany](https://gitlab.fhnw.ch/raveena.ramany)**
 
 
