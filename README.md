@@ -40,7 +40,7 @@ Raveena Ramany
 
 
 ## Supervisors
-Prof.Dr. Arzu Çöltekin<br>
+Prof. Dr. Arzu Çöltekin<br>
 Manuel Riedi<br>
 Alain Zanchetta
 
