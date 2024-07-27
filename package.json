@@ -2,6 +2,19 @@
   "name": "24fs_iit38-public-transport-in-switzerland_access-for-all-and-inclusive-design-for-people-with-disabilities",
   "version": "0.1.0",
   "private": true,
+  "contributors": [
+    {
+      "name": "Luigi Adinolfi",
+      "email": "luigi.adinolfi@students.fhnw.ch"
+    },
+    {
+      "name": "Raveena Ramany",
+      "email": "raveena.ramany@students.fhnw.ch"
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://accessibility-public-transport.vercel.app/",
+  "repository": "https://gitlab.fhnw.ch/iit-projektschiene/fs24/24fs_iit38-public-transport-in-switzerland_access-for-all-and-inclusive-design-for-people-with-disabilities",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
