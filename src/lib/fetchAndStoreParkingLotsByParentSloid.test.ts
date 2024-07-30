@@ -29,11 +29,6 @@ describe("fetchAndStoreParkingLotsByParentSloid", () => {
       ],
     };
 
-    const selectedFields = [
-      { id: "1", field1: "value1" },
-      { id: "2", field2: "value2" },
-    ];
-
     mockedFetchFromAPIByParentSloid.mockResolvedValue(mockData);
     mockedConnectDB.mockResolvedValue(undefined);
     mockedParkingLotToStore.mockReturnValue({
