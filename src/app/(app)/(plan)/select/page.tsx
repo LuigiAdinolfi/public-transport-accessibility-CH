@@ -23,7 +23,7 @@ export default function SelectPage(): React.ReactElement {
       </div>
 
       {/* Main Content */}
-      <div className="flex min-h-screen w-full flex-col items-center justify-between py-6 lg:p-10">
+      <div className="flex min-h-screen w-full flex-col items-center justify-between py-5 lg:p-8">
         {/* Journey selection interface */}
         <SelectJourney />
       </div>

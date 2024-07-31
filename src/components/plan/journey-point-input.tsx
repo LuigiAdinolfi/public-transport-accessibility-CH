@@ -19,11 +19,11 @@ import { useHandleMouseEnter } from "@/hooks/useHandleMouseEnter";
  * @returns {React.ReactElement} The rendered JSX element representing the JourneyPointInput component.
  */
 export default function JourneyPointInput({
-                                            placeholder,
-                                            onLocationSelected,
-                                            description,
-                                            value,
-                                          }: JourneyPointProps): React.ReactElement {
+  placeholder,
+  onLocationSelected,
+  description,
+  value,
+}: JourneyPointProps): React.ReactElement {
   const [highlightedIndex, setHighlightedIndex] = useState<number | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -88,7 +88,7 @@ export default function JourneyPointInput({
           onChange={(e) => setInputValue(e.target.value)}
           onFocus={() => setMenuOpen(true)}
           onKeyDown={handleKeyDown}
-          className="border border-zinc-800 bg-white text-base dark:border-zinc-300 dark:bg-zinc-900"
+          className="h-11 border border-zinc-800 bg-white text-base dark:border-zinc-300 dark:bg-zinc-900"
           aria-autocomplete="list"
           aria-haspopup="listbox"
         />

@@ -24,9 +24,9 @@ import { useRouter } from "next/navigation";
  * @returns {React.ReactElement} The rendered Breadcrumb component.
  */
 export function MyBreadcrumb({
-                               currentPage,
-                               breadcrumbList,
-                             }: {
+  currentPage,
+  breadcrumbList,
+}: {
   currentPage: string;
   breadcrumbList: MyBreadcrumbItem[];
 }): React.ReactElement {
@@ -61,7 +61,7 @@ export function MyBreadcrumb({
 
           return (
             <Fragment key={index}>
-              <BreadcrumbItem className="text-zinc-600 dark:text-zinc-400">
+              <BreadcrumbItem className="text-zinc-600 dark:text-zinc-400 lg:h-12">
                 {!isLastPath ? (
                   <BreadcrumbLink
                     onClick={(e) => {
@@ -70,13 +70,16 @@ export function MyBreadcrumb({
                     }}
                     onKeyDown={(e) => handleKeyDown(e, item.url)}
                     tabIndex={0}
-                    className="cursor-pointer p-1 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:after:ring-0 dark:focus-visible:ring-white"
+                    className="flex cursor-pointer items-center p-1 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:after:ring-0 dark:focus-visible:ring-white lg:h-11"
                     aria-current={isLastPath ? "page" : undefined}
                   >
                     {item.name}
                   </BreadcrumbLink>
                 ) : (
-                  <BreadcrumbPage className="p-1 font-bold" aria-current="page">
+                  <BreadcrumbPage
+                    className="flex items-center p-1 font-bold lg:h-11"
+                    aria-current="page"
+                  >
                     {item.name}
                   </BreadcrumbPage>
                 )}

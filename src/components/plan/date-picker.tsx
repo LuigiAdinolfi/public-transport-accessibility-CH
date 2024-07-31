@@ -41,7 +41,7 @@ export function DatePicker(): React.ReactElement {
       <PopoverTrigger asChild>
         <Button
           variant={"outline"}
-          className="w-full justify-between border border-zinc-800 bg-white text-left text-base font-normal dark:border-zinc-300 dark:bg-zinc-900 lg:w-80"
+          className="h-11 w-full justify-between border border-zinc-800 bg-white text-left text-base font-normal dark:border-zinc-300 dark:bg-zinc-900 lg:w-80"
           aria-label={`Select Date and Time ${formatDateForUI(date)}`}
           suppressHydrationWarning
         >

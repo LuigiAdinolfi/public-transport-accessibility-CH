@@ -16,7 +16,7 @@ import {
 export function SelectDemo(): React.ReactElement {
   return (
     <Select>
-      <SelectTrigger className="md:w-[220px] md:text-base">
+      <SelectTrigger className="md:w-[220px] md:text-base lg:h-11">
         {/* Select value placeholder with aria-label for accessibility */}
         <SelectValue
           placeholder="Filtern nach..."

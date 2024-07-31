@@ -16,7 +16,7 @@ export default function PreviousConnections(): React.ReactElement {
   return (
     <div className="flex w-full justify-center">
       <Button
-        className="flex w-full text-base font-medium"
+        className="flex w-full text-base font-medium lg:h-11"
         variant="secondary"
         aria-label="Previous Connections"
         onClick={() => console.log("Previous Connections")}

@@ -49,12 +49,12 @@ export function CardForum(): React.ReactElement {
             <Input
               type="search"
               placeholder="Suche im Forum..."
-              className="border border-zinc-800 bg-white dark:border-zinc-300 dark:bg-zinc-900 md:text-base"
+              className="border border-zinc-800 bg-white dark:border-zinc-300 dark:bg-zinc-900 md:text-base lg:h-11"
             />
             <Button
               type="submit"
               variant="secondary"
-              className="md:text-base lg:w-48"
+              className="md:text-base lg:h-11 lg:w-48"
             >
               Suche
             </Button>
@@ -62,7 +62,7 @@ export function CardForum(): React.ReactElement {
           </div>
         </div>
         <div className="flex items-center justify-start pb-2 pt-8">
-          <Button variant="outline" className="self-start lg:w-40">
+          <Button variant="outline" className="self-start lg:h-11 lg:w-40">
             <span className="pr-2 md:text-base">Neuer Beitrag</span>
             <Plus size={16} />
           </Button>

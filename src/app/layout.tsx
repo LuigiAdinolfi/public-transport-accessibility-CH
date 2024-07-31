@@ -34,29 +34,29 @@ export const metadata: Metadata = {
  * @returns {React.ReactElement} The root layout component with a theme provider, header, main content, and footer.
  */
 export default function RootLayout({
-                                     children,
-                                   }: {
+  children,
+}: {
   children: React.ReactNode;
 }): React.ReactElement {
   return (
     <html lang="en" suppressHydrationWarning>
-    <head>
-      <title>{siteConfig.name}</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    </head>
-    <body className={inter.className}>
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="light"
-      disableTransitionOnChange
-    >
-      <SiteHeader />
-      <main className="flex min-h-screen w-full flex-col items-center justify-between p-6 lg:py-10">
-        {children}
-      </main>
-      <SiteFooter />
-    </ThemeProvider>
-    </body>
+      <head>
+        <title>{siteConfig.name}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
+      <body className={inter.className}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          disableTransitionOnChange
+        >
+          <SiteHeader />
+          <main className="flex min-h-screen w-full flex-col items-center justify-between p-5 lg:py-8">
+            {children}
+          </main>
+          <SiteFooter />
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

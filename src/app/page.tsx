@@ -22,7 +22,7 @@ export default function Homepage(): React.ReactElement {
           breadcrumbList={JourneyBreadcrumbList}
         />
       </div>
-      <div className="flex min-h-screen w-full flex-col items-center justify-between py-6 lg:p-10">
+      <div className="flex min-h-screen w-full flex-col items-center justify-between py-5 lg:p-8">
         {/* Hidden title for accessibility */}
         <h1 className="sr-only mb-6 text-2xl font-bold">Reise planen</h1>
         {/* Renders the journey planning section */}

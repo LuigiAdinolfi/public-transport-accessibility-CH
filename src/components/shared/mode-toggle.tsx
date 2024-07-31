@@ -26,7 +26,7 @@ export function ModeToggle(): React.ReactElement {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         {/* Button to trigger the dropdown menu for theme selection */}
-        <Button variant="outline" size="icon">
+        <Button variant="outline" size="icon" className="lg:h-11 lg:w-12">
           {/* Sun icon for light mode */}
           <Sun
             className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"

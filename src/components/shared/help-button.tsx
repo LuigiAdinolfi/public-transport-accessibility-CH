@@ -13,7 +13,7 @@ import * as React from "react";
  */
 export function HelpButton(): React.ReactElement {
   return (
-    <Button variant="secondary" className="flex items-center md:text-base">
+    <Button variant="secondary" className="flex h-11 items-center md:text-base">
       <MessageCircleQuestion className="mr-2 h-4 w-4" />
       <span>Brauchst du Hilfe?</span>
     </Button>

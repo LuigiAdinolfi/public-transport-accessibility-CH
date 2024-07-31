@@ -80,10 +80,10 @@ export function CardNewJourney(): React.ReactElement {
               aria-label="Abfahrtsort"
               aria-expanded="true"
             />
-            <div className="flex w-full items-center justify-center pt-5 lg:w-2/12 lg:pb-5">
+            <div className="flex w-full items-center justify-center lg:w-2/12 lg:pb-2">
               {/* Button to swap origin and destination */}
               <Button
-                className="w-16"
+                className="h-11 w-16"
                 variant="outline"
                 size="icon"
                 onClick={() =>
@@ -109,7 +109,7 @@ export function CardNewJourney(): React.ReactElement {
           <div className="flex flex-col items-center justify-between align-middle lg:flex-row">
             <div className="w-full space-y-1 lg:w-4/12">
               <div
-                className="text-base font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                className="pt-2 text-base font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 id="datetime-label"
               >
                 Wann
@@ -120,7 +120,7 @@ export function CardNewJourney(): React.ReactElement {
               </CardDescription>
             </div>
             {/* Tabs for Departure and Arrival */}
-            <div className="flex w-full content-center justify-center pt-3">
+            <div className="flex w-full content-center justify-center">
               <Tabs
                 defaultValue={activeSearchTab}
                 className="lg:h-14"
@@ -128,10 +128,10 @@ export function CardNewJourney(): React.ReactElement {
                   setActiveSearchTab(value as SearchTab)
                 } // Cast value to SearchTab
               >
-                <TabsList className="content-center lg:w-64">
+                <TabsList className="h-12 content-center lg:w-64">
                   {/* Departure Tab Trigger */}
                   <TabsTrigger
-                    className="w-32 items-center text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:w-32"
+                    className="h-11 w-32 items-center text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:w-32"
                     value="Dep"
                     aria-controls={"Departure"}
                     id={"Departure"}
@@ -145,7 +145,7 @@ export function CardNewJourney(): React.ReactElement {
                   </TabsTrigger>
                   {/* Arrival Tab Trigger */}
                   <TabsTrigger
-                    className="w-32 text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:w-32"
+                    className="h-11 w-32 text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:w-32"
                     value="Arr"
                     aria-controls={"Arrival"}
                     id={"Arrival"}
@@ -165,7 +165,7 @@ export function CardNewJourney(): React.ReactElement {
               <Button
                 id="submit"
                 type="submit"
-                className="w-full md:text-base lg:mb-2 lg:w-44"
+                className="h-11 w-full md:text-base lg:mb-2 lg:w-44"
                 onClick={handleClick}
                 variant={loading ? "secondary" : "default"}
                 disabled={loading}

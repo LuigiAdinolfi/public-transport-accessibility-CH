@@ -19,7 +19,7 @@ export function BackButton(): React.ReactElement {
   return (
     <Button
       variant="outline"
-      className="md:text-base"
+      className="h-11 md:text-base"
       type="button"
       onClick={() => router.back()}
       aria-label="Zurück"

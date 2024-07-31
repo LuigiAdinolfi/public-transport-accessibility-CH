@@ -23,7 +23,7 @@ export default function CommunityPage(): React.ReactElement {
       </div>
 
       {/* Main Content */}
-      <div className="flex min-h-screen w-full flex-col items-center justify-between py-6 lg:p-10">
+      <div className="flex min-h-screen w-full flex-col items-center justify-between py-5 lg:p-8">
         {/* Hidden heading for accessibility */}
         <h1 className="sr-only">Community</h1>
         {/* Component displaying community-related information */}

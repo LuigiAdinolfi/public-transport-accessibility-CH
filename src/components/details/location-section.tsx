@@ -50,13 +50,13 @@ interface LocationSectionProps {
  * @returns {React.ReactElement} LocationSection component.
  */
 export default function LocationSection({
-                                          locationName,
-                                          platform,
-                                          platformNr,
-                                          accessIconLocationProps,
-                                          selectedLeg,
-                                          time,
-                                        }: LocationSectionProps): React.ReactElement {
+  locationName,
+  platform,
+  platformNr,
+  accessIconLocationProps,
+  selectedLeg,
+  time,
+}: LocationSectionProps): React.ReactElement {
   const router = useRouter();
   const { resolvedTheme } = useTheme();
   const { setSelectedStop } = useJourneyStore();
@@ -266,7 +266,7 @@ export default function LocationSection({
         <Button
           variant={isLoading ? "outline" : "default"}
           onClick={() => handleClick(locationName)}
-          className="flex w-full items-center p-2 md:text-base"
+          className="flex w-full items-center p-2 md:text-base lg:h-11"
           disabled={isLoading}
         >
           {isLoading ? (

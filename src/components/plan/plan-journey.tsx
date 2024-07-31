@@ -29,7 +29,7 @@ export function PlanJourney(): React.ReactElement {
   return (
     <Tabs
       defaultValue={activeJourneyTab}
-      className="mx-auto w-full max-w-screen-lg px-0"
+      className="mx-auto w-full max-w-screen-lg px-0 lg:h-14"
       onValueChange={(value) => setActiveJourneyTab(value as ActiveTab)} // Cast value to ActiveTab
     >
       <div className="flex flex-col">
@@ -39,31 +39,35 @@ export function PlanJourney(): React.ReactElement {
         </div>
 
         <div className="flex items-center justify-between">
-          <TabsList className="grid w-full grid-cols-2 md:w-1/2 lg:h-12">
+          <TabsList className="grid w-full grid-cols-2 md:w-1/2 lg:h-14">
             <TabsTrigger
-              className="mx-1 items-center text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:h-10"
+              className="mx-1 flex items-center text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:h-12"
               value="new-journey"
             >
-              <CircleIcons
-                active={activeJourneyTab === "new-journey"}
-                darkTheme={resolvedTheme === "dark"}
-              />
+              <div className="lg:pt-[2px]">
+                <CircleIcons
+                  active={activeJourneyTab === "new-journey"}
+                  darkTheme={resolvedTheme === "dark"}
+                />
+              </div>
               <div className="pl-1 md:text-lg lg:pl-2">Neue Reise</div>
             </TabsTrigger>
             <TabsTrigger
-              className="mx-1 text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:h-10"
+              className="mx-1 flex items-center text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:h-12"
               value="recent-journeys"
             >
-              <CircleIcons
-                active={activeJourneyTab === "recent-journeys"}
-                darkTheme={resolvedTheme === "dark"}
-              />
+              <div className="lg:pt-[2px]">
+                <CircleIcons
+                  active={activeJourneyTab === "recent-journeys"}
+                  darkTheme={resolvedTheme === "dark"}
+                />
+              </div>
               <div className="pl-1 md:text-lg lg:pl-2">Letzte Reisen</div>
             </TabsTrigger>
           </TabsList>
 
           {/* Desktop variant of HelpButton */}
-          <div className="mb-2 hidden md:flex">
+          <div className="mb-1 hidden md:flex">
             <HelpButton />
           </div>
         </div>

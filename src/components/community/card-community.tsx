@@ -25,30 +25,34 @@ export function CommunityCard(): React.ReactElement {
     <Tabs
       // Set the default active tab and manage tab value change
       defaultValue={activeTab}
-      className="mx-auto w-full max-w-screen-lg px-0"
+      className="mx-auto w-full max-w-screen-lg px-0 lg:h-14"
       onValueChange={(value) => setActiveTab(value as ActiveTab)}
     >
       <div className="flex flex-col">
         <div className="flex items-center justify-between">
-          <TabsList className="grid w-full grid-cols-2 md:w-1/2 lg:h-12">
+          <TabsList className="grid w-full grid-cols-2 md:w-1/2 lg:h-14">
             <TabsTrigger
-              className="mx-1 items-center text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:h-10"
+              className="mx-1 flex items-center text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:h-12"
               value="news"
             >
-              <CircleIcons
-                active={activeTab === "news"}
-                darkTheme={resolvedTheme === "dark"}
-              />
+              <div className="lg:pt-[2px]">
+                <CircleIcons
+                  active={activeTab === "news"}
+                  darkTheme={resolvedTheme === "dark"}
+                />
+              </div>
               <div className="pl-1 md:text-lg lg:pl-2">News</div>
             </TabsTrigger>
             <TabsTrigger
-              className="mx-1 text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:h-10 lg:text-base"
+              className="mx-1 flex items-center text-zinc-700 active:text-zinc-950 dark:text-zinc-300 dark:active:text-white lg:h-12 lg:text-base"
               value="forum"
             >
-              <CircleIcons
-                active={activeTab === "forum"}
-                darkTheme={resolvedTheme === "dark"}
-              />
+              <div className="lg:pt-[2px]">
+                <CircleIcons
+                  active={activeTab === "forum"}
+                  darkTheme={resolvedTheme === "dark"}
+                />
+              </div>
               <div className="pl-1 md:text-lg lg:pl-2">Forum</div>
             </TabsTrigger>
           </TabsList>
