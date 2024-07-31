@@ -42,17 +42,17 @@ export function ModeToggle(): React.ReactElement {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         {/* Dropdown menu item for light mode */}
-        <DropdownMenuItem onClick={() => setTheme("light")}>
+        <DropdownMenuItem className="h-10" onClick={() => setTheme("light")}>
           <Sun
-            className={`mr-2 h-[0.8rem] w-[0.8rem] transition-all ${theme === "light" ? "text-yellow-500" : "text-gray-500"}`}
+            className={`mr-4 h-4 w-4 transition-all ${theme === "light" ? "text-yellow-500" : "text-gray-500"}`}
             aria-hidden="true"
           />
           Light
         </DropdownMenuItem>
         {/* Dropdown menu item for dark mode */}
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
+        <DropdownMenuItem className="h-10" onClick={() => setTheme("dark")}>
           <Moon
-            className={`mr-2 h-[0.8rem] w-[0.8rem] transition-all ${theme === "dark" ? "text-yellow-500" : "text-gray-500"}`}
+            className={`mr-4 h-4 w-4 transition-all ${theme === "dark" ? "text-yellow-500" : "text-gray-500"}`}
             aria-hidden="true"
           />
           Dark
