@@ -8,8 +8,8 @@ export const siteConfig = {
   links: {
     gitlab:
       "https://gitlab.fhnw.ch/iit-projektschiene/fs24/24fs_iit38-public-transport-in-switzerland_access-for-all-and-inclusive-design-for-people-with-disabilities",
-    github_luigi: "https://github.com/LuigiAdinolfi",
-    github_raveena: "",
+    email_luigi: "mailto:luigi.adinolfi@students.fhnw.ch",
+    email_raveena: "mailto:raveena.ramany@students.fhnw.ch",
   },
 };
 

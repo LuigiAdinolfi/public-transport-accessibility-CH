@@ -84,7 +84,9 @@ export function MyBreadcrumb({
                   </BreadcrumbPage>
                 )}
               </BreadcrumbItem>
-              {!isLastPath && <BreadcrumbSeparator />}
+              {!isLastPath && (
+                <BreadcrumbSeparator className="pt-1 [&>svg]:size-5" />
+              )}
             </Fragment>
           );
         })}

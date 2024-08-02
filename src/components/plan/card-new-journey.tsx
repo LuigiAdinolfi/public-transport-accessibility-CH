@@ -65,7 +65,7 @@ export function CardNewJourney(): React.ReactElement {
     <Card>
       <CardHeader className="pb-8">
         <CardDescription className="text-zinc-600 md:text-base">
-          Gib deine Reisedaten ein.
+          Gib deine Reisedaten ein
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-10 pb-6 lg:space-y-12 lg:pb-12">
@@ -76,7 +76,7 @@ export function CardNewJourney(): React.ReactElement {
               placeholder="Von"
               onLocationSelected={setOrigin}
               value={inputOrigin}
-              description="Gib den Abfahrtsort ein."
+              description="Gib den Abfahrtsort ein"
               aria-label="Abfahrtsort"
               aria-expanded="true"
             />
@@ -98,7 +98,7 @@ export function CardNewJourney(): React.ReactElement {
               placeholder="Nach"
               onLocationSelected={setDestination}
               value={inputDestination}
-              description="Gib den Zielort ein."
+              description="Gib den Zielort ein"
               aria-label="Zielort"
               aria-expanded="true"
             />
@@ -116,7 +116,7 @@ export function CardNewJourney(): React.ReactElement {
               </div>
               <DatePicker aria-labelledby="datetime-label" />
               <CardDescription className="pt-2 text-zinc-600 md:text-base">
-                Gib Datum und Uhrzeit ein.
+                Gib Datum und Uhrzeit ein
               </CardDescription>
             </div>
             {/* Tabs for Departure and Arrival */}

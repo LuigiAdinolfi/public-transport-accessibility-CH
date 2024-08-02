@@ -21,7 +21,7 @@ export default function SelectOptionsHeader(): React.ReactElement {
       <div className="flex w-full justify-start text-sm text-zinc-500 dark:text-zinc-400">
         {/* Prompt text for selecting an option */}
         <div className="flex w-full justify-start text-zinc-600 dark:text-zinc-400 md:text-base">
-          Wählen Sie eine dieser Optionen aus.
+          Wähle eine der folgenden Optionen aus
         </div>
 
         {/* Display the formatted selected date */}

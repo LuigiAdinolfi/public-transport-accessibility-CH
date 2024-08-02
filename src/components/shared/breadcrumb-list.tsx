@@ -64,4 +64,23 @@ const CommunityBreadcrumbList: MyBreadcrumbItem[] = [
   },
 ];
 
-export { JourneyBreadcrumbList, CommunityBreadcrumbList };
+/**
+ * Array of breadcrumb items for account navigation.
+ *
+ * This array represents the breadcrumb trail for account-related navigation, typically
+ * showing the main account page.
+ *
+ * @type {MyBreadcrumbItem[]}
+ */
+const AccountBreadcrumbList: MyBreadcrumbItem[] = [
+  {
+    name: "Mein Konto",
+    url: "/account",
+  },
+];
+
+export {
+  JourneyBreadcrumbList,
+  CommunityBreadcrumbList,
+  AccountBreadcrumbList,
+};

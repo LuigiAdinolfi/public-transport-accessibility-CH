@@ -35,7 +35,7 @@ export function CardRecentJourneys(): React.ReactElement {
       {recentJourneys.length !== 0 && (
         <CardHeader className="pb-8">
           <CardDescription className="text-zinc-600 md:text-base">
-            Eine frühere Reise auswählen.
+            Eine frühere Reise auswählen
           </CardDescription>
         </CardHeader>
       )}
