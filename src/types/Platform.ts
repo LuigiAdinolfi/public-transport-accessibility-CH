@@ -18,7 +18,7 @@ export interface Platform {
   infoOpportunities: string[];
   levelAccessWheelchair: string;
   partialElevation: string;
-  superElevation: string;
+  superelevation: string;
   tactileSystem: string;
   vehicleAccess: string;
   wheelchairAreaLength: string;

@@ -26,7 +26,7 @@ export function storePlatformToDB(platformsData: Platform[]): any[] {
     infoOpportunities: platform.infoOpportunities,
     levelAccessWheelchair: platform.levelAccessWheelchair,
     partialElevation: platform.partialElevation,
-    superelevation: platform.superElevation,
+    superelevation: platform.superelevation,
     tactileSystem: platform.tactileSystem,
     vehicleAccess: platform.vehicleAccess,
     wheelchairAreaLength: platform.wheelchairAreaLength,

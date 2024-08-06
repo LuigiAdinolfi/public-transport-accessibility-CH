@@ -101,7 +101,6 @@ export function CardRating(): React.ReactElement {
               journey.journeyDate instanceof Date
                 ? journey.journeyDate.toISOString()
                 : journey.journeyDate ?? "";
-            new Date().toISOString();
             const formattedDateBigScreen = formatDate(new Date(date));
             const formattedDateSmallScreen = formatDateSmall(new Date(date));
             const VehicleIcon = getVehicleIcon(
