@@ -17,7 +17,7 @@ export default function InfoSection(): React.ReactElement {
   const { stopPoint } = useStopPointStore();
 
   // Destructure ticket machine information from stop point data
-  const infoticketmachine = stopPoint.infoTicketMachine;
+  const infoTicketMachine = stopPoint.infoTicketMachine;
 
   return (
     <div
@@ -31,7 +31,7 @@ export default function InfoSection(): React.ReactElement {
       <div
         className={`font-normal ${isMobile ? "text-sm" : "pl-3 pr-1"} leading-relaxed`}
       >
-        {infoticketmachine || "N/A"}
+        {infoTicketMachine || "N/A"}
       </div>
     </div>
   );

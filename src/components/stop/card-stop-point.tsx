@@ -8,9 +8,9 @@ import AccordionSections from "@/components/stop/accordion-sections";
 import InfoSection from "@/components/stop/info-section";
 import { getVehicleIcon } from "@/utils/handleVehicleIcon";
 import { getVehicleType } from "@/utils/getVehicleType";
-import { getCachedParkingLot } from "@/cache/getCachedParkingLot";
+import { fetchAndCacheParkingLotData } from "@/cache/fetchAndCacheParkingLotData";
 import { useParkingLotStore } from "@/store/useParkingLotStore";
-import { getCachedStopPoint } from "@/cache/getCachedStopPoint";
+import { fetchAndCacheStopPointData } from "@/cache/fetchAndCacheStopPointData";
 import { useStopPointStore } from "@/store/useStopPointStore";
 import { Map } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -56,7 +56,7 @@ export default function CardStopPoint(): React.ReactElement {
   const fetchParkingLot = useCallback(async () => {
     if (!parentSloid) return;
     try {
-      const parkingLot = await getCachedParkingLot(parentSloid);
+      const parkingLot = await fetchAndCacheParkingLotData(parentSloid);
       setParkingLot(parkingLot);
     } catch (error) {
       console.error("Error fetching parking lot:", error);
@@ -67,7 +67,7 @@ export default function CardStopPoint(): React.ReactElement {
   const fetchStopPoint = useCallback(async () => {
     if (!parentSloid) return;
     try {
-      const stopPoint = await getCachedStopPoint(parentSloid);
+      const stopPoint = await fetchAndCacheStopPointData(parentSloid);
       setStopPoint(stopPoint);
     } catch (error) {
       console.error("Error fetching stop point:", error);

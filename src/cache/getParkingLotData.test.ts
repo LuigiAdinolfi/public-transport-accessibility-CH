@@ -1,12 +1,12 @@
-import { fetchParkingLotClient } from "./fetchParkingLotClient";
-import { fetchParkingLotFromLocalAPI } from "@/cache/fetchParkingLotFromLocalAPI";
+import { getParkingLotData } from "./getParkingLotData";
+import { retrieveParkingLotData } from "@/cache/retrieveParkingLotData";
 
 // Mock the fetchParkingLotFromLocalAPI function
-jest.mock("@/cache/fetchParkingLotFromLocalAPI", () => ({
-  fetchParkingLotFromLocalAPI: jest.fn(),
+jest.mock("@/cache/retrieveParkingLotData", () => ({
+  retrieveParkingLotData: jest.fn(),
 }));
 
-describe("fetchParkingLotClient", () => {
+describe("getParkingLotData", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -16,15 +16,15 @@ describe("fetchParkingLotClient", () => {
     const mockData = { id: "1", name: "Test Parking Lot" };
 
     // Mock the function to return a successful response
-    (fetchParkingLotFromLocalAPI as jest.Mock).mockResolvedValue({
+    (retrieveParkingLotData as jest.Mock).mockResolvedValue({
       data: mockData,
       ok: true,
     });
 
-    const result = await fetchParkingLotClient(parentServicePointSloid);
+    const result = await getParkingLotData(parentServicePointSloid);
 
     // Verify that fetchParkingLotFromLocalAPI was called with the correct SLOID
-    expect(fetchParkingLotFromLocalAPI).toHaveBeenCalledWith(
+    expect(retrieveParkingLotData).toHaveBeenCalledWith(
       parentServicePointSloid,
     );
 
@@ -36,17 +36,17 @@ describe("fetchParkingLotClient", () => {
     const parentServicePointSloid = "testSloid";
 
     // Mock the function to throw an error
-    (fetchParkingLotFromLocalAPI as jest.Mock).mockRejectedValue(
+    (retrieveParkingLotData as jest.Mock).mockRejectedValue(
       new Error("Network Error"),
     );
 
     // Capture console log
     const consoleLog = jest.spyOn(console, "log").mockImplementation(() => {});
 
-    const result = await fetchParkingLotClient(parentServicePointSloid);
+    const result = await getParkingLotData(parentServicePointSloid);
 
     // Verify that fetchParkingLotFromLocalAPI was called with the correct SLOID
-    expect(fetchParkingLotFromLocalAPI).toHaveBeenCalledWith(
+    expect(retrieveParkingLotData).toHaveBeenCalledWith(
       parentServicePointSloid,
     );
 

@@ -1,4 +1,4 @@
-import { fetchParkingLotClient } from "@/cache/fetchParkingLotClient";
+import { getParkingLotData } from "@/cache/getParkingLotData";
 import { useParkingLotStore } from "@/store/useParkingLotStore";
 
 /**
@@ -10,7 +10,9 @@ import { useParkingLotStore } from "@/store/useParkingLotStore";
  * @param {string} parentServicePointSloid - The SLOID (Service Location IDentifier) to fetch parking lot data for.
  * @returns {Promise<any>} A promise that resolves to the parking lot data or an empty object if no data is available.
  */
-export async function getCachedParkingLot(parentServicePointSloid: string) {
+export async function fetchAndCacheParkingLotData(
+  parentServicePointSloid: string,
+) {
   // Get the state updater function from the parking lot store
   const { setParkingLot } = useParkingLotStore.getState();
 
@@ -21,7 +23,7 @@ export async function getCachedParkingLot(parentServicePointSloid: string) {
   if (parentServicePointSloid.startsWith("ch:1:")) {
     try {
       // Fetch parking lot data using the client
-      const parkingLot = await fetchParkingLotClient(parentServicePointSloid);
+      const parkingLot = await getParkingLotData(parentServicePointSloid);
       // Update the store with the fetched parking lot data
       setParkingLot(parkingLot);
       // Return the fetched parking lot data

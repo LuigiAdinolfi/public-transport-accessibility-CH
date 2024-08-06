@@ -18,23 +18,23 @@ export default function FeatureList(): React.ReactElement {
   const { stopPoint } = useStopPointStore();
 
   // Destructure relevant features from stop point data
-  const assistanceservice = stopPoint.assistanceService;
-  const wheelchairticketmachine = stopPoint.wheelchairTicketMachine;
+  const assistanceService = stopPoint.assistanceService;
+  const wheelchairTicketMachine = stopPoint.wheelchairTicketMachine;
   const wheelchairToilet = "YES"; // Hardcoded as "YES"
-  const assistanceavailability = stopPoint.assistanceAvailability;
-  const audioticketmachine = stopPoint.audioTicketMachine;
-  const dynamicaudiosystem = stopPoint.dynamicAudioSystem;
-  const dynamicopticsystem = stopPoint.dynamicOpticSystem;
+  const assistanceAvailability = stopPoint.assistanceAvailability;
+  const audioTicketMachine = stopPoint.audioTicketMachine;
+  const dynamicAudioSystem = stopPoint.dynamicAudioSystem;
+  const dynamicOpticSystem = stopPoint.dynamicOpticSystem;
 
   // Define feature mappings with their corresponding labels
   const featureMappings = [
-    { value: assistanceservice, text: "Rollstuhl-Assistenzdienst" },
-    { value: wheelchairticketmachine, text: "Rollstuhl-Ticket-Maschine" },
+    { value: assistanceService, text: "Rollstuhl-Assistenzdienst" },
+    { value: wheelchairTicketMachine, text: "Rollstuhl-Ticket-Maschine" },
     { value: wheelchairToilet, text: "Rollstuhlgängige Toilette" },
-    { value: assistanceavailability, text: "Unterstützung verfügbar" },
-    { value: audioticketmachine, text: "Audioticketmaschine" },
-    { value: dynamicaudiosystem, text: "Dynamisches Audiosystem" },
-    { value: dynamicopticsystem, text: "Dynamisches optisches System" },
+    { value: assistanceAvailability, text: "Unterstützung verfügbar" },
+    { value: audioTicketMachine, text: "Audioticketmaschine" },
+    { value: dynamicAudioSystem, text: "Dynamisches Audiosystem" },
+    { value: dynamicOpticSystem, text: "Dynamisches optisches System" },
   ];
 
   // Filter and map features that are available

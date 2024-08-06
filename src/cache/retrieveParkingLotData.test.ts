@@ -1,4 +1,4 @@
-import { fetchParkingLotFromLocalAPI } from "./fetchParkingLotFromLocalAPI";
+import { retrieveParkingLotData } from "./retrieveParkingLotData";
 import redis from "@/cache/redisClient";
 
 // Mock dependencies
@@ -24,7 +24,7 @@ jest.mock("@/db/storeParkingLotToDB", () => ({
   storeParkingLotToDB: jest.fn(),
 }));
 
-describe("fetchParkingLotFromLocalAPI", () => {
+describe("retrieveParkingLotData", () => {
   const parentServicePointSloid = "testSloid";
 
   beforeEach(() => {
@@ -38,7 +38,7 @@ describe("fetchParkingLotFromLocalAPI", () => {
     });
     (redis.get as jest.Mock).mockResolvedValue(mockCacheData);
 
-    const result = await fetchParkingLotFromLocalAPI(parentServicePointSloid);
+    const result = await retrieveParkingLotData(parentServicePointSloid);
 
     expect(redis.get).toHaveBeenCalledWith(
       `parkingLot:${parentServicePointSloid}`,
@@ -50,7 +50,7 @@ describe("fetchParkingLotFromLocalAPI", () => {
     const mockError = new Error("Network Error");
     (redis.get as jest.Mock).mockRejectedValue(mockError); // Simulate Redis error
 
-    const result = await fetchParkingLotFromLocalAPI(parentServicePointSloid);
+    const result = await retrieveParkingLotData(parentServicePointSloid);
 
     expect(result).toEqual({ data: { message: mockError }, ok: false });
   });

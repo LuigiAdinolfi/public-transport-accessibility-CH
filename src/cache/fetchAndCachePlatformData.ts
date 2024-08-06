@@ -1,6 +1,6 @@
 import { usePlatformStore } from "@/store/usePlatformStore";
 import { isTripTimedLeg } from "@/utils/isTripTimedLeg";
-import { fetchPlatformClient } from "@/cache/fetchPlatformClient";
+import { getPlatformData } from "@/cache/getPlatformData";
 import fetchFromExplorerAPI from "@/services/explorer/fetchFromExplorerAPI";
 
 /**
@@ -33,7 +33,7 @@ export async function getCachedPlatformFromOrigin(
   if (sloid.startsWith("ch:1:")) {
     // Fetch platform data using the sloid
     try {
-      const platform = await fetchPlatformClient(sloid);
+      const platform = await getPlatformData(sloid);
       setPlatformOrigin(platform); // Update platform in state
       return platform; // Return fetched platform data
     } catch (error) {
@@ -52,7 +52,7 @@ export async function getCachedPlatformFromOrigin(
         const sloid = platformFromBehig.results[0].kanten_sloid;
         if (!sloid) return {}; // Return empty object if sloid is missing
         try {
-          const platform = await fetchPlatformClient(sloid);
+          const platform = await getPlatformData(sloid);
           setPlatformOrigin(platform); // Update platform in state
           return platform; // Return fetched platform data
         } catch (error) {
@@ -97,7 +97,7 @@ export async function getCachedPlatformFromDestination(
   if (sloid.startsWith("ch:1:")) {
     try {
       // Fetch platform data using the sloid
-      const platform = await fetchPlatformClient(sloid);
+      const platform = await getPlatformData(sloid);
       setPlatformDestination(platform); // Update platform in state
       return platform; // Return fetched platform data
     } catch (error) {
@@ -116,7 +116,7 @@ export async function getCachedPlatformFromDestination(
         const sloid = platformFromBehig.results[0].kanten_sloid;
         if (!sloid) return {}; // Return empty object if sloid is missing
         try {
-          const platform = await fetchPlatformClient(sloid);
+          const platform = await getPlatformData(sloid);
           setPlatformDestination(platform); // Update platform in state
           return platform; // Return fetched platform data
         } catch (error) {

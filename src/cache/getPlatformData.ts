@@ -1,4 +1,4 @@
-import { fetchPlatformFromLocalAPI } from "@/cache/fetchPlatformFromLocalAPI";
+import { retrievePlatformData } from "@/cache/retrievePlatformData";
 
 /**
  * Fetches platform data from the server using the provided SLOID.
@@ -9,9 +9,9 @@ import { fetchPlatformFromLocalAPI } from "@/cache/fetchPlatformFromLocalAPI";
  * @returns {Promise<any>} A promise that resolves to the platform data retrieved from the server.
  * @throws {Error} If the fetch request fails or the response is not OK.
  */
-export async function fetchPlatformClient(sloid: string) {
+export async function getPlatformData(sloid: string) {
   try {
-    const { data, ok } = await fetchPlatformFromLocalAPI(sloid);
+    const { data, ok } = await retrievePlatformData(sloid);
 
     // Check if the response was successful
     if (!ok) {

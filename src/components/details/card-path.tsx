@@ -14,7 +14,7 @@ import { usePlatformStore } from "@/store/usePlatformStore";
 import {
   getCachedPlatformFromDestination,
   getCachedPlatformFromOrigin,
-} from "@/cache/getCachedPlatform";
+} from "@/cache/fetchAndCachePlatformData";
 import { Platform } from "@/types/Platform";
 import { accessIconProps } from "@/helpers/accessIconProps";
 import { getArrivalTime } from "@/utils/getArrivalTime";
@@ -34,11 +34,11 @@ interface CardPathProps {
  * @returns {React.ReactElement} The CardPath component.
  */
 export default function CardPath({
-                                   index,
-                                   leg,
-                                   legDuration,
-                                   accessIcons,
-                                 }: CardPathProps): React.ReactElement {
+  index,
+  leg,
+  legDuration,
+  accessIcons,
+}: CardPathProps): React.ReactElement {
   const selectedLeg = leg;
   const fromLocationName = selectedLeg.fromLocation.locationName ?? "N/A";
   const toLocationName = selectedLeg.toLocation.locationName ?? "N/A";

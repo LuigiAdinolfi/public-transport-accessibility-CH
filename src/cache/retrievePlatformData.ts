@@ -16,7 +16,7 @@ import PlatformToStore from "@/models/platform";
  *   - `data`: The platform data retrieved from the cache, database, or API.
  *   - `ok`: A boolean indicating whether the data was successfully retrieved.
  */
-export async function fetchPlatformFromLocalAPI(
+export async function retrievePlatformData(
   sloid: string,
 ): Promise<{ data: any; ok: boolean }> {
   try {

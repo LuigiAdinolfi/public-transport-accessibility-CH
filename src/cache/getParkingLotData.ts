@@ -1,4 +1,4 @@
-import { fetchParkingLotFromLocalAPI } from "@/cache/fetchParkingLotFromLocalAPI";
+import { retrieveParkingLotData } from "@/cache/retrieveParkingLotData";
 
 /**
  * Fetches parking lot data for a given parent service point SLOID from the local API.
@@ -10,12 +10,10 @@ import { fetchParkingLotFromLocalAPI } from "@/cache/fetchParkingLotFromLocalAPI
  * @param {string} parentServicePointSloid - The SLOID (Service Location Object ID) of the parent service point.
  * @returns {Promise<object>} - A promise that resolves to the parking lot data as a plain object, or an empty object if an error occurs.
  */
-export async function fetchParkingLotClient(parentServicePointSloid: string) {
+export async function getParkingLotData(parentServicePointSloid: string) {
   try {
     // Fetch parking lot data using the local API
-    const { data, ok } = await fetchParkingLotFromLocalAPI(
-      parentServicePointSloid,
-    );
+    const { data, ok } = await retrieveParkingLotData(parentServicePointSloid);
 
     if (!ok) {
       // Log an error message if the fetch was unsuccessful

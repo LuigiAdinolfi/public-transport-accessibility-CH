@@ -17,9 +17,7 @@ import ParkingLotToStore from "@/models/parkingLot";
  * @returns {Promise<{ data: object, ok: boolean }>} - A promise that resolves to an object containing the parking
  * lot data and a boolean indicating the success of the operation.
  */
-export async function fetchParkingLotFromLocalAPI(
-  parentServicePointSloid: string,
-) {
+export async function retrieveParkingLotData(parentServicePointSloid: string) {
   try {
     // Check Redis cache first
     const cachedParkingLot = await redis.get(

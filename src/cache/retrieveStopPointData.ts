@@ -14,7 +14,7 @@ import { StopPointToStore } from "@/models/stopPoint";
  * @param {string} sloid - The SLOID to fetch stop point data for.
  * @returns {Promise<{data: any, ok: boolean}>} A promise that resolves to an object containing the stop point data and a success status.
  */
-export async function fetchStopPointFromLocalAPI(sloid: string) {
+export async function retrieveStopPointData(sloid: string) {
   try {
     // Check Redis cache first
     const cachedStopPoint = await redis.get(`stopPoint:${sloid}`);

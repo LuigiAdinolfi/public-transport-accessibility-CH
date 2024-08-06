@@ -31,9 +31,9 @@ import { useRouter } from "next/navigation";
  * @returns {React.ReactElement} JSX Element representing the journey with multiple connections.
  */
 export function MultipleConnection({
-                                     allLegs,
-                                     duration,
-                                   }: {
+  allLegs,
+  duration,
+}: {
   allLegs: OJP.TripLeg[];
   duration: string;
 }): React.ReactElement {
