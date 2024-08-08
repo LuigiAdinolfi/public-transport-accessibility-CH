@@ -12,7 +12,6 @@
       "email": "raveena.ramany@students.fhnw.ch"
     }
   ],
-  "license": "MIT",
   "homepage": "https://accessibility-public-transport.vercel.app/",
   "repository": "https://gitlab.fhnw.ch/iit-projektschiene/fs24/24fs_iit38-public-transport-in-switzerland_access-for-all-and-inclusive-design-for-people-with-disabilities",
   "scripts": {
