@@ -9,8 +9,40 @@ This will enable people with disabilities to plan their journeys independently. 
 
 ### 🏠 [Demo](https://accessibility-public-transport.vercel.app/)
 
+
+## Requirements
+
+To run this application, you will need to have Node.js installed in your environment.
+
+### Node
+- #### Node installation on Windows
+
+  Just go on [official Node.js website](https://nodejs.org/) and download the installer.
+  Also, be sure to have `git` available in your PATH, `npm` might need it (You can find git [here](https://git-scm.com/)).
+
+- #### Node installation on Ubuntu
+
+  You can install Node.js and npm easily with apt install, just run the following commands.
+
+      $ sudo apt install nodejs
+      $ sudo apt install npm
+
+- #### Other Operating Systems
+  You can find more information about the installation on the [official Node.js website](https://nodejs.org/) and the [official NPM website](https://npmjs.org/).
+
+If the installation was successful, you should be able to run the following command.
+
+    $ node --version
+    v20.15.1
+
 ## Setup
-After cloning the project into a folder of your choice, run the following commands in your project directory.
+
+Clone the repository into a folder of your choice.
+```sh
+git clone https://gitlab.fhnw.ch/iit-projektschiene/fs24/24fs_iit38-public-transport-in-switzerland_access-for-all-and-inclusive-design-for-people-with-disabilities.git
+```
+
+Run the following commands in your project directory.
 
 ### 1. Install dependencies
 
