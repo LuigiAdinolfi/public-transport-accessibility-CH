@@ -15,14 +15,14 @@ This will enable people with disabilities to plan their journeys independently. 
 To run this application, you will need to have Node.js installed in your environment.
 
 ### Node
-- #### Node installation on Windows
+- #### Installing Node on Windows
 
-  Just go on [official Node.js website](https://nodejs.org/) and download the installer.
-  Also, be sure to have `git` available in your PATH, `npm` might need it (You can find git [here](https://git-scm.com/)).
+  Simply go to the [official Node.js website](https://nodejs.org/) and download the installer.
+  Also make sure you have `git` available in your PATH, `npm` might need it (you can find git [here](https://git-scm.com/)).
 
-- #### Node installation on Ubuntu
+- #### Installing Node on Ubuntu
 
-  You can install Node.js and npm easily with apt install, just run the following commands.
+  You can easily install Node.js and npm with apt install, just run the following commands.
 
       $ sudo apt install nodejs
       $ sudo apt install npm
@@ -42,7 +42,7 @@ Clone the repository into a folder of your choice.
 git clone https://gitlab.fhnw.ch/iit-projektschiene/fs24/24fs_iit38-public-transport-in-switzerland_access-for-all-and-inclusive-design-for-people-with-disabilities.git
 ```
 
-Run the following commands in your project directory.
+Execute the following commands in your project directory.
 
 ### 1. Install dependencies
 
@@ -50,7 +50,7 @@ Run the following commands in your project directory.
 npm install
 ```
 
-### 2. Creates an optimised production build of the project
+### 2. Generates an optimised production build
 
 ```sh
 npm run build
