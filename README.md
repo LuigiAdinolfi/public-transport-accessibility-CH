@@ -77,4 +77,4 @@ Manuel Riedi<br>
 Alain Zanchetta
 
 ## Client
-Schweizerische Bundesbahnen SBB
+SKI+ (Systemaufgaben Kundeninformation / SBB Infrastruktur, im Auftrag des BAV)
