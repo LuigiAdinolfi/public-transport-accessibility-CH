@@ -20,7 +20,7 @@ To run this application, you will need to have Node.js installed in your environ
   Simply go to the [official Node.js website](https://nodejs.org/) and download the installer.
   Also make sure you have `git` available in your PATH, `npm` might need it (you can find git [here](https://git-scm.com/)).
 
-- #### Installing Node on Ubuntu
+- #### Installing Node on Linux
 
   You can easily install Node.js and npm with apt install, just run the following commands.
 
