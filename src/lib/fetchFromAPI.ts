@@ -27,7 +27,7 @@ export default async function fetchFromAPI(
     }
 
     // Construct the full URL for the API request
-    const url = `https://atlas.api.sbb.ch:443${endpoint}`;
+    const url = `${process.env.BASE_URL}${endpoint}`;
 
     // Make the API request with the access token
     const response = await fetch(url, {

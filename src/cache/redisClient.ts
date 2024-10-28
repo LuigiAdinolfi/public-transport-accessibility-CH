@@ -3,8 +3,8 @@ import Redis from "ioredis";
 // Initialize Redis client with connection details
 const redis: Redis = new Redis({
   port: 12441, // Redis port
-  host: "redis-12441.c293.eu-central-1-1.ec2.redns.redis-cloud.com",
-  password: "A2IsIHal3bkeHs2loU8kGuoc5SRctDTt",
+  host: process.env.REDIS_HOST,
+  password: process.env.REDIS_PASSWORD,
 });
 
 /**

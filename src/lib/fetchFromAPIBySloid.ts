@@ -31,7 +31,7 @@ export default async function fetchFromAPIBySloid(
 
   try {
     // Construct the full URL for the API request
-    const url = `https://atlas.api.sbb.ch:443${endpoint}/${sloid}`;
+    const url = `${process.env.BASE_URL}${endpoint}/${sloid}`;
 
     // Make the API request with the access token
     const response = await fetch(url, {
