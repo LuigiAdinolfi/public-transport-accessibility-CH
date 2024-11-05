@@ -23,7 +23,7 @@ async function connectDB() {
   try {
     // Connect to MongoDB using the connection URI and database name
     const db = await mongoose.connect(process.env.MONGODB_URI!, {
-      dbName: "ip6-database", // Specify the name of the database
+      dbName: process.env.DB_NAME, // Specify the name of the database
     });
     // Update connection status
     connection.isConnected = db.connections[0].readyState;

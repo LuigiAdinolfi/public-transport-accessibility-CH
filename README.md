@@ -7,8 +7,6 @@ This project is part of a bachelor thesis in computer science at the Fachhochsch
 The aim of this website is to display Swiss public transport stops in an accessible and inclusive way. 
 This will enable people with disabilities to plan their journeys independently. The website is based on the open data of the Swiss Federal Railways (SBB) and is designed to be accessible to people with disabilities and to comply with the Web Content Accessibility Guidelines (WCAG) 2.2.
 
-### 🏠 [Demo](https://accessibility-public-transport.vercel.app/)
-
 
 ## Requirements
 
